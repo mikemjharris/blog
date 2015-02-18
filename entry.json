@@ -1,0 +1,32 @@
+[
+  {
+    "handle": "gulp",
+    "spawn": {
+      "command": "./node_modules/gulp/bin/gulp.js",
+      "args":  ["sass"]
+    },
+    "stdinPrefix": "gulp"
+  },
+  {
+    "handle": "gulp-watch",
+    "spawn": {
+      "command": "./node_modules/gulp/bin/gulp.js",
+      "args":  ["watch"]
+    },
+    "stdinPrefix": "gulp-watch"
+  },
+  {
+    "handle": "nodemon",
+    "spawn": {
+      "command": "nodemon",
+      "args":  [
+        "server/server.js",
+        "-w",
+        "server",
+        "-e",
+        "jade,html,js"
+      ]
+    },
+    "stdinPrefix": "nodemon"
+  }
+]
