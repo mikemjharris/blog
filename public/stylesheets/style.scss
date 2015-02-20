@@ -1,3 +1,7 @@
+$border-left-col: hsla(120, 60%,60%,1);
+$menu-move-col: hsla(120, 70%, 70%, 0.5);
+
+
 *{
   box-sizing: border-box;
   font-family: verdana;
@@ -7,17 +11,17 @@
 }
 
 body {
-  /*background: hsla(240, 5%, 90%,1);*/
-  /*-webkit-animation: background 4s ease-in;  */
+
 }
-/*
-@-webkit-keyframes background {
-  0% {background: hsla(240, 0%, 100%,1);}
-  100% {background: hsla(240, 5%, 90%,1);}
-}*/
 
 header {
   height: 10vh;
+  h1 {
+    margin: 20px;
+    text-align: left;
+    font-size: 40px;
+    font-family: inconsolata;
+  }
 }
 main {
   display: flex;
@@ -25,8 +29,9 @@ main {
 }
 nav {
   text-align: center;
-  flex-grow: 2;
-  display: flex;
+  flex: 1;
+  margin-left: 20px;
+  border-left: 10px solid $border-left-col;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
@@ -34,7 +39,7 @@ nav {
 }
 
 section {
-  flex-grow: 4;
+  flex: 2;
   /*border: 1px solid black;*/
   padding: 20px;
   display: flex;
@@ -42,19 +47,38 @@ section {
 }
 
 article {
-  flex-grow: 2;
-  /*opacity: 0;*/
-  padding: 10px;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  line-height: 1.4;
+  text-align: justify;
+  background: hsla(240, 95%, 99%,1);
+  overflow: hidden;
+   box-shadow: 0 -4px 2px -4px hsla(240, 95%, 80%,1) inset;
   h2 {
     text-align: center
   }
 }
 
 
+.page {
+  display:none;
+}
+
+.page.showpage {
+  display: block;
+  -webkit-animation: 1s showpage ease-in;
+}
+
+@-webkit-keyframes showpage {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 .show {
-  box-shadow: 0 0 0 0 white;
+  box-shadow: 0 -4px 2px -4px hsla(240, 95%, 80%,1) inset;
   opacity: 1;
-  background: #ffffff;
+    background: hsla(240, 95%, 99%,1);
   outline: 0px solid white;
   outline-radius: 10px;
   -webkit-animation: show 1s linear;
@@ -84,12 +108,11 @@ article {
 
 ul {
   list-style: none;
-  margin: 0px;
+  margin: 0px 10px;
   position: relative;
   nav>& {
   padding: 20px 0;
   width: 200px;
-   border-bottom: 2px solid black;
   -webkit-animation: border 0.9s linear ;
   line-height: 20px;
   }
@@ -97,10 +120,9 @@ ul {
 
 nav>ul>li {
   padding: 5px 0;
-  top: 0px;
   margin: 0px;
   /*position: absolute;*/
-  -webkit-animation: nav 0.7s cubic-bezier(0.2, 0.3, 0.4, 1.2 );
+  /*-webkit-animation: nav 0.7s cubic-bezier(0.2, 0.3, 0.4, 1.2 );*/
 }
 
 @-webkit-keyframes nav {
@@ -141,7 +163,7 @@ ul li ul li {
   }
 }
 .move {
-  background: hsla(300, 70%, 70%, 1);
+  background: $menu-move-col;
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -159,7 +181,6 @@ ul li ul li {
   }
 }
 .test  {
-  
   -webkit-animation: test2 2s linear;
   & .move {
     -webkit-transform-origin: 100% 50%;
@@ -213,7 +234,6 @@ ul li ul li {
 @for $i from 1 through 20 {
   .detailed .clicked li:nth-child(#{$i + 0}) { 
     background: hsla( $i * 10 + 120, 60%, 80%,1); 
-    /*top: #{$i * 42}px;*/
     -webkit-animation: drop-#{$i} 2s linear;
   };
   
@@ -257,14 +277,14 @@ ul li ul li {
 @for $i from 1 through 20 {
   li:nth-child(#{$i + 0}) { 
 
-    /*background: hsla( $i * 10 + 120, 60%, 80%,1); */
+    background: hsla( $i * 10 + 120, 60%, 80%,1); 
     .smooth .clicked & {
     -webkit-animation: smooth-drop-#{$i} 0.9s cubic-bezier(0.815, 10.650, 0.555, -1.010);
     }
   };
 
   .smooth  .clicked li:nth-child(#{$i + 0}):hover { 
-    /*background: hsla( $i * 10  + 300 , 60%, 80%,1); */
+    background: hsla( $i * 10  + 300 , 60%, 80%,1); 
   }
   @-webkit-keyframes smooth-drop-#{$i} {
     0% { -webkit-transform: translateY(-100px)  scaleX(1.1) scaleY(0.8);}

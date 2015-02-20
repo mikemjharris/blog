@@ -1,21 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Snowman Game</title>
+    <title>Blog</title>
     <link  rel='stylesheet' href='/dist/style.css' />
     <script src="/jquery/dist/jquery.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Spinnaker' rel='stylesheet' type='text/css'>
+  <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type=" text/css">
+   <link href='http://fonts.googleapis.com/css?family=Jura' rel='stylesheet' type='text/css'>
     <link rel="icon"href="/images/favicon.png">
 
   </script>
   </head>
   <body>
 <header>
-
-</header>
-
+    <h1>Blog : Mike Sirrah</h1>
+  </header>
 <main>
-<nav>
+
+<div>
+ 
+
 <!--      <ul class="detailed">
         <li class='clicked' id='parent'>Master Level
           <ul> 
@@ -28,6 +32,7 @@
           </ul>
         </li>
       </ul> -->
+      <nav>
        <ul class="detailed">
         <li class='clicked title' id='parent2'>Mike Sirrah Blog
           <ul> 
@@ -37,18 +42,13 @@
             <li><span class="back">Project Posts</span><div class='move'></div></li>
         
             <div class="space"></div>
-            <li><span class="back">Contact</span><div class='move'></div></li>
-            <li><span class="back">About me</span><div class='move'></div></li>
+            <li data-location="contact"><span class="back">Contact</span><div class='move'></div></li>
+            <li data-location="about"><span class="back">About me</span><div class='move'></div></li>
         
         
            </ul>       
-        </li>
-        <li>
-         <!--  <ul class='clicked title'>Me
-            <li><span class="back">Contact</span><div class='move'></div></li>
-            <li><span class="back">About me</span><div class='move'></div></li>
-          </ul> -->
-        </li>
+      
+              </li>
       </ul>
      <!--  <ul class="smooth">
         <li class='clicked title' id='parent2'>Master Level
@@ -63,13 +63,54 @@
         </li>
       </ul> -->
 </nav>
+</div>
       <section >
         <article>
-           <h2>Mike</h2>
+          <div class="intro page showpage">
+            <h2>Mike</h2>
             <h2>sirraH | Harris<h2>
+          </div>
+          <div class="about page ">
+            <h2>About me</h2>
+            My name's Mike and I'm a web-developer, based in London. 
+
+I enjoy all the parts that make up a modern web app - my brain enjoys working on the backend, my spirit thrives on tangling with javascript and my soul loves css (as much as you can love css..). 
+
+In terms of technologies I like to use the one that is best for the job - if that invloves me learning something new and interesting even better. So far I've built apps using Ruby on Rails, Node, Backbone and Angular. 
+
+Currently a Guiness World Record Holder. 
+
+You can learn more about me by reading my blog.
+
+On a slightly drier note you can head over to linkedin and see what I have been up to professionally.
+</div>
+
+<div class="contact page">
+  <h2>Contact</h2>
+    <ul>
+        <li><a href="svg.html">SVG Animations</a><br></li>
+        <li><a href="http://animated-message.mikesirrah.co.uk/">Animated Messages</a><br></li>
+        <li><a href="box.html">Box Drop Down</a><br></li>
+        <li><a href="advanced_ttt/index.html">Advanced TicTacToe</a><br></li>
+        <li><a href="http://star-wars-timeline.sirrahmj.co.uk">Star Wars Twitter Timeline</a><br></li>
+        <li><a href="boxspin.html">Spinning Box</a><br></li>
+        <li><a href="ga_projects.html">Projects While at General Assembly</a><br></li>
+        <li><a href="map.html">Maps</a><br></li>
+        <li><a href="canvasClock.html">Clock</a><br></li>   
+        <li><a href="Real-O-Meter2.html">Real-o-meter</a><br></li>   
+      </ul>
+
+</div>
         </article>
 
       </section>
+
+
+
+
+
+
+
    <!--     <ul class="smooth">
         <li class='clicked' id='parent2'>Master Level
           <ul> 

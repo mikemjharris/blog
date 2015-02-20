@@ -17,13 +17,15 @@ document.getElementById('parent2').onclick = function ( ) {
 }
 
 $('.clicked ul li').click(function() {
-  $('.clicked').removeClass('clicked')
-  $('article').removeClass('show')
-  $('.test').removeClass('test')
-  $(this).addClass('test')
-
+  $('.clicked').removeClass('clicked');
+  $('article').removeClass('show');
+  $('.test').removeClass('test');
+  $(this).addClass('test');
+  $('.page').removeClass('showpage');
+  var newPage = $(this).data('location');
    setTimeout(function() {
     $('article').addClass('show')
-  }, 0)
-
+   
+    $('.' + newPage).addClass('showpage');
+  }, 0);
 })

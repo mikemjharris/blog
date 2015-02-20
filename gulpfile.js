@@ -3,8 +3,12 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 gulp.task('sass', function () {
-  gulp.src('./public/stylesheets/style.scss')
+  gulp.src([
+    './public/stylesheets/aa_reset.scss',
+    './public/stylesheets/style.scss'
+    ])
     .pipe(sass())
+     .pipe(concat('style.css'))
     .pipe(gulp.dest('./public/dist/'));
 });
 
