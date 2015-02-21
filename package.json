@@ -24,8 +24,11 @@
     "static-favicon": "~1.0.0"
   },
   "devDependencies": {
-    "gulp-concat": "^2.4.2",
     "gulp": "^3.8.10",
-    "gulp-sass": "^1.1.0"
+    "gulp-concat": "^2.5.2",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^3.0.1",
+    "gulp-sass": "^1.1.0",
+    "gulp-wrap": "^0.11.0"
   }
 }

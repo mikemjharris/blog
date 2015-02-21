@@ -6,10 +6,23 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+var mongo = require('mongoskin');
+var mongoUri = process.env.MONGOLAB_URI || "mongodb://localhost:27017/blog";
+var db = mongo.db( mongoUri, {native_parser:true} );
+
+var exphbs  = require('express-handlebars');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.engine('html', require('ejs').renderFile);
+app.set('layouts', path.join(__dirname, 'views/layouts/'));
+// app.set('view engine', 'jade');
+
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main', 
+  layoutsDir: "server/views/layouts/",
+  partialsDir: "server/views/partials/"
+}));
+app.set('view engine', 'handlebars');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -18,7 +31,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../bower_components')));
 
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
+
 require('./routes/main')(app);
+
+
 
 app.get('*', function ( req, res, next ) {
   res.redirect('../');
