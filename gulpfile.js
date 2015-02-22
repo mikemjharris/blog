@@ -20,7 +20,8 @@ gulp.task('templates', function(){
 gulp.task('sass', function () {
   gulp.src([
     './public/stylesheets/aa_reset.scss',
-    './public/stylesheets/style.scss'
+    './public/stylesheets/style.scss',
+    './public/stylesheets/mobile.scss'
     ])
     .pipe(sass({ errLogToConsole: true }))
      .pipe(concat('style.css'))

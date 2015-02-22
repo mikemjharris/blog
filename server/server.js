@@ -17,12 +17,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('layouts', path.join(__dirname, 'views/layouts/'));
 // app.set('view engine', 'jade');
 
-app.engine('handlebars', exphbs({
+app.engine('.hbs', exphbs({
   defaultLayout: 'main', 
+  extname: '.hbs',
   layoutsDir: "server/views/layouts/",
-  partialsDir: "server/views/partials/"
+  partialsDir: "server/views/templates/"
 }));
-app.set('view engine', 'handlebars');
+
+app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -37,7 +39,7 @@ app.use(function(req,res,next){
 });
 
 require('./routes/main')(app);
-
+// require('./routes/api')(app);
 
 
 app.get('*', function ( req, res, next ) {

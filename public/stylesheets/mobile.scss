@@ -1,0 +1,112 @@
+
+@media screen and (max-width: 600px){
+.mobile{
+  display: block;
+}
+header {
+  ul {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    transform: translateZ(100px);
+  }
+  li {
+    border: 1px solid black;
+    width: 40px;
+    margin: 5px 0;
+  }
+}
+
+
+ main {
+    flex-direction: column;
+    div {
+      display: -webkit-flex;
+      display: flex;
+      flex: none;
+      /*position: fixed;*/
+      z-index: 2;
+      background: white;
+      width: 100%;
+      header {
+       height: 45px;
+       width: 100%;
+      line-height: 20px;
+      }
+      h1 {
+        font-size: 20px;
+        width:100%;
+      }
+    }
+
+    nav {
+      z-index: s1;
+      position: absolute;
+      right: 0px;
+      top: 50px;
+      width: 100%;
+      -webkit-transform: translateY(-400px);;
+      transform: translateY(-400px);
+      transition: all 0.2s;
+      ul {
+        width: 100%;
+        li {
+       
+          margin-left: auto;
+          margin-right: 0px;
+          max-width: 300px;
+          width: 100%;
+          transition: all 0.5s;
+        }
+        .space {
+          display: none;
+        }
+        span {
+          display: none;
+          &.mobile {
+            cursor: pointer;
+            display:block;
+            background: red;
+            padding: 10px;
+          }
+        }
+      }
+
+    }
+   
+
+ }
+
+ section {
+  /*height: calc(100vh - 55px);*/
+  margin-top: 60px;
+  padding: 0px;
+ }
+
+.expand {
+  z-index: 2;
+ -webkit-transform: translateY(0px);
+ transform: translateY(0px) translateZ(2px);
+   height: 100%;
+  
+}
+
+#twitter-logo {
+  display: none;
+}
+
+
+nav ul {
+  
+}
+article  {
+  .content {
+    margin-top: 10px;
+  }
+  h2 {
+    position: relative;
+  }
+}
+
+
+}
