@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
     if (window.history && window.history.pushState) {
 
-    // window.history.pushState('forward', null, './#forward');
+    
 
     $(window).on('popstate', function() {
       
@@ -18,7 +18,7 @@ $( document ).ready(function() {
       id = pathParams[2];
       
       console.log(id)
-
+      if ( posts !== undefined ) {
       if ( id !== undefined ) {
         post = findPost(id, posts)
         var html = MyApp.templates.post( {post: post});
@@ -37,7 +37,7 @@ $( document ).ready(function() {
           }
         }
       }
-
+    }
 
     });
 

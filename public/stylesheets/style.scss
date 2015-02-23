@@ -51,9 +51,7 @@ nav {
 }
 
 section {
-   -webkit-flex: 2;
   flex: 2;
-  display: -webkit-flex;
   display: flex;
   justify-content: center;
   height: 95vh;
@@ -68,6 +66,7 @@ article {
   line-height: 1.4;
   text-align: justify;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   height: 100%;
   .content {
     margin-top: 80px;
@@ -98,6 +97,7 @@ article {
     min-width: 300px;
     display: -webkit-flex;
     display: flex;
+    padding: 10px 3px;
     justify-content: space-between;
     &:nth-child(even) {
         background: lighten($border-left-col, 30%);

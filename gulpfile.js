@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('templates', function(){
   gulp.src('server/views/templates/*.hbs')
@@ -24,7 +25,11 @@ gulp.task('sass', function () {
     './public/stylesheets/mobile.scss'
     ])
     .pipe(sass({ errLogToConsole: true }))
-     .pipe(concat('style.css'))
+    .pipe(concat('style.css'))
+    .pipe(autoprefixer({
+          browsers: ['last 2 versions'],
+          cascade: false
+      }))
     .pipe(gulp.dest('./public/dist/'));
 });
 
