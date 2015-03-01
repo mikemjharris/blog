@@ -110,6 +110,21 @@ article {
   display: none;
 }
 
+form {
+  label {
+    display: block;
+
+  }
+  input {
+    display: block;
+  }
+
+
+}
+#twitter {
+  background: white;
+}
+
 #twitter-logo {
   position: fixed;
   bottom:20px;

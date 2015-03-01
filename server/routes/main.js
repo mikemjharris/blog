@@ -16,6 +16,27 @@ module.exports = function ( app ) {
     });
   });
 
+   app.get('/posts/new', function( req, res ) {
+  
+      res.render('templates/new' );  
+ 
+  });
+
+   app.post('/posts', function( req, res ) {
+    var newPost = req.body.post;
+    var db = req.db;
+
+    console.log('pwd', req.body.password)
+    if ( req.body.password === 'password') {
+      console.log('ok!')
+      db.collection("posts").insert(newPost, function(err, result) {
+        res.render('templates/new' );  
+      })
+    } else {
+       res.render('templates/new' );  
+    }
+  });
+
   app.get('/posts/:id', function( req, res ) {
     var db = req.db;
     var postId = req.params.id;
@@ -23,16 +44,10 @@ module.exports = function ( app ) {
     // db.collection("posts").find({"_id": new ObjectID(postId)}).toArray(function(err,data) {
     db.collection("posts").find({"searchtitle": postId}).toArray(function(err,data) {
       console.log('post', data)
-       res.render('templates/post' , {
-        post: data, 
-        helpers: {
-          test: function() {
-            return data;
-            }
-        }
+       res.render('templates/post' , {post: data});
       })
     });  
-  });
+  
 
   app.get('/api/posts', function( req, res ) {
     var db = req.db;
@@ -42,11 +57,7 @@ module.exports = function ( app ) {
     });
   });
 
-  app.get('/new', function( req, res ) {
-  
-      res.render('templates/new' );  
  
-  });
 
   app.get('/contact', function( req, res ) {
     var db = req.db;

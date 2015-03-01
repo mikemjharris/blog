@@ -1,12 +1,23 @@
 <h2>Create Blog</h2>
 
 
-<form>
-<input type="text" />
-
-<input type="textarea" />
-
-
+<form method="post" action="/posts">
+  <label>Title</label>
+<input name="post[title]" type="text" />
+<label>Unique title</label>
+<input name="post[searchtitle]" type="text" />
+<label>Intro</label>
+<input name="post[intro]" type="text" />
+<label>Section header</label>
+<input type="textarea" name="post[body][0][header]"/>
+<label>Section Content</label>
+<input type="textarea" name="post[body][0][content]"/>
+<label>Section header</label>
+<input type="textarea" name="post[body][1][header]"/>
+<label>Section Content</label>
+<input type="textarea" name="post[body][1][content]"/>
+<label>Password</label>
+<input type="text" name="password" />
 <input type="submit" />
 
 </form>
