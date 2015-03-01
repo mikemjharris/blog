@@ -1,4 +1,9 @@
-Seed project    
+Blog             
 ========================
 
-Base for future node projects with gulp etc.
+Base for online blog
+
+```
+    npm install && bower install
+    entry
+```
