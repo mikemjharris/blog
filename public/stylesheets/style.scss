@@ -115,12 +115,16 @@ form {
     display: block;
 
   }
-  input {
+  input , textarea{
     display: block;
+    width: 100%;
+    padding: 5px;
   }
-
-
+  textarea {
+    height: 6em;
+  }
 }
+
 #twitter {
   background: white;
 }
@@ -134,8 +138,8 @@ form {
   display: inline-block;
 } 
 
-  svg{
-    padding: 2px;
+svg{
+  padding: 2px;
   width: 100%;
   & #rect {
     stroke-dasharray: 0, 3000;
@@ -145,15 +149,36 @@ form {
     #rect {
       stroke-dasharray: 3000, 3000;
       -webkit-animation: dash 0.5s linear;
-    }
-  
+    }  
   }
 }
 
-  @-webkit-keyframes dash {
-    from { stroke-dasharray: 0, 3000;}
-      to {stroke-dasharray: 3000, 1700;}
+
+#twitter-share {
+  position: absolute;
+  right: 0px;
+  -webkit-font-smoothing: antialiased;
+  width: 110px;
+  cursor: pointer;
+  .bird path {
+   fill:#2aa9e0;
+   opacity: 0;
+    transition: all 0.4s;
   }
+  &:hover .bird path {
+    fill:#2aa9e0;
+    opacity: 1;
+  }
+}
+
+
+
+
+
+@-webkit-keyframes dash {
+  from { stroke-dasharray: 0, 3000;}
+    to {stroke-dasharray: 3000, 1700;}
+}
 
 .show h2 {
   -webkit-animation: showbackground 1s linear;

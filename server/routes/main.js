@@ -5,7 +5,7 @@ module.exports = function ( app ) {
   app.get('/', function( req, res ) {
     var db = req.db;
     db.collection('posts').find().toArray(function (err, data) {
-      res.render('home' , {data: data, title: "Choose a Quiz", game_type: "multi"});  
+      res.render('templates/posts' , {posts: data});  
     });
   });
 
@@ -17,7 +17,6 @@ module.exports = function ( app ) {
   });
 
    app.get('/posts/new', function( req, res ) {
-  
       res.render('templates/new' );  
  
   });
@@ -26,7 +25,6 @@ module.exports = function ( app ) {
     var newPost = req.body.post;
     var db = req.db;
 
-    console.log('pwd', req.body.password)
     if ( req.body.password === 'password') {
       console.log('ok!')
       db.collection("posts").insert(newPost, function(err, result) {

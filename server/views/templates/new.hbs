@@ -1,23 +1,23 @@
 <h2>Create Blog</h2>
 
-
-<form method="post" action="/posts">
-  <label>Title</label>
-<input name="post[title]" type="text" />
-<label>Unique title</label>
-<input name="post[searchtitle]" type="text" />
-<label>Intro</label>
-<input name="post[intro]" type="text" />
-<label>Section header</label>
-<input type="textarea" name="post[body][0][header]"/>
-<label>Section Content</label>
-<input type="textarea" name="post[body][0][content]"/>
-<label>Section header</label>
-<input type="textarea" name="post[body][1][header]"/>
-<label>Section Content</label>
-<input type="textarea" name="post[body][1][content]"/>
-<label>Password</label>
-<input type="text" name="password" />
-<input type="submit" />
-
-</form>
+<div class="content">
+  <form method="post" action="/posts" class='post-form'>
+    <label>Title</label>
+    <input name="post[title]" type="text" />
+    <label>Unique title</label>
+    <input name="post[searchtitle]" type="text" />
+    <label>Intro</label>
+    <textarea name="post[intro]" type="text"></textarea>
+    <label>Section header</label>
+    <input type="textarea" name="post[body][0][header]"/>
+    <label>Section Content</label>
+    <textarea type="textarea" name="post[body][0][content]"></textarea>
+    <label>Section header</label>
+    <input type="textarea" name="post[body][1][header]"/>
+    <label>Section Content</label>
+    <textarea type="textarea" name="post[body][1][content]"></textarea>
+    <label>Password</label>
+    <input type="text" name="password" />
+    <input type="submit" />
+  </form>
+</div>
