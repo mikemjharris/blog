@@ -1,6 +1,23 @@
 var ObjectID = require('mongoskin').ObjectID;
+var fs = require('fs');
+
+
 
 module.exports = function ( app ) {
+
+  // app.get('/posts/:title', function( req, res ) {
+  //     var postTitle = req.params.title;
+
+  //     // Is it a directory?
+  //     fs.lstat('server/views/templates/posts/' +  postTitle + '.hbs', function(err, stats) {
+  //         if (!err && stats.isFile()) {
+  //           res.render('templates/posts/' +  postTitle); 
+  //         } else {
+  //           res.render('templates/posts', { error: 'Hmm - that blog doesn\'t exist. Try another' }); 
+  //         }
+  //     });
+      
+  // })
 
   app.get('/', function( req, res ) {
     var db = req.db;

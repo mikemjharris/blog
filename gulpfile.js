@@ -4,19 +4,50 @@ var concat = require('gulp-concat');
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
+var merge = require('merge-stream');
+var path = require('path');
 var autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('templates', function(){
-  gulp.src('server/views/templates/*.hbs')
+// gulp.task('templates', function(){
+//   gulp.src('server/views/templates/*.hbs')
+//     .pipe(handlebars())
+//     .pipe(wrap('Handlebars.template(<%= contents %>)'))
+//     .pipe(declare({
+//       namespace: 'MyApp.templates',
+//       noRedeclare: true, // Avoid duplicate declarations 
+//     }))
+//     .pipe(concat('templates.js'))
+//     .pipe(gulp.dest('./public/dist/'));
+// });
+
+gulp.task('templates', function() {
+  // Assume all partials start with an underscore
+  // You could also put them in a folder such as source/templates/partials/*.hbs
+  var partials = gulp.src(['server/views/templates/partials/*.hbs'])
+    .pipe(handlebars())
+    .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));', {}, {
+      imports: {
+        processPartialName: function(fileName) {
+          // Escape the output with JSON.stringify
+          return JSON.stringify(path.basename(fileName, '.js'));
+        }
+      }
+    }));
+
+  var templates = gulp.src('server/views/templates/*.hbs')
     .pipe(handlebars())
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
       namespace: 'MyApp.templates',
-      noRedeclare: true, // Avoid duplicate declarations 
-    }))
+      noRedeclare: true // Avoid duplicate declarations
+    }));
+
+  return merge(partials, templates)
     .pipe(concat('templates.js'))
     .pipe(gulp.dest('./public/dist/'));
 });
+
+
 
 gulp.task('sass', function () {
   gulp.src([

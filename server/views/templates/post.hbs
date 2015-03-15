@@ -1,15 +1,15 @@
-{{#post}}
-  <h2>{{title}}</h2>
+  {{#post}}
+    <h2>{{title}}</h2>
 
-    <a href="http://twitter.com/{{_id}}" id="twitter-share">{{> twitter-share }} </a>
+      <a href="http://twitter.com/{{_id}}" id="twitter-share">{{> "_twitter-share" }}</a>
 
-  <!-- <span>{{ date }}</span> -->
-  
-  <div class="content">
-    <p>{{ intro }}</p>
-  {{#body }}
-    <h3>{{header}}</h3>
-    <p>{{content}}</p>
-  {{/body}}
-  </div>
-{{/post}}
+    <!-- <span>{{ date }}</span> -->
+    
+    <div class="content">
+      <p>{{ intro }}</p>
+    {{#body }}
+      <h3>{{header}}</h3>
+      <p>{{content}}</p>
+    {{/body}}
+    </div>
+  {{/post}}

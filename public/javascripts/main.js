@@ -1,14 +1,11 @@
-
-
-
-
 $( document ).ready(function() {
   var posts;
+  // Handlebars.registerHelper('partial', function(templateName,context){
+  //   return new Handlebars.SafeString(MyApp.templates[templateName](this));
+  // });
+
 
     if (window.history && window.history.pushState) {
-
-    
-
     $(window).on('popstate', function() {
       
       var _href = window.location.pathname;
@@ -19,26 +16,26 @@ $( document ).ready(function() {
       
       console.log(id)
       if ( posts !== undefined ) {
-      if ( id !== undefined ) {
-        post = findPost(id, posts)
-        var html = MyApp.templates.post( {post: post});
-        $('article').html('');
-        $('article').append(html)
-      } else {
+        if ( id !== undefined ) {
+          post = findPost(id, posts);
+          console.log(post)
+          var html = MyApp.templates.post( {post: post});
+          $('article').html('');
+          $('article').append(html)
+        } else {
+          $('article').html('');
 
-        $('article').html('');
-        var html = MyApp.templates[path]({ posts: posts});
-        $('article').append(html)
-        $('.active-menu').removeClass('active-menu');
-        menuNavs = $('nav a')
-        for ( var i = 0 ; i < menuNavs.length; i++){
-          if ($(menuNavs[i]).attr('href') === window.location.pathname) {
-            $(menuNavs[i]).closest('li').addClass('active-menu');
+          var html = MyApp.templates[path]({ posts: posts});
+          $('article').append(html)
+          $('.active-menu').removeClass('active-menu');
+          menuNavs = $('nav a')
+          for ( var i = 0 ; i < menuNavs.length; i++){
+            if ($(menuNavs[i]).attr('href') === window.location.pathname) {
+              $(menuNavs[i]).closest('li').addClass('active-menu');
+            }
           }
         }
       }
-    }
-
     });
 
   }
@@ -70,16 +67,17 @@ $( document ).ready(function() {
     pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/)
     var id = pathParams[2]
     console.log(id)
-    post = findPost(id, posts)
-    var html = MyApp.templates.post( {post: post});
-     $('article').html('');
-      $('article').append(html)
+    var post = findPost(id, posts) 
+    console.log(post)
+    var html = MyApp.templates['post']( {post: post});
+    $('article').html('');
+    $('article').append(html)
 
   })
  
   $('.intro-animation ul li a').click(function(e) {
     e.preventDefault();
-     $('nav').toggleClass('expand');
+    $('nav').toggleClass('expand');
     $('.intro-animation').removeClass('intro-animation');
     $('article').removeClass('show');
 
@@ -93,6 +91,7 @@ $( document ).ready(function() {
     $('.page').removeClass('showpage');
     var newPage = _href.replace(/\//, "");
     $('article').html('');
+    console.log('np', newPage)
     var html = MyApp.templates[newPage]({ posts: posts});
   
      setTimeout(function() {

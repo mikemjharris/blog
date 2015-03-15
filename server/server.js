@@ -7,7 +7,13 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var mongo = require('mongoskin');
-var mongoUri = process.env.MONGOLAB_URI || "mongodb://localhost:27017/blog";
+var mongoUri
+if ( process.env.MONGODB_PORT_27017_TCP_ADDR ) {
+  mongoUri = "mongodb://"+ process.env.MONGODB_PORT_27017_TCP_ADDR + "/blog" 
+} else {
+  mongoUri = "mongodb://localhost:27017/blog";
+} 
+
 var db = mongo.db( mongoUri, {native_parser:true} );
 
 var exphbs  = require('express-handlebars');
@@ -21,7 +27,7 @@ app.engine('.hbs', exphbs({
   defaultLayout: 'main', 
   extname: '.hbs',
   layoutsDir: "server/views/layouts/",
-  partialsDir: "server/views/templates/"
+  partialsDir: "server/views/templates/partials"
 }));
 
 app.set('view engine', '.hbs');

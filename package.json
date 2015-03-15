@@ -1,5 +1,5 @@
 {
-  "name": "game",
+  "name": "blog",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
     "entry": "*",
     "express": "~4.2.0",
     "express-session": "*",
-    "mongodb": "*",
+    "mongodb": "~1.4",
     "mongoskin": "*",
     "morgan": "~1.0.0",
     "nunjucks": "~1.0.1",
@@ -22,12 +22,17 @@
     "static-favicon": "~1.0.0"
   },
   "devDependencies": {
+    "express-handlebars": "^1.2.2",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-concat": "^2.5.2",
     "gulp-declare": "^0.3.0",
-    "gulp-handlebars": "^3.0.1",
+    "gulp-handlebars": "^4.0.0",
     "gulp-sass": "^1.1.0",
-    "gulp-wrap": "^0.11.0"
+    "gulp-wrap": "^0.11.0",
+    "handlebars": "^3.0.0",
+    "merge-stream": "^0.1.7",
+    "node-sass": "^2.0.1",
+    "path": "^0.11.14"
   }
 }
