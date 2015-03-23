@@ -18,7 +18,7 @@ header {
   padding: 20px;
   overflow: scroll;
 line-height: 50px;
- 
+
   h1 {
     text-align: left;
      -webkit-flex: 1;
@@ -59,6 +59,7 @@ section {
 }
 
 article {
+  position: relative;
   padding: 0 20px;
   max-width: 800px;
   min-width: 320px;
@@ -102,7 +103,7 @@ article {
     &:nth-child(even) {
         background: lighten($border-left-col, 30%);
     }
-  } 
+  }
   box-shadow:0px -10px 20px 10px white inset;
 }
 
@@ -136,7 +137,7 @@ form {
   width: 150px;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
-} 
+}
 
 svg{
   padding: 2px;
@@ -149,7 +150,7 @@ svg{
     #rect {
       stroke-dasharray: 3000, 3000;
       -webkit-animation: dash 0.5s linear;
-    }  
+    }
   }
 }
 
@@ -157,6 +158,7 @@ svg{
 #twitter-share {
   position: absolute;
   right: 0px;
+  top: 0px;
   -webkit-font-smoothing: antialiased;
   width: 110px;
   cursor: pointer;
@@ -260,7 +262,7 @@ ul li ul li {
   width: 200px;
   transition: all 0.2s linear;
   margin: 1px 0;
-  height: 40px; 
+  height: 40px;
   position: relative;
   background: hsla(300, 70%, 90%, 1);
   &:hover {
@@ -340,12 +342,12 @@ ul li ul li {
 
 
 @for $i from 1 through 20 {
-    .intro-animation li:nth-child(#{$i + 0}) { 
-    background: hsla( $i * 10 + 120, 60%, 80%,1); 
+    .intro-animation li:nth-child(#{$i + 0}) {
+    background: hsla( $i * 10 + 120, 60%, 80%,1);
       -webkit-animation: drop-#{$i} 2s linear;
-  
+
   };
-  
+
   @-webkit-keyframes drop-#{$i} {
     0% {-webkit-transform: translateY( #{$i * -50}px)  scaleX(1) scaleY(1);}
     9% {-webkit-transform: translateY( #{$i * 50}px)  scaleX(0.8) scaleY(1.2);}
@@ -358,7 +360,7 @@ ul li ul li {
     82% {-webkit-transform: translateY( #{$i * 5}px)  scaleX(1) scaleY(1);}
     91% {-webkit-transform: translateY( #{$i * -2}px)  scaleX(1) scaleY(1);}
     100% {-webkit-transform: translateY( 0px)  scaleX(1) scaleY(1);}
-    
+
   }
 
    /* @-webkit-keyframes drop-#{$i} {
@@ -383,14 +385,14 @@ ul li ul li {
 }
 
 @for $i from 1 through 20 {
-  li:nth-child(#{$i + 0}) { 
+  li:nth-child(#{$i + 0}) {
 
     /*background: hsla( $i * 10 + 120, 60%, 80%,1); */
     .smooth .intro-animation & {
     -webkit-animation: smooth-drop-#{$i} 0.9s cubic-bezier(0.815, 10.650, 0.555, -1.010);
     }
   };
-  li:nth-child(#{$i + 0}) { 
+  li:nth-child(#{$i + 0}) {
 
     /*background: hsla( $i * 10 + 120, 60%, 80%,1); */
     .smooth .intro-animation & {
@@ -398,7 +400,7 @@ ul li ul li {
     }
   };
 
-  .smooth  .intro-animation li:nth-child(#{$i + 0}):hover { 
+  .smooth  .intro-animation li:nth-child(#{$i + 0}):hover {
     /*background: hsla( $i * 10  + 300 , 60%, 80%,1); */
   }
   @-webkit-keyframes smooth-drop-#{$i} {

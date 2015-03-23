@@ -1,5 +1,50 @@
 
 @media screen and (max-width: 600px){
+
+
+ul.menu {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: block;
+  padding: 10px;
+}
+
+.cross {
+   -webkit-animation: flash 0.4s ease-out;
+}
+
+@-webkit-keyframes flash {
+  0% {background: none;}
+  20% {background: hsla(120, 30%, 60%, 1)}
+  100% {background: none}
+}
+
+
+.menu li {
+  width: 40px;
+  margin: 10px auto;
+  border: 2px solid black;
+  transition: all 0.2s ease-in-out;
+}
+
+.cross li:nth-child(1) {
+  /*  position: absolute;*/
+  transform-origin: 0% 50%;
+  transform: translateX(5px) rotate(45deg) ;
+}
+
+.cross li:nth-child(2) {
+  opacity: 0;
+}
+.cross li:nth-child(3) {
+  /*  position: absolute;*/
+  transform-origin: 0% 50%;
+  transform:  translateX(5px) rotate(-45deg)  ;
+}
+
+
+
 .mobile{
   display: block;
 }
@@ -23,7 +68,7 @@ header {
  main {
     flex-direction: column;
     div {
-      
+
       display: block;
       flex: none;
       /*position: fixed;*/
@@ -54,7 +99,7 @@ header {
         width: 100%;
         -webkit-animation: none 1.5s linear;
         li {
-          
+
           margin-left: auto;
           margin-right: auto;
           max-width: 300px;
@@ -101,7 +146,7 @@ nav>ul>li {
  -webkit-transform: translateY(0px);
  transform: translateY(0px) translateZ(2px);
    height: 100%;
-  
+
 }
 
 #twitter-logo {
@@ -110,7 +155,7 @@ nav>ul>li {
 
 
 nav ul {
-  
+
 }
 article  {
   padding: 20px;

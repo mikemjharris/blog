@@ -7,13 +7,13 @@ $( document ).ready(function() {
 
     if (window.history && window.history.pushState) {
     $(window).on('popstate', function() {
-      
+
       var _href = window.location.pathname;
       pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/)
 
       path = pathParams[1];
       id = pathParams[2];
-      
+
       console.log(id)
       if ( posts !== undefined ) {
         if ( id !== undefined ) {
@@ -52,6 +52,7 @@ $( document ).ready(function() {
   //     $('nav').toggleClass('expand');
   // })
   $('.menu').on('click' , function() {
+      $(this).toggleClass('cross');
       $('nav').toggleClass('expand');
   })
 
@@ -67,14 +68,14 @@ $( document ).ready(function() {
     pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/)
     var id = pathParams[2]
     console.log(id)
-    var post = findPost(id, posts) 
+    var post = findPost(id, posts)
     console.log(post)
     var html = MyApp.templates['post']( {post: post});
     $('article').html('');
     $('article').append(html)
 
   })
- 
+
   $('.intro-animation ul li a').click(function(e) {
     e.preventDefault();
     $('nav').toggleClass('expand');
@@ -82,7 +83,7 @@ $( document ).ready(function() {
     $('article').removeClass('show');
 
     _href = $(this).attr("href");
-    
+
     // change the url without a page refresh and add a history entry.
     history.pushState(null, null, _href);
 
@@ -93,7 +94,7 @@ $( document ).ready(function() {
     $('article').html('');
     console.log('np', newPage)
     var html = MyApp.templates[newPage]({ posts: posts});
-  
+
      setTimeout(function() {
       $('article').addClass('show');
       $('article').append(html);
@@ -103,7 +104,7 @@ $( document ).ready(function() {
 });
 
 function findPost( id, posts) {
-    var foundPost 
+    var foundPost
     posts.forEach(function(post){
       if (post.searchtitle === id ) {
         foundPost = post
