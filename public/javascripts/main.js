@@ -57,7 +57,6 @@ $( document ).ready(function() {
   })
 
   $('body').on('click', '.posts', function(e) {
-    console.log(this)
     e.preventDefault();
 
     _href = $(this).attr("href");
