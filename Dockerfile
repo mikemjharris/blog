@@ -25,7 +25,8 @@ ADD . /var/www/
 WORKDIR /var/www/
 
 RUN gulp --no-color sass && \
-    gulp --no-color js
+    gulp --no-color js && \
+    gulp --no-color templates
 
 CMD npm start
 
