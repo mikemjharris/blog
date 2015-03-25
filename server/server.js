@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var app = express();
 
@@ -17,6 +18,31 @@ if ( process.env.MONGODB_PORT_27017_TCP_ADDR ) {
 var db = mongo.db( mongoUri, {native_parser:true} );
 
 var exphbs  = require('express-handlebars');
+
+var regex = /\<\!\-\-\smeta-data\s([A-z]+)\:\s(.+?(?=-->))/g
+var posts = [];
+
+fs.readdir('./server/views/templates/posts' , function ( err, files ) {
+  
+  files.forEach(function( file ) {
+    var post ={};
+    post.template = file;
+    fs.readFile('./server/views/templates/posts/' + file, function ( err, data ) {
+
+      var str = data.toString('utf8');    
+      console.log(str);   
+      var matches = [];
+      var match; 
+      while (match = regex.exec(str)) {
+          post[ match[ 1 ] ]= match [ 2 ]
+          matches.push([match[1],match[2]]);
+      }
+      posts.push(post);
+      console.log(posts);
+    }) 
+  })
+
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,7 +70,7 @@ app.use(function(req,res,next){
   next();
 });
 
-require('./routes/main')(app);
+require('./routes/main')(app, posts);
 // require('./routes/api')(app);
 
 

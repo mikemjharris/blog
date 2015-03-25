@@ -3,7 +3,7 @@ var fs = require('fs');
 
 
 
-module.exports = function ( app ) {
+module.exports = function ( app, posts ) {
 
   // app.get('/posts/:title', function( req, res ) {
   //     var postTitle = req.params.title;
@@ -20,9 +20,10 @@ module.exports = function ( app ) {
   // })
 
   app.get('/', function( req, res ) {
+    console.log( 'posts', posts)
     var db = req.db;
     db.collection('posts').find().toArray(function (err, data) {
-      res.render('templates/posts' , {posts: data});  
+      res.render('templates/posts' , {posts: posts});  
     });
   });
 
@@ -68,7 +69,7 @@ module.exports = function ( app ) {
     var db = req.db;
     db.collection('posts').find().toArray(function (err, data) {
       console.log(data)
-      res.json(data)
+      res.json(posts)
     });
   });
 
