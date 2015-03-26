@@ -70,6 +70,9 @@ article {
   -webkit-overflow-scrolling: touch;
   height: 100%;
   .content {
+    p {
+      margin-bottom: 1em;
+    }
     // margin-top: 80px;
   }
   .header {
