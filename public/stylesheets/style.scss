@@ -70,20 +70,24 @@ article {
   -webkit-overflow-scrolling: touch;
   height: 100%;
   .content {
-    margin-top: 80px;
+    // margin-top: 80px;
   }
+  .header {
+    // position: absolute;
+  }
+
   h2 {
+    width: calc( 100% - 120px);
+    display: inline-block;
+    vertical-align: top;
     font-size: $body-font-size * 2;
     text-align: left;
     margin-bottom: 20px;
     padding-left: 10px;
     border-left: 10px solid $border-left-col;
-    position: absolute;
     background: white;
     max-width: calc(800px - 30px);
-    width: 100%;
     box-shadow:0px 10px 20px 10px white;
-    display: block;
     font-family: inconsolata;
     }
     h3 {
@@ -98,8 +102,10 @@ article {
     min-width: 300px;
     display: -webkit-flex;
     display: flex;
-    padding: 10px 3px;
     justify-content: space-between;
+    a {
+      padding: 10px 3px;
+    }
     &:nth-child(even) {
         background: lighten($border-left-col, 30%);
     }
@@ -154,12 +160,13 @@ svg{
   }
 }
 
+.header h2 {
+
+}
 
 #twitter-share {
-  position: absolute;
-  right: 0px;
-  top: 0px;
   -webkit-font-smoothing: antialiased;
+  display: inline-block;
   width: 110px;
   cursor: pointer;
   .bird path {

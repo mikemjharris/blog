@@ -11,9 +11,9 @@ $( document ).ready(function() {
       var path = pathParams[1];
       var id = pathParams[2];
 
-      console.log(id)
+      console.log(id);
       if ( posts !== undefined ) {
-        if ( titiel !== undefined ) {
+        if ( id !== undefined ) {
           var post = findPost(id, posts);
           console.log(post)
           var html = MyApp.templates.post({ post: post });
@@ -96,11 +96,13 @@ $( document ).ready(function() {
 });
 
 function findPost( id, posts) {
-    var foundPost;
-    posts.forEach(function(post){
-      if (post.searchtitle === id ) {
-        foundPost = post;
-      }
-    })
-    return foundPost;
+  var foundPost;
+  console.log( id )
+  console.log( posts)
+  posts.forEach(function(post){
+    if (post.searchtitle === id ) {
+      foundPost = post;
+    }
+  });
+  return foundPost;
 }
