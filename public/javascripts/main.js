@@ -1,34 +1,32 @@
 $( document ).ready(function() {
   var posts;
-  // Handlebars.registerHelper('partial', function(templateName,context){
-  //   return new Handlebars.SafeString(MyApp.templates[templateName](this));
-  // });
 
+  if (window.history && window.history.pushState) {
 
-    if (window.history && window.history.pushState) {
     $(window).on('popstate', function() {
 
       var _href = window.location.pathname;
-      pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/)
+      var pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/);
 
-      path = pathParams[1];
-      id = pathParams[2];
+      var path = pathParams[1];
+      var id = pathParams[2];
 
       console.log(id)
       if ( posts !== undefined ) {
-        if ( id !== undefined ) {
-          post = findPost(id, posts);
+        if ( titiel !== undefined ) {
+          var post = findPost(id, posts);
           console.log(post)
-          var html = MyApp.templates.post( {post: post});
+          var html = MyApp.templates.post({ post: post });
           $('article').html('');
-          $('article').append(html)
+          $('article').append(html);
         } else {
           $('article').html('');
 
-          var html = MyApp.templates[path]({ posts: posts});
-          $('article').append(html)
+          var html = MyApp.templates[path]({ posts: posts });
+          $('article').append(html);
           $('.active-menu').removeClass('active-menu');
-          menuNavs = $('nav a')
+
+          var menuNavs = $('nav a');
           for ( var i = 0 ; i < menuNavs.length; i++){
             if ($(menuNavs[i]).attr('href') === window.location.pathname) {
               $(menuNavs[i]).closest('li').addClass('active-menu');
@@ -37,42 +35,37 @@ $( document ).ready(function() {
         }
       }
     });
-
   }
 
   $.ajax({
-    url: "/api/posts",
-    dataType: "json",
+    url: '/api/posts',
+    dataType: 'json',
     success: function(data) {
       posts = data;
     }
-  })
+  });
 
-  // $('header').on('click' , function() {
-  //     $('nav').toggleClass('expand');
-  // })
   $('.menu').on('click' , function() {
       $(this).toggleClass('cross');
       $('nav').toggleClass('expand');
-  })
+  });
 
   $('body').on('click', '.posts', function(e) {
     e.preventDefault();
 
-    _href = $(this).attr("href");
+    var _href = $(this).attr('href');
     history.pushState(null, null, _href);
     $('.active-menu').removeClass('active-menu');
 
-    var _href = window.location.pathname;
-    pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/)
-    var id = pathParams[2]
-    console.log(id)
-    var post = findPost(id, posts)
-    console.log(post)
-    var html = MyApp.templates['post']( {post: post});
+    _href = window.location.pathname;
+    var pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/);
+    var id = pathParams[2];
+    console.log(id);
+    var post = findPost(id, posts);
+    console.log(post);
+    var html = MyApp.templates['post']({ post: post });
     $('article').html('');
-    $('article').append(html)
-
+    $('article').append(html);
   })
 
   $('.intro-animation ul li a').click(function(e) {
@@ -89,9 +82,9 @@ $( document ).ready(function() {
     $('.active-menu').removeClass('active-menu');
     $(this).closest('li').addClass('active-menu');
     $('.page').removeClass('showpage');
-    var newPage = _href.replace(/\//, "");
+    var newPage = _href.replace(/\//, '');
     $('article').html('');
-    console.log('np', newPage)
+    console.log('np', newPage);
     var html = MyApp.templates[newPage]({ posts: posts});
 
      setTimeout(function() {
@@ -103,10 +96,10 @@ $( document ).ready(function() {
 });
 
 function findPost( id, posts) {
-    var foundPost
+    var foundPost;
     posts.forEach(function(post){
       if (post.searchtitle === id ) {
-        foundPost = post
+        foundPost = post;
       }
     })
     return foundPost;
