@@ -45,10 +45,7 @@ $( document ).ready(function() {
     }
   });
 
-  $('.menu').on('click' , function() {
-      $(this).toggleClass('cross');
-      $('nav').toggleClass('expand');
-  });
+  $('.menu').on('click' , toggleMenu);
 
   $('body').on('click', '.posts', function(e) {
     e.preventDefault();
@@ -70,7 +67,8 @@ $( document ).ready(function() {
 
   $('.intro-animation ul li a').click(function(e) {
     e.preventDefault();
-    $('nav').toggleClass('expand');
+    toggleMenu();
+    
     $('.intro-animation').removeClass('intro-animation');
     $('article').removeClass('show');
 
@@ -105,4 +103,9 @@ function findPost( id, posts) {
     }
   });
   return foundPost;
+}
+
+function toggleMenu () {
+  $('.menu').toggleClass('cross');
+  $('nav').toggleClass('expand');
 }

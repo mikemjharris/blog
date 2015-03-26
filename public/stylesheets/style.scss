@@ -3,7 +3,6 @@ $menu-move-col: hsla(240, 70%, 85%, 0.8);
 $show-col: hsla(300, 70%, 80%, 1);
 $body-font-size: 18px;
 
-
 *{
   box-sizing: border-box;
   font-family: verdana;
@@ -13,11 +12,12 @@ $body-font-size: 18px;
   font-size: $body-font-size;
 }
 
+
 header {
   height: 80px;
   padding: 20px;
   overflow: scroll;
-line-height: 50px;
+  line-height: 50px;
 
   h1 {
     text-align: left;
@@ -90,6 +90,7 @@ article {
     border-left: 10px solid $border-left-col;
     background: white;
     max-width: calc(800px - 30px);
+    min-width: 320px;
     box-shadow:0px 10px 20px 10px white;
     font-family: inconsolata;
     }
@@ -116,7 +117,7 @@ article {
   box-shadow:0px -10px 20px 10px white inset;
 }
 
-.mobile{
+.mobile {
   display: none;
 }
 
@@ -151,6 +152,10 @@ form {
 svg{
   padding: 2px;
   width: 100%;
+  li & {
+    height: 100%;
+    width: auto;
+  }
   & #rect {
     stroke-dasharray: 0, 3000;
   }

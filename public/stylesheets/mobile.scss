@@ -1,175 +1,191 @@
-
 @media screen and (max-width: 600px){
 
-
-ul.menu {
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  display: block;
-  padding: 10px;
-}
-
-.cross {
-   -webkit-animation: flash 0.4s ease-out;
-}
-
-@-webkit-keyframes flash {
-  0% {background: none;}
-  20% {background: hsla(120, 30%, 60%, 1)}
-  100% {background: none}
-}
-
-
-.menu li {
-  width: 40px;
-  margin: 10px auto;
-  border: 2px solid black;
-  transition: all 0.2s ease-in-out;
-}
-
-.cross li:nth-child(1) {
-  /*  position: absolute;*/
-  transform-origin: 0% 50%;
-  transform: translateX(5px) rotate(45deg) ;
-}
-
-.cross li:nth-child(2) {
-  opacity: 0;
-}
-.cross li:nth-child(3) {
-  /*  position: absolute;*/
-  transform-origin: 0% 50%;
-  transform:  translateX(5px) rotate(-45deg)  ;
-}
-
-
-
-.mobile{
-  display: block;
-}
-header {
-  ul {
-    position: fixed;
-    right: 0px;
-    top: 0px;
-    transform: translateZ(100px);
-    cursor:pointer;
-    padding: 15px;
+  .desktop {
+    display: none;
   }
-  li {
-    border: 1px solid black;
+
+  ul.menu {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: block;
+    padding: 10px;
+  }
+
+  .cross {
+     -webkit-animation: flash 0.4s ease-out;
+  }
+
+  @-webkit-keyframes flash {
+    0% {background: none;}
+    20% {background: hsla(120, 30%, 60%, 1)}
+    100% {background: none}
+  }
+
+
+  .menu li {
     width: 40px;
-    margin: 5px 0;
+    margin: 10px auto;
+    border: 2px solid black;
+    transition: all 0.2s ease-in-out;
   }
-}
 
+  .cross li:nth-child(1) {
+    /*  position: absolute;*/
+    transform-origin: 0% 50%;
+    transform: translateX(5px) rotate(45deg) ;
+  }
 
- main {
-    flex-direction: column;
-    div {
+  .cross li:nth-child(2) {
+    opacity: 0;
+  }
+  .cross li:nth-child(3) {
+    /*  position: absolute;*/
+    transform-origin: 0% 50%;
+    transform:  translateX(5px) rotate(-45deg)  ;
+  }
 
-      display: block;
-      flex: none;
-      /*position: fixed;*/
-      z-index: 2;
-      background: white;
-      width: 100%;
-      header {
-       height: 45px;
-       width: 100%;
-      line-height: 20px;
-      }
-      h1 {
-        font-size: 20px;
-        width:100%;
+  .mobile{
+    display: block;
+  }
+  header {
+    ul {
+      position: fixed;
+      right: 0px;
+      top: 0px;
+      transform: translateZ(100px);
+      cursor:pointer;
+      padding: 15px;
+    }
+    li {
+      border: 1px solid black;
+      width: 40px;
+      margin: 5px 0;
+    }
+  }
+
+  article {
+    .header {
+      h2 {
+        width: 100%;
+        font-size: 18px * 1.5;
+        margin-bottom: 10px;
       }
     }
 
-    nav {
-      z-index: 1;
-      position: absolute;
-      right: 0px;
-      top: 50px;
-      width: 100%;
-      -webkit-transform: translateY(-400px);;
-      transform: translateY(-400px);
-      transition: all 0.2s;
-      ul {
-        width: 100%;
-        -webkit-animation: none 1.5s linear;
-        li {
+    #twitter-share {
+      width: 90px;
+      padding-left: calc( 100% - 200px);
+      text-align: right;
+      svg {
+        
+        display: inline-block;
+      }
+    }
+  }
 
-          margin-left: auto;
-          margin-right: auto;
-          max-width: 300px;
+
+   main {
+      flex-direction: column;
+      div {
+
+        display: block;
+        flex: none;
+        /*position: fixed;*/
+        z-index: 2;
+        background: white;
+        width: 100%;
+        header {
+         height: 45px;
+         width: 100%;
+        line-height: 20px;
+        }
+        h1 {
+          font-size: 20px;
+          width:100%;
+        }
+      }
+
+      nav {
+        z-index: 1;
+        position: absolute;
+        right: 0px;
+        top: 50px;
+        width: 100%;
+        -webkit-transform: translateY(-400px);;
+        transform: translateY(-400px);
+        transition: all 0.2s;
+        ul {
           width: 100%;
-          transition: all 0.5s;
-        }
-        .space {
-          display: none;
-        }
-        span {
-          display: none;
-          &.mobile {
-            cursor: pointer;
-            display:block;
-            background: red;
-            padding: 10px;
+          -webkit-animation: none 1.5s linear;
+          li {
+
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 300px;
+            width: 100%;
+            transition: all 0.5s;
+          }
+          .space {
+            display: none;
+          }
+          span {
+            display: none;
+            &.mobile {
+              cursor: pointer;
+              display:block;
+              background: red;
+              padding: 10px;
+            }
           }
         }
+
       }
+   }
 
-    }
- }
+   .intro-animation li:nth-child(n) {
+    -webkit-animation: none 1s linear;
+   }
 
- .intro-animation li:nth-child(n) {
-  -webkit-animation: none 1s linear;
- }
+  nav>ul>li {
+    -webkit-animation: none 1.5s linear;
+  }
+  /* @-webkit-keyframes hide {
+    from {opacity: 0; transform: translateY(-500px);}
+    to {opacity: 1; transform: translateY(--500px)}
+   }*/
 
-nav>ul>li {
-  -webkit-animation: none 1.5s linear;
-}
-/* @-webkit-keyframes hide {
-  from {opacity: 0; transform: translateY(-500px);}
-  to {opacity: 1; transform: translateY(--500px)}
- }*/
-
- section {
-  height: calc(100vh - 55px);
-  margin-top: 10px;
-  padding: 0px;
- }
-
-.expand {
-  z-index: 2;
- -webkit-transform: translateY(0px);
- transform: translateY(0px) translateZ(2px);
-   height: 100%;
-
-}
-
-#twitter-logo {
-  /*display: none;*/
-}
-
-
-nav ul {
-
-}
-article  {
-  padding: 20px;
-  .content {
+   section {
+    height: calc(100vh - 55px);
     margin-top: 10px;
+    padding: 0px;
+   }
+
+  .expand {
+    z-index: 2;
+   -webkit-transform: translateY(0px);
+   transform: translateY(0px) translateZ(2px);
+     height: 100%;
+
   }
-  h2 {
-    position: relative;
+
+  #twitter-logo {
+    display: none;
   }
-  li {
-    min-width: 0px;
-    /*padding-right: 10px;*/
+
+  article  {
+    padding: 20px;
+    .content {
+      margin-top: 10px;
+    }
+    h2 {
+      position: relative;
+    }
+    li {
+      min-width: 0px;
+      /*padding-right: 10px;*/
+    }
   }
-}
 
 
 }
