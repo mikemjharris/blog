@@ -140,13 +140,15 @@ article {
 
 .tinyletter {
   max-width: 300px;
+  margin: 0 auto;
   input {
     margin: 20px 0;
     padding: 10px 5px;
+    text-align: center;
   }
   input[type="submit"] {
     padding: 10px;
-    max-width: 200px;
+    // max-width: 200px;
    -webkit-appearance: none;
     align-items: flex-start;
     text-align: center;
