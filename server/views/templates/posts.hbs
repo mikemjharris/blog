@@ -5,9 +5,10 @@
 
 <div class="content">
   <div class="error">{{ error }}</div>
+
   <ul>
-  {{#posts}}
-    <li><a class='posts' href='/posts/{{searchtitle}}'>{{title}}</a><span>Mar 15</span</li>
-  {{/posts}}
- </ul>
+    {{#posts}}
+      <li><a class='posts' href='/posts/{{searchtitle}}'><span>{{title}}</span><span>{{ date }}</span></a></li>
+    {{/posts}}
+    </ul>
 </div>

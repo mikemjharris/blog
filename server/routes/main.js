@@ -9,6 +9,10 @@ module.exports = function ( app, posts ) {
     res.render('templates/home' , { posts: posts, latestPost: posts[ 0 ]  });
   });
 
+  app.get('/projects', function( req, res ) {
+    res.render('templates/projects' , { posts: posts });
+  });
+
   app.get('/posts', function( req, res ) {
     res.render('templates/posts' , { posts: posts });
   });
