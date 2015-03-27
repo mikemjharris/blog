@@ -48,8 +48,9 @@
   }
 
   header {
+
     ul {
-      position: fixed;
+      position: absolute;
       margin-left: calc(100% - 75px);
       top: -10px;
       transform: translateZ(100px);
