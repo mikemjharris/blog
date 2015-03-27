@@ -49,10 +49,11 @@
     display: block;
   }
   header {
+    position: relative;
     ul {
       position: fixed;
-      right: 0px;
-      top: 0px;
+      left: calc(100% - 75px);
+      top: -10px;
       transform: translateZ(100px);
       cursor:pointer;
       padding: 15px;
@@ -78,7 +79,7 @@
       padding-left: calc( 100% - 200px);
       text-align: right;
       svg {
-        
+
         display: inline-block;
       }
     }
