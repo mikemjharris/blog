@@ -64,30 +64,32 @@ $( document ).ready(function() {
   })
 
   $('.intro-animation ul li a').click(function(e) {
-    e.preventDefault();
-    toggleMenu();
+    if( !$(this).data('navigate')) {
+      e.preventDefault();
+      toggleMenu();
 
-    $('.intro-animation').removeClass('intro-animation');
-    $('article').removeClass('show');
+      $('.intro-animation').removeClass('intro-animation');
+      $('article').removeClass('show');
 
-    _href = $(this).attr("href");
-    // change the url without a page refresh and add a history entry.
-    history.pushState(null, null, _href);
+      _href = $(this).attr("href");
+      // change the url without a page refresh and add a history entry.
+      history.pushState(null, null, _href);
 
-    $('.active-menu').removeClass('active-menu');
-    $(this).closest('li').addClass('active-menu');
-    $('.page').removeClass('showpage');
+      $('.active-menu').removeClass('active-menu');
+      $(this).closest('li').addClass('active-menu');
+      $('.page').removeClass('showpage');
 
-    var newPage = _href.replace(/\//, '');
-    $('article').html('');
-    console.log('np', newPage);
-    var html = MyApp.templates[newPage]({ posts: posts});
+      var newPage = _href.replace(/\//, '');
+      $('article').html('');
+      console.log('np', newPage);
+      var html = MyApp.templates[newPage]({ posts: posts});
 
-     setTimeout(function() {
-      $('article').addClass('show');
-      $('article').append(html);
-      // $('.' + newPage).addClass('showpage');
-    }, 0);
+       setTimeout(function() {
+        $('article').addClass('show');
+        $('article').append(html);
+        // $('.' + newPage).addClass('showpage');
+      }, 0);
+    }
   });
 });
 
