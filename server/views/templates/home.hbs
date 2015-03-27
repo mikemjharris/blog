@@ -1,0 +1,44 @@
+<h2>My Blog</h2>
+
+
+  <p>
+    I'm a generalist, full stack web developr based in london and working for Mammal.  I buid modern web apps - such as this blog.
+  </p>
+  <p>
+    This is my little corner of the internet where I get write about what I want - usually about tech.
+  </p>
+  <h3>Latest Post</h3>
+  <a href="./posts/{{ latestPost.searchtitle }}">
+    <div class='highlight'>
+      <h4>{{ latestPost.title }}</h4>
+        {{ latestPost.intro }}
+
+    </div>
+  </a>
+
+
+  <h3>Mailing List</h3>
+
+  Whenever I write a new piece I will send it out on twitter and to a mailing list - fill in your email to subscribe.
+
+
+  <form
+    class="tinyletter"
+    action="https://tinyletter.com/Mikemjharris"
+    method="post"
+    target="popupwindow"
+    onsubmit="window.open('https://tinyletter.com/Mikemjharris', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"
+  >
+    <input
+      type="text"
+      name="email"
+      id="tlemail"
+      placeholder="email"
+    />
+    <input type="hidden" value="1" name="embed"/>
+    <input type="submit" value="Subscribe" /><p>
+
+  </form>
+
+
+

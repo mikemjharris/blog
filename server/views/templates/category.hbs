@@ -1,0 +1,28 @@
+<h2>Posts By Category</h2>
+
+<div class="content">
+  <p>The aim of this blog is to generally post about tech with the odd thought piece thrown in.  As and when I write more posts I will expand the granularity of the categories.  ALl a bit sparse so far.</p>
+
+  <div class="article-section">
+    <h3>Tech</h3>
+    <ul>
+    {{#posts}}
+      {{#compare category 'tech' }}
+         <li><a class='posts' href='/posts/{{searchtitle}}'>{{title}}</a><span>Mar 15</span</li>
+      {{/compare }}
+    {{/posts}}
+   </ul>
+  </div>
+
+  <div class="article-section">
+    <h3>Thoughts</h3>
+    <ul>
+      {{#posts}}
+        {{#compare category 'thoughts' }}
+          <li><a class='posts' href='/posts/{{searchtitle}}'>{{title}}</a><span>Mar 15</span</li>
+        {{/compare }}
+      {{/posts}}
+    </ul>
+ </div>
+
+</div>

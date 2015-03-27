@@ -2,7 +2,9 @@
 
   <div class="header">
     <h2>{{title}}</h2>
-    <a href="http://twitter.com/{{_id}}" id="twitter-share">{{> "_twitter-share" }}</a>
+    <a
+      target="_blank"
+      href="https://twitter.com/intent/tweet?;text={{ title }} by @mikemjharris&amp;url=http://blog.mikemjharris.com/posts/{{ searchtitle }}" id="twitter-share">{{> "_twitter-share" }}</a>
   </div>
 
   <div class="content">
