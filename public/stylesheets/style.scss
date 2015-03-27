@@ -25,7 +25,7 @@ h4 {
 }
 
 .highlight {
-  padding: 5px;
+  padding: 15px;
   margin: 15px;
   background: lighten($show-col ,10%);
   transition: background 0.2s;
@@ -141,7 +141,7 @@ article {
 .tinyletter {
   max-width: 300px;
   input {
-    margin: 5px 0;
+    margin: 20px 0;
     padding: 10px 5px;
   }
   input[type="submit"] {
