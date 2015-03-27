@@ -31,7 +31,6 @@
   }
 
   .cross li:nth-child(1) {
-    /*  position: absolute;*/
     transform-origin: 0% 50%;
     transform: translateX(5px) rotate(45deg) ;
   }
@@ -40,7 +39,6 @@
     opacity: 0;
   }
   .cross li:nth-child(3) {
-    /*  position: absolute;*/
     transform-origin: 0% 50%;
     transform:  translateX(5px) rotate(-45deg)  ;
   }
@@ -48,11 +46,11 @@
   .mobile{
     display: block;
   }
+
   header {
-    position: relative;
     ul {
       position: fixed;
-      left: calc(100% - 75px);
+      margin-left: calc(100% - 75px);
       top: -10px;
       transform: translateZ(100px);
       cursor:pointer;
