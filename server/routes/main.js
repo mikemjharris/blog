@@ -6,7 +6,11 @@ var notFound = {
 module.exports = function ( app, posts ) {
 
   app.get('/', function( req, res ) {
-    res.render('templates/posts' , { posts: posts });
+    res.render('templates/home' , { posts: posts, latestPost: posts[ 0 ]  });
+  });
+
+  app.get('/projects', function( req, res ) {
+    res.render('templates/projects' , { posts: posts });
   });
 
   app.get('/posts', function( req, res ) {
@@ -15,6 +19,10 @@ module.exports = function ( app, posts ) {
 
   app.get('/posts/top', function( req, res ) {
     res.render('templates/posts' , { posts: posts });
+  });
+
+  app.get('/category', function( req, res ) {
+    res.render('templates/category' , { posts: posts });
   });
 
   app.get('/posts/:id', function( req, res ) {

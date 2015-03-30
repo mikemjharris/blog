@@ -31,7 +31,6 @@
   }
 
   .cross li:nth-child(1) {
-    /*  position: absolute;*/
     transform-origin: 0% 50%;
     transform: translateX(5px) rotate(45deg) ;
   }
@@ -40,7 +39,6 @@
     opacity: 0;
   }
   .cross li:nth-child(3) {
-    /*  position: absolute;*/
     transform-origin: 0% 50%;
     transform:  translateX(5px) rotate(-45deg)  ;
   }
@@ -48,11 +46,13 @@
   .mobile{
     display: block;
   }
+
   header {
+
     ul {
-      position: fixed;
+      position: absolute;
       right: 0px;
-      top: 0px;
+      top: -10px;
       transform: translateZ(100px);
       cursor:pointer;
       padding: 15px;
@@ -78,7 +78,7 @@
       padding-left: calc( 100% - 200px);
       text-align: right;
       svg {
-        
+
         display: inline-block;
       }
     }

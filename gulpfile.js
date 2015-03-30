@@ -8,17 +8,6 @@ var merge = require('merge-stream');
 var path = require('path');
 var autoprefixer = require('gulp-autoprefixer');
 
-// gulp.task('templates', function(){
-//   gulp.src('server/views/templates/*.hbs')
-//     .pipe(handlebars())
-//     .pipe(wrap('Handlebars.template(<%= contents %>)'))
-//     .pipe(declare({
-//       namespace: 'MyApp.templates',
-//       noRedeclare: true, // Avoid duplicate declarations 
-//     }))
-//     .pipe(concat('templates.js'))
-//     .pipe(gulp.dest('./public/dist/'));
-// });
 
 gulp.task('templates', function() {
   // Assume all partials start with an underscore
@@ -66,13 +55,14 @@ gulp.task('sass', function () {
 
 gulp.task('js', function () {
   gulp.src([
+    './public/javascripts/helpers.js',
     './public/javascripts/main.js',
   ])
   .pipe(concat('main.js'))
   .pipe(gulp.dest('./public/dist/'));
 });
 
-gulp.task('default', ['js', 'sass', 'templates'])
+gulp.task('default', ['js', 'sass', 'templates']);
 
 gulp.task('watch', ['sass', 'js', 'templates'], function () {
   gulp.watch('./public/stylesheets/*', ['sass']);

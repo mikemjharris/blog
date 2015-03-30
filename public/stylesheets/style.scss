@@ -12,6 +12,31 @@ $body-font-size: 18px;
   font-size: $body-font-size;
 }
 
+em {
+  font-weight: bold;
+}
+
+h1, h2,h3, h4 {
+  font-weight: bold;
+}
+
+h3, h4 {
+  margin: 10px 0;
+}
+
+h4 {
+  border-left: 5px solid $border-left-col;
+}
+
+.highlight {
+  padding: 15px;
+  margin: 15px;
+  background: lighten($show-col ,10%);
+  transition: background 0.2s;
+  &:hover {
+    background: lighten($show-col ,5%);
+  }
+}
 
 header {
   height: 80px;
@@ -69,10 +94,11 @@ article {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-  .content {
-    p {
+  p {
       margin-bottom: 1em;
     }
+  .content {
+
     // margin-top: 80px;
   }
   .header {
@@ -94,27 +120,59 @@ article {
     box-shadow:0px 10px 20px 10px white;
     font-family: inconsolata;
     }
-    h3 {
-      border-left: 10px solid $border-left-col;
-       padding-left: 5px;
-       font-size: $body-font-size * 1.2;
-       margin: 10px 0;
-
-    }
+  h3 {
+    border-left: 10px solid $border-left-col;
+     padding-left: 5px;
+     font-size: $body-font-size * 1.2;
+     margin: 10px 0;
+  }
 
   li {
     min-width: 300px;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: space-between;
+
     a {
+      display: -webkit-flex;
+      display: flex;
+      justify-content: space-between;
       padding: 10px 3px;
+      &:hover {
+        background: lighten( $show-col, 10%);
+      }
     }
     &:nth-child(even) {
-        background: lighten($border-left-col, 30%);
+      background: lighten($border-left-col, 30%);
     }
   }
   box-shadow:0px -10px 20px 10px white inset;
+}
+
+.tinyletter {
+  max-width: 300px;
+  margin: 0 auto;
+  input {
+    margin: 20px 0;
+    padding: 10px 5px;
+    text-align: center;
+  }
+  input[type="submit"] {
+    padding: 10px;
+    // max-width: 200px;
+   -webkit-appearance: none;
+    align-items: flex-start;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    border: none;
+    background: $show-col;
+    transition: background 0.2s;
+    &:hover {
+      background: lighten($show-col, 5%);
+    }
+  }
+}
+
+.article-section {
+  margin: 20px 0;
 }
 
 .mobile {

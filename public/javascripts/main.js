@@ -1,24 +1,31 @@
 $( document ).ready(function() {
   var posts;
 
+  //initial call for posts
+  $.ajax({
+    url: '/api/posts',
+    dataType: 'json',
+    success: function(data) {
+      posts = data;
+    }
+  });
+
+  //browser history
   if (window.history && window.history.pushState) {
 
     $(window).on('popstate', function() {
-
       var _href = window.location.pathname;
       var pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/);
 
       var path = pathParams[1];
       var id = pathParams[2];
 
-      console.log(id);
       if ( posts !== undefined ) {
         if ( id !== undefined ) {
           var post = findPost(id, posts);
-          console.log(post)
+          console.log(post);
           var html = MyApp.templates.post({ post: post });
-          $('article').html('');
-          $('article').append(html);
+          $('article').html(html);
         } else {
           $('article').html('');
 
@@ -37,19 +44,10 @@ $( document ).ready(function() {
     });
   }
 
-  $.ajax({
-    url: '/api/posts',
-    dataType: 'json',
-    success: function(data) {
-      posts = data;
-    }
-  });
-
   $('.menu').on('click' , toggleMenu);
 
   $('body').on('click', '.posts', function(e) {
     e.preventDefault();
-
     var _href = $(this).attr('href');
     history.pushState(null, null, _href);
     $('.active-menu').removeClass('active-menu');
@@ -66,31 +64,33 @@ $( document ).ready(function() {
   })
 
   $('.intro-animation ul li a').click(function(e) {
-    e.preventDefault();
-    toggleMenu();
-    
-    $('.intro-animation').removeClass('intro-animation');
-    $('article').removeClass('show');
+    if( !$(this).data('navigate')) {
+      e.preventDefault();
+      toggleMenu();
 
-    _href = $(this).attr("href");
+      $('.intro-animation').removeClass('intro-animation');
+      $('article').removeClass('show');
 
-    // change the url without a page refresh and add a history entry.
-    history.pushState(null, null, _href);
+      _href = $(this).attr("href");
+      // change the url without a page refresh and add a history entry.
+      history.pushState(null, null, _href);
 
-    $('.active-menu').removeClass('active-menu');
-    $(this).closest('li').addClass('active-menu');
-    $('.page').removeClass('showpage');
-    var newPage = _href.replace(/\//, '');
-    $('article').html('');
-    console.log('np', newPage);
-    var html = MyApp.templates[newPage]({ posts: posts});
+      $('.active-menu').removeClass('active-menu');
+      $(this).closest('li').addClass('active-menu');
+      $('.page').removeClass('showpage');
 
-     setTimeout(function() {
-      $('article').addClass('show');
-      $('article').append(html);
-      // $('.' + newPage).addClass('showpage');
-    }, 0);
-  })
+      var newPage = _href.replace(/\//, '');
+      $('article').html('');
+      console.log('np', newPage);
+      var html = MyApp.templates[newPage]({ posts: posts});
+
+       setTimeout(function() {
+        $('article').addClass('show');
+        $('article').append(html);
+        // $('.' + newPage).addClass('showpage');
+      }, 0);
+    }
+  });
 });
 
 function findPost( id, posts) {
