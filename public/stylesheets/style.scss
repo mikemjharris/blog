@@ -248,8 +248,6 @@ svg{
 
 
 
-
-
 @-webkit-keyframes dash {
   from { stroke-dasharray: 0, 3000;}
     to {stroke-dasharray: 3000, 1700;}
@@ -285,7 +283,7 @@ a {
 .show {
   opacity: 1;
   outline-radius: 10px;
-  -webkit-animation: show 1s linear;
+  -webkit-animation: show 0.5s linear;
 }
 
 @-webkit-keyframes show {

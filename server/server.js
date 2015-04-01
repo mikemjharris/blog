@@ -15,18 +15,18 @@ if ( process.env.MONGODB_PORT_27017_TCP_ADDR ) {
   mongoUri = 'mongodb://localhost:27017/blog';
 }
 
-var db = mongo.db( mongoUri, { native_parser:true } );
+var db = mongo.db( mongoUri, { native_parser: true } );
 
 var exphbs  = require('express-handlebars');
 
 var regex = /\<\!\-\-\smeta-data\s([A-z]+)\:\s(.+?(?=-->))/g;
 var posts = [];
 
-fs.readdir('./server/views/templates/posts' , function ( err, files ) {
+fs.readdir('./server/content/posts' , function ( err, files ) {
   files.forEach(function( file ) {
     var post ={};
     post.template = file;
-    fs.readFile('./server/views/templates/posts/' + file, function ( err, data ) {
+    fs.readFile('./server/content/posts/' + file, function ( err, data ) {
 
       var str = data.toString('utf8');
       var match;
@@ -52,21 +52,23 @@ app.set('layouts', path.join(__dirname, 'views/layouts/'));
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
+  helpers: require("../public/javascripts/helpers.js").helpers, // same file that gets used on our client
   layoutsDir: 'server/views/layouts/',
-  partialsDir: 'server/views/templates/partials',
-  helpers: {
-    compare: function(lvalue, rvalue, options) {
-      if (arguments.length < 3) {
-          throw new Error("Handlebars Helper equal needs 2 parameters");
-        }
-      if ( lvalue !== rvalue ) {
-          return options.inverse(this);
-      } else {
-          return options.fn(this);
-      }
-    }
-  }
+  partialsDir: 'server/views/templates/partials'
 }));
+
+// helpers: {
+//     compare: function(lvalue, rvalue, options) {
+//       if (arguments.length < 3) {
+//           throw new Error( 'Handlebars Helper equal needs 2 parameters' );
+//         }
+//       if ( lvalue !== rvalue ) {
+//           return options.inverse(this);
+//       } else {
+//           return options.fn(this);
+//       }
+//     }
+//   }
 
 app.set('view engine', '.hbs');
 
