@@ -58,7 +58,7 @@ header {
 main {
   display: -webkit-flex;
   display: flex;
-  height: 90vh;
+  height: 100vh;
   div {
      -webkit-flex: 1;
     flex: 1;
@@ -79,8 +79,9 @@ section {
   flex: 2;
   display: flex;
   justify-content: center;
-  height: 95vh;
+  height: 100vh;
   padding: 20px;
+  padding-bottom: 0px;
 }
 
 article {
@@ -170,6 +171,8 @@ article {
     }
   }
 }
+
+
 
 .article-section {
   margin: 20px 0;
@@ -416,6 +419,9 @@ ul li ul li {
     .intro-animation li:nth-child(#{$i + 0}) {
     background: hsla( $i * 10 + 120, 60%, 80%,1);
       -webkit-animation: drop-#{$i} 2s linear;
+      &.clear-back {
+        background: white;
+      }
 
   };
 
