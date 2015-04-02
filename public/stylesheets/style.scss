@@ -342,6 +342,9 @@ ul li ul li {
   &:hover {
     -webkit-transform: translateX(-5px) skewX(10deg);
   }
+  &.clear-back {
+    background: white;
+  }
 }
 
 .move {
