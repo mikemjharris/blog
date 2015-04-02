@@ -59,6 +59,8 @@ main {
   display: -webkit-flex;
   display: flex;
   height: 100vh;
+  max-width: 1550px;
+  margin: 0 auto;
   div {
      -webkit-flex: 1;
     flex: 1;
@@ -136,6 +138,7 @@ article {
       display: flex;
       justify-content: space-between;
       padding: 10px 3px;
+      transition: background 0.2s;
       &:hover {
         background: lighten( $show-col, 10%);
       }

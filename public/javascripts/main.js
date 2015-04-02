@@ -101,6 +101,31 @@ $( document ).ready(function() {
   });
 });
 
+// function formatPage( path, id) {
+//   if ( posts !== undefined ) {
+//     if ( id !== undefined ) {
+//       var post = findPost(id, posts);
+//       console.log(post);
+//       var html = MyApp.templates.post({ post: post });
+//       $('article').html(html);
+//     } else {
+//       $('article').html('');
+
+//       var html = MyApp.templates[path]({ posts: posts });
+//       $('article').append(html);
+//       $('.active-menu').removeClass('active-menu');
+
+//       var menuNavs = $('nav a');
+//       for ( var i = 0 ; i < menuNavs.length; i++){
+//         if ($(menuNavs[i]).attr('href') === window.location.pathname) {
+//           $(menuNavs[i]).closest('li').addClass('active-menu');
+//         }
+//       }
+//     }
+// }
+
+
+
 function findPost( id, posts) {
   var foundPost;
   posts.forEach(function ( post ) {
