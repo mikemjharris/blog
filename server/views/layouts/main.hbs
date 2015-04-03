@@ -15,10 +15,17 @@
     <script src="/dist/main.js"></script>
   </head>
   <body>
+
+    <div id='twitter-logo' class="desktop">
+      <a title="Follow @MikeMJHarris on Twitter" target="_blank" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A8000%2Fposts%23&amp;region=follow_link&amp;screen_name=MikeMJHarris&amp;tw_p=followbutton">
+        {{> "_twitter-follow" }}
+      </a>
+    </div>
+
     <main>
       <div>
         <header>
-          <a href="/"><h1>Blog : Mike MJ Harris</h1></a>
+          <a href="/"><h1>Mike MJ Harris</h1></a>
           <ul class='menu'>
             <li></li>
             <li></li>
@@ -49,11 +56,6 @@
         </article>
       </section>
 
-      <div id='twitter-logo' class="desktop">
-        <a title="Follow @MikeMJHarris on Twitter" target="_blank" href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A8000%2Fposts%23&amp;region=follow_link&amp;screen_name=MikeMJHarris&amp;tw_p=followbutton">
-          {{> "_twitter-follow" }}
-        </a>
-      </div>
     </main>
   </body>
 
