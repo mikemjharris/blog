@@ -200,6 +200,16 @@ form {
   }
 }
 
+.show-link {
+  font-weight: bold;
+  display: inline-block;
+  border-bottom: 1px solid $border-left-col;
+  transition: all 0.2s;
+  &:hover {
+    background: $border-left-col;
+  };
+}
+
 #twitter {
   background: white;
 }
