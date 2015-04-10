@@ -99,6 +99,7 @@ $body-font-size: 18px;
 
   main {
     flex-direction: column;
+    max-width: 600px;
     div {
       display: block;
       flex: none;
@@ -111,6 +112,7 @@ $body-font-size: 18px;
       line-height: 20px;
       }
       h1 {
+        text-align: left;
         font-size: 20px;
         width:100%;
       }
