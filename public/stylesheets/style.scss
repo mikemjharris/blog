@@ -52,6 +52,11 @@ h4 {
   &:hover {
     background: lighten($show-col ,5%);
   }
+  h4 {
+    display: flex;
+     justify-content: space-between;
+
+  }
 }
 
 header {
@@ -72,23 +77,18 @@ header {
 }
 
 main {
-  display: -webkit-flex;
   display: flex;
   height: 100vh;
   max-width: 1550px;
   margin: 0 auto;
   div {
-     -webkit-flex: 1;
     flex: 1;
   }
 }
 
 nav {
   text-align: center;
-   -webkit-flex: 1;
   flex: 1;
-  /*margin-left: 20px;*/
-  /*border-left: 10px solid $border-left-col;*/
   align-items: flex-start;
   padding: 20px 0;
 }
@@ -150,7 +150,6 @@ article {
     min-width: 300px;
 
     a {
-      display: -webkit-flex;
       display: flex;
       justify-content: space-between;
       padding: 10px 3px;
