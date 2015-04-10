@@ -122,9 +122,8 @@ $body-font-size: 18px;
         right: 0px;
         top: 50px;
         width: 100%;
-        -webkit-transform: translateY(-400px);;
-        transform: translateY(-400px);
-        transition: transform 0.5s cubic-bezier(.58,-1.06,.2,1.75);
+        transform: translateY(-700px) scaleX(0.3) scaleY(4);;
+        transition: transform 0.5s cubic-bezier(.58,-1.06,.2,1.95);
         background: transparent;
         ul {
           width: 100%;
@@ -174,7 +173,7 @@ $body-font-size: 18px;
 
   .expand {
     z-index: 2;
-    transform: translateY(0px) translateZ(2px);
+    transform: translateY(0px) translateZ(2px) scaleX(1) scaleY(1);
     height: 100%;
     -webkit-animation: expandback 0.6s linear;
      background: hsla(0, 95%, 5%, 0.2);
@@ -184,9 +183,9 @@ $body-font-size: 18px;
   }
 
   @keyframes expandback {
-    0% { background: transparent;}
-    85% { background: transparent;;}
-    110% { background: hsla(0, 95%, 5%, 0.2);}
+    0% { background: transparent; }
+    85% { background: transparent;}
+    110% { background: hsla(0, 95%, 5%, 0.2); }
   }
 
 
