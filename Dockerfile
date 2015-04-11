@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs
+FROM node:0.10-onbuild
 MAINTAINER Mike Harris "mike.harris@mammal.io"
 
 RUN npm --no-color install -g bower && \
