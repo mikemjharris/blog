@@ -1,4 +1,4 @@
-FROM node:0.10-onbuild
+FROM node:0.12.2
 MAINTAINER Mike Harris "mike.harris@mammal.io"
 
 RUN npm --no-color install -g bower && \
