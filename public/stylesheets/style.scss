@@ -113,6 +113,12 @@ article {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   height: 100%;
+  ul {
+    margin-bottom: 1em;
+    li {
+      margin: 5px 0;
+    }
+  }
   p {
       margin-bottom: 1em;
     }
