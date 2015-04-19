@@ -1,7 +1,7 @@
 Blog             
 ========================
 
-Base for online blog
+Base for online blog. To run pull this repositry then run the following commands.
 
 ```
     npm install && bower install
@@ -33,6 +33,12 @@ docker push mikemjharris/blog
 #### Deployment on the server
 The blog was desigined to be deployed using docker - with the node app sitting in one container linked to a mongodb container with a shared volume in another container.  Here are the commands to get it running:
 
+```
+docker run -d -p 7000:8000 --name blog mikemjharris/blog
+```
+
+
+#### THIS ISN'T CURRENTLY NEEDED BUT MAY BE IMPLEMENTED SOON
 1 Run the mongodb container.  We want to mount an external volume so that the data is save outside the container - this data can be copied as a back up - also the data is not lost if we restart the container. 
 ```
 docker run -d -p 27017:27017 -v /data/db:/data/db --name mongodb dockerfile/mongodb
