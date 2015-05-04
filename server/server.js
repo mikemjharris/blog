@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var moment = require('moment');
 
 var app = express();
 
@@ -37,12 +38,9 @@ fs.readdir('./server/content/posts' , function ( err, files ) {
         post[ match[ 1 ].trim() ] = match [ 2 ].trim();
       }
       posts.push(post);
+      posts = sortPosts(posts);
     });
   });
-});
-
-posts = posts.sort(function(a, b) {
-  return new Date(a.date) - new Date(b.date);
 });
 
 // view engine setup
@@ -119,3 +117,10 @@ app.set('port', process.env.PORT || 8000);
 var server = app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + server.address().port);
 });
+
+// helper functions
+function sortPosts( posts ) {
+  return posts.sort(function(a, b) {
+    return moment(b.date) - moment(a.date);
+  });
+}
