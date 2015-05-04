@@ -1,14 +1,14 @@
 <h2>Posts By Category</h2>
 
 <div class="content">
-  <p>The aim of this blog is to generally post about tech with the odd thought piece thrown in.  As and when I write more posts I will expand the granularity of the categories.  ALl a bit sparse so far.</p>
+  <p>The aim of this blog is to generally post about tech with the odd thought piece thrown in.  Most of the technical pieces are about the process of building and deploying this very blog you are experiencing now.</p>
 
   <div class="article-section">
     <h3>Tech</h3>
     <ul>
     {{#posts}}
       {{#compare category 'tech' }}
-        <li><a class='posts' href='/posts/{{searchtitle}}'><span>{{title}}</span><span>{{ date }}</span></a></li>
+        <li><a class='posts space-content' href='/posts/{{searchtitle}}'><span>{{title}}</span><span>{{ date }}</span></a></li>
       {{/compare }}
     {{/posts}}
    </ul>
@@ -19,7 +19,7 @@
     <ul>
       {{#posts}}
         {{#compare category 'thoughts' }}
-          <li><a class='posts' href='/posts/{{searchtitle}}'><span>{{title}}</span><span>{{ date }}</span></a></li>
+          <li><a class='posts space-content' href='/posts/{{searchtitle}}'><span>{{title}}</span><span>{{ date }}</span></a></li>
         {{/compare }}
       {{/posts}}
     </ul>
