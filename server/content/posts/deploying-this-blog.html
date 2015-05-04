@@ -1,0 +1,76 @@
+<!-- meta-data title: Deploying this blog  -->
+<!-- meta-data searchtitle: deploying-this-blog  -->
+<!-- meta-data date: 04 May 2015 -->
+<!-- meta-data intro: Building a continuous integration solution with containers  -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+  It’s awesome building digital products, but once you have got something amazing whirring away on your laptop, how do you share it with the world?  For many developers Heroku has been a saviour taking away much of the pain of getting a web app up and running on the internet.
+</p>
+
+<p>
+  Part of this project, <a href="http://blog.mikemjharris.com/posts/building-a-blog">where I build and write about a blog app</a>, I wanted to push myself to learn new skills - one of these was how to deploy your own app on your own server.  Hopefully I would develop a quick and easy solution and wean myself off Heroku - or at the very least increase my appreciation of the solution they provide.
+</p>
+
+<p>
+  A quick spoiler - I did manage to build a fast, continuous integrated, deployment solution. Now whenever I push code to master my project is deployed to my server within a minute.  This piece is just a few of the thoughts and decisions I made along the way. I'm saving a full blown technical walkthrough for a rainy day.
+</p>
+
+<h4>Docker</h4>
+<p>
+  Heroku uses its own container system to launch apps. At work we use Docker to containerise our apps. So I decided to use Docker for my project - having a few experts close at hand to ask questions of is invaluable.
+</p>
+
+<h4>One dependency to rule them all</h4>
+<p>
+  With Docker you build an image of your app using layers and then run it in a container. The great thing about this is that the only dependency you need on your server is Docker. No fussing around getting a remote system set up with all the different tools you need to run your app. Just one dependency to bring them all and in the container run them.
+</p>
+
+<h4>Docker registry</h4>
+<p>
+  There is an initial investment in setting up a Dockerfile for you project which details how your app image is built. This blog is a node app with a number of gulp tasks for compiling various assets and it was relatively easy to find example Dockerfiles out in the wild (<a target="_blank" href="https://github.com/mikemjharris/blog/blob/master/Dockerfile" class="show-link">you can see mine on Github</a>). Once set up you can build and run your container locally, push this up to the Docker registry and pull it down on your server (much as you would code with Github). Another great feature of containers is that they act the same whether they are run locally or remotely so you have no surprises when you deploy.
+</p>
+
+<h4>Automation</h4>
+<p>
+  This solution worked great but I was locally building, pushing to the online repository and then SSH-ing into my server to pull the image and get it whirring away in the cloud.  The tech world is all about automation so how to streamline this process?
+</p>
+
+<h4>Webhooks</h4>
+<p>
+  Github sends out a webhook when code is changed on a branch. The Docker registry can respond to webhooks and build an image from your latest code. It in turn can post a webhook. I needed to listen for this on my server. I built a small server using the python simple server which comes bundled with most versions on linux (I didn't want any more dependencies other than Docker). On receiving the nod from the registry it would trigger a bash script which pulled down the image and started the ignition. Boom - up and running! Post to master and then deployed!
+</p>
+
+<h4>Sloooooow</h4>
+<p>
+  Ouch - eight minutes to deploy? That’s rubbish.  Manually I could deploy in just over a minute - what was going wrong?  The layers that make up a Docker image are cached locally. When you change something in your app very few of the layers are affected (you don’t normally change the core of your app from node to, say, rails every few mins) so the build is super quick.  The hold up in my deployment I believe was that the Docker registry was building from scratch every time. Boo.
+</p>
+
+<h4>Fassssst</h4>
+<p>
+  I decided to skip the Docker registry step and removed it from the webhook chain.  My webhook from github went straight to my server where a bash script pulled the latest code from GitHub, built the image and fired it up.  Boom!  Deployment in less than a minute and all triggered as soon as I deployed to master!
+</p>
+
+<h4>Smooth, speedy, continuous integration system</h4>
+<p>
+  The smoothness, speed and simplicity of the eventual solution was much better than I could of expected.  What started out as an experiment has now become the core method of deployment for all my personal projects.  I have four node apps and one static site all using the same method and am looking to port across some of my rails apps currently lurking around on Heroku.  The latest code on master is the same as that running on my server and I don’t have to worry about deployment at all. If my server goes down I can get a new one up and running quickly. If Github goes down I can bypass it and go via the Docker registry. A robust and fast solution.
+</p>
+
+<div class="break"></div>
+
+<h4>Confession</h4>
+<p>
+  This was a quick run down on how I got to the final solution - it emits two key things - firstly the nitty gritty of the technical detail.  This post also fails to describe the dead ends, the stupid mistakes, the head banging, the pain and perseverance that are ever present and necessary when trying something new. Rest assured that there was plenty of all of that - if you are trying to implement any of the above don’t worry if things go wrong. If you need a nudge in the right direction feel free to drop me a message.
+</p>
+
+<h4>Appendix</h4>
+<p>
+<p>
+  I used Digital Ocean for my online server - friends had used it and I had some discount vouchers knocking around.  It was quick and easy to get a droplet with Docker installed up and running cheaply.
+</p>
+<p>
+  There were a few other technical hurdles. Running a couple of apps on the same server required using Nginx to route requests to the appropriate container as well as listen out for the webhooks.  There was also some fun as I played around with cronjobs and trying to daemonising my python server.
+</p>
+
+
