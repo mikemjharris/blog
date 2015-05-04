@@ -180,7 +180,7 @@ article {
       width: 100%;
       transition: background 0.2s;
 
-     .flex-content {
+     &.space-content,  .space-content{
         font-weight: bold;
         display: flex;
         justify-content: space-between;
