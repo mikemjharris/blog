@@ -1,7 +1,7 @@
 Blog             
 ========================
 
-Base for online blog. To run pull this repositry then run the following commands.
+Base for my online blog. To run pull this repository then run the following commands.
 
 ```
     npm install && bower install
