@@ -13,6 +13,7 @@
     "entry": "*",
     "express": "~4.2.0",
     "express-session": "*",
+    "moment": "^2.10.2",
     "mongodb": "~1.4",
     "mongoskin": "*",
     "morgan": "~1.0.0",
