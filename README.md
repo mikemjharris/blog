@@ -1,7 +1,7 @@
 Blog             
 ========================
 
-Base for my online blog. To run pull this repository then run the following commands.
+Base for my online blog - view it here [blog.mikemjharis.com](http://blog.mikemjharris.com) To run pull this repository then run the following commands.
 
 ```
     npm install && bower install
