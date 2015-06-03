@@ -5,10 +5,15 @@
     <a
       target="_blank"
       href="https://twitter.com/intent/tweet?;text={{ title }} by @mikemjharris&amp;url=http://blog.mikemjharris.com/posts/{{ searchtitle }}" id="twitter-share">{{> "_twitter-share" }}</a>
+    <div class="post-date">
+      Published:  {{ date }}
+    </div>
   </div>
 
   <div class="content">
     {{{ body }}}
   </div>
+
+
 
 {{/post}}
