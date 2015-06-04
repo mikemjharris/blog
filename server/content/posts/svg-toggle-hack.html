@@ -1,0 +1,99 @@
+<!-- meta-data title: SVG Toggle Hack  -->
+<!-- meta-data searchtitle: svg-toggle-hack  -->
+<!-- meta-data date: 4 June 2015 -->
+<!-- meta-data intro: Toggling SVG animation without libraries or scripting  -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+
+<p>Aren't SVG buttons awesome? You click, you see a great animation and everyone has a warm, fuzzy, happy feel.  One thing has been bugging me - toggling. An SVG animation can be started by a click event just by adding an atrribute to the SVG itself. To toggle an animation (say a 'like' button) you either have to rely on fancy css tranisitons or some scripting plus maybe a library (many thanks to <a href="http://codepen.io/SaraSoueidan/">@sarahsouheiden</a> for the tip to try out <a href="http://greensock.com/">greensock</a>).</p>
+
+<p>After much playing around I managed to hack my way to a button that toggles without the need for any scripting. Here is a breakdown of the thought process (nicely sanitised without the dead-ends and stupid mistakes along the way). </p>
+
+<h2 id="start-with-an-svg-animation-you-want-to-toggle">Start with an SVG animation you want to toggle</h2>
+
+<p>For this article the starting point is a plus button that turns into a tick. The pen below shows the starting point, the end point and a looping animation between the two states.  The button consists of a <code>circle</code> element with two <code>path</code> elements. The animation moves the paths into a single point in the centre and then out into a cross or a tick.</p>
+
+<div><iframe id="cp_embed_65eaa9c17a77197629bc3c2fdfe6417f" src="//codepen.io/mikemjharris/embed/65eaa9c17a77197629bc3c2fdfe6417f?height=268&amp;theme-id=0&amp;slug-hash=65eaa9c17a77197629bc3c2fdfe6417f&amp;default-tab=result&amp;user=mikemjharris" scrolling="no" frameborder="0" height="268" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe undefined" style="width: 100%; overflow: hidden;"></iframe></div>
+
+
+
+<h2 id="starting-an-animation-on-click">Starting an animation on click</h2>
+
+<p>In the pen below the circle in the middle is what we want to animate. For now we have two circles on either side which will be used to control the central animation. Triggering an animation on a click can be done by adding following attribute:  </p>
+
+<p>
+  <code>begin="click"</code>
+</p>
+
+<p>This triggers an animation on the element it is attached to. An animation on a different element can be triggered at the same time. The circle on the left (labelled start) has an animation that for now doesn't do anything, that begins on a click and has an id.</p>
+
+<p>
+  <code>id="startAnimation"</code>
+</p>
+
+<p>For the centre circle the looping seen in the first pen is split up into a forward and reverse animation .  We begin the forward animation <em>at the same time as the startAnimation</em>.</p>
+
+<p>
+  <code>begin="startAnimation.begin"</code>
+</p>
+
+<p>We do exactely the same for the reverse circle.  Set up an animation that doesn't do anything, give it an id and start the reverse animation for the centre circle when it is clicked.</p>
+
+<p>Check  out the pen below - click on the start circle, then on the reverse and watch the central animation toggle.</p>
+
+<div><iframe id="cp_embed_919e19f06a493c4eb6402c4bb52847c7" src="//codepen.io/mikemjharris/embed/919e19f06a493c4eb6402c4bb52847c7?height=268&amp;theme-id=0&amp;slug-hash=919e19f06a493c4eb6402c4bb52847c7&amp;default-tab=result&amp;user=mikemjharris" scrolling="no" frameborder="0" height="268" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe undefined" style="width: 100%; overflow: hidden;"></iframe></div>
+
+
+
+<h2 id="stopping-the-forward-animation-being-repeated">Stopping the forward animation being repeated</h2>
+
+<p>Great! We pretty much have a toggling animation.  However, if you click on the left circle twice in a row then we get the same forward animation.  Also (you may be ahead of me here and have got to this already!) we do not want two circles either side but layer them on top of the button. How do we ensure that the correct circle is clicked on?</p>
+
+<p>The solution here is to make those animations within the start and reverse circles do something. In this case we want the circle clicked on to disappear by changing the radius to 0.</p>
+
+<p>For the other circle we want to set the inital radius as 0 so you can't click it. Just as we did for the main animation we will trigger an animation that changes its radius from 0 to 100 when the other button is clicked.</p>
+
+<p>We will then do exactly the same but in reverse for the reverse part of the toggle. Hopefully the pen below will make things a bit clearer. Have a play clicking on the start and stop buttons and watch them shrink and grow.</p>
+
+<div><iframe id="cp_embed_1814a0ee2862870aebca43b0c9b2eec9" src="//codepen.io/mikemjharris/embed/1814a0ee2862870aebca43b0c9b2eec9?height=268&amp;theme-id=0&amp;slug-hash=1814a0ee2862870aebca43b0c9b2eec9&amp;default-tab=result&amp;user=mikemjharris" scrolling="no" frameborder="0" height="268" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe undefined" style="width: 100%; overflow: hidden;"></iframe></div>
+
+
+
+<h2 id="bringing-it-all-together">Bringing it all together</h2>
+
+<p>The final step is to bring it all together - literally!  Instead of the control circles being either side we put them on top of the centre element. The order is important here - the controls should be last so that they are on top of the pile and will register the click event. </p>
+
+<p>As amazing as those control circles are, we don't want them hiding our animation. By setting <code>fill-opacity="0"</code> they will be hidden from view. </p>
+
+<p>With SVG (or CSS) animations the general rule of thumb is whatever speed you think is ok, the actual speed should be faster. The controls should shrink in size almost instantly. <code>dur=0.01s</code> seems pretty quick to me.  The other animations have also been given a bit of a nudge.</p>
+
+<p>The final tweak was to add an extra animation on the button circle that shrinks the radius slightly so it looks like it is being clicked. Check out the finished pen - toggle away to your hearts content! </p>
+
+<div><iframe id="cp_embed_11e2a013511a3ad19245ad563000be80" src="//codepen.io/mikemjharris/embed/11e2a013511a3ad19245ad563000be80?height=268&amp;theme-id=0&amp;slug-hash=11e2a013511a3ad19245ad563000be80&amp;default-tab=result&amp;user=mikemjharris" scrolling="no" frameborder="0" height="268" allowtransparency="true" allowfullscreen="true" class="cp_embed_iframe undefined" style="width: 100%; overflow: hidden;"></iframe></div>
+
+
+
+<hr>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Great we have a working toggle button.  We can amend the reverse animation so that the untoggle maybe does something slightly different.  By chaining together as many of these animations we can have multi state options. In the real world a library such as <a href="http://greensock.com/">greensock</a> will have more power and flexibility but this hack provides a fun and interesting way of toggling an SVG animation as well as learning more about how SVG animations work.</p>
+
+<h2 id="issues">Issues</h2>
+
+<p>This works great here but what issues could there be in the real world?  The two that I can think of are:</p>
+
+<p>You can only have one id on a page. If this element is repeated then when you click on the first element on the page the id of that animation will trigger all the svg elements!  A solution would be dynamically creating the ids on the SVG (I had a play with $index in an angular repeator and it didn't work for me). Alternatively does anyone know if you can namespace the ids in an SVG so they don't interfere with each other?</p>
+<p>The second issue is that you can't set the initial state - it is always a cross. Some scripting could be used or the whole structure could be recreated but with a different starting point.</p>
+
+<p>Any other issues that spring to mind?</p>
+
+<h2 id="thanks">Thanks</h2>
+
+<p>I've loved playing with SVG over the past few months. What has made it especially enjoyable is the codepen community. Special thanks to <a href="http://codepen.io/AmeliaBR/">@AmeliaBR</a>,  <a href="http://codepen.io/SaraSoueidan/">@sarahsouheiden</a> and <a href="http://codepen.io/chriscoyier/">@chriscoyier</a> for tips and comments along the way.</p>
+
+<p>I struggled to find any articles or pens that solved the toggle issue like this but that doesn't mean they don't exisit. If you have a similar, different and probably much better solution it would be great to hear from you.</p>
+
+
+
