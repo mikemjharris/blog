@@ -81,6 +81,7 @@ header {
   height: 80px;
   padding: 20px;
   line-height: 50px;
+  overflow: hidden;
 
   h1 {
     text-align: center;
@@ -96,6 +97,7 @@ header {
 main {
   display: flex;
   height: 100vh;
+  overflow: hidden;
   max-width: 1550px;
   margin: 0 auto;
   div {
@@ -160,7 +162,7 @@ article {
     // margin-top: 80px;
   }
   .header {
-    // position: absolute;
+
   }
 
   h2 {
