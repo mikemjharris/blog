@@ -50,7 +50,7 @@ app.set('layouts', path.join(__dirname, 'views/layouts/'));
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
-  helpers: require("../public/javascripts/helpers.js").helpers, // same file that gets used on our client
+  helpers: require('../public/javascripts/helpers.js').helpers, // same file that gets used on our client
   layoutsDir: 'server/views/layouts/',
   partialsDir: 'server/views/templates/partials'
 }));
