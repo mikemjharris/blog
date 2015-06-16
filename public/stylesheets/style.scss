@@ -1,7 +1,4 @@
-$border-left-col: hsla(120, 60%,60%,1);
-$menu-move-col: hsla(240, 70%, 85%, 0.8);
-$show-col: hsla(300, 70%, 80%, 1);
-$body-font-size: 18px;
+@import 'variables';
 
 *{
   box-sizing: border-box;
