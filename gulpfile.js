@@ -36,11 +36,9 @@ gulp.task('templates', function() {
     .pipe(gulp.dest('./public/dist/'));
 });
 
-
-
 gulp.task('sass', function () {
   gulp.src([
-    './public/stylesheets/aa_reset.scss',
+    './public/stylesheets/reset.scss',
     './public/stylesheets/style.scss',
     './public/stylesheets/mobile.scss'
     ])
