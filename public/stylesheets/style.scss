@@ -82,7 +82,7 @@ header {
 
   h1 {
     text-align: center;
-     -webkit-flex: 1;
+     flex: 1;
     flex: 1;
     font-size: 40px;
     font-family: verdana;
@@ -127,7 +127,7 @@ article {
   line-height: 1.4;
   text-align: justify;
   overflow: scroll;
-  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
   height: 100%;
 
   .break {
@@ -221,7 +221,7 @@ article {
   input[type="submit"] {
     padding: 10px;
     // max-width: 200px;
-   -webkit-appearance: none;
+   appearance: none;
     align-items: flex-start;
     text-align: center;
     cursor: pointer;
@@ -279,7 +279,7 @@ form {
   bottom:20px;
   left: 10px;
   width: 150px;
-  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
   display: inline-block;
 }
 
@@ -297,7 +297,7 @@ svg{
     cursor: pointer;
     #rect {
       stroke-dasharray: 3000, 3000;
-      -webkit-animation: dash 0.5s linear;
+      animation: dash 0.5s linear;
     }
   }
 }
@@ -307,7 +307,7 @@ svg{
 }
 
 #twitter-share {
-  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
   display: inline-block;
   width: 110px;
   cursor: pointer;
@@ -324,16 +324,16 @@ svg{
 
 
 
-@-webkit-keyframes dash {
+@keyframes dash {
   from { stroke-dasharray: 0, 3000;}
     to {stroke-dasharray: 3000, 1700;}
 }
 
 .show h2 {
-  -webkit-animation: showbackground 1s linear;
+  animation: showbackground 1s linear;
 }
 
-@-webkit-keyframes showbackground {
+@keyframes showbackground {
   from { background: none; box-shadow: 0px 0px 0px 0px white};
   to {background: none; box-shadow: 0px 0px 0px 0px white};
 }
@@ -355,10 +355,10 @@ a {
 }
 .page.showpage {
   display: block;
-  -webkit-animation: 1s showpage ease-in;
+  animation: 1s showpage ease-in;
 }
 
-@-webkit-keyframes showpage {
+@keyframes showpage {
   from {opacity: 0;}
   to {opacity: 1;}
 }
@@ -366,10 +366,10 @@ a {
 .show {
   opacity: 1;
   outline-radius: 10px;
-  -webkit-animation: show 0.5s linear;
+  animation: show 0.5s linear;
 }
 
-@-webkit-keyframes show {
+@keyframes show {
   0% { box-shadow: 0 0 0 0 white; opacity: 0;}
   20% { box-shadow: 0 0 0 0 white; opacity: 0;}
   21% { box-shadow: 0 0 5px 5px $show-col; opacity: 1; background: $show-col;}
@@ -384,18 +384,18 @@ nav ul {
   /*padding: 20px 0;*/
   width: 200px;
   line-height: 20px;
-   -webkit-animation: nav 0.7s cubic-bezier(0.2, 0.3, 0.4, 1.2 );
+   animation: nav 0.7s cubic-bezier(0.2, 0.3, 0.4, 1.2 );
 }
 
 nav>ul>li {
   padding: 5px 0;
   margin: 0px;
-  -webkit-animation: nav 0.7s cubic-bezier(0.2, 0.3, 0.4, 1.2 );
+  animation: nav 0.7s cubic-bezier(0.2, 0.3, 0.4, 1.2 );
 }
 
-@-webkit-keyframes nav {
-  0% {-webkit-transform: translateY(1500px) ;}
-  100% {-webkit-transform: translateY(0px) ;}
+@keyframes nav {
+  0% {transform: translateY(1500px) ;}
+  100% {transform: translateY(0px) ;}
 }
 
 .space {
@@ -403,9 +403,9 @@ nav>ul>li {
 }
 
 ul li ul {
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   flex-direction: column;
   margin: 0px;
   padding: 0px;
@@ -420,7 +420,7 @@ ul li ul li {
   position: relative;
   background: hsla(300, 70%, 90%, 1);
   &:hover {
-    -webkit-transform: translateX(-5px) skewX(10deg);
+    transform: translateX(-5px) skewX(10deg);
   }
   &.clear-back {
     background: white;
@@ -448,79 +448,77 @@ ul li ul li {
 }
 
 .active-menu  {
-  -webkit-animation: test2 2s linear;
+  animation: test2 2s linear;
   & .move {
-    -webkit-transform-origin: 100% 50%;
-    -webkit-transform: translateX(220px) scaleX(0.1) scaleY(4);
-     -webkit-animation: test 0.2s linear;
+    transform-origin: 100% 50%;
+    transform: translateX(220px) scaleX(0.1) scaleY(4);
+     animation: test 0.2s linear;
      opacity: 0;
   }
 }
 
 .active-menu:hover {
-  -webkit-transform: translateX(0px) scaleX(1) scaleY(1);
+  transform: translateX(0px) scaleX(1) scaleY(1);
 }
 
-@-webkit-keyframes test2 {
-  0% {-webkit-transform: translateX(-4px) skewX(10deg); opacity: 1;}
-  1% {-webkit-transform: translateX(-10px) skewX(20deg);}
-  7% {-webkit-transform: translateX(4px) skewX(-10deg);}
-  17% {-webkit-transform: translateX(-2px) skewX(5deg); }
-  27% {-webkit-transform: translateX(2px) skewX(-5deg); }
+@keyframes test2 {
+  0% {transform: translateX(-4px) skewX(10deg); opacity: 1;}
+  1% {transform: translateX(-10px) skewX(20deg);}
+  7% {transform: translateX(4px) skewX(-10deg);}
+  17% {transform: translateX(-2px) skewX(5deg); }
+  27% {transform: translateX(2px) skewX(-5deg); }
 
-  37% {-webkit-transform: translateX(0px) skewX(0deg);}
+  37% {transform: translateX(0px) skewX(0deg);}
 }
 
 
-@-webkit-keyframes test {
-  0% {-webkit-transform: translateX(-10px) skewX(10deg); opacity: 1;}
-  7% {-webkit-transform: translateX(-20px) skewX(20deg);}
-  10% {-webkit-transform: translateX(10px) skewX(-10deg);}
-  60% {-webkit-transform: translateX(220px) skewX(-10deg); opacity:0.8;}
-  100% {-webkit-transform: translateX(220px) scaleX(0.1) scaleY(4); opacity: 0.4;}
+@keyframes test {
+  0% {transform: translateX(-10px) skewX(10deg); opacity: 1;}
+  7% {transform: translateX(-20px) skewX(20deg);}
+  10% {transform: translateX(10px) skewX(-10deg);}
+  60% {transform: translateX(220px) skewX(-10deg); opacity:0.8;}
+  100% {transform: translateX(220px) scaleX(0.1) scaleY(4); opacity: 0.4;}
 }
 
 @for $i from 1 through 20 {
-    .intro-animation li:nth-child(#{$i + 0}) {
+  .intro-animation li:nth-child(#{$i + 0}) {
     background: hsla( $i * 10 + 120, 60%, 80%,1);
-      -webkit-animation: drop-#{$i} 2s linear;
-      &.clear-back {
-        background: white;
-      }
-
+    animation: drop-#{$i} 2s linear;
+    &.clear-back {
+      background: white;
+    }
   };
 
-  @-webkit-keyframes drop-#{$i} {
-    0% {-webkit-transform: translateY( #{$i * -50}px)  scaleX(1) scaleY(1);}
-    9% {-webkit-transform: translateY( #{$i * 50}px)  scaleX(0.8) scaleY(1.2);}
-    27% {-webkit-transform: translateY( #{$i * 150}px)  scaleX(0.9) scaleY(1.1);}
-    36% {-webkit-transform: translateY( #{$i * -30}px)  scaleX(1) scaleY(1);}
-    45% {-webkit-transform: translateY( #{$i * 55}px)  scaleX(1) scaleY(1);}
-    54% {-webkit-transform: translateY( #{$i * -10}px)  scaleX(1) scaleY(1);}
-    64% {-webkit-transform: translateY( #{$i * 20}px)  scaleX(1) scaleY(1);}
-    73% {-webkit-transform: translateY( #{$i * -5}px)  scaleX(1) scaleY(1);}
-    82% {-webkit-transform: translateY( #{$i * 5}px)  scaleX(1) scaleY(1);}
-    91% {-webkit-transform: translateY( #{$i * -2}px)  scaleX(1) scaleY(1);}
-    100% {-webkit-transform: translateY( 0px)  scaleX(1) scaleY(1);}
-
+  @keyframes drop-#{$i} {
+    0% {transform: translateY( #{$i * -50}px) scaleX(1) scaleY(1);}
+    9% {transform: translateY( #{$i * 50}px) scaleX(0.8) scaleY(1.2);}
+    27% {transform: translateY( #{$i * 150}px) scaleX(0.9) scaleY(1.1);}
+    36% {transform: translateY( #{$i * -30}px) scaleX(1) scaleY(1);}
+    45% {transform: translateY( #{$i * 55}px) scaleX(1) scaleY(1);}
+    54% {transform: translateY( #{$i * -10}px) scaleX(1) scaleY(1);}
+    64% {transform: translateY( #{$i * 20}px) scaleX(1) scaleY(1);}
+    73% {transform: translateY( #{$i * -5}px) scaleX(1) scaleY(1);}
+    82% {transform: translateY( #{$i * 5}px) scaleX(1) scaleY(1);}
+    91% {transform: translateY( #{$i * -2}px) scaleX(1) scaleY(1);}
+    100% {transform: translateY( 0px)  scaleX(1) scaleY(1);}
   }
 }
 
 @for $i from 1 through 20 {
   li:nth-child(#{$i + 0}) {
     .smooth .intro-animation & {
-    -webkit-animation: smooth-drop-#{$i} 0.9s cubic-bezier(0.815, 10.650, 0.555, -1.010);
+    animation: smooth-drop-#{$i} 0.9s cubic-bezier(0.815, 10.650, 0.555, -1.010);
     }
   };
   li:nth-child(#{$i + 0}) {
     .smooth .intro-animation & {
-    -webkit-animation: smooth-drop-#{$i} 0.9s cubic-bezier(0.815, 10.650, 0.555, -1.010);
+    animation: smooth-drop-#{$i} 0.9s cubic-bezier(0.815, 10.650, 0.555, -1.010);
     }
   };
 
-  @-webkit-keyframes smooth-drop-#{$i} {
-    0% { -webkit-transform: translateY(-100px)  scaleX(1.1) scaleY(0.8);}
-    #{100}% {-webkit-transform: translateY(0px) scaleX(1) scaleY(1);}
+  @keyframes smooth-drop-#{$i} {
+    0% { transform: translateY(-100px)  scaleX(1.1) scaleY(0.8);}
+    #{100}% {transform: translateY(0px) scaleX(1) scaleY(1);}
   }
 }
 
