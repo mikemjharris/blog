@@ -479,24 +479,6 @@ ul li ul li {
   60% {-webkit-transform: translateX(220px) skewX(-10deg); opacity:0.8;}
   100% {-webkit-transform: translateX(220px) scaleX(0.1) scaleY(4); opacity: 0.4;}
 }
-/*@-webkit-keyframes test {
-  0% {-webkit-transform: translateX(0px) scaleX(1);}
-  10% {-webkit-transform: translateX(35px)  scaleY(0.95);}
-  15% {-webkit-transform: translateX(50px)  scaleY(1.05);}
-  20% {-webkit-transform: translateX(50px) scaleY(0.91) ;}
-  22% {-webkit-transform: translateX(50px) scaleY(0.91) ;}
-  30% {-webkit-transform: translateX(35px) scaleY(1.01);}
-  35% {-webkit-transform: translateX(20px) scaleY(0.95);}
-  40% {-webkit-transform: translateX(20px) scaleY(0.95);}
-  45% {-webkit-transform: translateX(20px) scaleY(0.95);}
-  50% {-webkit-transform: translateX(30px) scaleY(1.01);}
-  60% {-webkit-transform: translateX(50px) scaleY(0.95);}
-  65% {-webkit-transform: translateX(40px) scaleY(1.01);}
-  70% {-webkit-transform: translateX(40px) scaleY(0.95);}
-  100% {-webkit-transform: translateX(50px) scaleX(1);}
-}
-*/
-
 
 @for $i from 1 through 20 {
     .intro-animation li:nth-child(#{$i + 0}) {
@@ -522,26 +504,6 @@ ul li ul li {
     100% {-webkit-transform: translateY( 0px)  scaleX(1) scaleY(1);}
 
   }
-
-   /* @-webkit-keyframes drop-#{$i} {
-    0% {top: 0;}
-    7% {top: #{$i * 100 }px; height: 30px;}
-    #{11}% {top: #{$i * 29 }px ; height: 40px}
-    #{12}% {top: #{$i * 25 }px ; height: 40px}
-    #{13}% {top: #{$i * 29 }px ; height: 40px}
-    #{17}% {top: #{$i * 72 }px ; height: 40px}
-    #{18}% {top: #{$i * 80 }px ; height: 40px}
-    #{23}% {top: #{$i * 20}px ; height: 24px}
-    #{24}% {top: #{$i * 19}px ; height: 24px}
-    #{26}% {top: #{$i * 47}px ; height: 48px}
-    #{27}% {top: #{$i * 50}px ; height: 48px}
-    #{29}% {top: #{$i * 35}px ; height: 26px}
-    #{31}% {top: #{$i * 47}px ; height: 44px}
-    #{33}% {top: #{$i * 35}px ; height: 28px}
-    #{35}% {top: #{$i * 42}px ; height: 40px}
-  /*  #{36}% {top: #{$i * 40}px ; height: 39px}
-    #{38}% {top: #{$i * 42}px ; height: 40px}*/
-  /*}*/
 }
 
 @for $i from 1 through 20 {
