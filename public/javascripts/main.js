@@ -13,7 +13,7 @@
     });
 
     //browser history
-    if (window.history && window.history.pushState) {
+    if ( window.history && window.history.pushState ) {
 
       $(window).on('popstate', function() {
         var _href = window.location.pathname;
@@ -77,7 +77,7 @@
         $('.intro-animation').removeClass('intro-animation');
         $('article').removeClass('show');
 
-        var _href = $(this).attr("href");
+        var _href = $(this).attr('href');
 
         // change the url without a page refresh and add a history entry.
         history.pushState(null, null, _href);
@@ -90,7 +90,6 @@
         $('article').html('');
 
         var html = MyApp.templates[newPage]({ posts: posts });
-        console.log( 'newpage', newPage)
          setTimeout(function() {
           $('article').addClass('show');
           $('article').append(html);
