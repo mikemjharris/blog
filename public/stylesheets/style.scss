@@ -90,7 +90,6 @@ main {
   display: flex;
   height: 100vh;
   overflow: hidden;
-  max-width: 1550px;
   margin: 0 auto;
   div {
     flex: 1;
@@ -111,6 +110,7 @@ section {
   height: 100vh;
   padding: 20px;
   padding-bottom: 0px;
+  overflow: scroll;
 }
 
 article {
@@ -121,7 +121,6 @@ article {
   width: 100%;
   line-height: 1.4;
   text-align: justify;
-  overflow: scroll;
   overflow-scrolling: touch;
   height: 100%;
   box-shadow:0px -10px 20px 10px white inset;
@@ -452,8 +451,8 @@ ul li ul li {
   0% {transform: translateX(-10px) skewX(10deg); opacity: 1;}
   7% {transform: translateX(-20px) skewX(20deg);}
   10% {transform: translateX(10px) skewX(-10deg);}
-  60% {transform: translateX(220px) skewX(-10deg); opacity:0.8;}
-  100% {transform: translateX(220px) scaleX(0.1) scaleY(4); opacity: 0.4;}
+  60% {transform: translateX(420px) skewX(-10deg); opacity:0.8;}
+  100% {transform: translateX(420px) scaleX(0.1) scaleY(4); opacity: 0.4;}
 }
 
 @for $i from 1 through 20 {
