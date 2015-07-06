@@ -52,7 +52,7 @@
       if( !$(this).data('navigate')) {
         e.preventDefault();
         var _href = $(this).attr('href');
-        history.pushState(null, null, _href);
+        window.history.pushState(null, null, _href);
         $('.active-menu').removeClass('active-menu');
 
         _href = window.location.pathname;
@@ -80,7 +80,7 @@
         var _href = $(this).attr('href');
 
         // change the url without a page refresh and add a history entry.
-        history.pushState(null, null, _href);
+        window.history.pushState(null, null, _href);
 
         $('.active-menu').removeClass('active-menu');
         $(this).closest('li').addClass('active-menu');
