@@ -1,0 +1,63 @@
+<!-- meta-data title: Blogimations  -->
+<!-- meta-data searchtitle:   blogimations -->
+<!-- meta-data date: 31 Aug 2015 -->
+<!-- meta-data intro: A look into some of the animations used in this blog  -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+  I love building stuff on <a href="http://codepen.io/mikemjharris" target="_blank">codepen</a>. Easily shareable projects and an excellent online editor with all your favourite HTML and CSS pre-processors built in. Most important has been the community - lots of encouragement as well as tips from a delightful bunch of developers and designers.
+</p>
+
+<p>
+  Codepen is a great place to experiment but I often question how these proofs of concept would fit into the real world (by which I mean a production website...)
+</p>
+
+<p>
+  When building this blog I wanted to unleash some of my experiments and see how they could add to the enjoyment and usability of a project. I also wanted to have fun! This post is a broad review of the techniques and technologies involved as well as example pens.
+</p>
+
+<h4>Technologies</h4>
+<p>
+  On this website I've shied away from using libraries to build the animation and relied instead upon standard CSS transition and animations as well as SVG and SMIL. I've found that libraries make things easier and better supported across browsers however I often don't learn as much about how the actual animations work. This project is mainly for myself and as well as the tech community who will generally be using a modern browser. As such I've preferred to learn more and sacrifice some performance/looks on older browsers.
+</p>
+
+<h4>Techniques</h4>
+<p>
+  Almost any post that I have read on animation usually refers to the <a href="https://en.wikipedia.org/wiki/12_basic_principles_of_animation" target="_blank">Disney twelve basic principles of animation</a>. If you are into animation you will be sick of reading about it. If you aren't then it is worth a look over - one of those lists that you wouldn't come up with yourself but when you read it seems so obvious.
+</p>
+
+<h4>CSS animations</h4>
+<p>
+  For the menu and post showing the animations are all done with CSS animations and transitions and are triggered by adding and removing classes with Javascript.  While I am more than happy to use javascript for animation (I wrote a JS based <a href="http://snowman.mikemjharris.com" target="_blank">snowman shooting game</a>) I find that if you are just changing CSS attributes then that should be done with CSS.  JS for action, CSS for display.
+</p>
+<p>
+  The springy menu on the left (on desktop) is a big, bouncy animation to show that the site is lively and fun.  I've stripped out the main animation and put it into a codepen.  While I could point you in the direction of the relevant code on <a href="https://github.com/mikemjharris/blog" target="_blank">github</a> this would mean looking at several different files.  If you wanted to play with it you would have to set up the environment.  With codepen you can see the relevant parts all in one place and can tweak and fiddle to your hearts content.
+<p>
+<p data-height="268" data-theme-id="0" data-slug-hash="LVjmYe" data-default-tab="result" data-user="mikemjharris" class='codepen'>See the Pen <a href='http://codepen.io/mikemjharris/pen/LVjmYe/'>Bouncy Menu animation</a> by Mike Harris (<a href='http://codepen.io/mikemjharris'>@mikemjharris</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p>
+  A quick reivew of the other animations involved with the menu system include a prime as you hover over a menu item, an explosion to the right as the menu item is catapulted left.  There is a little wibbly wobbly recoil. The right hand pane explodes with the new menu item.
+</p>
+
+<h4>SVG Animations</h4>
+<p>
+  This year I have lots of fun with SVG animations - I find them incredibly interesting and fun! My most popular codepen is the twitter animated follow button (shown below). I kindly borrowed the twitter logo and then animated it along a path with some 'followers' in tow. The word 'follow' is clipped from view and slowly shown.  This was done a while ago and I now wince at some of the long winded hacks I employed and the repetition of code. Makes me feel happy that I'm constantly learning and improving! In future a smattering of 'use' and a couple of frozen fill modes would provide a much neater solution.
+</p>
+  <p data-height="268" data-theme-id="0" data-slug-hash="yyEwVR" data-default-tab="result" data-user="mikemjharris" class='codepen'>See the Pen <a href='http://codepen.io/mikemjharris/pen/yyEwVR/'>Animated Twitter Follow Button</a> by Mike Harris (<a href='http://codepen.io/mikemjharris'>@mikemjharris</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+
+<p>
+  The twitter share button was done around the same time and has similar bits of painful code.
+</p>
+<p data-height="268" data-theme-id="0" data-slug-hash="RPMrGG" data-default-tab="result" data-user="mikemjharris" class='codepen'>See the Pen <a href='http://codepen.io/mikemjharris/pen/RPMrGG/'>Twitter Share Animation.</a> by Mike Harris (<a href='http://codepen.io/mikemjharris'>@mikemjharris</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+
+<h4>Conclusion</h4>
+<p>
+  That was a brief overview of the animation techniques used in this blog - mainly CSS and SVG. Lots of fun making it and I think it adds energy to the whole project. Animation can be a a super powerful tool to improve the users understanding and interaction with a web page.  It can also be a huge distraction if used too much or in the wrong places. In this project I preferred to err on the side of excess - a different project may require a more nuanced approach.
+</p>
+<p>
+  My plan over the next months is to improve not only my knowledge of how to make web animations but to learn more about how they can complement and be integrated in to sites.
+ </p>
+
+<!-- TODO for now this runs when the page loads - ideally we want to include this in the layout part so it is loaded initially and then need to trigger the section that loads the pen on the page -->
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
