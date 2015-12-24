@@ -1,16 +1,5 @@
 [
   {
-    "handle": "mongodb",
-    "spawn": {
-      "command": "mongod",
-      "args": [
-         "--dbpath",
-          "db/data"
-      ]
-    },
-    "stdinPrefix": "mongodb"
-  },
-  {
     "handle": "gulp",
     "spawn": {
       "command": "./node_modules/gulp/bin/gulp.js",
