@@ -424,6 +424,18 @@ ul li ul li {
   }
 }
 
+table {
+  margin: 10px 0px;
+  border: 1px solid lighten($border-left-col,10%);
+  thead {
+    background: $border-left-col;
+  }
+  td, th {
+    padding: 5px;
+    text-align: center;
+  }
+}
+
 .active-menu  {
   animation: test2 2s linear;
   & .move {
