@@ -1,11 +1,11 @@
 <!-- meta-data title: Termianl config-->
 <!-- meta-data searchtitle: terminal-config  -->
-<!-- meta-data date: 28 Nov 2016 -->
+<!-- meta-data date: 13 Dec 2016 -->
 <!-- meta-data intro: Making working life easier -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech -->
 <p>
-  It's been on my todo list for  a long time but I finally got round to putting some of the command line config into a repo.  The tipping point came because we got given a whole bunch of remote servers at work to build and run tooling and experiments on.  It was only when working in an uncustomised environment did I realise quite how much configuration I had setup and how much it improved my day to day work flow.
+  It's been on my todo list for  a long time but I finally got round to putting some of the command line config into a repo.  The tipping point came because we got given a whole bunch of remote servers at work to build and run tooling and experiments on.  It was only when working in an uncustomised environment that I realised how much configuration I had setup and how much it improved my day to day work flow.
 </p>
 
 <h4>Easy to setup config</h4>
@@ -16,14 +16,18 @@
 <h4>What is configured.</h4>
 
 <p> 
-  The main change for me over the past year has been to operate increasingly in vim. Having said that I have slightly quirky tooling setup - I use sublime for front-end work, IntelliJ for java and vim for pretty much everything else.  The one common factor is I use vim bindings for both the stand alone text editors. Vim is super customisable but I have started with a generic setup I found on the web and have expanded from there. 
+  The main change for me over the past year has been to operate increasingly in vim (having used vim bindings in Intellij and Sublime for a while). Vim is especially handy to get to grips with when dealing with remote servers. Vim out of the box is good but getting it to work even better takes  
 </p>
 
 <p>
-  The other tool I have started to use more is tmux - there is a very basic config and I am still experimenting with different setups.  Having spent years switching tabs having toggelable panes in one window has been great.  On top of that tmux has been essential for running processes on remote servers. Having clearly named sessions to attach to also helps me remember where things live (I usually have one pane running the process and another in the main folder).
+  The other tool that I have been using is tmux.  Initially the main benefit of tmux was that I could run a process from inside a tmux session so that when I closed the ssh session to the box the process would remain running.  From starting off using it as a necessity I have started using it in my day to day workflow to allow me to have multiple tabs open in one screen and to have set projects or folders always open together.  I find it especially useful in that when I log onto a box there are clearly labeled sessions with the appropriate file and folders open that I usually tweak so find it easy to get back in the flow of a project.
 </p>
 
 <h4>Aliasing</h4>
 <p>
-  Finally command line aliases speed up my day today work.  The three I use most are <code>hg</code>.  This stands for <code>history | grep</code>  which gives me a nudge on when I have used something previously.  The other two go hand in hand: <code>gb</code> and <code>gcb</code>.  The first lists all the local branches in a current repo in the order they were last checked out.  This is a huge help - I am often swapping between a number of branches when working on a couple of stories and code reviewing others code as well as running release processes.  I can remember what I was working on but can't remember the exact branch name.  listing the top 15 in order allows me to easily spot the one I was working on. There is a number alongside the list of branches and I can run <code>gcb $number</code> to checkout that branch! Super userful and helpful.
+  Finally command line aliases speed up my day today work.  The three I use most are <code>hg</code>.  This stands for <code>history | grep</code>  which gives me a nudge on when I have used something previously.  The other two go hand in hand: <code>gb</code> and <code>gcb</code>.  The first <a href="https://github.com/mikemjharris/config/blob/master/bin/latest-branches.sh"> runs a script</a> that lists all the local branches in a current repo in the order they were last checked out.  This is a huge help - I am often swapping between a number of branches when working on stories, code reviewing others code as well as running release processes.  I can remember what I was working on but can't remember the exact branch name.  Listing the top 15 in order allows me to easily spot the one I was working on. There is a number alongside the list of branches and I can run <code>gcb $number</code> to checkout that branch! Super userful and helpful and helps speed up my development process.
 </p>
+
+<h4>Summary</h4>
+<p>
+  Having a centralised config has been super helpful.  For my main setup instead of running the install command I symlink to the appropriate file so that I always update the central repo whenever I add some config.  On my todo list is an easy way for other boxes to automatically check for updates and pull in the changes.  Having a roughly unified experience wherever I am has been a huge help. I'll be looking to add more config and other applications to the repo.  The other area I want to tackle is the tech and applications I install on a new laptop (brew, ruby, node etc.) Watch this space...
