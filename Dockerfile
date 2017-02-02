@@ -1,5 +1,5 @@
 FROM node:0.12.2
-MAINTAINER Mike Harris "mike.harris@mammal.io"
+MAINTAINER Mike Harris "hello@mikemjharris.com"
 
 RUN npm --no-color install -g bower && \
     npm --no-color install -g gulp && \
