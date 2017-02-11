@@ -8,16 +8,6 @@ var moment = require('moment');
 
 var app = express();
 
-var mongo = require('mongoskin');
-var mongoUri;
-if ( process.env.MONGODB_PORT_27017_TCP_ADDR ) {
-  mongoUri = 'mongodb://' + process.env.MONGODB_PORT_27017_TCP_ADDR + '/blog';
-} else {
-  mongoUri = 'mongodb://localhost:27017/blog';
-}
-
-var db = mongo.db( mongoUri, { native_parser: true } );
-
 var exphbs  = require('express-handlebars');
 
 var regex = /\<\!\-\-\smeta-data\s([A-z]+)\:\s(.+?(?=-->))/g;
@@ -63,11 +53,6 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../bower_components')));
-
-app.use(function ( req, res, next ) {
-  req.db = db;
-  next();
-});
 
 require('./routes/main')(app, posts);
 
