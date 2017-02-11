@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var moment = require('moment');
 
+var handlebars = require('handlebars');
+
 var app = express();
 
 var exphbs  = require('express-handlebars');
@@ -59,6 +61,7 @@ require('./routes/main')(app, posts);
 app.get('*', function ( req, res, next ) {
   res.redirect('../');
 });
+
 
 app.use(function (req, res, next ) {
     var err = new Error('Not Found');

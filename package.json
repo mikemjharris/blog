@@ -13,6 +13,7 @@
     "entry": "*",
     "express": "~4.2.0",
     "express-session": "*",
+    "jquery": "^3.1.1",
     "moment": "^2.10.2",
     "mongodb": "~2.0",
     "mongoskin": "*",
