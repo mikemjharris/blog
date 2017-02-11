@@ -93,6 +93,6 @@ var server = app.listen(app.get('port'), function() {
 // helper functions
 function sortPosts( posts ) {
   return posts.sort(function(a, b) {
-    return b.date - a.date;
+    return new Date(b.date) - new Date(a.date);
   });
 }
