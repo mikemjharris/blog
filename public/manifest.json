@@ -1,0 +1,13 @@
+{
+  "name": "Mikemjharris Blog",
+  "short_name": "Blog",
+  "icons": [{
+    "src": "images/favicon.png",
+      "sizes": "20x20",
+      "type": "image/png"
+    }],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#5cd65c",
+  "theme_color": "#5cd65c"
+}
