@@ -7,9 +7,9 @@ var filesToCache = [
   "/handlebars/dist/handlebars.js",
   "/dist/templates.js",
   "/dist/main.js",
-  "http://fonts.googleapis.com/css?family=Spinnaker",
-  "http://fonts.googleapis.com/css?family=Inconsolata",
-  "http://fonts.googleapis.com/css?family=Jura"
+  "https://fonts.googleapis.com/css?family=Spinnaker",
+  "https://fonts.googleapis.com/css?family=Inconsolata",
+  "https://fonts.googleapis.com/css?family=Jura"
 ];
 
 self.addEventListener('install', function(e) {
