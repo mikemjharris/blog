@@ -1,15 +1,14 @@
-var cacheName = 'mikemjharris-blog-2';
+var cacheName = 'mikemjharris-blog';
 var filesToCache = [
   "/",
   "/api/posts",
   "/dist/style.css",
-  "/jquery/dist/jquery.js",
-  "/handlebars/dist/handlebars.js",
+  "/jquery/dist/jquery.min.js",
+  "/handlebars/dist/handlebars.min.js",
   "/dist/templates.js",
   "/dist/main.js",
   "https://fonts.googleapis.com/css?family=Spinnaker",
   "https://fonts.googleapis.com/css?family=Inconsolata",
-  "https://fonts.googleapis.com/css?family=Jura"
 ];
 
 self.addEventListener('install', function(e) {

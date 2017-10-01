@@ -5,10 +5,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var moment = require('moment');
+var express     = require('express')
+var compression = require('compression')
 
 var handlebars = require('handlebars');
 
 var app = express();
+app.use(compression())
 
 var exphbs  = require('express-handlebars');
 
