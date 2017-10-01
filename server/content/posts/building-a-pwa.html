@@ -1,0 +1,63 @@
+<!-- meta-data title: Building a PWA-->
+<!-- meta-data searchtitle: building-a-pwa  -->
+<!-- meta-data date: 01 Oct 2017 -->
+<!-- meta-data intro: Turning this blog into a progressive web app -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: thoughts  -->
+
+<p>
+  Imagine having an app on your home screen that looked the same as the one next to it, behaved in the same way but was better in almost every way?  An app that was multiple times smaller and easier to upgrade? An app that felt the same but only had to be built once to work on any platform? An app that could be available without jumping through endless hoops to get into a 'store'? An app that could be installed in one easy step from a webpage?  An app built using open web standards? That is a PWA.  
+</p>
+<p> 
+  This post is an ashamed love in for PWAs and about how, in only a few hours, I converted an existing website to a full blown progressive web app.  For a more balanced and rigourous view of what PWA's are Henrik Joreteg wrote  <a href="https://joreteg.com/blog/betting-on-the-web" target="_blank">this excellent article by</a>.  
+</p>
+
+<h4>PWA - quick, easy and beautiful</h4>
+<p>
+  I've thought about making a native app for years but the barriers to entry - new languages, tools and form filling - has always put me off.  After reading a couple of articles I decided to try to convert this blog to a PWA.
+</p>
+<p>
+  Some of the great things that I was excited about were some of the UI improvements and accessibility. Instead of the app store you get a button that pops up which allows users to add the app to their home page with one click.  The ability to set a theme - in chrome this means the navigation bar fits the colour of your app. Once installed on your home page the url navigation bar goes away completely and your theme is used to colour the top of your app. In addition you get a funky looking opening screen. 
+</p>  
+<h4>PWA's work offline</h4>
+<p> 
+  The UI and interface is all well and good but the killer feature of the PWA (over normal websites) is the ability to work offline.  The service worker is responsible for this and sits between you and the network and allows your PWA to act like a native app.  The entirity of this blog can now be read offline!  Go on - try it out - turn off your internet and navigate around. Magic!
+</p>
+<h4>How did I do it?</h4>
+<p>
+  By standing on the shoulder's of others, a bit of determination and lots of googling.  Mainly I followed the steps <a href="https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/" target="_blank">in this article</a>. With any project I find if you have something you care about building it helps. I had a single page app ready and raring to be PWA'd - this blog. A single page app already has much of the structure to make a good PWA and only needs a few additional parts: A manifest.json which has some config about the theme and name of your app.  A few settings in the head of your html to reference the manifest.json and to set other config such as the theme colour.  The final bit is to add some logic so the app knows what to store offline. This belongs in the service-worker.js - to get a simple PWA working you can take the example in the tutorial, dump it into your app and update the list of files to cached to reflect the parts of your app to cache.  
+
+  <p>
+    You can see all that work for this blog in <a href="https://github.com/mikemjharris/blog/compare/fc4de1b0184919d0a741df57827df72bc5d41bb7...26d1c9fa2994113f5e55112733457a5537d1503d" target="_blank">these commits</a>.  
+</p>
+<h4>Gotchas</h4>
+<p> 
+  Caching is hard. Got trapped a few times by having multiple windows open or not allowing the service worker to refresh. By design the app works offline - was a little suprised when I moved on to another project but found the previous app still on localhost:8000.  You need https to get your app to work.  I'd been meaning to https my site (there's no user info on it so has been parked in the non urgent pile) and this forced me to do it.
+</p>
+<p>
+  This is a fairly simple PWA with no user data - caching sensitive info is not ideal.  This is a simple implementation but service workers are incredibly powerful and can cope with more complex situations but care is needed.
+</p>
+
+<h4>Conclusion</h4>
+<p> 
+  After wanting to create a native app for a while I was excited to port an old project to a PWA with minimal hassle.  I learnt lots along the way and as always went down some dead ends. Though I was exposed to some new ideas and apis the core work, flow and technologies were what I deal with day in day out.
+</p>
+
+
+<h4>Futher reading</h4>
+<p> 
+  If you do want to read more about building an app for the app store <a href=":https://neave.blog/illusions-of-the-app-store-e250dcd51c2b" target="_blank">checkout Paul's article. </a></p>
+</p>
+<p>
+  Posted some screenshots on twitter - they should still be viewable <a href="https://twitter.com/MikeMJHarris/status/914206777180327936" target="_blank">here</a>
+</p>
+<p>
+  Mentioned https ing my site.  I followed <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04" target="_blank">these instructions using certbot</a>
+</p>
+<p>
+  If you don't care that much about the browser but do get involved with CDN caching, cloudfront are implementing the service worker spec on the edge - <a href="https://blog.cloudflare.com/introducing-cloudflare-workers/" target="_blank">this article explains in more detail</a>.
+</p>
+
+
+
+
