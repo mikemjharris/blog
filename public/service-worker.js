@@ -9,7 +9,6 @@ var filesToCache = [
   "/dist/main.js",
   "https://fonts.googleapis.com/css?family=Spinnaker",
   "https://fonts.googleapis.com/css?family=Inconsolata",
-  "https://fonts.googleapis.com/css?family=Jura"
 ];
 
 self.addEventListener('install', function(e) {
