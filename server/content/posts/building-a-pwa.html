@@ -4,23 +4,57 @@
 <!-- meta-data intro: Turning this blog into a progressive web app -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: thoughts  -->
+
 <p>
-  PWA. Progressive web app. By using web standard technology you can create an app with the look, feel and functionality of a native app but that runs on any platform.  There are many other benefits and features - in this post I'm going to outline how I converted this blog to a PWA. Please read <a href="https://joreteg.com/blog/betting-on-the-web">this excellent article by Henrik Joreteg</a> for a more detailed look at much of what PWAs offer.  
+  Imagine having an icon on your home screen that looked the same as the one next to it, behaved in the same way but was multiple times smaller and easier to upgrade? An app that felt the same but only had to be built once to work on any platform?  An app that felt the same but that was multiple times smaller and easier to upgrade? An app that could be available without jumping through endless hoops to get into a 'store'? An app that could be installed in one easy step from a webpage?  An app built using open web standards? That is a PWA.  
+</p>
+<p> 
+  For a more balanced and rigourous view of what PWA's are Herik Joreteg wrote  <a href="https://joreteg.com/blog/betting-on-the-web" target="_blank">this excellent article by</a>.  In my post I'll briefly outline how I converted this blog to a PWA and point you in the right direction so you can do the same.
+</p>
+
+<h4>PWA - quick, easy and beautiful</h4>
+<p>
+  I've thought about making a native app for years but the barriers to entry and new tech needed to learn have always put me off let alone the approval process*. .  In a few hours in an afternoon I converted an existing single page app to a pwa app.
+</p>
+<p>
+  Some of the great things that I was excited about included a button that pops up which allows users to add the app to their home page with one click.  The ability to set a theme - in chrome this means the navigation bar fits the colour of your app. Once installed on your home page the url navigation bar goes away completely and your theme is used to colour the top of your app. In addiition you get a funky looking opening screen. 
+</p>  
+<h4>PWA's work offline</h4>
+<p> 
+  One of the best parts of a pwa is the ability to work offline.  The service worker is responsible for this and sits between you and the network and if setup properly you can use the app like a native app.  For this blog it means you can navigate around the whole app when offline and read all the posts.  Try it!  Even on a laptop the service worker should be installed.  Turn off your wifi and try a normal referesh and navigate round.
+</p>
+<h4>How did I do it?</h4>
+<p>
+  I followed most of the steps <a href="https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/" target="_blank">in this article</a> along with a smattering of googling elsewhere. It helps if you have a single page app already and there are only a few changes you need.  A manifest.json which has some config about the theme and name of your app.  A few settings in the head of your html to reference the manifest.json and to set other config such as the theme colour.  The final bit is to add some logic so the app knows what to store offline. This belongs in the service-worker.js - to get started you can take the example in the tutorial and update the list of files to cached to reflect the parts of your app to cache.  For this blog you can see the work in <a href="https://github.com/mikemjharris/blog/compare/fc4de1b0184919d0a741df57827df72bc5d41bb7...26d1c9fa2994113f5e55112733457a5537d1503d" target="_blank">these commits</a>.  
+</p>
+<h4>Gotchas</h4>
+<p> 
+  Caching is hard and having service workers there often makes it hard to debug.  In chrome dev tools find the `Application` tab and you can turn on and off service workers.  The service worker is designed to stop working even when you have killed your dev server.  I went to work on another project that ran on the same port but chrome kepy giving me the previous app I'd been working on!  You also need to not have your app open in two tabs if trying to update the service-worker.  These and many other fun related caching issues are yours to enjoy while developing your PWA.
+</p>
+<p>
+  Https.  You need https to get your app to work.  I pushed to 'prod' and nothing worked.  I'd been meaning to https my site (there's no user info on it so has been parked in the non urgent pile) and this forced me to do it.
+</p>
+<p>
+  This is a fairly simple PWA with no user data - caching sensitive info is not ideal.  This is a simple implementation but service workers are incredibly powerful and can cope with more complex situations but care is needed.
+</p>
+
+<h4>Conclusion</h4>
+<p> After wanting to create a native app for a while I was excited to port an old project to a PWA with minimal hassle.  I learnt lots along the way and as always went down some dead ends however despite being exposed to some new ideas and apis the core work, flow and technologies were what I deal with day in day out.
 </p>
 
 
-
-
-
-<h4>Build what....?</h4>
-<p>
-  The list of things I want to build is long. The list of things that others want me to build is even longer. But wouldn't it be great if the project I built and wrote about I could guarantee the reader had experienced. They could see and understand the design decisions, they would feel the bugs and the pain and could validate if I had overcome those. Wouldn't it be great if I could blog about building a blog?
+<h4>Futher reading</h4>
+<p> 
+  * If you do want to read more about building an app for the app store <a href=":https://neave.blog/illusions-of-the-app-store-e250dcd51c2b" target="_blank">checkout Paul's article. </a></p>
 </p>
 <p>
-  Yes it does sound like a whole load of meta, east London, extra skinny flat white, self indulgent bs. But I've already built an mvp of the blog - look it’s glowing at you from your screen. You're reading it now.  It is a side project squeezed into the small gaps that life sometimes provided but it does give an idea of the thoughts and process that I put into building a project. There were some interesting decisions along the way, I discovered some new tools and had problems to overcome.  I’m still iterating and improving. I reckon there are enough navel gazing, meta posts in this project to pollinate the blog and hope it is flourishes into something beautiful.
+  Posted some screenshots on twitter - they should still be viewable <a href="https://twitter.com/MikeMJHarris/status/914206777180327936" target="_blank">here</a>
 </p>
 <p>
-  I'll talk a little about everything from front end to backend, data storage to design choices, api to version control and my home brewed continuous integration solution.  Let’s hope I can balance tweaking the code and actually writing words.
+  Mentioned https ing my site.  I followed <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04" target="_blank">these instructions using certbot and they worked well</a>
+</p>
+<p>
+  If you don't care that much about the browser but do get involved with CDN caching, cloudfront are implementing the service worker spec on the edge - <a href="https://blog.cloudflare.com/introducing-cloudflare-workers/" target="_blank">this article explains in more detail</a>
 </p>
 
 
