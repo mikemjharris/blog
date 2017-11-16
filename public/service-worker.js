@@ -1,4 +1,4 @@
-var cacheName = 'mikemjharris-blog-7';
+var cacheName = 'mikemjharris-blog-8';
 var filesToCache = [
   "/",
   "/api/posts",
