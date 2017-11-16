@@ -143,9 +143,15 @@ article {
 
   ul {
     margin-bottom: 1em;
+    &.with-bullets { 
+      list-style: disc;
+      margin-left: 1em;
+    }
+
     li {
       margin: 5px 0;
     }
+
   }
 
   p {
