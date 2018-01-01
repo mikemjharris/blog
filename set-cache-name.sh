@@ -6,4 +6,6 @@ COMMIT=`git rev-parse --short head`
 
 less ./public/compile/service-worker.js | sed -e s/mikemjharris-blog-.*/mikemjharris-blog-$COMMIT\'/g > ./public/service-worker.js
 
+git add ./public/service-worker.js
 
+git commit -m 'Bump cache version'
