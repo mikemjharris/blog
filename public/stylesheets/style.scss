@@ -10,8 +10,7 @@
 }
 
 em {
-  font-weight: bold;
-}
+  font-weight: bold; }
 
 h1, h2,h3, h4 {
   font-weight: bold;
@@ -29,6 +28,9 @@ h4 {
   a & {
     margin-top: 0px;
   }
+}
+.content {
+  padding-bottom: 40px;
 }
 
 .quote {
