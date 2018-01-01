@@ -148,6 +148,9 @@ article {
     &.with-bullets { 
       list-style: disc;
       margin-left: 1em;
+      li {
+        padding-left: 5px;
+      }
     }
 
     li {
@@ -212,7 +215,7 @@ article {
         background: lighten( $show-col, 10%);
       }
     }
-    &:nth-child(even) {
+    &:nth-child(odd) {
       background: lighten($border-left-col, 37%);
     }
   }
