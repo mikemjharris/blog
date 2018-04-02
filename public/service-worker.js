@@ -1,4 +1,4 @@
-var cacheName = 'mikemjharris-blog-cff73e1'
+var cacheName = 'mikemjharris-blog-d9cb388'
 var filesToCache = [
   "/",
   "/api/posts",
@@ -38,16 +38,15 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.open(cacheName).then(function(cache) {
-      return caches.match(event.request)
+    caches.match(event.request)
       .then(function(response) {
-        // Stale while revalidate cache
-        var fetchPromise = fetch(event.request).then(function(networkResponse) {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        })
-        return response || fetchPromise;
-      })
-    })
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+
+        return fetch(event.request);
+      }
+    )
   );
 });
