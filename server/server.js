@@ -20,21 +20,23 @@ var posts = [];
 
 fs.readdir('./server/content/posts' , function ( err, files ) {
   files.forEach(function( file ) {
-    var post ={};
-    post.template = file;
-    fs.readFile('./server/content/posts/' + file, function ( err, data ) {
+    if (file.match(/.html$/)) {
+      var post ={};
+      post.template = file;
+      fs.readFile('./server/content/posts/' + file, function ( err, data ) {
 
-      var str = data.toString('utf8');
-      var match;
+        var str = data.toString('utf8');
+        var match;
 
-      post.body = str;
-      post.searchtitle = file;
-      while ( match = regex.exec(str) ) {
-        post[ match[ 1 ].trim() ] = match [ 2 ].trim();
-      }
-      posts.push(post);
-      posts = sortPosts(posts);
-    });
+        post.body = str;
+        post.searchtitle = file;
+        while ( match = regex.exec(str) ) {
+          post[ match[ 1 ].trim() ] = match [ 2 ].trim();
+        }
+        posts.push(post);
+        posts = sortPosts(posts);
+      });
+    }
   });
 });
 
