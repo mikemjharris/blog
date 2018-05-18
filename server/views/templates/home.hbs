@@ -1,11 +1,12 @@
-<h2>My Blog</h2>
+<div>
+  <h2>My Blog</h2>
 
 
   <p>
-    I'm full stack web developer.  I build modern web apps such as this blog.
+    I'm Mike - a full stack web developer who makes modern web apps such as this blog.
   </p>
   <p>
-    This is my little corner of the internet where I get write about what I want - usually tech but occasionally other thoughts. I also get to use some of my fun svg and css experiments in the wild.
+    This is my little corner of the internet where I get write about what I want - usually tech but occasionally other thoughts. 
   </p>
   <h3>Latest Post</h3>
   <a class="posts" href="./posts/{{ latestPost.searchtitle }}">
@@ -15,29 +16,10 @@
     </div>
   </a>
 
-
-  <h3>Mailing List</h3>
-
-  Get the latest blog post straight to your inbox.
-
-
-  <form
-    class="tinyletter"
-    action="https://tinyletter.com/Mikemjharris"
-    method="post"
-    target="popupwindow"
-    onsubmit="window.open('https://tinyletter.com/Mikemjharris', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"
-  >
-    <input
-      type="text"
-      name="email"
-      id="tlemail"
-      placeholder="email"
-    />
-    <input type="hidden" value="1" name="embed"/>
-    <input type="submit" value="Subscribe" /><p>
-
-  </form>
-
+  <h3>This Blog</h3>
+  <p>
+    As well as a place to share thoughts this is a project I use to practice and experiment with fun or interesting technolgies.  You'll notice some funky css and svg animation, the blog as a whole is a progressive web app with offline functionality and it is deployed in the cloud, in docker containers via a custome built ci pipeline.  All these and more I have detailed in various posts.
+</p>
+</div>
 
 
