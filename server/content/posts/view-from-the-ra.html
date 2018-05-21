@@ -1,0 +1,49 @@
+<!-- meta-data title: View From The RA -->
+<!-- meta-data searchtitle:  view-from-the-ra -->
+<!-- meta-data date: 20 May 2018 -->
+<!-- meta-data intro: Building an app to showoff pics of the Royal Academy of Arts -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+One of the reasons for joining the Royal Academy of Arts was to get exposed to a completely new environemt. This has this paid off in so many ways! I've never worked in west London or in such an inspiring or beautiful environment. I posted a bunch of pics to instagram but was frustrated I couldn't just show my posts with a certain hashtag.  So I built an app, <a href="https://view-from-the-ra.mikemjharris.com">View From The RA</a>, where you can see just my pics from the RA and wont get distracted by other rubbish I might post on instagram!
+</p>
+
+<p data-height="352" data-theme-id="0" data-slug-hash="EEzzpx" data-default-tab="result" data-user="mikemjharris" data-embed-version="2" data-pen-title="SVG Animated Heart Mask" class="codepen">See the Pen <a href="https://codepen.io/mikemjharris/pen/EEzzpx/">SVG Animated Heart Mask</a> by Mike Harris (<a href="https://codepen.io/mikemjharris">@mikemjharris</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+<p>
+  Half the fun of doing side projects is building some functionality that you want.  The other half is learning or practicing new skills or technology. For a while I've been looking at playing with SVG masks. Before I even broke ground on this app I played around in code pen - one example which I'm most proud of is in the pen above.  In the end the animated mask didn't work so well for what I wanted but was lots of fun to make and I think makes and interesting pen - it got a bunch of views and likes.  I do enjoy a good helping of fake internet points!
+</p>
+
+<h3>Seed project</h3>
+
+<p>
+In setting up the app I went back to a seed project that I've used in the past as a basis for projects.  It's a bit outdated (last commits Aug 2015!) so I took the change to change some of how it's setup. Quite a bit has changed in a bit over two years. You can see the <a href="https://github.com/mikemjharris/seed-project/compare/6705a53a4a739986120f5721b29642510dd27221...8dfde22e673ebd4e0ea9d3492b024c04c7fb1018" target="_blank">chagnes on github</a> but here's a quick summary:
+  <ul>
+     <li>Update nvm to node 9</li>
+     <li>Remove outdated package tools - i.e. bower</li>
+     <li>Convert build process to webpack from gulp</li>
+     <li>Add build and run scripts in package.json</li>
+     <li>Use ejs templating instead of jade</li>
+  </ul>
+ </p>
+
+ <h3>Pupeteer</h3>
+ <p>
+ Having had to wrestle and play with PhantomJS it was a shame to hear of that project being mothballed.  The reason was google had entered the market - this was my opportunity to try out <a href="https://github.com/GoogleChrome/puppeteer" target="_blank">Pupeteer</a> which runs a headless chrome.  The experience was fantastic - stable, easy to install with fantastic docs.  As Instagram is restricitng it's API I used pupeteer to crawl their website. I'm only crawling my publically available data and using it for a fun project - this should never be done for anything commercial - you should apply to use their API.  <a href="https://github.com/mikemjharris/view-from-the-ra/blob/master/scrapper.js">This script</a> runs nightly - it calls my page on instagram, saves the global variable which has the inital page data and list of images.  Headless chrome then simulates scrolling down the page and the script captures the responses of the calls to the api.  This data is all combined as an array of images and inserted as a JSON object into MongoDB to be used on the next view of the page.
+ </p>
+
+ <h3>Deployment</h3>
+ <p>
+ I've written before about my <a target="_blank" href="/posts/deploying-this-blog">home built ci / deployment tooling</a>. I love the benefits of previous efforts to automate processes - now the structure was there it's a fairly straight forward procdure to get the app up on my digital ocean droplet and auto deploying when I push to git. It's not new but it is very satisfying.
+ </p>
+
+
+ <h3>Other new environments</h3>
+
+<p>
+  In addition to the physical environment the working environment is completely different and just as refreshing.  There are people from walks of life that i've never worked with before. While the arts has it's own diversity issues they are quite different from the tech and finance worlds. At a recent heads of department meeting over 70% of the people there weren't men. While a great opportunity for me to be exposed to it doesn't lend itself to creating a good looking app hence why I've focused on the building and artworks at the RA for this side project
+</p>
+
