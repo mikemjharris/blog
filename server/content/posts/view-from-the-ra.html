@@ -1,28 +1,29 @@
 <!-- meta-data title: View From The RA -->
 <!-- meta-data searchtitle:  view-from-the-ra -->
-<!-- meta-data date: 20 May 2018 -->
-<!-- meta-data intro: Building an app to showoff pics of the Royal Academy of Arts -->
+<!-- meta-data date: 23 May 2018 -->
+<!-- meta-data intro: An app to showoff pics of the Royal Academy of Arts -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech  -->
 
 <p>
-One of the reasons for joining the Royal Academy of Arts was to get exposed to a completely new environemt. This has this paid off in so many ways! I've never worked in west London or in such an inspiring or beautiful environment. I posted a bunch of pics to instagram but was frustrated I couldn't just show my posts with a certain hashtag.  So I built an app, <a href="https://view-from-the-ra.mikemjharris.com">View From The RA</a>, where you can see just my pics from the RA and wont get distracted by other rubbish I might post on instagram!
+  Moving to work at the Royal Academy took me away from east London and it's mix of modern offices and tech companies to an organisation in west London celebrating it's 250th anniversary.  I wanted to experience a new environment and I have in so many ways!  Of particular note is the beautiful building and the artwork displayed inside. To keep a momento and to share with others I started taking regular pictures and sharing them to Instagram.  I was frustrated that you couldn't filter by both a user and a hashtag so built an app, <a href="https://view-from-the-ra.mikemjharris.com">View From The RA</a> so that you can view just the pictures of the RA that I share. 
 </p>
+
 
 <p data-height="352" data-theme-id="0" data-slug-hash="EEzzpx" data-default-tab="result" data-user="mikemjharris" data-embed-version="2" data-pen-title="SVG Animated Heart Mask" class="codepen">See the Pen <a href="https://codepen.io/mikemjharris/pen/EEzzpx/">SVG Animated Heart Mask</a> by Mike Harris (<a href="https://codepen.io/mikemjharris">@mikemjharris</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 
 <p>
-  Half the fun of doing side projects is building some functionality that you want.  The other half is learning or practicing new skills or technology. For a while I've been looking at playing with SVG masks. Before I even broke ground on this app I played around in code pen - one example which I'm most proud of is in the pen above.  In the end the animated mask didn't work so well for what I wanted but was lots of fun to make and I think makes and interesting pen - it got a bunch of views and likes.  I do enjoy a good helping of fake internet points!
+  For me, spending time on side projects has two benefits.  Firstly I get to build some functionality that I want.  Second I get play around with some new tech. For a while I wanted to try out SVG masks - as I often do I make some sketches with code in codepen to try and learn what I'm doing and flesh out some ideas before starting on a full on app. You can see one of my test cases above - I took a previous SVG animation and layered it over an image from the RA with pretty cool results.  In the end for a whole page of images I went for something more subtly but it was fun to try a few things out although I was pretty happy with the opening image mask and animation.
 </p>
 
-<h3>Seed project</h3>
+<h3>Updating a Seed project</h3>
 
 <p>
-In setting up the app I went back to a seed project that I've used in the past as a basis for projects.  It's a bit outdated (last commits Aug 2015!) so I took the change to change some of how it's setup. Quite a bit has changed in a bit over two years. You can see the <a href="https://github.com/mikemjharris/seed-project/compare/6705a53a4a739986120f5721b29642510dd27221...8dfde22e673ebd4e0ea9d3492b024c04c7fb1018" target="_blank">chagnes on github</a> but here's a quick summary:
+In setting up the app I went back to a seed project that I've used in the past as a basis for projects.  It's a bit outdated (last commits Aug 2015!) so I took the change to change some of how it's setup. The tech world has change quite a bit in the past two years.. You can see the <a href="https://github.com/mikemjharris/seed-project/compare/6705a53a4a739986120f5721b29642510dd27221...8dfde22e673ebd4e0ea9d3492b024c04c7fb1018" target="_blank">chagnes on github</a> but here's a quick summary:
   <ul>
-     <li>Update nvm to node 9</li>
+     <li>Update node 9</li>
      <li>Remove outdated package tools - i.e. bower</li>
      <li>Convert build process to webpack from gulp</li>
      <li>Add build and run scripts in package.json</li>
@@ -30,20 +31,24 @@ In setting up the app I went back to a seed project that I've used in the past a
   </ul>
  </p>
 
- <h3>Pupeteer</h3>
+ <h3>Try out Pupeteer</h3>
  <p>
- Having had to wrestle and play with PhantomJS it was a shame to hear of that project being mothballed.  The reason was google had entered the market - this was my opportunity to try out <a href="https://github.com/GoogleChrome/puppeteer" target="_blank">Pupeteer</a> which runs a headless chrome.  The experience was fantastic - stable, easy to install with fantastic docs.  As Instagram is restricitng it's API I used pupeteer to crawl their website. I'm only crawling my publically available data and using it for a fun project - this should never be done for anything commercial - you should apply to use their API.  <a href="https://github.com/mikemjharris/view-from-the-ra/blob/master/scrapper.js">This script</a> runs nightly - it calls my page on instagram, saves the global variable which has the inital page data and list of images.  Headless chrome then simulates scrolling down the page and the script captures the responses of the calls to the api.  This data is all combined as an array of images and inserted as a JSON object into MongoDB to be used on the next view of the page.
+  Google recently lauched <a href="https://github.com/GoogleChrome/puppeteer" target="_blank">Pupeteer</a> which provide a headless chrome experience along the lines of PhantomJS. I wanted to try it out and this project was the perfect test case.  Instagram is limiting their API so I went down the route of scraping their site for my data - this method shouldn't really be used but in this case I'm only fetching my own public data for a side project. The experience was fantastic - stable, easy to install with fantastic docs.  <a href="https://github.com/mikemjharris/view-from-the-ra/blob/master/scrapper.js">This script</a> runs nightly - it calls my page on instagram, saves the global variable which has the inital page data and list of images.  Headless chrome then simulates scrolling down the page and the script captures the responses of the calls to the api.  This data is all combined as an array of images and inserted as a JSON object into MongoDB to be used on the next view of the page.
  </p>
 
  <h3>Deployment</h3>
  <p>
- I've written before about my <a target="_blank" href="/posts/deploying-this-blog">home built ci / deployment tooling</a>. I love the benefits of previous efforts to automate processes - now the structure was there it's a fairly straight forward procdure to get the app up on my digital ocean droplet and auto deploying when I push to git. It's not new but it is very satisfying.
+ I've written before about my <a target="_blank" href="/posts/deploying-this-blog">home built ci / deployment tooling</a>. I love the benefits of previous efforts to automate processes - now the structure was there it's a fairly straight forward procdure to get the app up on my digital ocean droplet and auto deploying when I push to git. It's not new but it is very satisfying. 
  </p>
 
 
+ <h3>The app</h3>
+ <p>
+  The app itself is fairly standard - a bunch of images on a page.  The RA itself - both the building and the works of art - are really the star.  You can still just head to instagram and probably get a better experience but your viewings might be interupted by other more mundane pictures that I post
+ </p>
+ 
  <h3>Other new environments</h3>
 
 <p>
-  In addition to the physical environment the working environment is completely different and just as refreshing.  There are people from walks of life that i've never worked with before. While the arts has it's own diversity issues they are quite different from the tech and finance worlds. At a recent heads of department meeting over 70% of the people there weren't men. While a great opportunity for me to be exposed to it doesn't lend itself to creating a good looking app hence why I've focused on the building and artworks at the RA for this side project
+  I've written and documented the physical environment I've been exposed to at the RA. However the working environment is very different - the arts world has it's own diversity issues but in some ways it is better than in tech and finance.  It's been interesting and educational to work in an environment where the majority of employees identify as female. However building an app where I post pictures of the members of the meetings I attend isn't as appropriate as images of art.
 </p>
-
