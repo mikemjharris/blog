@@ -3,6 +3,11 @@ bower_components
 npm-debug.log
 public/npm-debug.log
 
+# Version files
+public/version.json
+public/releases.json
+
+
 db/data
 
 *.swp
