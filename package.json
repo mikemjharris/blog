@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./server/server.js"
+    "start": "node ./server/server.js",
+    "devserver": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html"
   },
   "dependencies": {
     "body-parser": "~1.0.0",
@@ -32,6 +33,11 @@
     "handlebars": "^3.0.0",
     "merge-stream": "^0.1.7",
     "node-sass": "^2.0.1",
+    "nodemon": "^1.17.5",
     "path": "^0.11.14"
+  },
+  "nodemonConfig": {
+    "delay": "2500",
+		"e": "html"
   }
 }
