@@ -6,40 +6,45 @@
 <!-- meta-data category: tech  -->
 
 <p>
- An unfortunate water incident that was entirely my own fault rendered by work laptop useless. While waiting for a new one I reverted to my truest 2013 macbook air only to find it not up to the job of running the range of services required for day to day coding. I decided to experiement with setting up a remote dev environment on aws and seeing if that would be a feasable option.  Here's how I got on and the various new bits of tech I discovered along the way.  
+ An unfortunate water incident rendered by work laptop useless. While waiting for a new one I reverted to my trusty 2013 macbook air only to find it not up to the job of running the range of services required for day to day coding. I decided to experiment with setting up my dev environment in the cloud and see if working over a remote connection provided a feasable alternative. Here's how I got on and the various new bits of tech I discovered along the way.  
 </p>
 
 
 <h3>Setting up in the cloud</h3>
 <p>
-  I've got a decent amount of experience working with cloud computing - my personal website (and this blod) are hosted on Digital Ocean and for work I've used AWS at work. As this was a one off setup the quickest and easiest way of getting a box up and running was through the aws console on the web, following their docs to get a box up and running and allowing myself to ssh in. No need to play around with terraform and ansible.
+	My personal site is hosted on Digital Ocean and I've worked with servers on AWS for work. I opted to use AWS has I have some familiarity but haven't had to set up infrastructure from scratch.  The AWS docs are pretty comprehensive and I'd setup an EC2 instance via the console fairly quickly and could ssh onto the box. 
 </p>
+
 <h3>Dev environment</h3>
 <p>
-	While I've worked on remote servers, I'm generally used to working locally on a Mac.  As such my scripts for setting up my local environment are all using brew as the package manager. I went through the packages manaully finding the equivalent in apt and creating a new script I could use in the future when setting up in a debian environment. <a href="https://github.com/mikemjharris/config/blob/master/bin/install-linux.sh" target="_blank">You can checkout the script on github</a>.  Other dot files for my tmux / vim setup worked straight from the off.
-</p>
+  Usually I work locally on a Mac and as such all my setup scripts utilise the brew package manager. I'd opted for an Ubuntu box so manually went through the various packages in my script and installed the equivallent debian package using apt and setup an linux based setup script which <a href="https://github.com/mikemjharris/config/blob/master/bin/install-linux.sh" target="_blank">you can checkout on github</a>. Other config such as tmux and vim dot files worked from the off.
 <h3>Laggy ssh</h3>
 <p>
-	Once setup I could start coding - I generally code in the terminal so just having to an ssh connection to the server meant I could work seamlessly.  However on any interuption in the network the terminal connection would get slightly laggy - fine if you're just doing a few things remotely but annoying if you're trying to code over an extended period of time.  On the recommendation of a friend I tried out <a href="
-https://mosh.org/" target="_blank">mosh</a>. This uses UDP to communicate remotely and has a whole bunch of awesome features including being able to reconnect automatically.  Once using mosh I couldn't tell any difference between my local terminal and the remote. I even experimented on a 3g phone connection and it worked great!  It was so smooth I had to update the look of my remote terminal so I knew I was working in the cloud!
+	Once setup I could start coding - I generally code in the terminal so just having to an ssh connection to the server is all I need. There are web based ides such as Amazon's cloud 9 if you are used to an IDE. Using ssh is ok but any slowness or interruption in the connection caused input to be laggy - fine if you're just doing a few things remotely but annoying if you're trying to code over an extended period of time.  On the recommendation of a friend I tried out <a href="
+https://mosh.org/" target="_blank">mosh</a>. This uses UDP to communicate remotely and has a whole bunch of awesome features including being able to reconnect automatically and optomistic ui.  Once using mosh I couldn't tell any difference between my local terminal and the remote. I even experimented on a 3g phone connection and it worked great!  It was so smooth I had to update the look of my remote terminal so I knew I was working in the cloud.
 <p>
 
 <h3>Saving Money with AWS lambda</h3>
 <p>
-	Cloud computers aren't free. An m4.xlarge - 4cpus /16gb ram costs $170 a month. I work hard but I don't work 24h a day.  In AWS if you stop an instance you don't get charge for it and I worked out even if I coded 8 hours a day it would cost ~$50 a month.  In addition I am often in meetings or in 1-1s so anticiapted it would be less than that.  I installed the aws cli and made sure I shut down the box whenver I was going to be away from my desk. At the end of the day though it can be easy to forget as the lure of heading home beckons. To make sure the box was off I followed <a href="https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/" target="_blank">this tutuorial</a>and set it to run at 5.45pm and 11pm. The first encourages me to make sure I leave work on time, the second if I've needed to do some evening work (rare) forces me to shut down and head to bed. 
+	Cloud computers aren't free. An m4.xlarge - 4cpus/16gb ram costs $170 a month. I work hard but I don't work 24h a day.  In AWS if you stop an instance you don't get charged so 8hrs of coding a day would end up costing ~$50. In addition I am often in meetings or 1-1s so anticiapted it would be even less than that.  I installed the aws cli and made sure I shut down the box whenver I was going to be away from my desk. At the end of the day though it can be easy to forget as the lure of heading home beckons. To make sure the box was off I followed <a href="https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/" target="_blank">this tutuorial</a> and set up an AWS lambda function to turn off the box at 5.45pm and 11pm. The first encourages me to make sure I leave work on time, the second if I've needed to do some evening work (rare) forces me to shut down and head to bed. 
 </p>
 <p>	
-	Here's my usage over the first month of working in the cloud. It also allows me to really see how much coding I am doing vs other responsibilities. The usuage for a month cost me $24
+	Here's my usage over the first month of working in the cloud. It also allows me to really see how much coding I am doing vs other responsibilities. The usuage for a month cost me $24.
 </p>
 <img src="/images/aws-usage.png" />
 
-<h3>AUtomating setup</h3>
+<h3>Automating setup</h3>
 <p>
-	Turning the dev environment off regularly meant turning it on regularly and getting up to speed.  Starting an ec2 box takes around a minute - enough time to reread the jira ticket I'm working on. Next I just needed to get my dev environemt up to speed. I use vim and tmux and wrote a bit about my setup and keyboard skills in this post.  I worked out the commands I'd usually run to get everything running locally (when on a local computer I'd get this running at the start of the week and leave it running so hadn't automated things) and converted those commands into config for a tmux session.  You can see the <a href="<F24><F25>https://github.com/mikemjharris/config/blob/master/conf/tmux/ra-full-session">config on github</a>.  With a quick keyboard short cut I have four services running, mysql command line up and running and vim open ready to go.
+	Turning the dev environment off regularly meant turning it on regularly and getting up to speed.  Starting an ec2 box takes around a minute - enough time to reread the jira ticket I'm working on. Then it's a case of getting my dev environemt up to running. I've written about my setup and keyboard skills <a href="/posts/me-and-my-keyboard" target="_blank">in this post</a> and have config (<a href="<F24><F25>https://github.com/mikemjharris/config/blob/master/conf/tmux/ra-full-session">see it on github</a>) which automatically sets up a tmux session with multiple windows and panes running vim, mysql console and all the services I need. This takes around 30s. So from a standing start I'm up and productive in less than 2 mins - enought time to grab a tea or re read the jira ticket I'm working on.
 </p>
 
 <h3>Conclusion</h3>
 <p>
-	I wasn't sure that coding remotely would be seamless but using mosh and harnessing the power of aws I had a super powerful setup that I could run from an outdated laptop. Using aws lambdaI limit my costs.  In addition updating security rules means it's easier to share what I'm working on locally with anyone and also means I can work from home using a different computer and have the same setup as my day to day use. I've learnt lots along the way and don't think I'll need to purchase a powerful personal computer ever again. 
+	While I'm happy deploying code on the cloud, I wasn't sure that coding remotely would be a seamless experience. Using the excellent mosh and harnessing the power of aws I had a super powerful setup that I could run from anywhere. Utilising aws lambda limited costs. There are other benefits such as being able to share 'local' work with anyone, or being able to log on to the same environment from any computer which I'll touch on in a future post. The tools I use day to day were well suited to the shift to remote coding. I've learnt a whole load more about AWS and enjoyed the challenge of trying to solve the issue of a waterlogged laptop that had been entirely my own fault. 
 </p>
+
+<div class="appendix">
+<h3>Appendix</h3>
+<p>
+	This was a top level quick run through - there are number of details I haven't mentioned along the way such as setting static ips, security groups and opening up certain ports.  If you are going along this process you will find the AWS docs combined with some light google will get you there - happy to answer any queries if you're stuck. 
  	
