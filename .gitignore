@@ -13,3 +13,5 @@ db/data
 *.swp
 
 public/dist
+
+*.bak
