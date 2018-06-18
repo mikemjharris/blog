@@ -1,8 +1,7 @@
-FROM node:6.9.5
+FROM node:5
 MAINTAINER Mike Harris "hello@mikemjharris.com"
 
 RUN  npm --no-color install -g gulp
-
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm --no-color install
