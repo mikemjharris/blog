@@ -6,30 +6,30 @@
 <!-- meta-data category: tech  -->
 
 <p>
- An unfortunate water incident rendered by work laptop useless. While waiting for a new one I reverted to my trusty 2013 Macbook Air only to find it not up to the job of running the range of services required for day to day coding. I decided to experiment with setting up my dev environment in the cloud and see if working over a remote connection provided a feasable alternative. Here's how I got on and the various new bits of tech I discovered along the way.  
+ An unfortunate water incident rendered by work laptop useless. While waiting for a new one I reverted to my trusty 2013 Macbook Air only to find it not up to the job of running the range of services required for day to day coding. I decided to experiment with setting up my dev environment in the cloud and see if working over a remote connection provided a feasable alternative. Here's how I got on and the various new bits of tech I discovered along the way.
 </p>
 
 
 <h3>Setting up in the cloud</h3>
 <p>
-	My personal site is hosted on Digital Ocean and I've worked with servers on AWS for work so the cloud isn't new to me. As a learning experience I opted to use AWS has I haven't had to set up infrastructure from scratch in that environment. The AWS docs are pretty comprehensive and following I soon was able to ssh on to a running EC2 instance that I'd setup from the online console.
+	My personal site is hosted on Digital Ocean and I've dealt with servers on AWS for work so the cloud isn't new to me. As a learning experience I opted to use AWS has I haven't had to set up infrastructure from scratch in that environment. The AWS docs are pretty comprehensive and I was soon able to ssh on to a running EC2 instance that I'd setup from the online console.
 </p>
 
 <h3>Dev environment</h3>
 <p>
-  Usually I work locally on a Mac and as such all my setup scripts utilise the brew package manager. I'd opted for an Ubuntu box so manually went through the various packages in my script and installed the equivallent debian package using apt.  I took notes and converted these into a linux based setup script so I coulda automatically repeat the process in the future. <a href="https://github.com/mikemjharris/config/blob/master/bin/install-linux.sh" target="_blank">You can checkout it out on github</a>. Other config such as tmux and vim dot files worked from the off - all of which are in that same repo.
+  Usually I work locally on a Mac and as such all my setup scripts utilise the brew package manager. I'd opted for an Ubuntu box so manually went through the various dependencies in my script and installed the equivallent debian package using apt.  I took notes and converted these into a linux based setup script so I coulda automatically repeat the process in the future. <a href="https://github.com/mikemjharris/config/blob/master/bin/install-linux.sh" target="_blank">You can checkout it out on github</a>. Other config such as tmux and vim dot files worked from the off - all of which are in that same repo.
 <h3>Laggy ssh</h3>
 <p>
-	Once setup I could start coding - I generally code in the terminal so just having to an ssh connection to the server is all I need. There are web based ides such as Amazon's cloud 9 if you prefer. Using ssh is ok but any slowness or interruption in the connection caused input to be laggy - fine if you're just doing a few things remotely but annoying if you're trying to code for an extended period of time.  On the recommendation of a friend at our weekly techrunners group I tried out <a href="
+	Once setup I could start coding - I generally code in the terminal so just having to ssh connection to the server is all I need. There are web based ides such as Amazon's cloud 9 if you prefer. Using ssh is ok but any slowness or interruption in the connection caused input to be laggy - fine if you're just doing a few things remotely but annoying if you're trying to code for an extended period of time.  On the recommendation of a friend at our weekly techrunners group I tried out <a href="
 https://mosh.org/" target="_blank">mosh</a>. This uses UDP to communicate and has a whole bunch of awesome features including being able to reconnect automatically and optomistic UI.  Once using mosh I couldn't tell any difference between my local terminal and the remote. I even experimented on a 3g phone connection and it worked seamlessly!  It was so smooth I had to update the look of my remote terminal so I knew I was working in the cloud.
 <p>
 
 <h3>Saving Money with AWS lambda</h3>
 <p>
-	Cloud computers aren't free. An m4.xlarge - 4cpus/16gb ram costs $170 a month. I work hard but I don't work 24h a day.  In AWS if you stop an instance you don't get charged - 8hrs of coding a day would end up costing ~$50. In addition I am often in meetings or 1-1s so anticiapted it would be even less than that.  I installed the aws cli and made sure I shut down the box whenver I was going to be away from my desk. At the end of the day though it can be easy to forget as the lure of heading home beckons. To make ensure the instance was stopped I followed <a href="https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/" target="_blank">this tutuorial</a> and set up an AWS lambda function to flick the off switch at 5.45pm and 11pm. The first encourages me to make sure I leave work on time, the second if I've needed to do some evening work forces me to shut down and head to bed. 
+	Cloud computers aren't free. An m4.xlarge - 4cpus/16gb ram costs $170 a month. I work hard but I don't work 24h a day.  In AWS if you stop an instance you don't get charged - I calculated 8hrs of coding a day would end up costing ~$50. In addition I am often in meetings or 1-1s so anticiapted it would be even less than that.  I installed the aws cli and made sure I shut down the box whenver I was going to be away from my desk. At the end of the day though it can be easy to forget as the lure of heading home beckons. To make ensure the instance was stopped I followed <a href="https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/" target="_blank">this tutuorial</a> and set up an AWS lambda function to flick the off switch at 5.45pm and 11pm. The first encourages me to make sure I leave work on time, the second if I've needed to do some evening work forces me to shut down and head to bed.
 </p>
-<p>	
-	Here's my usage over the first month of working in the cloud. It also allows me to really see how much coding I am doing vs other responsibilities. The usuage for a month cost me around $25 for 100h.
+<p>
+	Here's my usage over the first month of working in the cloud. It also allows me to see how much coding I am doing vs other responsibilities. The usuage for a month cost me around $25 for 100h.
 </p>
 <img src="/images/aws-usage.png" />
 
@@ -40,12 +40,12 @@ https://mosh.org/" target="_blank">mosh</a>. This uses UDP to communicate and ha
 
 <h3>Conclusion</h3>
 <p>
-	While I'm happy deploying code on the cloud, I wasn't sure that coding remotely would be a seamless experience. Using the excellent mosh and harnessing the power of AWS I had a super powerful setup that I can run from anywhere whilst limiting costs through AWS lambda functions. There are other benefits such as being able to share 'local' work with anyone and being able to log on to the same environment from any computer which I'll touch on in a future post. The tools I use day to day were well suited to the shift to remote coding. I've learnt a whole load more about AWS and enjoyed the challenge of trying to solve the issue of a waterlogged laptop that had been entirely my own fault. 
+	While I'm happy deploying code on the cloud, I wasn't sure that coding remotely would be a seamless experience. Using the excellent mosh and harnessing the power of AWS I had a super powerful setup that I can run from anywhere whilst limiting costs through AWS lambda functions. There are other benefits such as being able to share 'local' work with anyone and being able to log on to the same environment from any computer which I'll touch on in a future post. The tools I use day to day were well suited to the shift to remote coding. I've learnt a whole load more about AWS and enjoyed the challenge of trying to solve the issue of a waterlogged laptop that had been entirely my own fault.
 </p>
 
 <div class="appendix">
 <h3>Appendix</h3>
 <p>
-	This was a quick run through - there are number of details I haven't mentioned along the way such as setting static ips, security groups and opening up certain ports.  If you are attempting to implement the same you will find the AWS docs combined with some light googling will get you there - happy to answer any queries if you're stuck. A big thanks to various people over the past few years who I've discussed remote coding in the cloud with and whose tips helped make my progress smoother. 
+	This was a quick run through - there are number of details I haven't mentioned along the way such as setting static ips, security groups and opening up certain ports.  If you are attempting to implement the same you will find the AWS docs combined with some light googling will get you there - happy to answer any queries if you're stuck. A big thanks to various people over the past few years who I've discussed remote coding in the cloud with and whose tips helped make my progress smoother.
  </p>
-</div>	
+</div>
