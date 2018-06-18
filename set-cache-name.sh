@@ -4,7 +4,7 @@
 
 COMMIT=`git rev-parse --short HEAD`
 
-less ./public/compile/service-worker.js | sed -e s/mikemjharris-blog-.*/mikemjharris-blog-$COMMIT\'/g > ./public/service-worker.js
+sed -ie s/mikemjharris-blog-.*/mikemjharris-blog-$COMMIT\'/g  ./public/service-worker.js
 
 git add ./public/service-worker.js
 
