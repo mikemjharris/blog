@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./server/server.js",
-    "devserver": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html"
+    "devserver": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html",
+    "test": "echo 'hi'"
   },
   "dependencies": {
     "body-parser": "~1.0.0",

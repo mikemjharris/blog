@@ -4,7 +4,8 @@ services:
 
 script:
   - docker build --tag blog .
+  - docker run blog npm test 
 
 after_script:
   - docker images
-  - /bin/bash echo 'hit'
+  - echo 'hit'
