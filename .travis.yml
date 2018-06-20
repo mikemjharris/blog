@@ -4,7 +4,7 @@ services:
 
 script:
   - docker build --tag blog .
-  - docker run blog 
+  - docker run blog -d
 
 after_script:
   - docker images
