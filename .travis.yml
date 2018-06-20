@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build --tag blog .
+  - docker run blog 
+
+after_script:
+  - docker images
