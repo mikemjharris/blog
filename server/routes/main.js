@@ -1,33 +1,33 @@
-var notFound = {
+const notFound = {
   title: '404',
   intro: 'the page you were looking for wasn\'t found'
 };
 
-module.exports = function ( app, posts ) {
+module.exports = (app, posts) => {
 
-  app.get('/', function( req, res ) {
+  app.get('/', ( req, res ) => {
     res.render('templates/home' , { posts: posts, latestPost: posts[ 0 ]  });
   });
 
-  app.get('/projects', function( req, res ) {
+  app.get('/projects', ( req, res ) => {
     res.render('templates/projects' , { posts: posts });
   });
 
-  app.get('/posts', function( req, res ) {
+  app.get('/posts', ( req, res ) => {
     res.render('templates/posts' , { posts: posts });
   });
 
-  app.get('/posts/top', function( req, res ) {
+  app.get('/posts/top', ( req, res ) => {
     res.render('templates/posts' , { posts: posts });
   });
 
-  app.get('/category', function( req, res ) {
+  app.get('/category', ( req, res ) => {
     res.render('templates/category' , { posts: posts });
   });
 
-  app.get('/posts/:id', function( req, res ) {
-    var postId = req.params.id;
-    var postToShow = notFound;
+  app.get('/posts/:id', ( req, res ) => {
+    const postId = req.params.id;
+    const postToShow = notFound;
 
     posts.forEach(function ( post ) {
       if ( post.searchtitle === postId ) {
@@ -37,16 +37,16 @@ module.exports = function ( app, posts ) {
     res.render('templates/post' , { post: postToShow });
   });
 
-  app.get('/contact', function( req, res ) {
+  app.get('/contact', ( req, res ) => {
     res.render('templates/contact');
   });
 
-  app.get('/about', function( req, res ) {
+  app.get('/about', ( req, res ) => {
     res.render('templates/about');
   });
 
   // API
-  app.get('/api/posts', function( req, res ) {
+  app.get('/api/posts', ( req, res ) => {
     res.json(posts);
   });
 
