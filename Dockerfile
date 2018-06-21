@@ -15,6 +15,8 @@ ADD . /var/www/
 
 WORKDIR /var/www/
 
+# was getting a weird errro around handle bars template.  Doing another npm instll here (it's fast) seems to fix
+RUN npm install
 RUN gulp --no-color 
 
 CMD npm start
