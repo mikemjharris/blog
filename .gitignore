@@ -15,3 +15,5 @@ db/data
 public/dist
 
 *.bak
+
+coverage
