@@ -35,4 +35,7 @@ The project exposes port 8000 so map that to whichevere port you need.
 docker run -d -p 8000:8000 --name blog mikemjharris/blog
 ```
 
+Test
+==========
+`npm test` or `npm run test-coverage`
 
