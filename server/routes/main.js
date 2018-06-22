@@ -27,7 +27,7 @@ module.exports = (app, posts) => {
 
   app.get('/posts/:id', ( req, res ) => {
     const postId = req.params.id;
-    const postToShow = notFound;
+    let postToShow = notFound;
 
     posts.forEach(function ( post ) {
       if ( post.searchtitle === postId ) {
