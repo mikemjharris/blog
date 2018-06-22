@@ -4,26 +4,23 @@ const regex = /\<\!\-\-\smeta-data\s([A-z]+)\:\s(.+?(?=-->))/g;
 
 const getPostsFromPath = (path) => {
   let posts = []
-  fs.readdir(path, (err, files) => {
-    files.forEach((file) => {
-      if (file.match(/.html$/)) {
-        let post ={};
-        post.template = file;
-        fs.readFile(path + file, (err, data) => {
+  const files = fs.readdirSync(path);
+  files.forEach((file) => {
+    if (file.match(/.\.html$/)) {
+      let post ={};
+      post.template = file;
+      let data = fs.readFileSync(path + file);
+      let str = data.toString('utf8');
+      let match;
 
-          let str = data.toString('utf8');
-          let match;
-
-          post.body = str;
-          post.searchtitle = file;
-          while ( match = regex.exec(str) ) {
-            post[ match[ 1 ].trim() ] = match [ 2 ].trim();
-          }
-          posts.push(post);
-          posts = sortPosts(posts);
-        });
+      post.body = str;
+      post.searchtitle = file;
+      while ( match = regex.exec(str) ) {
+        post[ match[ 1 ].trim() ] = match [ 2 ].trim();
       }
-    });
+      posts.push(post);
+      posts = sortPosts(posts);
+    }
   })
   return posts;
 }
@@ -41,4 +38,4 @@ const getPosts = () => {
   return getPostsFromPath(postsPath);
 }
 
-module.exports =  { getPosts: getPosts};
+module.exports =  { getPosts: getPosts, getPostsFromPath };
