@@ -14,3 +14,17 @@ test('meta data is parsed correctly', () => {
     expect(posts[0].author).toEqual('Mike Harris');
     expect(posts[0].category).toEqual('thoughts');
 });
+
+test('sort posts sorts posts in correct order', () => {
+    const a = { date: new Date() };
+    const b = { date: new Date() + 5};
+    const posts = postHelpers.sortPosts([b, a]);
+    const postsBackwards = postHelpers.sortPosts([a, b]);
+    expect(posts).toEqual(postsBackwards);
+});
+
+test('check getPosts returns production posts', () => {
+    const posts = postHelpers.getPosts();
+    // Test we get a bunch of posts back
+    expect(posts.length).toBeGreaterThan(20);
+});

@@ -38,4 +38,4 @@ const getPosts = () => {
   return getPostsFromPath(postsPath);
 }
 
-module.exports =  { getPosts: getPosts, getPostsFromPath };
+module.exports =  { getPosts, getPostsFromPath, sortPosts };
