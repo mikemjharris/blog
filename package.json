@@ -26,7 +26,7 @@
     "static-favicon": "~1.0.0"
   },
   "devDependencies": {
-    "express-handlebars": "^1.2.2",
+    "express-handlebars": "^3.0.0",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-concat": "^2.5.2",
@@ -34,7 +34,7 @@
     "gulp-handlebars": "^5.0.0",
     "gulp-sass": "^2.1.1",
     "gulp-wrap": "^0.11.0",
-    "handlebars": "^3.0.0",
+    "handlebars": "^4.0.0",
     "merge-stream": "^0.1.7",
     "node-sass": "^2.0.1",
     "nodemon": "^1.17.5",
