@@ -3,10 +3,9 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const fs = require('fs');
 const moment = require('moment');
 const compression = require('compression')
-
+const postHelpers = require('./helpers/source-content');
 const handlebars = require('handlebars');
 
 const app = express();
@@ -14,31 +13,9 @@ app.use(compression())
 
 const exphbs  = require('express-handlebars');
 
-const regex = /\<\!\-\-\smeta-data\s([A-z]+)\:\s(.+?(?=-->))/g;
 
-let posts = [];
-
-fs.readdir('./server/content/posts', (err, files) => {
-  files.forEach((file) => {
-    if (file.match(/.html$/)) {
-      let post ={};
-      post.template = file;
-      fs.readFile('./server/content/posts/' + file, (err, data) => {
-
-        let str = data.toString('utf8');
-        let match;
-
-        post.body = str;
-        post.searchtitle = file;
-        while ( match = regex.exec(str) ) {
-          post[ match[ 1 ].trim() ] = match [ 2 ].trim();
-        }
-        posts.push(post);
-        posts = sortPosts(posts);
-      });
-    }
-  });
-});
+const postsPath = './server/content/posts/';
+const posts = postHelpers.getPosts(postsPath);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -97,10 +74,3 @@ app.set('port', process.env.PORT || 8000);
 var server = app.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + server.address().port);
 });
-
-// helper functions
-function sortPosts( posts ) {
-  return posts.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date);
-  });
-}
