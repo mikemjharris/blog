@@ -7,6 +7,8 @@ const moment = require('moment');
 const compression = require('compression')
 const postHelpers = require('./helpers/source-content');
 const handlebars = require('handlebars');
+const graphqlHTTP = require('express-graphql');
+const { buildSchema, GraphQLObjectType, GraphQLString, GraphQLDateTime } = require('graphql');
 
 const app = express();
 app.use(compression())
@@ -16,6 +18,8 @@ const exphbs  = require('express-handlebars');
 
 const postsPath = './server/content/posts/';
 const posts = postHelpers.getPosts(postsPath);
+
+const getPosts = () => { return posts; };
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +41,38 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
+
+const schema = buildSchema(`
+    type Query {
+      posts: [Post]
+    },
+    type Post {
+      title: String,
+      searchtitle: String,
+      date: String
+      intro: String,
+      author: String,
+      category: String
+      }
+  `);
+
+const postType = new GraphQLObjectType({
+    name: 'post',
+      fields: () => ({
+        title: { type: GraphQLString },
+        date: { type: GraphQLDateTime }
+      })
+});
+
+const root = {
+  posts: getPosts,
+};
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+}));
 
 require('./routes/main')(app, posts);
 
