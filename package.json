@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./server/server.js",
-    "devserver": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html",
+    "devserver": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html,js",
     "test": "jest test",
     "test-coverage": "jest test --coverage"
   },
