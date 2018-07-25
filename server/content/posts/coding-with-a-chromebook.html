@@ -1,0 +1,44 @@
+<!-- meta-data title: Coding with a chromebook -->
+<!-- meta-data searchtitle:  coding-with-a-chromebook -->
+<!-- meta-data date: 25 Jul 2018 -->
+<!-- meta-data intro: Day to day coding with a small lightweight chromebook -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+Chromebooks are small, light and cheap.  I wanted to see if they would be up to the challenge of becoming my day to day computer. Here's my Asus flip I've been experimenting on pictured at a conference. Would it be up to the task? 
+</p>
+<img src="/images/chromebook-in-action.jpg" />
+<h3>What I want for my personal computer</h3>
+
+<p>
+I'm often out and about round town or travelling and wanted a computer that was easy to carry and not too expensive. Chromebooks fitted under these criteria - after a bunch of research I decided to try out the <a href="https://www.amazon.co.uk/ASUS-C101PA-FS002-10-1-inch-Touchscreen-Chromebook/dp/B073R9CXM2/ref=sr_1_4?ie=UTF8&qid=1532376208&sr=8-4&keywords=asus+flip" target="_blank">11 inch Asus chromebook flip</a>. It cost a fraction of the price of a mac but still looks good. It comes with chrome OS which gives a seamless web experience. My task was to see if it would be possible to use it to code on. 
+</p>
+<h3>Cloud to the rescue</h3>
+<p> 
+In a <a href="https://blog.mikemjharris.com/posts/computing-in-the-cloud" target="_blank">previous post</a> I wrote about how I had started using AWS EC2 to code on. All I needed was a way of linking up my chromebook to one of those instances to harness as much computer power as possible. You can use a web based browser such as Amazon's cloud 9 - however I find that quite different from the way I work day to day. In that previous post I'd used mosh to connect to the server and work over the command line.  There is a Mosh application on chrome OS and within a short time I had a command line interface to the cloud.  I was in business!
+</p>
+<h3>Working offline</h3>
+<p>
+While chromebooks are meant to be used online most of the time there is plenty of offline functionality.  Google docs has an offline capacity. But what happens if I wanted to code offline? <a href="https://github.com/dnschneid/crouton" target="_blank">Crouton</a> to the rescue!  - this allows you to run linux in parralel with chrome OS. An afternoon of going through the docs and I was up and running code locally.  For any serious programming the chromebooks is underpowered but for most of my side projects or for running unit tests on larger projects it works fine. In fact I'm sat at the airport right now writing this post.
+</p>
+<h3>Crouton the saviour</h3>
+<p>
+Indeed with crouton I had a proper CLI - I found the mosh application wasn't as smooth as I wanted (slightly clunky interface for multiple hosts / keys) so transferred to using ssh from crouton to access the cloud.  A word of warning crouton is unsecure locally - read the docs for more info. One other downside is you cant run docker. In the future the <a href="https://chromeunboxed.com/news/linux-apps-crostini-enabled-on-more-chromebooks" target="_blank">crostini project</a> will allow Linux apps to be run from chrome OS which should solve these issues. Will try it out what I can. 
+</p>
+
+<h3>What about apple?</h3>
+<p>
+I love my 13inch macbook air and have enjoyed macbook pros and macbooks.  But all of them have felt heavy and I find that all of them are a struggle to type on an economy table on an aeroplane. In addition I am concious they are expensive - while I don't want to lose anything a chromebook is a less desirable piece of gear to pinch and cheaper to replace. I thought about a macbook air 11 inch but wanted to try a different ecosystem at a lower price.
+<p>
+As a size comparison here's a pic of chromebook vs 13inch macbook air along with large and small books. With a descrete over the shoulder bag I can snugly fit chromebook plus a real book with ease and get about town with no issues. 
+</p>
+<img src="/images/asus-flip-comparison.jpg" />
+
+<h3>Chromebook convert</h3>
+<p>
+I've switched to my chromebook for any of my personal projects - whether that's sitting on the sofa, around town or travelling. I'm a heavy google user and enjoy the way everything integrates smoothly. There are plenty of chrome apps available too. In addition a light external battery pack which you can see in the first pic of thie piece means that I can go multiple days use without having to find a power outlet.
+</p>
+<p>
+There is a learning curve - slightly different keyboard layout and shortcuts and a bit of work if you want to setup crouton - but once up and running it's a great experience browsing the web and a viable tool to code.  Overall a succesful experiment! 
+</p>
