@@ -6,17 +6,17 @@
 <!-- meta-data category: tech  -->
 
 <p>
-  In 2012 I started using a kindle and loved the ease and portability.  The quality and quantity of my reading increased but I missed being able to glance at shelf of titles and recall the pleasure of reading them. I started noting down the books I've read in google sheets and have always wanted to build a little project around that data. I use side projects as a chance to learn new technologies and pick up new skills - in this case I wanted to try out GraphQL. 
+  In 2012 I started using a kindle and loved it's ease and portability.  The quality and quantity of my reading increased but I missed being able to glance at shelf of titles and recall the pleasure of reading them. I started noting down the books I read in Google sheets and have always wanted to build a little project around that data. I use side projects as a chance to learn new technologies and pick up new skills - in this case I wanted to try out GraphQL. 
 </p>
 
-<h4>Me, reading and this blog</h4>
+<h4>Me, Reading and this Blog</h4>
 <p>
-  The list of books in google sheets has been incredibly helpful not only in helping me remember what I've read but also to help me analyse and expand the range of literature I consume. In a couple of previous posts in this blog I've written in more detail about what I've been trying to achieve: <a href="/posts/book-balance" target="_blank">book balance</a> and <a href="/posts/accidental-sexist" target="_blank">accidental sexist</a>. 
+  The list of books in Google sheets has been incredibly useful not only in helping me remember what I've read but also to help me analyse and expand the range of literature I consume. In a couple of previous posts in this blog I've written in more detail about what I've been trying to achieve: <a href="/posts/book-balance" target="_blank">book balance</a> and <a href="/posts/accidental-sexist" target="_blank">accidental sexist</a>. 
 </p>
 
-<h4>Books project</h4>
+<h4>Books Project</h4>
 <p>
-  The first part of the book project was to work out how to get the data from google sheets into a server and expose that via an API.  From there I could use the data to build out a little site showing the books I've read and any interesting analytics - such as the gender split of the authors. I've heard a whole bunch about GraphQL via blogs and twitter - and especially Henrik Jorteg.  Tweets such as the following suggested I could get started with a familiar data set and server setup and hopefully have a little go at using GrapQL.
+  The first part of ths project was to work out how to get the data from Google sheets into a server and expose that via an API.  From there I could use the data to build out a little site showing the books I've read and any interesting analytics. I've heard a whole bunch about GraphQL via blogs and twitter - and especially Henrik Jorteg.  Tweets such as the following suggested I could get started with a familiar data set and server setup and have a little go at using GrapQL.
 </p>
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">It&#39;s surprising how many think you need Relay or a graph-like data structure to benefit from GraphQL.<br><br>As a first step you
@@ -26,21 +26,21 @@
 
 <h4>What is GraphQL?</h4>
 <p>
-  My take on <a href="https://GraphQL.org/" target="_blank">GraphQL</a> - it allows you to determine on the front end of your app what data you want. It reduces the amount of backend work and means you can have efficient calls for the right amount of data.  There will be a couple of examples at the end of this usign the book project I've setup.
+  My take on <a href="https://GraphQL.org/" target="_blank">GraphQL</a> - it allows you to determine on the front end of your app what data you want. It reduces the amount of backend work and means you can have efficient calls for the right amount of data.  There will be a couple of examples at the end of this using the book project I've setup.
 </p>
 
 <h4>Getting data from Google Sheets</h4>
 <p>
-Google sheets help run my life! From holidays, expenses through to over 11 years of exercise data they are a great, easy to use and accessible tool.  I still wanted to use sheets to update my books but just wanted to be able to get that data out into an app.  From sheets the File -> Publish To The Web option fitted into what I did. I made a consolidate page available to the public in CSV form which you can see <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSnuIE5i7X7VhTsbCcyQtLJeBkFpBiF1CMvRtv9Ze8NOMdnFXQZC1JHE40qGo83rkhsAw6CQVhZvqRW/pub?gid=50513809&single=true&output=csv" target="_blank">here</a>. 
+Google sheets help run my life! From holidays, expenses through to over 11 years of exercise data they are a great, easy to use and accessible tool.  I still wanted to use sheets to update my books but just wanted to be able to get that data out into an app.  From sheets the File -> Publish To The Web option fitted into what I wanted. I made a consolidate page available to the public in CSV form which you can see <a href="https://docs.Google.com/spreadsheets/d/e/2PACX-1vSnuIE5i7X7VhTsbCcyQtLJeBkFpBiF1CMvRtv9Ze8NOMdnFXQZC1JHE40qGo83rkhsAw6CQVhZvqRW/pub?gid=50513809&single=true&output=csv" target="_blank">here</a>. 
 </p>
 
 <h4>Using GraphQL</h4>
 <p>
-Knowing I could access the data I set about having a go at GraphQL. I forked my node based <a href="https://github.com/mikemjharris/seed-project" target="_blank">seed project</a> and following the instructions  on the <a href="https://GraphQL.org/">GraphQL</a> page I'd produced <a href="https://github.com/mikemjharris/books/commit/ffd3b05047d3441d6c3c7070d560810c1fc5a10c" target="_blank">this bit of code</a> which as an initial test version worked.  
+Knowing I could access the data I set about having a go at GraphQL. I forked my node based <a href="https://github.com/mikemjharris/seed-project" target="_blank">seed project</a> and following the instructions  on the <a href="https://GraphQL.org/">GraphQL</a> page I produced an <a href="https://github.com/mikemjharris/books/commit/ffd3b05047d3441d6c3c7070d560810c1fc5a10c" target="_blank">initial test</a> setup.  
 </p>
 
 <p>
-The next step was to call off to google sheets, run the CSV through a converter to JSON and update the GraphQL schema to reflect a few additional data fields. You can see the results at the GraphQL endpoint on the <a href="https://books.mikemjharris.com/GraphQL?query=%7B%0A%20%20books%20%7B%0A%20%20%20%20title%0A%20%20%20%20author%0A%20%20%20%20gender%0A%20%20%20%20year%0A%20%20%20%20month%0A%20%20%7D%0A%7D">live app here</a>.  Click the button that looks like a play button and you'll get back the full list of books!
+The next step was to call off to Google sheets, run the CSV through a converter to JSON and update the GraphQL schema to reflect a few additional data fields. You can see the results at the GraphQL endpoint on the <a href="https://books.mikemjharris.com/GraphQL?query=%7B%0A%20%20books%20%7B%0A%20%20%20%20title%0A%20%20%20%20author%0A%20%20%20%20gender%0A%20%20%20%20year%0A%20%20%20%20month%0A%20%20%7D%0A%7D" target="_blank">live app here</a>.  Click the button that looks like a play button and you'll get back the full list of books!
 </p>
 
 <p>
@@ -49,5 +49,5 @@ In this example you get back all the fields but you can update the query to only
 
 <h4>Conclusion</h4>
 <p>
-Things worked as I wanted! Book data available for a node server to pick up, transform into JSON and expose via a GraphQL endpoint.  A nice fairly straightforward set of data to dip my toes into the GraphQL landscape. This post is fairly concise - as always the reality of side projects is that they happen over time whenever they can be squeezed in.  A number of times over the past few months I'd had aborted attempts to try out GraphQL both in this blog and elsewhere.  The final books project was easier to make having learnt from the earlier attempts.  You can see the final project at <a href="https://books.mikemjharris.com/">https://books.mikemjharris.com/</a> - watch out for a second part to this blog where I build out a better front end. Hoping to use that opportunity to try out Vue. Let's see how it goes.
+Things worked as I wanted! Book data available for a node server to pick up, transform into JSON and expose via a GraphQL endpoint.  A fairly straightforward set of data to dip my toes into the GraphQL landscape and give me the confidence to experiment in a more complex scenario. You can see the final project at <a href="https://books.mikemjharris.com/">https://books.mikemjharris.com/</a> and the code for it is on <a href="https://github.com/mikemjharris/books" target="_blank">github</a> - watch out for a second part to this blog where I build out a better front end. Hoping to use that opportunity to try out Vue. Let's see how it goes.
 </p> 
