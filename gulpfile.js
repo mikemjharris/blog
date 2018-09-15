@@ -13,7 +13,9 @@ gulp.task('templates', function() {
   // Assume all partials start with an underscore
   // You could also put them in a folder such as source/templates/partials/*.hbs
   var partials = gulp.src(['server/views/templates/partials/*.hbs'])
-    .pipe(handlebars())
+    .pipe(handlebars({
+      handlebars: require('handlebars')
+    }))
     .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));', {}, {
       imports: {
         processPartialName: function(fileName) {
