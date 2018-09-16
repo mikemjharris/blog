@@ -1,7 +1,7 @@
 <!-- meta-data title: Books Project - Part 1 -->
 <!-- meta-data date: 16 Sep 2018  -->
-<!-- meta-data searchtitle: books-list -->
-<!-- meta-data intro: Experimenting with GraphQL to expose my reading list -->
+<!-- meta-data searchtitle: books-project-pt1 -->
+<!-- meta-data intro: Experimenting with GraphQL to list the books I've read. -->
 <!-- meta-data author: mikemjharris  -->
 <!-- meta-data category: tech  -->
 
@@ -11,7 +11,7 @@
 
 <h4>Me, Reading and this Blog</h4>
 <p>
-  The list of books in Google sheets has been incredibly useful not only in helping me remember what I've read but also to help me analyse and expand the range of literature I consume. In a couple of previous posts in this blog I've written in more detail about what I've been trying to achieve: <a href="/posts/book-balance" target="_blank">book balance</a> and <a href="/posts/accidental-sexist" target="_blank">accidental sexist</a>. 
+  The list of books in Google sheets has been incredibly useful not only in helping me remember what I've read but also to help me analyse and expand the range of literature I consume. In a couple of previous posts in this blog I've written in more detail about what I've been trying to achieve: <a href="/posts/book-balance" target="_blank">book balance</a> and <a href="/posts/accidental-sexist" target="_blank">accidental sexist</a>. I wanted to be able to use this project to make public not only the list of books but this breakdown of the authors and more.
 </p>
 
 <h4>Books Project</h4>
@@ -29,18 +29,18 @@
   My take on <a href="https://GraphQL.org/" target="_blank">GraphQL</a> - it allows you to determine on the front end of your app what data you want. It reduces the amount of backend work and means you can have efficient calls for the right amount of data.  There will be a couple of examples at the end of this using the book project I've setup.
 </p>
 
-<h4>Getting data from Google Sheets</h4>
-<p>
-Google sheets help run my life! From holidays, expenses through to over 11 years of exercise data they are a great, easy to use and accessible tool.  I still wanted to use sheets to update my books but just wanted to be able to get that data out into an app.  From sheets the File -> Publish To The Web option fitted into what I wanted. I made a consolidate page available to the public in CSV form which you can see <a href="https://docs.Google.com/spreadsheets/d/e/2PACX-1vSnuIE5i7X7VhTsbCcyQtLJeBkFpBiF1CMvRtv9Ze8NOMdnFXQZC1JHE40qGo83rkhsAw6CQVhZvqRW/pub?gid=50513809&single=true&output=csv" target="_blank">here</a>. 
-</p>
-
 <h4>Using GraphQL</h4>
 <p>
-Knowing I could access the data I set about having a go at GraphQL. I forked my node based <a href="https://github.com/mikemjharris/seed-project" target="_blank">seed project</a> and following the instructions  on the <a href="https://GraphQL.org/">GraphQL</a> page I produced an <a href="https://github.com/mikemjharris/books/commit/ffd3b05047d3441d6c3c7070d560810c1fc5a10c" target="_blank">initial test</a> setup.  
+ To start I forked my node based <a href="https://github.com/mikemjharris/seed-project" target="_blank">seed project</a> and following the instructions  on the <a href="https://GraphQL.org/">GraphQL</a> page I produced an <a href="https://github.com/mikemjharris/books/commit/ffd3b05047d3441d6c3c7070d560810c1fc5a10c" target="_blank">initial test</a> setup. The next step was to get the data from google sheets and setup a more suitable scheam.
+
+<h4>Getting data from Google Sheets</h4>
+<p>
+ Google sheets help run my life! From holidays, expenses through to over 11 years of exercise data they are a great, easy to use and accessible tool.  I still wanted to use sheets to update my books but just wanted to be able to get that data out into an app.  From sheets the File -> Publish To The Web option fitted into what I wanted. I made a consolidate page available to the public in CSV form which you can see <a href="https://docs.Google.com/spreadsheets/d/e/2PACX-1vSnuIE5i7X7VhTsbCcyQtLJeBkFpBiF1CMvRtv9Ze8NOMdnFXQZC1JHE40qGo83rkhsAw6CQVhZvqRW/pub?gid=50513809&single=true&output=csv" target="_blank">here</a>. 
 </p>
 
+<h4>Plugging it all together</h4>
 <p>
-The next step was to call off to Google sheets, run the CSV through a converter to JSON and update the GraphQL schema to reflect a few additional data fields. You can see the results at the GraphQL endpoint on the <a href="https://books.mikemjharris.com/GraphQL?query=%7B%0A%20%20books%20%7B%0A%20%20%20%20title%0A%20%20%20%20author%0A%20%20%20%20gender%0A%20%20%20%20year%0A%20%20%20%20month%0A%20%20%7D%0A%7D" target="_blank">live app here</a>.  Click the button that looks like a play button and you'll get back the full list of books!
+ In my app I called off to google sheets, ran the CSV through a converter to JSON and update the GraphQL schema to reflect a few additional data fields. You can see the results at the GraphQL endpoint on the <a href="https://books.mikemjharris.com/GraphQL?query=%7B%0A%20%20books%20%7B%0A%20%20%20%20title%0A%20%20%20%20author%0A%20%20%20%20gender%0A%20%20%20%20year%0A%20%20%20%20month%0A%20%20%7D%0A%7D" target="_blank">live app here</a>.  Click the button that looks like a play button and you'll get back the full list of books!
 </p>
 
 <p>
