@@ -1,0 +1,53 @@
+<!-- meta-data title: More Book Balance -->
+<!-- meta-data searchtitle: more-book-balance  -->
+<!-- meta-data date: 21 Oct 2018 -->
+<!-- meta-data intro: More articles that have changed the way I read -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: thoughts -->
+<p>
+A previous article in The Guardian had a big influence on my reading habits - alerting me to the white male make up of the authors I was reading and encouraged me to expand the types of books I read.  I've written a number of blog posts about how I've done over the years (<a href="/accidental-sexist" target="_blank">accidental sexist</a> and <a href="book-balance" target="_blank">Book Balance</a>)
+</p>
+
+<h4>Still relevant</h4>
+<p>
+With the #MeToo movement this look at imbalance in the world of literature is as relevant as ever.  I read another excellent Guardian article <a href="https://www.theguardian.com/world/2018/oct/02/how-to-be-good-man-me-too-month-reading-feminist-classics">How to be a good man</a>. Read the article for full details - this sentence sums up what the author was looking to do: " I wanted to to sit down and read about women’s experiences, to stay silent for a while, and hopefully learn something."
+</p>
+
+<p>
+  The article provided a list of 13 books to read - only one of which I've read. The books have been added purchased from Amazon and added to my reading list.
+</p>
+
+<h4>Book project</h4>
+<p>
+I'm building an webapp to list out the books I've read.  I wrote about that in a previous post <a href="book-project-pt1">Book Project - Part 1</a> and you can see the project at <a href="https://books.mikemjharris.com">books.mikemjharris.com</a>
+<p>
+
+<h4>Tips</h4>
+<p>
+Would love your tips on non white authors to read.  Am aware that I've written mostly about reading more female authors but I am trying to cast my net wider.  Recent issues such as having <a href="https://www.theguardian.com/books/2017/feb/16/all-white-carnegie-medal-longlist-anger-childrens-authors-philip-pullman">all white nominees</a> for the Carnegie medal longlist have encouraged me to research and read more BAME authors too. Recommendations please!
+</a>
+</p>
+
+
+
+  <a href="https://github.com/mikemjharris/config">My config is up on github</a> and is installable from the command line using curl. Simple and easy to get up and running anywhere.
+</p>
+
+<h4>What is configured.</h4>
+
+<p> 
+  The main change for me over the past year has been to operate increasingly in vim (having used vim bindings in Intellij and Sublime for a while). Vim is especially handy to get to grips with when dealing with remote servers. Vim out of the box is good but getting it to work even better takes  
+</p>
+
+<p>
+  The other tool that I have been using is tmux.  Initially the main benefit of tmux was that I could run a process from inside a tmux session so that when I closed the ssh session to the box the process would remain running.  From starting off using it as a necessity I have started using it in my day to day workflow to allow me to have multiple tabs open in one screen and to have set projects or folders always open together.  I find it especially useful in that when I log onto a box there are clearly labeled sessions with the appropriate file and folders open that I usually tweak so find it easy to get back in the flow of a project.
+</p>
+
+<h4>Aliasing</h4>
+<p>
+  Finally command line aliases speed up my day today work.  The three I use most are <code>hg</code>.  This stands for <code>history | grep</code>  which gives me a nudge on when I have used something previously.  The other two go hand in hand: <code>gb</code> and <code>gcb</code>.  The first <a href="https://github.com/mikemjharris/config/blob/master/bin/latest-branches.sh"> runs a script</a> that lists all the local branches in a current repo in the order they were last checked out.  This is a huge help - I am often swapping between a number of branches when working on stories, code reviewing others code as well as running release processes.  I can remember what I was working on but can't remember the exact branch name.  Listing the top 15 in order allows me to easily spot the one I was working on. There is a number alongside the list of branches and I can run <code>gcb $number</code> to checkout that branch! Super userful and helpful and helps speed up my development process.
+</p>
+
+<h4>Summary</h4>
+<p>
+  Having a centralised config has been super helpful.  For my main setup instead of running the install command I symlink to the appropriate file so that I always update the central repo whenever I add some config.  On my todo list is an easy way for other boxes to automatically check for updates and pull in the changes.  Having a roughly unified experience wherever I am has been a huge help. I'll be looking to add more config and other applications to the repo.  The other area I want to tackle is the tech and applications I install on a new laptop (brew, ruby, node etc.) Watch this space...
