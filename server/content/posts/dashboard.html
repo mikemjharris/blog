@@ -1,0 +1,60 @@
+<!-- meta-data title: Dashboard -->
+<!-- meta-data searchtitle: dashboard  -->
+<!-- meta-data date: 18 Nov 2018 -->
+<!-- meta-data intro: Monitoring the status of my personal projects -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+  With a number of personal projects up and running in different places I wanted a central place where I could see the current status of my different sites as well as some info around what was deployed and when.  For this project I got to try out some new tech - some serverless technology on the infrastructure side and Vue Js framework on the front end.
+</p>
+
+
+<h3>Version.json</h3>
+<p>
+  The info I want for each project is whether it is up and working, the branch that is deployed, the last commit and the date of the last deploy.  For each of my projects I build this data as part of the deployment process into a version.json file. Here's the script that builds that data for this blog(https://github.com/mikemjharris/infrastructure/blob/master/deployment/version-blog.sh) and here's an example of what the version.json looks like.
+</p>
+<div class="code">
+  {
+  "commit": "1afcfb6d6fb110597eb220c6d8f0ca6da087bf89",
+  "branch": "master",
+  "deploy_date": "2018-10-23_20-06-59"
+  }
+</div>
+<h3>Lovely Lambda</h3>
+<p>
+  With the data setup for each project I needed to work out how I'd collect that data. I wanted to learn a bit more about some of the serverless tools available so opted to try and implement something using the AWS stack.  Speicifally I wanted a lambda function to calll off to all my projects and get the data. Javascript is my goto language and is supported by lambda.  Initally I setup a local node proejct that returned the
+
+
+  Usually I work locally on a Mac and as such all my setup scripts utilise the brew package manager. I'd opted for an Ubuntu box so manually went through the various dependencies in my script and installed the equivallent debian package using apt.  I took notes and converted these into a linux based setup script so I coulda automatically repeat the process in the future. <a href="https://github.com/mikemjharris/config/blob/master/bin/install-linux.sh" target="_blank">You can checkout it out on github</a>. Other config such as tmux and vim dot files worked from the off - all of which are in that same repo.
+<h3>Laggy ssh</h3>
+<p>
+  Once setup I could start coding - I generally code in the terminal so just having to ssh connection to the server is all I need. There are web based ides such as Amazon's cloud 9 if you prefer. Using ssh is ok but any slowness or interruption in the connection caused input to be laggy - fine if you're just doing a few things remotely but annoying if you're trying to code for an extended period of time.  On the recommendation of a friend at our weekly techrunners group I tried out <a href="
+https://mosh.org/" target="_blank">mosh</a>. This uses UDP to communicate and has a whole bunch of awesome features including being able to reconnect automatically and optomistic UI.  Once using mosh I couldn't tell any difference between my local terminal and the remote. I even experimented on a 3g phone connection and it worked seamlessly!  It was so smooth I had to update the look of my remote terminal so I knew I was working in the cloud.
+<p>
+
+<h3>Saving Money with AWS lambda</h3>
+<p>
+  Cloud computers aren't free. An m4.xlarge - 4cpus/16gb ram costs $170 a month. I work hard but I don't work 24h a day.  In AWS if you stop an instance you don't get charged - I calculated 8hrs of coding a day would end up costing ~$50. In addition I am often in meetings or 1-1s so anticiapted it would be even less than that.  I installed the aws cli and made sure I shut down the box whenver I was going to be away from my desk. At the end of the day though it can be easy to forget as the lure of heading home beckons. To make ensure the instance was stopped I followed <a href="https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/" target="_blank">this tutuorial</a> and set up an AWS lambda function to flick the off switch at 5.45pm and 11pm. The first encourages me to make sure I leave work on time, the second if I've needed to do some evening work forces me to shut down and head to bed.
+</p>
+<p>
+  Here's my usage over the first month of working in the cloud. It also allows me to see how much coding I am doing vs other responsibilities. The usuage for a month cost me around $25 for 100h.
+</p>
+<img src="/images/aws-usage.png" />
+
+<h3>Automating setup</h3>
+<p>
+  Turning the dev environment off regularly meant turning it on regularly and getting up to speed.  Starting an ec2 box takes around a minute. Then it's a case of getting my dev environemt up to running. I've written about my setup and keyboard skills <a href="/posts/me-and-my-keyboard" target="_blank">in this post</a> and <a href="https://github.com/mikemjharris/config/blob/master/conf/tmux/ra-full-session">have config</a> which automatically sets up a tmux session with multiple windows and panes running vim, mysql console and all the services I need. This takes around 30s. So from a standing start I'm up and productive in less than 2 mins - enought time to grab a tea or re-read the jira ticket I'm working on.
+</p>
+
+<h3>Conclusion</h3>
+<p>
+  While I'm happy deploying code on the cloud, I wasn't sure that coding remotely would be a seamless experience. Using the excellent mosh and harnessing the power of AWS I had a super powerful setup that I can run from anywhere whilst limiting costs through AWS lambda functions. There are other benefits such as being able to share 'local' work with anyone and being able to log on to the same environment from any computer which I'll touch on in a future post. The tools I use day to day were well suited to the shift to remote coding. I've learnt a whole load more about AWS and enjoyed the challenge of trying to solve the issue of a waterlogged laptop that had been entirely my own fault.
+</p>
+
+<div class="appendix">
+<h3>Appendix</h3>
+<p>
+  This was a quick run through - there are number of details I haven't mentioned along the way such as setting static ips, security groups and opening up certain ports.  If you are attempting to implement the same you will find the AWS docs combined with some light googling will get you there - happy to answer any queries if you're stuck. A big thanks to various people over the past few years who I've discussed remote coding in the cloud with and whose tips helped make my progress smoother.
+ </p>
+</div>
