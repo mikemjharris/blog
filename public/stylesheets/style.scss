@@ -57,7 +57,7 @@ hr {
   border-top: 1px solid $border-left-col;
 }
 
-code {
+.code {
   background: #eee;
   padding: 1px 5px 2px;
   margin: 0 1px;
@@ -152,7 +152,7 @@ article {
 
   ul {
     margin-bottom: 1em;
-    &.with-bullets { 
+    &.with-bullets {
       list-style: disc;
       margin-left: 1em;
       li {
