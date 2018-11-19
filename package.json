@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./server/server.js",
-    "devserver": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html",
+    "dev-server": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html",
     "fe-build": "./node_modules/gulp/bin/gulp.js",
+    "fe-dev": "./node_modules/gulp/bin/gulp.js watch",
     "test": "jest test",
-    "test-coverage": "jest test --coverage"
-  },
+    "test-coverage": "jest test --coverage",
+    "start-dev": "concurrently \"npm:dev-server\" \"npm:fe-dev\""
+},
   "dependencies": {
     "body-parser": "^1.18.3",
     "compression": "^1.7.0",
