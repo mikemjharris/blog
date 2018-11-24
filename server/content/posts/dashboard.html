@@ -1,0 +1,62 @@
+<!-- meta-data title: Dashboard -->
+<!-- meta-data searchtitle: dashboard  -->
+<!-- meta-data date: 23 Nov 2018 -->
+<!-- meta-data intro: Monitoring the status of my personal projects -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+  With a number of personal projects up and running in different places I wanted a dashboard where I could see the current status of my different sites as well as some info around what was deployed and when.  In building my own dashboard I got to try out some new tech - some serverless technology on the infrastructure side and Vue Js framework and CSS grid on the front end.
+</p>
+
+
+<h3>Version.json</h3>
+<p>
+For each of my projects there's a script that adds build data to a version.json file in the public folder. <a href="https://github.com/mikemjharris/infrastructure/blob/master/deployment/version-blog.sh" target="_blank">Here's the script</a> that builds that data for this blog and here's an example of what the <a href="https://blog.mikemjharris.com/version.json" target="_blank">version.json</a> looks like:
+</p>
+<div class="code">
+  {<br />
+  &nbsp&nbsp&nbsp&nbsp"commit": "1afcfb6d6fb110597eb220c6d8f0ca6da087bf89",<br />
+  &nbsp&nbsp&nbsp&nbsp"branch": "master",<br />
+  &nbsp&nbsp&nbsp&nbsp"deploy_date": "2018-10-23_20-06-59"<br />
+  }
+</div>
+<h3>Lovely Lambda</h3>
+<p>
+For the dashboard I needed to needed to work out how I'd collect that data. I wanted to learn a bit more about some of the serverless technology available. I opted to use an AWS lambda function to call off to all my projects and get the data. Javascript is my go to language and is supported by lambda.  Initially I setup a local node project that returned the relevant info by making a series of calls to the various projects. Now how to run that in the cloud? AWS docs are very wide ranging and once you find the relevant part very helpful.  For lambda I followed <a href="https://docs.aws.amazon.com/lambda/latest/dg/get-started-create-function.html">these docs</a> which along with a helpful and informative UI I was able to import my code as a lambda function.
+</p>
+<h3>Serverless server</h3>
+<p>
+With the lambda function set up I wanted to be able to trigger it and access the data.  The plan was to have an endpoint where I could call to get the data and expose it on the front of my project.  This setup feels very much like what you use a server to do - but how to do the same using serverless?  AWS provide an API Gateway which acts like a normal API - there's wan endpoint you can call, this in turn triggers your lambda function and returns the data. All the functionality of an always listening server but only triggered on demand. Again I used a combo of <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-lambda-non-proxy-integration.html" target="_blank">AWS docs</a> and the UI to get an API Gateway setup with the lambda function. Here's the <a href="https://sasptp6a7h.execute-api.eu-west-1.amazonaws.com/default/nodeServerStatus" target="_blank">resulting endpoint</a> returning the status of my various projects.
+</p>
+
+<h3>Vue and CSS grid</h3>
+<p>
+To display the data on the front end I decided to use <a href="https://vuejs.org/" target="_blank">VueJs</a>  and use css grid for the layout. Both of which were new to me! The Vue docs were super helpful and for this fairly basic app I ended up with this <a href="https://github.com/mikemjharris/dashboard/blob/4e0ebecd779e78b084df73850355283fd4ad3748/src/index.js#L1-L21">js code</a> and this <a href="https://github.com/mikemjharris/dashboard/blob/4e0ebecd779e78b084df73850355283fd4ad3748/server/views/index.html#L21-L32" target="_blank">html template</a>.  CSS Tricks is my usual go to for instructions on latest CSS properties - here's their instructions on how to <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">use CSS grid</a>.
+
+<p>
+In keeping with the rest of the project I decided to host the front end on amazon - creating an website enabled s3 bucket. For the project url to look like one of my projects I setup a proxy for the s3 bucket in the nginx server I use for my main website - <a href="https://github.com/mikemjharris/infrastructure/blob/732cb11d56d5c5ba56b5ad5e8b9130d538064494/nginx-setup/nginx.conf#L64-L81" target="_blank">here's the config</a> for that.
+</p>
+
+<h3>Deployment</h3>
+<p>
+  There are various abstractions for deploying serverless code - however I wanted to try out using standard AWS cli. For the lambda function this requires zipping up the folder with the code in it and using the cli to upload to the cloud.  Similarly for the front end - I used webpack to package up the code and used the s3 cli to sync to the bucket.
+</p>
+
+<h3>Conclusion</h3>
+<p>Checkout the <a href="https://www.mikemjharris.com/dashboard">final dashboard here</a>.</p>
+<p>
+I got to try out some new tech, learnt a whole bunch of new things and got exactly what I wanted - a site with the status of my projects.  </p>
+
+<p>
+This post has been fairly minimal description of the steps I took. I found the docs for each of the projects pretty comprehensive and didn't feel I needed to add anything - I've linked to all the relevant sections but happy to help out if you are looking to do something similar and need any tips on how to piece together the pieces.
+</p>
+<p>
+  The combo of the API gateway and lambda to be an excellent replacement for a server.  Speed of response isn't necessary for this project - I'll probably be the only one checking it and don't mind waiting a few milliseconds for startup. I appreciate that keeping lambda's warm is a challenge but not one I needed to address here - something to dig into in the future!
+</p>
+
+
+
+
+
+
