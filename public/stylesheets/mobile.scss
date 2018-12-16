@@ -119,6 +119,10 @@ $body-font-size: 18px;
     }
 
       nav {
+        opacity: 0;
+        &.expand {
+          opacity: 1;
+        }
         z-index: 1;
         position: absolute;
         right: 0px;
