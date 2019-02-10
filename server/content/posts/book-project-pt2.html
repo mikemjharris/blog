@@ -29,6 +29,11 @@ In part 1 I suggested I'd try out Vue to build the front end.  In the meantime I
   Apart from the list of books (with funky rainbow colours) - I wanted to have a filter section so one can drill down to what I've read by year and gender. In addition I wanted to pull up stats per year and gender to give an broad overview. For both I setup a filter helper file where the same function is used for both purposes.  This isn't that efficient but for the data set I have there isn't a noticieable performance issue.  In future the filter helper code could be shared with the backend and the stats compiled and cached there to improve front end speed.
 </p>
 
+<h4>Search params</h4>
+<p>
+  When using filters I want the whole page to relect the current state of the data - if I share the URL I want the recipient to be able to see the same data. To achieve this I added filter params and added the previous view to the page history so you get a smooth web experience as you'd expect. If you want to share what I read in 2011 you can!
+</p>
+
 <h4>Conclusion</h4>
 <p>
 Having a two part series helped push me to write another post and to have something to build. The acutal project allowed me to showcase some of my React knowledge in a side project. There's a future post in my mind about how my personal coding differs from work.  Styled components worked really well and weren't that different from writing normal CSS.  The finished project does everything I wanted it to - pretty happy with the look and feel - apologies if the rainbow effect is a bit too much - it did allow me to play with more dynamic styles with was one of my aims.
