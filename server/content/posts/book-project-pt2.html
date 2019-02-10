@@ -6,37 +6,37 @@
 <!-- meta-data category: tech  -->
 
 <p>
-A few months ago i started a sideproject to showcase the books i've been reading. initially i wanted to play with graphql - i setup a backend to pull data from google sheets and expose that via a graphql endpoint. <a href="/posts/books-project-pt1" target="_blank">Books Project Part 1</a> out lines the process.
+A few months ago I started a side project to showcase the books I've been reading. <a href="/posts/books-project-pt1" target="_blank">Books Project Part 1</a> outlines the process where I setup a backend to pull data from google sheets and expose that via a GraphQL endpoint.
 </p>
 <p>
-In this second part I'll outline the steps taken in the second half of the project where I setup the front end which nicely shows the list of books and provides stats and filtering. You can see the final project at <a href="https://books.mikemjharris.com/">https://books.mikemjharris.com/</a> and the code for it is on <a href="https://github.com/mikemjharris/books" target="_blank">github</a>.
+In this second part I'll describe the second half of the project where I setup the front end. You can see the final project at <a href="https://books.mikemjharris.com/">books.mikemjharris.com</a> and the code for it is on <a href="https://github.com/mikemjharris/books" target="_blank">GitHub</a>.
 </p>
 
 <h4>Vue vs React</h4>
 
 <p>
-In part 1 I suggested I'd try out Vue to build the front end.  In the meantime I experiemented with that framework while building out my <a href="/posts/dashboard" target="_blank">dashboard</a> project. Whilst I've worked with React at work for around three years none of my personal projects have utilised it. I decided now was the time to use it.  In my side projects I can have a bit more fun and try out new things even with a familiar framework.
+In part 1 I suggested I'd try out Vue to build the front end.  In the meantime I experimented with that framework while building out my <a href="/posts/dashboard" target="_blank">dashboard</a> project. Whilst I've worked with React at work for around three years none of my personal projects have utilised it. In my side projects I can have a bit more fun and try out new things even with a familiar framework and in this case opted to use React.
 </p>
 
 <h4>Styled Components</h4>
 <p>
-  Another bit of tech that I wanted to experiment with  is styled components. Really enjoyed the using them in this project - they're still CSS and you still need to know how that works but you can manage your styles a bit differently. Used dynamic JS to create a colourful rainbow effect for the book layout.
+Another bit of tech that I wanted to experiment with  is <a href="https://www.styled-components.com/" target="_blank">styled components</a>. Really enjoyed the playing with them in this project - they're still CSS and you still need to know how that works but you can manage your styles a bit differently. Creating the colourful rainbow effect for the book layout worked out really easy to implement using a bit of JS with CSS.
 </p>
 
 
 <h4>Stats and filtering</h4>
 <p>
-  Apart from the list of books (with funky rainbow colours) - I wanted to have a filter section so one can drill down to what I've read by year and gender. In addition I wanted to pull up stats per year and gender to give an broad overview. For both I setup a filter helper file where the same function is used for both purposes.  This isn't that efficient but for the data set I have there isn't a noticieable performance issue.  In future the filter helper code could be shared with the backend and the stats compiled and cached there to improve front end speed.
+  Additional functionality I wanted was to be able to filter by year and gender  and also some stats over time. For both I setup a filter helper file where the same function is used for both purposes. This isn't that efficient but for the data set I have there isn't a noticeable performance issue.  In future the filter helper code could be shared with the backend and the stats compiled and cached there to improve frontend speed.
 </p>
 
-<h4>Search params</h4>
+<h4>Respecting the web</h4>
 <p>
-  When using filters I want the whole page to relect the current state of the data - if I share the URL I want the recipient to be able to see the same data. To achieve this I added filter params and added the previous view to the page history so you get a smooth web experience as you'd expect. If you want to share what I read in 2011 you can!
+  When using filters I want the whole page to reflect the current state of the data - if I share the URL I want the recipient to be able to see the same data. To achieve this I added filter params and added the previous view to the page history so you get a smooth web experience as you'd expect.
 </p>
 
 <h4>Conclusion</h4>
 <p>
-Having a two part series helped push me to write another post and to have something to build. The acutal project allowed me to showcase some of my React knowledge in a side project. There's a future post in my mind about how my personal coding differs from work.  Styled components worked really well and weren't that different from writing normal CSS.  The finished project does everything I wanted it to - pretty happy with the look and feel - apologies if the rainbow effect is a bit too much - it did allow me to play with more dynamic styles with was one of my aims.
+Having a two part series helped push me to write another post and to have something to build. The actual project allowed me to showcase some of my React knowledge. Styled components worked really well and weren't that different from writing normal CSS.  The finished project does everything I wanted it to - pretty happy with the look and feel - apologies if the rainbow effect is a bit too much - it did allow me to play with more dynamic styles wich was one of my aims.
 </p>
 
 
