@@ -1,0 +1,70 @@
+<!-- meta-data title: Infrastructure Update -->
+<!-- meta-data date: 17 Feb 2019  -->
+<!-- meta-data searchtitle: infrastructure-update -->
+<!-- meta-data intro: Moving my infrastructure into source control -->
+<!-- meta-data author: mikemjharris  -->
+<!-- meta-data category: tech  -->
+
+<p>
+  All of my side projects are hosted on a digital ocean droplet. The setup is broadly similar to when I first set it up back in 2015 and wrote about it in this post <a href="/posts/deploying-this-blog" target="_blank">post</a>. The main changes have been adding new projects and some new functionality around versioning as part of my dashboard project.  The main difference is that at the start it was a bunch of scripts and config on a server with now source control it is now a bunch of scripts and config in source control! That means I have a backup if everything gets lost, can track my changes and also the code and methods I use are public.
+</p>
+
+<h4>Infrastructure Repo</h4>
+<p>
+ All my infrasctucture scripts and config is public and you can see it on <a href="https://github.com/mikemjharris/infrastructure" target="_blank">GitHub</a>. It's still a bit ad hoc and is mainly the result of organic growth over time.  Often it's been easier to copy a script and find and replace a word rather than setup a more generic solution. It's on the list of things to do! There are three main parts to the repo as it currently stands and I'll briefly outline each part of the functionality.
+</p>
+
+<h4>Routing</h4>
+<p>
+  Most of my apps run in docker containers on different ports and I use Nginx to route between them.  I have various CNAMES pointing to the digital ocean droplet and nginx directs draffic to the relevant container. This used to be one big messy bit of config as part of the nginx.conf file that had evolved over time.  This has been recently been refactored to be multiple conf files that are symlinked to the sites-enabled folder from which nginx then uses to reference.
+</p>
+
+<h4>Scripts</h4>
+<p>
+  In the deployment folder there are a bunch of scripts. Anything starting with 'build' will build the relevant project (pull from git and build a docker container). The setup is pretty much the same for each with the only differences being the name and the port.  For the future this could be setup with one script and a config file which would make it marginally quickers to add new projects.
+</p>
+
+<p>
+  Scripts starting 'version' are used to create a hash in the public folder of a project before it is build with info around build time and commit hash.  This is consumed by th<a href="/posts/dashboard" target="_blank">dashboard</a> project (one of the few side projects not running in a docker container - this is an AWS lambda function and the nginx config routes to that
+</P>
+
+<p>
+  The other main script is the webhook server. This is a simple python http server that listens for webhooks from github which it uses to trigger builds (see more in the original <a href="/posts/deploying-this-blog" target="_blank">post</a>). There's a few other test scripts and experiments there too which aren't used.
+</p>
+
+<h4>Crontab</h4>
+<p>
+  The final section is a text file with the cron jobs I run.  This includes restarting all the docker containers and the webhook server on a reboot.  Also it includes a nightly job which scrapes images as part of my view from the ra project
+</p>
+
+<h4>Conclusion</h4>
+<p>
+  It's a relief to have all the config setup in source control.  There was always a worry that I'd have to start all over again if I lost access to my droplet for any reason or if I messed up the config and couldn't revert it. Am happy that what was some experimental playing around four years ago still works although the process of writing this post up makes me aware of areas that could be imrpoved.  The long term goal would be to have this all automated as part of ansible and terraform. But for now it all works and for a non essential side project that is only worked upon by me that is good enough.
+</p>
+
+
+In part 1 I suggested I'd try out Vue to build the front end.  In the meantime I experimented with that framework while building out my <a href="/posts/dashboard" target="_blank">dashboard</a> project. Whilst I've worked with React at work for around three years none of my personal projects have utilised it. In my side projects I can have a bit more fun and try out new things even with a familiar framework and in this case opted to use React.
+</p>
+
+<h4>Styled Components</h4>
+<p>
+Another bit of tech that I wanted to experiment with  is <a href="https://www.styled-components.com/" target="_blank">styled components</a>. Really enjoyed the playing with them in this project - they're still CSS and you still need to know how that works but you can manage your styles a bit differently. Creating the colourful rainbow effect for the book layout worked out really easy to implement using a bit of JS with CSS.
+</p>
+
+
+<h4>Stats and filtering</h4>
+<p>
+  Additional functionality I wanted was to be able to filter by year and gender  and also some stats over time. For both I setup a filter helper file where the same function is used for both purposes. This isn't that efficient but for the data set I have there isn't a noticeable performance issue.  In future the filter helper code could be shared with the backend and the stats compiled and cached there to improve frontend speed.
+</p>
+
+<h4>Respecting the web</h4>
+<p>
+  When using filters I want the whole page to reflect the current state of the data - if I share the URL I want the recipient to be able to see the same data. To achieve this I added filter params and added the previous view to the page history so you get a smooth web experience as you'd expect.
+</p>
+
+<h4>Conclusion</h4>
+<p>
+Having a two part series helped push me to write another post and to have something to build. The actual project allowed me to showcase some of my React knowledge. Styled components worked really well and weren't that different from writing normal CSS.  The finished project does everything I wanted it to - pretty happy with the look and feel - apologies if the rainbow effect is a bit too much - it did allow me to play with more dynamic styles wich was one of my aims.
+</p>
+
+
