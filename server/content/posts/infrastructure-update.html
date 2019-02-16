@@ -11,12 +11,12 @@
 
 <h4>Infrastructure Repo</h4>
 <p>
- You can see all my infrasctucture scripts and config on <a href="https://github.com/mikemjharris/infrastructure" target="_blank">GitHub</a>. It's still a bit ad hoc and is the result of organic growth over time.  Often it has been easier to copy a script and find and replace a word rather than setup a more generic solution. There are three main parts to the repo as it currently stands:
+ You can see all my infrastructure scripts and config on <a href="https://github.com/mikemjharris/infrastructure" target="_blank">GitHub</a>. It's still a bit ad hoc and is the result of organic growth over time.  Often it has been easier to copy a script and find and replace a word rather than setup a more generic solution. There are three main parts to the repo as it currently stands:
 </p>
 
 <h4>1 Routing</h4>
 <p>
-  Most of my apps run in docker containers on different ports. I have various CNAMES pointing to the digital ocean droplet and nginx directs draffic to the relevant container. This used to be one big messy bit of config as part of the <i>nginx.conf</i> file that had evolved over time.  Recently I refactored this to be multiple conf files that are symlinked to the sites-enabled folder which nginx references.
+  Most of my apps run in docker containers on different ports. I have various CNAMES pointing to the digital ocean droplet and Nginx directs traffic to the relevant container. This used to be one big messy bit of config as part of the <i>nginx.conf</i> file that had evolved over time.  Recently I refactored this to be multiple conf files that are symlinked to the sites-enabled folder which nginx references.
 </p>
 
 <h4>2 Scripts</h4>
@@ -25,7 +25,7 @@
 </p>
 
 <p>
-  The other main script is the webhook server. This is a simple python http server that listens for webhooks from github which it uses to trigger builds (for more info see this <a href="/posts/deploying-this-blog" target="_blank">post</a>).
+  The other main script is the webhook server. This is a simple python http server that listens for webhooks from GitHub which it uses to trigger builds (for more info see this <a href="/posts/deploying-this-blog" target="_blank">post</a>).
 </p>
 <p>There's a few other test scripts and experiments there too which aren't used.</p>
 
