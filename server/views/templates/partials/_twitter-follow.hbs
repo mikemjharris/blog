@@ -63,16 +63,16 @@
 
 
 <defs>
-  <clipPath id="clipPath5">
+  <clipPath id="{{ id-prefix }}-clipPath5">
     <text x="-250" y="50" style="font-size: 100px;" text-anchor="middle"  font-family="Verdana"  text-rendering="optimizeLegibility">
       Follow
     </text>
   </clipPath>
 </defs>
 
-<g style="clip-path: url(#clipPath5);">
+<g style="clip-path: url(#{{ id-prefix }}-clipPath5);">
 
-  <circle id="circle" cx="-400" cy="-15" r="500" style="stroke: #2aa9e0; fill: #2aa9e0;"
+  <circle cx="-400" cy="-15" r="500" style="stroke: #2aa9e0; fill: #2aa9e0;"
 
   >
   <animate dur="4s" begin="1.5s" attributeName="cx" values="-1500 ; -400" >
@@ -83,7 +83,7 @@
 
 
    <g>
-      <rect id="rect" x="-550" y="-97" width="700" height="194" stroke="#2aa9e0" fill="none" stroke-width="5px" stroke-dasharray="3000, 3000"; >
+      <rect x="-550" y="-97" width="700" height="194" stroke="#2aa9e0" fill="none" stroke-width="5px" stroke-dasharray="3000, 3000"; >
           <animate attributeName="fill"
      attributeType="XML"
      from="white"
