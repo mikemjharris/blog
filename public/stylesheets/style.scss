@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: verdana;
   font-family: spinnaker;
+  font-display: swap;
   padding: 0px;
   margin:0px;
   font-size: $body-font-size;
@@ -90,6 +91,7 @@ header {
     font-size: 40px;
     font-family: verdana;
     font-family: inconsolata;
+    font-display: swap;
     height: 40px;
   }
 }
