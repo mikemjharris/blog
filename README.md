@@ -5,8 +5,14 @@ Base for my online blog - view it here [blog.mikemjharis.com](http://blog.mikemj
 
 ```
     npm install 
-    entry
+    npm run start-dev
 ```
+
+or for prod
+```
+    npm start
+```
+
 
 Posts are in the server/content folder.  All the data such as title and date of published is inside meta tags at the top of each post.  These are used to order the posts, put them in different cataegories etc.
 
