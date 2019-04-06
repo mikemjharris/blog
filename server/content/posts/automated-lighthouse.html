@@ -15,12 +15,24 @@
 
 <h4>The stats</h4>
 
-<p>As you can see the major areas are Performance, Accessibility, Best Practices and SEO.  There's an additional marker for how whether the site classifies as a Progressive Web App. As you can see this site is scoring close to 100 for all four categories and clasifies as a progressive Web App.  It's a fairly lmimited in terms of complexity and most corporate sites will have much lower numbers.  You can have little run the tool yourself against any site and see how they are doing.  For example twitter ranges from 26 for performance through to a max of 90 for SEO. It's hard in a bigger organisation - I've checked all the sites I've professionally worked on and the numbers are worse than twitter - there are many comprimises and other priorities for an orgnasation. However targeting higher numbers should be key. The only way to push for improvements is to ensure that the numbers are being looked at.  Manually running ad hoc reports wont help with obeservability which is why I wanted to look into automating the process.</p>
+<p>As you can see the major areas are Performance, Accessibility, Best Practices and SEO.  There's an additional marker for how whether the site classifies as a Progressive Web App. My blog is in the green (above 90) for all the metircs. It was doing pretty well before but I knew I was writing this blog post so updated a number of areas to make sure it looked as impressive as possible.</p>
 
-<h4>Lighthouse CLI</h4>
-<p>Lighthouse has a CLI which allows yous to run the tests from the command line. The<a href="https://github.com/GoogleChrome/lighthouse" target="_blank">readme on github</a> is pretty comprehensive. There are plenty of options including running the tests headless (i.e. without a visible browser) which means that   <a
-<p><a href="" target="_blank"></a></p>
+<h4>Automating via the CLI</h4>
+<p>
+ Life's too busy to remeber to run ad hoc reports.  To ensure I had the numbers easily to hand I wanted to automate the process of running the report and potentially alerting me if the numbers dropped. Lighthouse has a CLI which allows yous to run the tests from the command line. The<a href="https://github.com/GoogleChrome/lighthouse" target="_blank">readme on github</a> is pretty comprehensive. There are plenty of options including running the tests headless (i.e. without a visible browser) which means that one can run it on a remote server.
+</p>
+<h4>Docker it up</h4>
+<p>
+  My main server that runs all my websites runs everything in docker containers and I wanted to use docker to run the lighthouse CLI. After a quick google I found this <a href="https://hub.docker.com/r/justinribeiro/lighthouse/" target="_blank">justing ribeiro's</a> docker container and <a href="https://hub.docker.com/r/femtopixel/google-lighthouse/" taget="_blank">another</a>. However for both I had a number of issues getting chrome to run and to get a proper report using the commands given.  After much trial and error I worked out that I needed the '--no-sandbox' chrome flag.  As part of my investigation I'd made <a href="https://github.com/mikemjharris/dockerfiles/blob/master/lighthouse/Dockerfile" target="_blank">my own dockerfile</a> - largely based on justin's with a few tweaks. I stuck with this as I'd have control over it in the future and it also had a later version of lighthouse than the image pulled from docker hub.</p>
+<h4>The setup</h4>
+<p>
+  The setup involved a couple of cron jobs (<a href="https://github.com/mikemjharris/infrastructure/blob/eb6348c43bc9ea2ca7019242bf47dff310c8ee27/crontab/crontab-jobs.txt">setup </a> from my infra repo) to run HTML and JSON reports for this blog and my main www site every morning. The folder is sylinked to my main website director so all the reports are accessible online. </p>
+<p>
+  You can see the latest for the blog at <a href="https://www.mikemjharris.com/lighthouse/blog/">https://www.mikemjharris.com/lighthouse/blog/</a> and for my main website at <a href="https://www.mikemjharris.com/lighthouse/website/" target="_blank">https://www.mikemjharris.com/lighthouse/website/</a> and there's a full history <a href="https://www.mikemjharris.com/lighthouse/" target="_blank">here</a>
+</p>
+
+<h4>Conclsion</h4>
+<p>
+  Getting lighthouse to run was fairly straighforward due to the excellent google docs.  The main time sink was getting docker to run properly. Now the rerports are generated automatically I can easily access them without having to be at the desktop and manually running the report. If this was an important business critical site I could setup alerts around when the metrics change - for my own personal projects I prefer a bit of peace and quiet over worrying too much about the state of my projects.
 
 
-https://hub.docker.com/r/justinribeiro/lighthouse/
-https://hub.docker.com/r/femtopixel/google-lighthouse/
