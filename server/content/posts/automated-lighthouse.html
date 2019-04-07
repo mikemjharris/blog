@@ -13,7 +13,7 @@
 
 <h4>What is Lighthouse</h4>
 <p>
-  Lighthouse "audits for performance, accessibility, progressive web apps, and more".  You can access the tool by opening up Chrome Dev Tools and selecting the audit panel (<a href="https://developers.google.com/web/tools/lighthouse/" target="_blank">docs</a>). On running an auti you get scores across a number of areas - there's an example for this blog in the pic below</p>
+  Lighthouse "audits for performance, accessibility, progressive web apps, and more".  You can access the tool by opening up Chrome Dev Tools and selecting the audit panel (<a href="https://developers.google.com/web/tools/lighthouse/" target="_blank">docs</a>). On running an audit you get scores across a number of areas - there's an example for this blog in the pic below</p>
 
 
 <img src="/images/lighthouse-stats.png" alt="image of lighthouse dashboard" />
@@ -21,12 +21,12 @@
 <h4>The Stats</h4>
 
 <p>
-  The major areas are Performance, Accessibility, Best Practices and SEO with an additional marker for how whether the site classifies as a Progressive Web App. Plesed to report my blog is in the green for all the metrics. It was doing pretty well before but I knew I was writing this blog post so made a few tweaks.
+  The major areas are Performance, Accessibility, Best Practices and SEO with an additional marker for how whether the site classifies as a Progressive Web App. Pleased to report my blog is in the green for all the metrics. It was doing pretty well before but I knew I was writing this blog post so made a few tweaks.
 </p>
 
 <h4>Automating via the CLI</h4>
 <p>
- Life's too busy to remeber to run ad hoc reports so I wanted to autmate the process. Lighthouse has a CLI which allows yous to run the tests from the command line (<a href="https://github.com/GoogleChrome/lighthouse" target="_blank">docs</a>). There are plenty of options including running the tests headless (i.e. without a visible browser) which means that one can run it on a remote server.
+ Life's too busy to remember to run ad hoc reports so I wanted to automate the process. Lighthouse has a CLI which allows yous to run the tests from the command line (<a href="https://github.com/GoogleChrome/lighthouse" target="_blank">docs</a>). There are plenty of options including running the tests headless (i.e. without a visible browser) which means that one can run it on a remote server.
 </p>
 <h4>Wrestling with docker</h4>
 <p>
@@ -34,14 +34,14 @@
 </p>
 <h4>Automation</h4>
 <p>
-  The setup involved a couple of cron jobs (<a href="https://github.com/mikemjharris/infrastructure/blob/eb6348c43bc9ea2ca7019242bf47dff310c8ee27/crontab/crontab-jobs.txt">setup </a> from my infra repo) to run HTML and JSON reports for this blog and my main www site every morning. The folder is sylinked to my main website director so all the reports are accessible online. </p>
+  The setup involved a couple of cron jobs (<a href="https://github.com/mikemjharris/infrastructure/blob/eb6348c43bc9ea2ca7019242bf47dff310c8ee27/crontab/crontab-jobs.txt">setup </a> from my infra repo) to run HTML and JSON reports for this blog and my main WWW site every morning. The folder is symlinked to my main website director so all the reports are accessible online. </p>
 <p>
   You can see the latest for the blog at <a href="https://www.mikemjharris.com/lighthouse/blog/">www.mikemjharris.com/lighthouse/blog/</a> and for my main website at <a href="https://www.mikemjharris.com/lighthouse/website/" target="_blank">www.mikemjharris.com/lighthouse/website/</a> and there's a full history <a href="https://www.mikemjharris.com/lighthouse/" target="_blank">here</a>.
 </p>
 
-<h4>Conclsion</h4>
+<h4>Conclusion</h4>
 <p>
-  Getting Lighthouse to run was fairly straighforward due to the excellent docs.  The main time sink was getting docker to run properly. Now the rerports are generated automatically I can easily access them without having to be at the desktop and manually running the report. If this was an important business critical site I could setup alerts around when the metrics change - for my own personal projects I prefer a bit of peace and quiet over worrying too much about the state of my projects.
+  Getting Lighthouse to run was fairly straightforward due to the excellent docs.  The main time sink was getting docker to run properly. Now the reports are generated automatically I can easily access them without having to be at the desktop and manually running the report. If this was an important business critical site I could setup alerts around when the metrics change - for my own personal projects I prefer a bit of peace and quiet over worrying too much about the state of my projects.
 </p>
 <p>You can use Lighthouse on any website - note this blog is a small personal project so easy to tweak and ensure it scores highly. Bigger businesses have more to worry about - all the sites I've worked on professionally have much lower scores.
 </p>
