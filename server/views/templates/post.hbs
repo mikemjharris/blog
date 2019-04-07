@@ -1,13 +1,19 @@
 {{#post}}
-  <meta name="twitter:card" content="summary" />
+  {{#compare twittercard undefined }}
+    <meta name="twitter:card" content="summary" />
+  {{ else }}
+  <meta name="twitter:card" content="{{ twittercard }}" />
+  {{/compare}}
   <meta name="twitter:site" content="@mikemjharris" />
   <meta name="twitter:title" content="{{ title }}" />
   <meta name="twitter:description" content="{{ intro }}" />
-  <meta name="twitter:image" content="https://blog.mikemjharris.com/images/icons/icon-512.png" />
-
+  {{#compare twitterimage undefined }}
+    <meta name="twitter:image" content="https://blog.mikemjharris.com/images/icons/icon-512.png" />
+  {{ else }}
+  <meta name="twitter:image" content="{{ twitterimage }}" />
+{{/compare}}
   <div class="header">
-    <h2>{{title}}</h2>
-    <a
+    <h2>{{title}}</h2> <a
       target="_blank"
       href="https://twitter.com/intent/tweet?;text={{ title }} by @mikemjharris&amp;url=http://blog.mikemjharris.com/posts/{{ searchtitle }}" id="twitter-share">{{> "_twitter-share" id-prefix='blog'}}</a>
     <div class="post-date">
