@@ -308,12 +308,12 @@ svg{
     height: 100%;
     width: auto;
   }
-  & #rect {
+  & .rect {
     stroke-dasharray: 0, 3000;
   }
   &:hover {
     cursor: pointer;
-    #rect {
+    .rect {
       stroke-dasharray: 3000, 3000;
       animation: dash 0.5s linear;
     }
