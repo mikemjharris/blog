@@ -5,34 +5,42 @@
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech -->
 
-<p>Google provides an excellent tool called lighthouse that can be used for "for improving the quality of web pages." I've manually run the tool in the past but wanted to run an automated performance and quality review on the main sites I maintain </p>
+<p>
+  Google provides an excellent tool called Lighthouse that can be used "for improving the quality of web pages". Usually I manually generate a report on an ad hoc basis but wanted to run  automate the process.
+</p>
 
-<h4>What is lighthouse</h4>
+<h4>What is Lighthouse</h4>
+<p>
+  Lighthouse "audits for performance, accessibility, progressive web apps, and more".  You can access the tool by opening up Chrome Dev Tools and selecting the audit panel (<a href="https://developers.google.com/web/tools/lighthouse/" target="_blank">docs</a>). On running an auti you get scores across a number of areas - there's an example for this blog in the pic below</p>
 
-<p>There are excellent <a href="https://developers.google.com/web/tools/lighthouse/" target="_blank"></a>docs</a> on the google website. In short the tool "audits for performance, accessibility, progressive web apps, and more.".  You can access the tool by opening up Dev Tools, selecting the audit tab and running the audit. At the end you get scores across a number of areas.  You can see an example for this blog in the pic below</p>
 
-<img srr="/images/lighthouse-stats.png" alt="image of lighthouse dashboard" />
+<img src="/images/lighthouse-stats.png" alt="image of lighthouse dashboard" />
 
-<h4>The stats</h4>
+<h4>The Stats</h4>
 
-<p>As you can see the major areas are Performance, Accessibility, Best Practices and SEO.  There's an additional marker for how whether the site classifies as a Progressive Web App. My blog is in the green (above 90) for all the metircs. It was doing pretty well before but I knew I was writing this blog post so updated a number of areas to make sure it looked as impressive as possible.</p>
+<p>
+  The major areas are Performance, Accessibility, Best Practices and SEO with an additional marker for how whether the site classifies as a Progressive Web App. Plesed to report my blog is in the green for all the metrics. It was doing pretty well before but I knew I was writing this blog post so made a few tweaks.
+</p>
 
 <h4>Automating via the CLI</h4>
 <p>
- Life's too busy to remeber to run ad hoc reports.  To ensure I had the numbers easily to hand I wanted to automate the process of running the report and potentially alerting me if the numbers dropped. Lighthouse has a CLI which allows yous to run the tests from the command line. The<a href="https://github.com/GoogleChrome/lighthouse" target="_blank">readme on github</a> is pretty comprehensive. There are plenty of options including running the tests headless (i.e. without a visible browser) which means that one can run it on a remote server.
+ Life's too busy to remeber to run ad hoc reports so I wanted to autmate the process. Lighthouse has a CLI which allows yous to run the tests from the command line (<a href="https://github.com/GoogleChrome/lighthouse" target="_blank">docs</a>). There are plenty of options including running the tests headless (i.e. without a visible browser) which means that one can run it on a remote server.
 </p>
-<h4>Docker it up</h4>
+<h4>Wrestling with docker</h4>
 <p>
-  My main server that runs all my websites runs everything in docker containers and I wanted to use docker to run the lighthouse CLI. After a quick google I found this <a href="https://hub.docker.com/r/justinribeiro/lighthouse/" target="_blank">justing ribeiro's</a> docker container and <a href="https://hub.docker.com/r/femtopixel/google-lighthouse/" taget="_blank">another</a>. However for both I had a number of issues getting chrome to run and to get a proper report using the commands given.  After much trial and error I worked out that I needed the '--no-sandbox' chrome flag.  As part of my investigation I'd made <a href="https://github.com/mikemjharris/dockerfiles/blob/master/lighthouse/Dockerfile" target="_blank">my own dockerfile</a> - largely based on justin's with a few tweaks. I stuck with this as I'd have control over it in the future and it also had a later version of lighthouse than the image pulled from docker hub.</p>
-<h4>The setup</h4>
+  All my services on my remote server run in docker containers. There were a couple of images available on docker hub: <a href="https://hub.docker.com/r/justinribeiro/lighthouse/" target="_blank">Justin Ribeiro's</a> and <a href="https://hub.docker.com/r/femtopixel/google-lighthouse/" taget="_blank">FemToPixels's</a>. For both I had a number of issues getting chrome to run and to get a working report.  After a bunch of investigation and trial and error I ended up with <a href="https://github.com/mikemjharris/dockerfiles/blob/master/lighthouse/Dockerfile" target="_blank">my own dockerfile</a> - largely based on Justin's with a few tweaks and a working set of commands. If there's interest I can write up in more detail some of the issues I had.
+</p>
+<h4>Automation</h4>
 <p>
   The setup involved a couple of cron jobs (<a href="https://github.com/mikemjharris/infrastructure/blob/eb6348c43bc9ea2ca7019242bf47dff310c8ee27/crontab/crontab-jobs.txt">setup </a> from my infra repo) to run HTML and JSON reports for this blog and my main www site every morning. The folder is sylinked to my main website director so all the reports are accessible online. </p>
 <p>
-  You can see the latest for the blog at <a href="https://www.mikemjharris.com/lighthouse/blog/">https://www.mikemjharris.com/lighthouse/blog/</a> and for my main website at <a href="https://www.mikemjharris.com/lighthouse/website/" target="_blank">https://www.mikemjharris.com/lighthouse/website/</a> and there's a full history <a href="https://www.mikemjharris.com/lighthouse/" target="_blank">here</a>
+  You can see the latest for the blog at <a href="https://www.mikemjharris.com/lighthouse/blog/">www.mikemjharris.com/lighthouse/blog/</a> and for my main website at <a href="https://www.mikemjharris.com/lighthouse/website/" target="_blank">www.mikemjharris.com/lighthouse/website/</a> and there's a full history <a href="https://www.mikemjharris.com/lighthouse/" target="_blank">here</a>.
 </p>
 
 <h4>Conclsion</h4>
 <p>
-  Getting lighthouse to run was fairly straighforward due to the excellent google docs.  The main time sink was getting docker to run properly. Now the rerports are generated automatically I can easily access them without having to be at the desktop and manually running the report. If this was an important business critical site I could setup alerts around when the metrics change - for my own personal projects I prefer a bit of peace and quiet over worrying too much about the state of my projects.
-
+  Getting Lighthouse to run was fairly straighforward due to the excellent docs.  The main time sink was getting docker to run properly. Now the rerports are generated automatically I can easily access them without having to be at the desktop and manually running the report. If this was an important business critical site I could setup alerts around when the metrics change - for my own personal projects I prefer a bit of peace and quiet over worrying too much about the state of my projects.
+</p>
+<p>You can use Lighthouse on any website - note this blog is a small personal project so easy to tweak and ensure it scores highly. Bigger businesses have more to worry about - all the sites I've worked on professionally have much lower scores.
+</p>
 
