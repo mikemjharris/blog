@@ -1,0 +1,23 @@
+<!-- meta-data title: Visualising the virtual dom -->
+<!-- meta-data searchtitle: visualising-the-virtual-dom  -->
+<!-- meta-data date: 1 May 2019 -->
+<!-- meta-data intro: A visual example of diffing the virtual dom -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech -->
+
+<p>
+  Lots of topics can be understood coneptually but sometimes seeing a visual example can really help one understand how something works. In a recent project I built I accidentally discovered a clear visual representation of diffing of the virtual dom.
+</p>
+
+<h4>Each key should have a unique key prop</h4>
+<p>
+  If you've used React you'll of come accross the error message 'Each key should have a unique "key" prop'.When first starting out you learn this is used by React to diff the virtual DOM and work out if it needs to recreate the component.  That all makes sense but visually your app looks ok with the error message. Adding in a key gets rid of the error message and you assume that React is doing it's magic and everything is faster and smoother but you can't see any change.  That's fine - lots of computer science isn't visual or visible - you need to look at other metrics such as speed, processor load etc to measure the real benefits.
+</p>
+<h4>Colors in My Books project</h4>
+<p>
+   Recently I built a project to list all the books I've read.  It uses react to list all the books - the key for each book is the title (hopefully unique!) and also passes in a prop which is the index.
+
+
+  <code>filteredBooks.map((book,i) => &lt;Book book={book} key={book.title} col={i} /&gt;)</code>
+
+  <code>background: hsla(${props => props.col}, 60%, 60%,1);</code>
