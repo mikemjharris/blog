@@ -58,7 +58,8 @@ hr {
   border-top: 1px solid $border-left-col;
 }
 
-.code {
+code {
+  display: block;
   background: #eee;
   padding: 5px;
   margin: 1em 1px;
