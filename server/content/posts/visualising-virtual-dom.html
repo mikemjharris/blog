@@ -15,9 +15,15 @@
 </p>
 <h4>Colors in My Books project</h4>
 <p>
-   Recently I built a project to list all the books I've read.  It uses react to list all the books - the key for each book is the title (hopefully unique!) and also passes in a prop which is the index.
+   Recently I built a project to list all the books I've read.  It uses react to list all the books - the key for each book is the title (hopefully unique!) and also passes in the index as the value for the colour prop.
 
+   <pre><code class="language-javascript">filteredBooks.map((book,i) =>
+		&lt;Book
+			book={book}
+			key={book.title}
+			col={i}
+		/&gt;)</code></pre>
 
-  <code>filteredBooks.map((book,i) => &lt;Book book={book} key={book.title} col={i} /&gt;)</code>
-
-  <code>background: hsla(${props => props.col}, 60%, 60%,1);</code>
+		<p> The Book is a styled component. It takes in the color prop and creates a different background</p>
+   <pre><code class="language-css">background: hsla(${props => props.col}, 60%, 60%,1);</code></pre>
+	<p>The result of this is a lovely, smooth, rainbow effect - the chane in index rotates through the color circle</p>
