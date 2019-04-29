@@ -1,4 +1,4 @@
-var cacheName = 'mikemjharris-blog-c10bb8e'
+var cacheName = 'mikemjharris-blog-d10bb8e'
 var filesToCache = [
   "/",
   "/api/posts",
@@ -9,6 +9,8 @@ var filesToCache = [
   "/dist/main.js",
   "https://fonts.googleapis.com/css?family=Spinnaker",
   "https://fonts.googleapis.com/css?family=Inconsolata",
+  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css"
 ];
 
 self.addEventListener('install', function(e) {
