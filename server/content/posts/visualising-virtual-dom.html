@@ -1,21 +1,27 @@
 <!-- meta-data title: Visualising the virtual dom -->
 <!-- meta-data searchtitle: visualising-the-virtual-dom  -->
-<!-- meta-data date: 1 May 2019 -->
+<!-- meta-data date: 13 May 2019 -->
 <!-- meta-data intro: A visual example of diffing the virtual dom -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech -->
 
 <p>
-  Lots of topics can be understood coneptually but sometimes seeing a visual example can really help one understand how something works. In a recent project I built I accidentally discovered a clear visual representation of diffing of the virtual dom.
+	In my recent books project I noticed a strange effect when playing with the filters - the smooth rainbow effect on the books sometimes worked well and sometimes was inconsistent. What was going on? It turns out this was a neat visual example of what React is doing when using the virutal dom.
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6ayxw6SybTM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h4>Each key should have a unique key prop</h4>
 <p>
-  If you've used React you'll of come accross the error message 'Each key should have a unique "key" prop'.When first starting out you learn this is used by React to diff the virtual DOM and work out if it needs to recreate the component.  That all makes sense but visually your app looks ok with the error message. Adding in a key gets rid of the error message and you assume that React is doing it's magic and everything is faster and smoother but you can't see any change.  That's fine - lots of computer science isn't visual or visible - you need to look at other metrics such as speed, processor load etc to measure the real benefits.
+  When using React you'll eventually come accross the error message 'Each key should have a unique "key" prop'. A bit of researching and you discover this is used by React to diff the virtual DOM and work out if it needs to re-render the component.  That all makes sense but visually your app looks ok with the error message. Adding in a key gets rid of the error message and you assume that React is doing it's magic and everything is faster and smoother but you can't see any change.  That's fine - lots of computer science isn't visual or visible - you need to look at other metrics to measure the real benefits. But sometimes it would be nice to see a visual example of what is actually happening.
 </p>
 <h4>Colors in My Books project</h4>
 <p>
-   Recently I built a project to list all the books I've read.  It uses react to list all the books - the key for each book is the title (hopefully unique!) and also passes in the index as the value for the colour prop.
+   Recently I built <a href="https://books.mikemjharris.com/" target="_blank">a project</a> using React to list all the books I've read. While playing around with the filters I noticed that normally there was a smooth rainbow effect for the books in the list.  Changing the filters filtered out books and there was disonnects in the color of the remaining adjoining books.  However playing with the filters sometimes books were filtered out but the coloring on the ones remaining was smooth.  Sometimes there was and sometimes there wasn't a consistency in the colour of the books. What was going on?  Check the video out at the top of the page to see the effect properly.
+</p>
+<h4>Choosing the right key</h4>
+<p>
+  In the project I chose the key for each book to be the title (hopefully unique!). This seems a reasonable choice - if as the filters change that book is in the results then in doesn't need updating.
 
    <pre><code class="language-javascript">filteredBooks.map((book,i) =>
 		&lt;Book
@@ -26,4 +32,17 @@
 
 		<p> The Book is a styled component. It takes in the color prop and creates a different background</p>
    <pre><code class="language-css">background: hsla(${props => props.col}, 60%, 60%,1);</code></pre>
-	<p>The result of this is a lovely, smooth, rainbow effect - the chane in index rotates through the color circle</p>
+		<p>The result of this is a lovely, smooth, rainbow effect - the change in index rotates through the color circle</p>
+
+<h4>Style not linked to the key</h4>
+<p>
+	The look of the book on the page is reliant on the index.  However if a book is shown in two consecutive filtered lists React uses the title (which is the key) not the index to work out if it needs to re-render the component. So as we go from a list of all books to books only written by female writers we go from a smooth rainbow effect to a more random look as the books by men are filtered out and the books by women retain their colour.  If we now switch to a filter which is all men we go back to a smooth rainbow effect.  All of the books needed to be re-rendered so we get a smooth rainbow again. Jumping between filters sometimes re-renders books so their colour reflects their index and sometimes their look carries over.
+</p>
+<h4>What's the right thing to do?</h4>
+<p>
+	This is a fun side project and I quite like the inconsistency. But what if this was something more important? Maybe a list of purchase options where the look needed to be correct?  By using styled components we have coupled some of our styles into how the component is rendered. To ensure we get the right look we should use some combination of index and title in the key - although this might end up resulting in slower render times as all items in the list would be rerendered.
+</p>
+<p> Another option is to solve the issues using vanilla CSS. Using SASS we can pump out a long list of nth-child selectors and create a rainbow effect that is completely decoupled from the rendering of the React components
+</p>
+<p>What's right?  Well depends on what you're building.  Styled components are very popular at the moment but take note that as with any new technology they can introduce new areas you need to think about when making a product. For me, in this project, I'm just happy to have a fun, visual way to help me understand what is going on under the surface.
+</p>
