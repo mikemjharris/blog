@@ -6,7 +6,7 @@
 <!-- meta-data category: tech -->
 
 <p>
-	In my recent books project I noticed a strange effect when playing with the filters - the smooth rainbow effect on the books sometimes worked well and sometimes was inconsistent. What was going on? It turns out this was a neat visual example of what React is doing when using the virutal dom.
+	In my recent books project I noticed a strange effect when playing with the filters - the smooth rainbow effect on the books sometimes worked well and sometimes was inconsistent. What was going on? It turns out this was a neat visual example of what React is doing when using the virutal dom to work out how to re render components.
 </p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6ayxw6SybTM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -15,9 +15,9 @@
 <p>
   When using React you'll eventually come accross the error message 'Each key should have a unique "key" prop'. A bit of researching and you discover this is used by React to diff the virtual DOM and work out if it needs to re-render the component.  That all makes sense but visually your app looks ok with the error message. Adding in a key gets rid of the error message and you assume that React is doing it's magic and everything is faster and smoother but you can't see any change.  That's fine - lots of computer science isn't visual or visible - you need to look at other metrics to measure the real benefits. But sometimes it would be nice to see a visual example of what is actually happening.
 </p>
-<h4>Colors in My Books project</h4>
+<h4>Rainbow colors in my books project</h4>
 <p>
-   Recently I built <a href="https://books.mikemjharris.com/" target="_blank">a project</a> using React to list all the books I've read. While playing around with the filters I noticed that normally there was a smooth rainbow effect for the books in the list.  Changing the filters filtered out books and there was disonnects in the color of the remaining adjoining books.  However playing with the filters sometimes books were filtered out but the coloring on the ones remaining was smooth.  Sometimes there was and sometimes there wasn't a consistency in the colour of the books. What was going on?  Check the video out at the top of the page to see the effect properly.
+   Recently I built <a href="https://books.mikemjharris.com/" target="_blank">a project</a> using React to list all the books I've read. While playing around with the filters I noticed that normally there was a smooth rainbow effect for the books in the list.  Changing the filters removed some books and there was disonnects in the color of the remaining adjoining books.  However playing with the filters sometimes resulted in a smooth rainbow effect. Checkout the video to see this in action.
 </p>
 <h4>Choosing the right key</h4>
 <p>
@@ -36,13 +36,13 @@
 
 <h4>Style not linked to the key</h4>
 <p>
-	The look of the book on the page is reliant on the index.  However if a book is shown in two consecutive filtered lists React uses the title (which is the key) not the index to work out if it needs to re-render the component. So as we go from a list of all books to books only written by female writers we go from a smooth rainbow effect to a more random look as the books by men are filtered out and the books by women retain their colour.  If we now switch to a filter which is all men we go back to a smooth rainbow effect.  All of the books needed to be re-rendered so we get a smooth rainbow again. Jumping between filters sometimes re-renders books so their colour reflects their index and sometimes their look carries over.
+	The look of the book on the page is reliant on the index.  However if a book is shown in two consecutive filtered lists React uses the title (which is the key) not the index to work out if it needs to re-render the component. So as we go from a list of all books to books only written by, say, female writers we go from a smooth rainbow effect to a more random look as the books by men are filtered out and the books by women retain their colour.  If we now switch to a filter which is all men we go back to a smooth rainbow effect.  All of the books needed to be re-rendered so we get a smooth rainbow again. Jumping between filters sometimes re-renders books so their colour reflects their index and sometimes their look carries over.
 </p>
 <h4>What's the right thing to do?</h4>
 <p>
-	This is a fun side project and I quite like the inconsistency. But what if this was something more important? Maybe a list of purchase options where the look needed to be correct?  By using styled components we have coupled some of our styles into how the component is rendered. To ensure we get the right look we should use some combination of index and title in the key - although this might end up resulting in slower render times as all items in the list would be rerendered.
+	This is a fun side project and I quite like the inconsistency. But what if this was something more important? Maybe a list of purchase options where the look needed to be correct?  By using styled components we have coupled some of our styles into how the component is rendered. To ensure we get the right look we should use some combination of index and title in the key - although this might end up resulting in slower render times as all items in the list would be re-rendered.
 </p>
 <p> Another option is to solve the issues using vanilla CSS. Using SASS we can pump out a long list of nth-child selectors and create a rainbow effect that is completely decoupled from the rendering of the React components
 </p>
-<p>What's right?  Well depends on what you're building.  Styled components are very popular at the moment but take note that as with any new technology they can introduce new areas you need to think about when making a product. For me, in this project, I'm just happy to have a fun, visual way to help me understand what is going on under the surface.
+<p>What's right?  Well depends on what you're building.  Styled components are very popular at the moment but take note that as with any new technology they can introduce new areas you need to think about. For me, in this project, I'm just happy to have a fun, visual way to help me understand what is going on under the surface.
 </p>
