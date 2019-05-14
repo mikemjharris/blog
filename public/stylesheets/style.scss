@@ -58,6 +58,9 @@ hr {
   border-top: 1px solid $border-left-col;
 }
 
+pre {
+	overflow: scroll;
+}
 code {
   display: block;
   background: #eee;

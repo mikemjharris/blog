@@ -6,10 +6,12 @@
 <!-- meta-data category: tech -->
 
 <p>
-	In my recent books project I noticed a strange effect when playing with the filters - the smooth rainbow effect on the books sometimes worked well and sometimes was inconsistent. What was going on? It turns out this was a neat visual example of what React is doing when using the virutal dom to work out how to re render components.
+	In my recent books project I noticed a strange effect when playing with the filters - the smooth rainbow effect on the books sometimes worked well and sometimes was inconsistent. What was going on? It turns out this was a neat visual example of what React is doing when using the virutal dom to work out how to re-render components.
 </p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6ayxw6SybTM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="videoWrapper">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/6ayxw6SybTM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 <h4>Each key should have a unique key prop</h4>
 <p>
@@ -17,11 +19,11 @@
 </p>
 <h4>Rainbow colors in my books project</h4>
 <p>
-   Recently I built <a href="https://books.mikemjharris.com/" target="_blank">a project</a> using React to list all the books I've read. While playing around with the filters I noticed that normally there was a smooth rainbow effect for the books in the list.  Changing the filters removed some books and there was disonnects in the color of the remaining adjoining books.  However playing with the filters sometimes resulted in a smooth rainbow effect. Checkout the video to see this in action.
+   Recently I built <a href="https://books.mikemjharris.com/" target="_blank">a project</a> using React to list all the books I've read. While playing around with the filters I noticed that normally there was a smooth rainbow effect.  Changing the filters removed some books and there were disonnects in the color of the remaining adjoining books.  However, playing with the filters sometimes resulted in a smooth rainbow effect. Checkout the video to see this in action.
 </p>
 <h4>Choosing the right key</h4>
 <p>
-  In the project I chose the key for each book to be the title (hopefully unique!). This seems a reasonable choice - if as the filters change that book is in the results then in doesn't need updating.
+  In the project I chose the key for each book to be the title (hopefully unique!). This seems a reasonable choice - if as the filters change that book is in the results then it doesn't need updating.
 
    <pre><code class="language-javascript">filteredBooks.map((book,i) =>
 		&lt;Book
@@ -36,7 +38,7 @@
 
 <h4>Style not linked to the key</h4>
 <p>
-	The look of the book on the page is reliant on the index.  However if a book is shown in two consecutive filtered lists React uses the title (which is the key) not the index to work out if it needs to re-render the component. So as we go from a list of all books to books only written by, say, female writers we go from a smooth rainbow effect to a more random look as the books by men are filtered out and the books by women retain their colour.  If we now switch to a filter which is all men we go back to a smooth rainbow effect.  All of the books needed to be re-rendered so we get a smooth rainbow again. Jumping between filters sometimes re-renders books so their colour reflects their index and sometimes their look carries over.
+	The look of a book on the page is reliant on its index.  However, if a book is shown in two consecutive filtered lists, React uses the title (which is the key) not the index to work out if it needs to re-render the component. So as we go from a list of all books to books only written by, say, female writers we go from a smooth rainbow effect to a more random look. The books by men are filtered out and the books by women retain their colour.  If we now switch to a filter which is all men we go back to a smooth rainbow effect.  All of the books needed to be re-rendered so we get a smooth rainbow again. Jumping between filters sometimes re-renders books so their colour reflects their index and sometimes their look carries over.
 </p>
 <h4>What's the right thing to do?</h4>
 <p>
@@ -44,5 +46,5 @@
 </p>
 <p> Another option is to solve the issues using vanilla CSS. Using SASS we can pump out a long list of nth-child selectors and create a rainbow effect that is completely decoupled from the rendering of the React components
 </p>
-<p>What's right?  Well depends on what you're building.  Styled components are very popular at the moment but take note that as with any new technology they can introduce new areas you need to think about. For me, in this project, I'm just happy to have a fun, visual way to help me understand what is going on under the surface.
+<p>What's right?  Well depends on what you're building.  Styled components are very popular at the moment but take note that as with any new technology they can introduce new areas you need to think about. For me, in this non essential side project, I'm just happy to have a fun, visual way to help me understand what is going on under the surface.
 </p>
