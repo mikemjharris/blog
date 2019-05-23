@@ -22,7 +22,7 @@
     "express": "^4.16.3",
     "express-session": "*",
     "jest": "^23.1.0",
-    "jquery": "^3.1.1",
+    "jquery": "^3.4.0",
     "moment": "^2.10.2",
     "morgan": "^1.9.1",
     "nunjucks": "^3.1.3",
