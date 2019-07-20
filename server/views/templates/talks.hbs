@@ -1,0 +1,17 @@
+<h2>Talks</h2>
+
+<div class="content">
+  <p>Various articles about talks I've given over the years</p>
+
+  <div class="article-section">
+    <h3>Talks</h3>
+    <ul>
+    {{#posts}}
+      {{#includes tags 'talk' }}
+        <li><a class='posts space-content' href='/posts/{{searchtitle}}'><span>{{title}}</span><span>{{ date }}</span></a></li>
+      {{/includes }}
+    {{/posts}}
+   </ul>
+  </div>
+
+</div>

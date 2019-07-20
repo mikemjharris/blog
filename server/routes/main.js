@@ -25,6 +25,10 @@ module.exports = (app, posts) => {
     res.render('templates/category' , { posts: posts });
   });
 
+  app.get('/talks', ( req, res ) => {
+    res.render('templates/talks' , { posts: posts });
+  });
+
   app.get('/posts/:id', ( req, res ) => {
     const postId = req.params.id;
     let postToShow = notFound;
