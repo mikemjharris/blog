@@ -7,7 +7,7 @@ const getPostsFromPath = (path) => {
   const files = fs.readdirSync(path);
   files.forEach((file) => {
     if (file.match(/.\.html$/)) {
-      let post ={};
+      let post ={ tags: []};
       post.template = file;
       let data = fs.readFileSync(path + file);
       let str = data.toString('utf8');
@@ -16,7 +16,11 @@ const getPostsFromPath = (path) => {
       post.body = str;
       post.searchtitle = file;
       while ( match = regex.exec(str) ) {
-        post[ match[ 1 ].trim() ] = match [ 2 ].trim();
+        if (match[1].trim() == 'tags') {
+          post[ match[ 1 ].trim() ] = match [ 2 ].trim().split(',');
+        } else {
+          post[ match[ 1 ].trim() ] = match [ 2 ].trim();
+        }
       }
       posts.push(post);
       posts = sortPosts(posts);
