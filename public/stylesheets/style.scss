@@ -176,7 +176,7 @@ article {
     line-height: 2;
     a {
       font-weight: bold;
-      display: inline-block;
+      display: inline;
       border-bottom: 1px solid $border-left-col;
       transition: all 0.2s;
       &:hover {
