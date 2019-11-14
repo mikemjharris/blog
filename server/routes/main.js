@@ -58,7 +58,6 @@ module.exports = (app, posts) => {
   });
 
   app.get('/rss.xml', ( req, res ) => {
-    // TO ADD <atom:link
     const rss = {
     rss: {
       $: {
@@ -77,7 +76,7 @@ module.exports = (app, posts) => {
                   href:"https://blog.mikemjharris.com/rss.xml",
                   rel:"self",
                   type:"application/rss+xml"
-                },
+               },
           },
           items: posts.map((post) => {
             return {
@@ -92,8 +91,8 @@ module.exports = (app, posts) => {
       }
     }
 
-    var builder = new xml2js.Builder();
-    var xml = builder.buildObject(rss);
+    const builder = new xml2js.Builder();
+    const xml = builder.buildObject(rss);
 
     res.set('Content-Type', 'text/xml');
     res.send(xml);
