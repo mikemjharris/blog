@@ -3,7 +3,7 @@ const notFound = {
   intro: 'the page you were looking for wasn\'t found'
 };
 
-const js2xmlparser = require("js2xmlparser");
+const xml2js = require("xml2js");
 const date = new Date();
 
 module.exports = (app, posts) => {
@@ -58,27 +58,45 @@ module.exports = (app, posts) => {
   });
 
   app.get('/rss.xml', ( req, res ) => {
-    // TO ADD <atom:link href="https://blog.mikemjharris.com/rss.xml" rel="self" type="application/rss+xml"/>
-    const channel = {
-      title: "MikeMJHarris' Blog",
-      link: "https://blog.mikemjharris.com/",
-      description: "Tech, some creative bits and other thoughts",
-      generator: "MikeMJHarris' custom generator",
-      language: "en-us",
-      lastBuildDate: date,
-      items: posts.map((post) => {
-        return {
-          title: post.title,
-          link: "https://blog.mikemjharris.com/posts/" + post.searchtitle,
-          pubDate: post.date,
-          guid: post.searchtitle,
-          description: post.body
+    // TO ADD <atom:link
+    const rss = {
+    rss: {
+      $: {
+         "xmlns:atom":"http://www.w3.org/2005/Atom",
+         version:"2.0"
+      },
+      channel: {
+          title: "MikeMJHarris' Blog",
+          link: "https://blog.mikemjharris.com/",
+          description: "Tech, some creative bits and other thoughts",
+          generator: "MikeMJHarris' custom generator",
+          language: "en-us",
+          lastBuildDate: date,
+          "atom:link": {
+            $: {
+                  href:"https://blog.mikemjharris.com/rss.xml",
+                  rel:"self",
+                  type:"application/rss+xml"
+                },
+          },
+          items: posts.map((post) => {
+            return {
+              title: post.title,
+              link: "https://blog.mikemjharris.com/posts/" + post.searchtitle,
+              pubDate: post.date,
+              guid: post.searchtitle,
+              description: post.body
+            }
+          })
         }
-      })
+      }
     }
 
+    var builder = new xml2js.Builder();
+    var xml = builder.buildObject(rss);
+
     res.set('Content-Type', 'text/xml');
-    res.send(js2xmlparser.parse('channel', channel));
+    res.send(xml);
   });
 
 };

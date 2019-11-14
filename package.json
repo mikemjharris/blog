@@ -23,11 +23,11 @@
     "express-session": "*",
     "jest": "^23.1.0",
     "jquery": "^3.4.0",
-    "js2xmlparser": "^4.0.0",
     "moment": "^2.10.2",
     "morgan": "^1.9.1",
     "nunjucks": "^3.1.3",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "xml2js": "^0.4.22"
   },
   "devDependencies": {
     "express-handlebars": "^3.0.0",
