@@ -58,6 +58,7 @@ module.exports = (app, posts) => {
   });
 
   app.get('/rss.xml', ( req, res ) => {
+    // TO ADD <atom:link href="https://blog.mikemjharris.com/rss.xml" rel="self" type="application/rss+xml"/>
     const channel = {
       title: "MikeMJHarris' Blog",
       link: "https://blog.mikemjharris.com/",
