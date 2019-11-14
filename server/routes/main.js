@@ -3,6 +3,9 @@ const notFound = {
   intro: 'the page you were looking for wasn\'t found'
 };
 
+const js2xmlparser = require("js2xmlparser");
+const date = new Date();
+
 module.exports = (app, posts) => {
 
   app.get('/', ( req, res ) => {
@@ -52,6 +55,29 @@ module.exports = (app, posts) => {
   // API
   app.get('/api/posts', ( req, res ) => {
     res.json(posts);
+  });
+
+  app.get('/rss.xml', ( req, res ) => {
+    const channel = {
+      title: "MikeMJHarris' Blog",
+      link: "https://blog.mikemjharris.com/",
+      description: "Tech, some creative bits and other thoughts",
+      generator: "MikeMJHarris' custom generator",
+      language: "en-us",
+      lastBuildDate: date,
+      items: posts.map((post) => {
+        return {
+          title: post.title,
+          link: "https://blog.mikemjharris.com/posts/" + post.searchtitle,
+          pubDate: post.date,
+          guid: post.searchtitle,
+          description: post.body
+        }
+      })
+    }
+
+    res.set('Content-Type', 'text/xml');
+    res.send(js2xmlparser.parse('channel', channel));
   });
 
 };
