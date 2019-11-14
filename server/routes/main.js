@@ -78,7 +78,7 @@ module.exports = (app, posts) => {
                   type:"application/rss+xml"
                },
           },
-          items: posts.map((post) => {
+          item: posts.map((post) => {
             return {
               title: post.title,
               link: "https://blog.mikemjharris.com/posts/" + post.searchtitle,
