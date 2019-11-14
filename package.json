@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./server/server.js",
-    "dev-server": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html",
+    "dev-server": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html,js",
     "fe-build": "./node_modules/gulp/bin/gulp.js",
     "fe-dev": "./node_modules/gulp/bin/gulp.js watch",
     "test": "jest test",
@@ -23,6 +23,7 @@
     "express-session": "*",
     "jest": "^23.1.0",
     "jquery": "^3.4.0",
+    "js2xmlparser": "^4.0.0",
     "moment": "^2.10.2",
     "morgan": "^1.9.1",
     "nunjucks": "^3.1.3",
