@@ -70,7 +70,7 @@ module.exports = (app, posts) => {
           description: "Tech, some creative bits and other thoughts",
           generator: "MikeMJHarris' custom generator",
           language: "en-us",
-          lastBuildDate: date,
+          lastBuildDate: date.toUTCString(),
           "atom:link": {
             $: {
                   href:"https://blog.mikemjharris.com/rss.xml",
