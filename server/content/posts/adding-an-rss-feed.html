@@ -8,17 +8,17 @@
 <!-- meta-data twittercard: summary_large_image -->
 
 <p>
-  A number of people who I respect on twitter are quite vocal that blogs should have an RSS feed. I'm excited to announce that as off this week my blog too has an <a href="/rss.xm">RSS feed!</a>. But what is an RSS feed, why do I need one and how did I add it to this project?
+  A number of people who I respect on twitter are quite vocal that blogs should have an RSS feed. I'm excited to announce, that as of this week, my blog too has an <a href="/rss.xm">RSS feed</a>! But what is an RSS feed, why do I need one and how did I add it to this project?
 </p>
 <h4>What is RSS?</h4>
  <p>
    RSS allows users to have one central place to read all their favourite blogs. It stands for Really Simple Syndication and is a standard, xml based way of exposing your blog content so that it can be read in a RSS reader.
  </p>
  <p>
-  For someone writing a blog there's more chance that someone will discover and read what you wrote.  One downside is that if you rely on advertising or care about data on how many people read your blog then providing all the content in the RSS feed means that users may not travel to your site.  Neither of these matter to me so more than happy to provide a feed.
+  The benefit for a blogger is there's more chance that someone will discover and then regularly read what you write.  One downside is that if you rely on advertising or care about data on how many people read your blog then providing all the content in the RSS feed means that users may not travel to your site.  Neither of these matter to me so more than happy to provide a feed.
  </p>
  <p>
-   These two twiiter posts (both Sara and Stu among others regularly post about RSSS) show the demand is out there and what consumers are looking for
+   These two twiiter posts below (both Sara and Stu among others regularly post about RSS) show the demand is out there and what consumers are looking for. The threads/conversations on both tweets are also worth a read.
  </p>
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">If you have a blog: please provide an RSS feed if you can.<br><br>If you provide an RSS feed: please provide the whole post to read (in the RSS reader) not just a short excerpt.<br><br>If you write but don’t have a blog: please start one, provide an RSS feed, and keep sharing what you love!</p>&mdash; Sara Soueidan (@SaraSoueidan) <a href="https://twitter.com/SaraSoueidan/status/1061577409340809216?ref_src=twsrc%5Etfw">November 11, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -26,12 +26,12 @@
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Hey, I love your personal blog … <br><br>but <br><br>I&#39;d _really_ love it if you had RSS so I never miss an article (chances are I&#39;ll click through to your site from my RSS reader)<br><br>and <br><br>I&#39;d be ecstatic if I didn&#39;t have to go into dev tools to find it</p>&mdash; Stu Robson is @DSLConf 🕶 (@StuRobson) <a href="https://twitter.com/StuRobson/status/1152132017905111041?ref_src=twsrc%5Etfw">July 19, 2019</a></blockquote></script>
 <h4>Deciding on the features to add</h4>
 <p>
-  Fortunately Those two tweets described what I needed to build pretty succintly:  create an RSS feed, provide the whole post in the feed and make sure there is a link to the feed on my blog.
+  These two tweets described what I needed to build pretty succintly:  create an RSS feed, provide the whole post in the feed and make sure there is a link to the feed on my blog.
  </p>
 
  <h4>Adding an RSS feed</h4>
  <p>
-   Most bloggin platforms (medium, wordpress etc.) either have RSS feed capability built in or available as a plugin.  My blog is a beautiful handcrafted piece of code (or cobled together bunch of JS libraries depending on your outlook) and as such adding an RSS feed was a manual process.  Fortunatly I already provide a list of all the posts in the blog as JSON. Creating an RSS feed meant mapping those fields to the required ones (I took Sara's feed as a blueprint), adding in some header content and converting it to xml. For that process I used <a href="https://www.npmjs.com/package/xml2js">xml2js</a>. I made sure the entire post was provided in the feed and there was a link to it in the main menu on my blog.
+   Most blogging platforms either have RSS feed capability built in or available as a plugin.  My blog is a beautiful handcrafted piece of code (or cobled together bunch of JS libraries depending on your outlook) and as such adding an RSS feed was a manual process.  Fortunatly I already provide a list of all the posts in the blog as JSON. Creating an RSS feed meant mapping those fields to the required ones (I took Sara's feed as a blueprint), adding in some header content and converting it to xml. For that process I used <a href="https://www.npmjs.com/package/xml2js">xml2js</a>. I made sure the entire post was provided in the feed and there was a link to it in the main menu on my blog.
  </p>
  <p>
    You can see the relevant piece of code <a href="https://github.com/mikemjharris/blog/blob/56c57ab5f94e1bb7e6d6fff5c8de364b75b81aba/server/routes/main.js#L60-L92">on github</a>, here's pic of the feed and you can also see the feed in action <a href="/rss.xml">here</a>
@@ -40,8 +40,5 @@
 <img src="/images/rss-xml.png" alt="Screenshot of xml feed" />
 <h4>Conclusion</h4>
 <p>
-  Twitter is a very useful tool to discover how people are using various technologies.  The tweets above prompted me to add an RSS feed and also all the details I needed to add. Adding a feed has been on my todo for a while - mainly because I thought it would be a bigger job than it was. Fortunately the structure of my project meant it went fairly smoothly - with the main tripping up points being making sure the RSS feed was in the exact right format.  Would love to hear from you if you do subscribe to the feed and any feedback on how the posts appear in your reader would be appreciated.
-</p>
-
-
+  Twitter is a very useful tool to discover how people are using various technologies.  The tweets above prompted me to add an RSS feed and also outline all the functionality I needed to include. Doing this has been on my todo list for a while - I thought it was going to be a bigger piece of work but it turned out to not need much time.  Would love to hear from you if you do subscribe to the feed and any feedback on how the posts appear in your reader would be appreciated.
 </p>
