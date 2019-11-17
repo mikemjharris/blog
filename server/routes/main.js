@@ -84,7 +84,7 @@ module.exports = (app, posts) => {
               link: "https://blog.mikemjharris.com/posts/" + post.searchtitle,
               pubDate: post.date,
               guid: post.searchtitle,
-              description: post.body
+              description: post.body.replace(/href=\"\//g, "href=\"https://blog.mikemjharris.com/")
             }
           })
         }
