@@ -16,5 +16,7 @@ jobs:
         git status
         touch test.txt
         echo 'hi' > test.txt
+        git config --global user.email "hello@mikemjharris.com"
+        git config --global user.name "Mike Harris"
         git add test.txt
         git commit -m 'ci skip'
