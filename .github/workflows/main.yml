@@ -20,3 +20,4 @@ jobs:
         git config --global user.name "Mike Harris"
         git add test.txt
         git commit -m 'ci skip'
+        git push -u
