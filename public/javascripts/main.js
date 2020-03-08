@@ -93,8 +93,13 @@ if ('serviceWorker' in navigator) {
 
         var newPage = _href.replace(/\//, '');
         $('article').html('');
-
-        var html = MyApp.templates[newPage]({ posts: posts });
+        try {
+        // sometimew get errors with handlebars. Need to fix but for now just rely on server
+        // side rendering
+          var html = MyApp.templates[newPage]({ posts: posts });
+        } catch (e) {
+          window.location = _href;
+        }
          setTimeout(function() {
           $('article').addClass('show');
           $('article').append(html);
