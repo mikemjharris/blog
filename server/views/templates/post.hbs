@@ -1,17 +1,23 @@
 {{#post}}
+  <meta property="og:url" content="https://blog.mikemjharris.com/posts/searchtitle" />
+  <meta property="og:type" content="article" />
   {{#compare twittercard undefined }}
     <meta name="twitter:card" content="summary" />
   {{ else }}
-  <meta name="twitter:card" content="{{ twittercard }}" />
+    <meta name="twitter:card" content="{{ twittercard }}" />
   {{/compare}}
   <meta name="twitter:site" content="@mikemjharris" />
   <meta name="twitter:title" content="{{ title }}" />
+  <meta property="og:title" content="{{ title }" />
   <meta name="twitter:description" content="{{ intro }}" />
+  <meta name="og:description" content="{{ intro }}" />
   {{#compare twitterimage undefined }}
     <meta name="twitter:image" content="https://blog.mikemjharris.com/images/icons/icon-512.png" />
+    <meta property="og:image" content="https://blog.mikemjharris.com/images/icons/icon-512.png" />
   {{ else }}
-  <meta name="twitter:image" content="{{ twitterimage }}" />
-{{/compare}}
+    <meta name="twitter:image" content="{{ twitterimage }}" />
+    <meta property="og:image" content="{{ twitterimage }" />
+  {{/compare}}
   <div class="header">
     <h2>{{title}}</h2> <a
       target="_blank"
