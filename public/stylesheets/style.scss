@@ -150,6 +150,14 @@ article {
     margin-bottom: 2em;
   }
 
+  .half {
+    display: flex;
+    justify-content: space-between;
+    img {
+      max-width: 48%;
+    }
+  }
+
   img.thumbnail {
     max-width: 200px;
     float: left;
