@@ -11,6 +11,11 @@
 }
 figcaption {
   font-style: italic;
+  margin-bottom: 5px;
+  img ~ & {
+    margin-top: -2em;
+    margin-bottom: 2em;
+  }
 }
 em {
   font-weight: bold; }
