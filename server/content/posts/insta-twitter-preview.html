@@ -1,17 +1,43 @@
 <!-- meta-data title: Instagram Twitter Preview -->
 <!-- meta-data searchtitle:  instagram-twitter-preview -->
 <!-- meta-data date: 25 April 2020 -->
-<!-- meta-data intro: Website I built to allow a preview of instagram pictures on twitter -->
+<!-- meta-data intro: Website I built to allow a preview of Instagram pictures on twitter -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech -->
 <!-- meta-data twitterimage: https://blog.mikemjharris.com/images/insta-share-twitter-preview.png  -->
 <!-- meta-data twittercard: summary_large_image -->
 
 <p>
+  I've occasionally wanted to share an Instagram link on twitter and it looks all sad and dull being just a link and no image or description. I built <a href="https://instagram.mikemjharris.com">this website</a> which takes a standard Instagram link and provides a link you can share in twitter with a full preview.  No logging in or authentication, just a copy, paste, copy, paste.
 </p>
-
-<h3>Skyscrapers of Chicago</h3>
+<figure>
+  <figcaption>Sad Instagram share with no preview</figcaption>
+  <img src="/images/insta-share.png" alt="Instagram link shared to twitter" />
+</figure>
+<h3>Twitter Cards</h3>
 <p>
+  In a <a href="/posts/twitter-card">previous post</a> I wrote about how I added the relevant meta data to this blog so that you can see a nice preview image when you share a post on twitter. Check that our for more info on twitter preview data.
 </p>
-<img src="/images/insta-share.png" alt="Instagram link shared to twitter" />
+<h3>Open Graph Tags</h3>
+<p>
+  Instagram posts have open tag data - this is very similar to twitter cards and means that when you share the post to Facebook or anything that uses the open graph protocol you can see a preview image and description.
+</p>
+<h3>Proxy server</h3>
+<p>
+  To make the open graph data available in the same format as twitter cards I setup a proxy server.  When the twitter bot requests the page from my server it gets the meta data including the links to the image on Instagram and the description.  When a user clicks on the link on twitter it takes them direct to the Instagram page.
+</p>
+<p>
+
+<figure>
+  <figcaption>This pic is the same link I've shared in the first pic but via the proxy server. What a lovely preview!</figcaption>
 <img src="/images/insta-share-twitter.png" alt="Instagram Share link shared to twitter" />
+</figure>
+<h3>How to use it</h3>
+<p>
+  Go to the <a href="https://instagram.mikemjharris.com">Instagram twitter preview site</a> to check it out. </p>
+<p>You copy a post from Instagram:  click the three dots to the top right of a post and select copy link or if you are on the web open an image and copy the URL. Paste that link in the box, click the button and it converts it to shareable URL.  What it does is convert a URL that looks like <a href="https://www.instagram.com/p/B_XtJ0cnOM0/">https://www.instagram.com/p/B_XtJ0cnOM0/</a> to <a href="https://instagram.mikemjharris.com/p/B_XtJ0cnOM0/">https://instagram.mikemjharris.com/p/B_XtJ0cnOM0/</a> (which if you click on the link takes you back to Instagram).
+</p>
+<h3>Conclusion</h3>
+<p>
+You can take a look at the code <a href="https://github.com/mikemjharris/insta-preview">here</a>. It's a bit of fun so imagine will break some situations but it works well enough that I can share any public post from Instagram on twitter.
+</p>
