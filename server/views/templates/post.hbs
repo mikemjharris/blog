@@ -6,6 +6,10 @@
   {{ else }}
     <meta name="twitter:card" content="{{ twittercard }}" />
   {{/compare}}
+  {{#compare twitterplayer undefined }}
+  {{ else }}
+    <meta name="twitter:player" content="{{ twitterplayer}}" />
+  {{/compare}}
   <meta name="twitter:site" content="@mikemjharris" />
   <meta name="twitter:title" content="{{ title }}" />
   <meta property="og:title" content="{{ title }}" />
