@@ -1,7 +1,7 @@
 name: TagBot
 on:
   schedule:
-    - cron: * * * * *
+    - cron: '* * * * *'
 
 jobs:
   build:
