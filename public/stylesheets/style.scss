@@ -11,6 +11,11 @@
 }
 figcaption {
   font-style: italic;
+  margin-bottom: 5px;
+  img ~ & {
+    margin-top: -2em;
+    margin-bottom: 2em;
+  }
 }
 em {
   font-weight: bold; }
@@ -148,6 +153,14 @@ article {
     vertical-align: top;
     max-width: 100%;
     margin-bottom: 2em;
+  }
+
+  .half {
+    display: flex;
+    justify-content: space-between;
+    img {
+      max-width: 48%;
+    }
   }
 
   img.thumbnail {
