@@ -40,7 +40,7 @@
     "gulp-wrap": "^0.14.0",
     "handlebars": "^4.1.1",
     "merge-stream": "^0.1.7",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.17.5",
     "path": "^0.11.14"
   },
