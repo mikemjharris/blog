@@ -500,6 +500,10 @@ table {
   transform: translateX(0px) scaleX(1) scaleY(1);
 }
 
+audio:focus {
+  outline: none;
+}
+
 /* https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php */
 .videoWrapper {
   position: relative;
