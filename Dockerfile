@@ -1,4 +1,4 @@
-FROM node:9.10
+FROM node:17
 MAINTAINER Mike Harris "hello@mikemjharris.com"
 
 RUN  npm --no-color install -g gulp
