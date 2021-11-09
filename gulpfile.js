@@ -1,13 +1,11 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('node-sass'));
 var concat = require('gulp-concat');
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var merge = require('merge-stream');
 var path = require('path');
-var autoprefixer = require('gulp-autoprefixer');
-
 
 gulp.task('templates', function() {
   // Assume all partials start with an underscore
@@ -39,22 +37,18 @@ gulp.task('templates', function() {
 });
 
 gulp.task('sass', function () {
-  gulp.src([
+  return gulp.src([
     './public/stylesheets/reset.scss',
     './public/stylesheets/style.scss',
     './public/stylesheets/mobile.scss'
     ])
     .pipe(sass({ errLogToConsole: true }))
     .pipe(concat('style.css'))
-    .pipe(autoprefixer({
-          browsers: ['last 2 versions'],
-          cascade: false
-      }))
     .pipe(gulp.dest('./public/dist/'));
 });
 
 gulp.task('js', function () {
-  gulp.src([
+  return gulp.src([
     './public/javascripts/helpers.js',
     './public/javascripts/main.js',
   ])
@@ -62,9 +56,9 @@ gulp.task('js', function () {
   .pipe(gulp.dest('./public/dist/'));
 });
 
-gulp.task('default', ['js', 'sass', 'templates']);
+gulp.task('default', gulp.series('js', 'sass', 'templates'));
 
-gulp.task('watch', ['sass', 'js', 'templates'], function () {
+gulp.task('watch', gulp.series('sass', 'js', 'templates'), function () {
   gulp.watch('./public/stylesheets/*', ['sass']);
   gulp.watch('./public/javascripts/*', ['js']);
   gulp.watch('./server/views/templates/*', ['templates']);
