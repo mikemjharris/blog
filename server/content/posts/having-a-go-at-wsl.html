@@ -1,19 +1,19 @@
-<!-- meta-data title: My attepts at using linux on windows? -->
+<!-- meta-data title: My attept(s) at using Linux on Windows -->
 <!-- meta-data searchtitle: having-a-go-at-WSL -->
 <!-- meta-data date: 2 Dec 2021 -->
-<!-- meta-data intro: Trying out WSL - windows subsytem for linux -->
+<!-- meta-data intro: Trying out Windows Subsytem for Linux (WSL) -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech -->
 <!-- meta-data twitterimage: https://blog.mikemjharris.com/images/keyboard_pink_keys.jpg  -->
 <!-- meta-data twittercard: summary_large_image -->
 
 <p>
-  Microsoft are increasingly trying to make their products and tools appeal to a wider range developers.  A large chunk of coders out there work in a *nix environment (Linux or MACs) so Microsoft created <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a> - Windows Subsystem for Linux. This allows users to run a linux like environment on Windows with little overhead. But how does it work in practice?  I had an initial go at trying it out in 2020 and have had another go in the past month. What's it like to setup and how does it compare to a native environment that I'm used to in my day to day work.
+  Microsoft are increasingly trying to make their products and tools appeal to a wider range developers.  A large chunk of coders out there work in a *nix environment (Linux or MACs) so Microsoft created <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a> - Windows Subsystem for Linux. This allows users to run a linux like environment on Windows with little overhead. But how does it work in practice?  What's it like to setup and how does it compare to a native environment that I'm used to in my day to day work.
 </p>
 
 <h4>A brief history of my computers</h4>
 <p>
-  For the first ten years of my working life (~2002 - 2013) I worked in finance and worked only with Windows - but primarily for Excel rather than to code. With much horror I had to switch to Macs when changing careers to coding - obiously I then fell in love with Macs and couldn't imagine anything else. Macs lasted unitl 2017.  In my first weeks at the Royal Academy of Arts an unfortunate incident with an automatic tap and an open laptop bag meant I ruined my smart new Mac - there was a spare dell laptop so with he help of a team member who was a linux user I setup Ubunutu and have been a dedicated linux user since.
+  For the first ten years of my working life (~2002 - 2013) I worked in finance and worked only with Windows - (primarily for Excel). With much horror I had to switch to Macs when changing careers to coding in 2014 - obviously I then fell in love with Macs and couldn't imagine anything else. Macs lasted unitl 2017.  In my first weeks at the Royal Academy of Arts an unfortunate incident with an automatic tap and an open laptop bag meant I ruined my smart new computer - there was a spare dell laptop so with he help of a team member (who was a linux user) I setup Ubuntu and have been a dedicated desktop Linux user since.
 </p>
 
 <figure>
@@ -23,17 +23,43 @@
     <img src="/images/asus-flip-comparison.jpg" />
 </figure>
 <p>
-  My home laptops have followed a similar curve - for the majority of the last few years I've mainly been using the Macbook Air I got myself in 2013. I've had a few other gadgets: I've written in the past about coding on a chrome book;  last year I got a MS Surface go - although it's spent it's life attached to a stationary bike as a screen to run zwift (<a href="/pedaling-through-a-pandemic">pedaling through a pandemic</a>)
+  My home laptops have followed a similar curve - for the majority of the last few years I've mainly been using the Macbook Air I got myself in 2013. I've had a few other gadgets: I've written in the past about <a href="posts/coding-with-a-chromebook">coding on a chrome book</a>;  last year I got a MS Surface Go although it's spent it's life attached to a stationary bike as a screen to run zwift (<a href="/pedaling-through-a-pandemic">pedaling through a pandemic</a>)
 </p>
 <p>
-  i was due an upgrade on the old mac - i'd usually opt for the dell developer editions with Ubuntu already setup but the refurbished dell store had an excellent deal on a windows laptop - saving money (and saving the world?) i chose that and decided to both set it up as a dual boot with linux as well as giving wsl a proper go.
+  I was due an upgrade on the old mac - for work laptops I've been very happy with Dell XPS 13 developer editions with Ubuntu already setup. However the refurbished dell store had an excellent deal on a Windows laptop - saving money (and saving the world?) I chose that and decided to set it up as a dual boot with Linux as well as using it as an opportunity giving WSL a proper go.
 </p>
-<h4>Why WSL?</h4>
+<h4>First go at WSL - 2020</h4>
 <p>
-   Why WSL? So one of the reasons for wallowing in nostalgia of my previous laptops was to give some context - I'm generally a linux user and for the main part have no issues with that setup.  Am always curious though as the odd application or device might work better on Windows/Mac.  WSL would give me the opportunity to try out windows again, benefit from that environment yet still be able to deal with the linux command line which is where I spend most of my day.
+  As mentioned in 2020 I gota Surface Go. It's small and super powerful and has lots more beef that my chromebook.  I wanted to try WSL on it so that I could have something to either code on locally or act as a dumb terminal to <a href="/posts/computing-in-the-cloud">code in the cloud</a>.
 </p>
-<h4>First go a WSL - 2020</h4>
+<p>At the time is was the first version of WSL. There were definitely a few issues - I can't remember all the details but here's the notes I saved as to some of the problems I ran into:  long/complex setup, fonts, icons, cursor spacing, gpg can't connect to agent, need to install apt repo, issues with docker.  I know there were a few other things as well - while it seemed a good idea there were enough issues that I didn't progress beyond a few days experimenting.
+</p>
+<h4>Seond go at WSL - 2021</h4>
 <p>
-   In 2020 I got a surface go - mainly to ride around in a virtual world but also to try it out as a beefed up portable computer to take the place of the dirt cheap chromebook I often use whout out and about. One of the things I tried out on it was WSL - at the time is was the first verison of WSL. There were definitely a few issues - I can't remember all the details but here's the notes I saved as to some of the problems I ran into:  k
+  In late 2021 I got my new laptop. First I setup dual boot - soon I had my familiar linux envirnment running - everything as I like it and no real issues.  Secondly I decided to see if I could get WSL setup and with roughly feature/feel parity to the dual boot.
+</p>
+<p>
+  WSL 2 had come out and the promise of quicker setup and better features.  Intially though it didn't seem that much had changed - I upgraded to windows 11 but still had to jump through various hoops running powershell commands, updating various settings and then eventually I had Ubunut 20 running in a window.  Being a year later there are more users, more blog posts/help/stackoverflow answers to help one along. There were a few more updates including a bios setting to get docker running.
+</p>
+<p>
+  At this stage I ran my <a href"https://github.com/mikemjharris/config">install scripts</a> - I'd only recently used them to setup the dual boot setup so wanted to see if WSL terminal could match the functionality. Most things ran but was a bit disappointed to see that some of the display issues with fonts/cursor/icons. I tried to fix some of these with limited success, moved onto other issues but then a day or two later found the solution. Switching from the default Windows Console Host to the new <a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Windows Terminal</a> meant that looks wise things were pretty much the same as on my native Linux setup!
+</p>
+<h4>WSL and the Windows environment</h4>
+<p>
+  Most of my time is either in the terminal or in the browser.  In the terminal I use Tmux and VIM - my configuration over the has grown and adapted to fit how I work day to day.  The main thing I was missing with WSL was integration with the system clipboard.  In vim when I yank text I have it setup elsewhere to copy to clipboard, similarly on the command line I often pipe content to the equivalent of pbcopy/pbpaste.  Quite a bit of investigation and learning how WSL is setup within the Windows environment meant these two commits solved my <a href-"https://github.com/mikemjharris/config/commit/a34db2270379e023117e5f51c4802b3e51531075">vim</a> and <a href="https://github.com/mikemjharris/config/commit/0633878eb00e20ab9d9c496a4fecf2c474ed8e1b">terminal</a> issues.
+  </p>
 
-</p>
+
+<figure>
+    <figcaption>
+      Windows Terminal - with Options to run Powershell, Ubuntu or Azure shell.
+    </figcaption>
+    <img src="/images/windows-terminal-wsl.png" />
+</figure>
+  <p>
+
+
+
+
+
+<p>How you get on with or have a need for WSL may depend on what systems you've worked with - if you're full Mac, and happy with Mac then this may be of interest but not much practical use.  If you're a Linux of Windows user then you'll have more use and I'd anticipate
