@@ -1,0 +1,4 @@
+tasks:
+  - init: npm install
+    command: npm run fe-build
+    command: npm run start
