@@ -8,12 +8,12 @@
 <!-- meta-data twittercard: summary_large_image -->
 
 <p>
-  Microsoft are increasingly trying to make their products and tools appeal to a wider range of developers.  Recently Microsoft created <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a> - Windows Subsystem for Linux. This allows users to run a Linux like environment on Windows with little overhead. But how does it work in practice?  What's it like to setup and how does it compare to a native Linux environment?
+  Microsoft are increasingly trying to make their products and tools appeal to a wider range of developers.  Recently they released <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a> - Windows Subsystem for Linux. This allows users to run a Linux like environment on Windows with little overhead. But how does it work in practice?  What's it like to setup and how does it compare to a native Linux environment?
 </p>
 
 <h4>A brief history of my computers</h4>
 <p>
-  How useful or interested you may find WSL will probably depend on what computers you are used to. For the first ten years of my working life (~2002 - 2013) I worked in finance and worked only with Windows - (primarily for Excel). With much horror I had to switch to Apple when changing careers to coding in 2014 - obviously I then fell in love with Macs and couldn't imagine anything else. In my first weeks at the Royal Academy of Arts in 2017 an unfortunate incident with an automatic tap and an open laptop bag meant I ruined my smart new computer - there was a spare dell laptop so with he help of a team member (who was a Linux user) I setup Ubuntu and have been a dedicated desktop Linux user since.
+  How useful or interested you may find WSL will probably depend on what computers you are used to. For the first ten years of my working life (~2002 - 2013) I worked in finance and worked only with Windows - (primarily for Excel). With much horror I had to switch to Apple when changing careers to coding in 2014 - obviously I then fell in love with Macs and couldn't imagine anything else. In my first weeks at the Royal Academy of Arts in 2017 an unfortunate incident with an automatic tap and an open laptop bag meant I ruined my smart new computer - there was a spare dell laptop so with the help of a team member (who was a Linux user) I setup Ubuntu and have been a dedicated desktop Linux user since.
 </p>
 
 <figure>
@@ -23,17 +23,17 @@
     <img src="/images/asus-flip-comparison.jpg" />
 </figure>
 <p>
-  My home laptops have followed a similar curve - for the majority of the last few years I've mainly been using the Macbook Air I got myself in 2013 or one of my work laptops. I've had a few other gadgets: I've written in the past about <a href="posts/coding-with-a-chromebook">coding on a chrome book</a>;  last year I got a MS Surface Go.
+  My home laptops have followed a similar curve - for the majority of the last few years I've mainly been using a Macbook Air I got myself in 2013. I've had a few other gadgets: I've written in the past about <a href="posts/coding-with-a-chromebook">coding on a chrome book</a>;  last year I got a MS Surface Go.
 </p>
 <p>
-  I was due an upgrade on the old home Mac Air. At work I've been very happy with Dell XPS 13 developer edition with Ubuntu already setup at work. This was my initial thought however the refurbished dell store had an excellent deal on a Windows laptop - saving money (and saving the world?) I chose that and decided to set it up as a dual boot with Linux as well as using it as an opportunity to give WSL a proper go.
+  I was due an upgrade on the old home Mac Air. At work I've been very happy with Dell XPS 13 developer edition with Ubuntu already setup. The refurbished dell store however had an excellent deal on a Windows laptop - saving money (and saving the world?) I chose that and decided to set it up as a dual boot with Linux as well as using it as an opportunity to give WSL a proper go.
 </p>
 <p>
 <h4>First go at WSL - 2020</h4>
 <p>
   As mentioned in 2020 I got a Surface Go. It's small and while not super powerful it has lots more beef that my chromebook.  I wanted to try WSL on it so that I could have something to either code on locally or act as a dumb terminal to <a href="/posts/computing-in-the-cloud">code in the cloud</a>.
 </p>
-<p>WSL was in it's first version then and there were definitely a few issues - I can't remember all the details but here's the rough notes I made at the time about the problems I encountered:  long/complex setup, fonts, icons, cursor spacing, gpg can't connect to agent, need to install apt repo, issues with docker.</p>
+<p>WSL was in its first version then and there were definitely a few issues - I can't remember all the details but here's the rough notes I made at the time about the problems I encountered:  long/complex setup, fonts, icons, cursor spacing, gpg can't connect to agent, need to install apt repo, docker.</p>
 <p>There were enough issues that my enthusiasm waned and the Surface Go ended up permanently attached to my exercise bike as a window into the <a href="/pedaling-through-a-pandemic">virtual zwift world</a>).
 </p>
 <h4>Seond go at WSL - 2021</h4>
@@ -41,7 +41,7 @@
   In late 2021 I got my new laptop. First I setup dual boot, then ran my <a href"https://github.com/mikemjharris/config">install scripts</a> and fairly quickly I had my familiar Linux environment running - everything as I like it and no real issues.
 </p>
 <p>
-  Then I tried out windows - WSL 2 had come out with the promise of quicker setup and better features.  Initially though it didn't seem that much had changed since my first attempt - there were quite a few hoops to jump through: running Powershell commands, updating various settings and even a BIOS change.
+  Then I tried out Windows - WSL 2 had come out with the promise of quicker setup and better features.  Initially though it didn't seem that much had changed since my first attempt - there were quite a few hoops to jump through: running Powershell commands, updating various settings and even a BIOS change.
 </p>
  Eventually I had Ubuntu 20 running in a window. The main difference to my first attempt was the amount of blog posts/help/stackoverflow answers to help one along.
 </p>
@@ -51,7 +51,7 @@
 </p>
 <h4>WSL and the Windows environment</h4>
 <p>
-  Most of my time is spent in the terminal. Things now looked similar to my dual boot Linux environment but a few key features were missing. The main thing I was missing with WSL was integration with the system clipboard - a feature I use a lot in the terminal either editing code or piping data around.  Quite a bit of investigation and learning how WSL is setup within the Windows environment meant these two commits solved my <a href="https://github.com/mikemjharris/config/commit/a34db2270379e023117e5f51c4802b3e51531075">vim</a> and <a href="https://github.com/mikemjharris/config/commit/0633878eb00e20ab9d9c496a4fecf2c474ed8e1b">terminal</a> issues.
+  Most of my time is spent in the terminal. Things now looked similar to my dual boot Linux environment but a few key features were missing. The main thing feature was integration with the system clipboard - something I use a lot in the terminal either editing code or piping data around.  Quite a bit of investigation and learning how WSL is setup within the Windows environment meant resulted in these two commits in my config repo which solved my <a href="https://github.com/mikemjharris/config/commit/a34db2270379e023117e5f51c4802b3e51531075">vim</a> and <a href="https://github.com/mikemjharris/config/commit/0633878eb00e20ab9d9c496a4fecf2c474ed8e1b">terminal</a> issues.
   </p>
 
 
@@ -64,7 +64,7 @@
 
 
 <h4>The power of Linux and Windows</h4>
-<p>In delving into these issues I started really appreciating the benefits of WSL. You can invoke windows commands in WSL and Linux commands in Powershell. They can run together in the fantastic Windows Terminal along with things such as Azure Shell or even other Linux versions. I had what felt like a proper first class Linux build but could rely on the quality of Windows for things like sound (an area that can be complicated with Linux) and also the ability to run Windows programs and potentially dabble with a windows coding environment.
+<p>In delving into these issues I started really appreciating the benefits of WSL. You can invoke windows commands in WSL and Linux commands in Powershell. They can run together in the fantastic Windows Terminal along with things such as Azure Shell or even other Linux versions. I had what felt like a proper first class Linux build but could rely on the quality of Windows for things like sound (an area that can be complicated with Linux) and also the ability to run Windows programs and potentially enticing me to dabble with a windows coding environment. There seemed to be the best of both worlds available to me with lots of ovelap.
 </p>
 
 <h4>Conclusion</h4>
@@ -74,8 +74,7 @@
 <p>I'm glad I persisted - am really enjoying the setup. I've mainly been using it for a few small projects but will aim to stick with it for a few months and report back on how I get on.
 </p>
 <p>
-  How you get on may depend on what you are used to using - I think any Linux or Windows users will see a lot of benefits from WSL. If you are a dedicated Mac user then the hassle may not be worth it.
+  How you get on may depend on what you are used to using - I think any Linux or Windows users will see a lot of benefits from WSL. If you are a dedicated Mac user then the hassle may not be worth it. Interestd to hear if anyone is using it as their main work dev environment.
   </P.
 
 
-<p>How you get on with or have a need for WSL may depend on what systems you've worked with - if you're full Mac, and happy with Mac then this may be of interest but not much practical use.  If you're a Linux of Windows user then you'll have more use and I'd anticipate
