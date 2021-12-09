@@ -1,24 +1,24 @@
-<!-- meta-data title: My attept(s) at using Linux on Windows -->
+<!-- meta-data title: My attempt(s) at using Linux on Windows -->
 <!-- meta-data searchtitle: having-a-go-at-WSL -->
 <!-- meta-data date: 2 Dec 2021 -->
-<!-- meta-data intro: Experimenting with Windows Subsytem for Linux (WSL) -->
+<!-- meta-data intro: Experimenting with Windows Subsystem for Linux (WSL) -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: tech -->
-<!-- meta-data twitterimage: https://blog.mikemjharris.com/images/keyboard_pink_keys.jpg  -->
+<!-- meta-data twitterimage: https://blog.mikemjharris.com/images/windows-terminal-wsl.png  -->
 <!-- meta-data twittercard: summary_large_image -->
 
 <p>
-  Microsoft are increasingly trying to make their products and tools appeal to a wider range of developers.  Recently Microsoft created <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a> - Windows Subsystem for Linux. This allows users to run a linux like environment on Windows with little overhead. But how does it work in practice?  What's it like to setup and how does it compare to a native Linux environment?
+  Microsoft are increasingly trying to make their products and tools appeal to a wider range of developers.  Recently Microsoft created <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a> - Windows Subsystem for Linux. This allows users to run a Linux like environment on Windows with little overhead. But how does it work in practice?  What's it like to setup and how does it compare to a native Linux environment?
 </p>
 
 <h4>A brief history of my computers</h4>
 <p>
-  How usueful or interested you may find WSL will probably depend on what computers you are used to. For the first ten years of my working life (~2002 - 2013) I worked in finance and worked only with Windows - (primarily for Excel). With much horror I had to switch to Apple when changing careers to coding in 2014 - obviously I then fell in love with Macs and couldn't imagine anything else. In my first weeks at the Royal Academy of Arts in 2017 an unfortunate incident with an automatic tap and an open laptop bag meant I ruined my smart new computer - there was a spare dell laptop so with he help of a team member (who was a linux user) I setup Ubuntu and have been a dedicated desktop Linux user since.
+  How useful or interested you may find WSL will probably depend on what computers you are used to. For the first ten years of my working life (~2002 - 2013) I worked in finance and worked only with Windows - (primarily for Excel). With much horror I had to switch to Apple when changing careers to coding in 2014 - obviously I then fell in love with Macs and couldn't imagine anything else. In my first weeks at the Royal Academy of Arts in 2017 an unfortunate incident with an automatic tap and an open laptop bag meant I ruined my smart new computer - there was a spare dell laptop so with he help of a team member (who was a Linux user) I setup Ubuntu and have been a dedicated desktop Linux user since.
 </p>
 
 <figure>
     <figcaption>
-      Pic from previous post about coding witha  chromebook - showing 2013 Mac Air and the chromebook
+      Pic from previous post about coding with a chromebook - showing 2013 Mac Air and the chromebook
     </figcaption>
     <img src="/images/asus-flip-comparison.jpg" />
 </figure>
@@ -34,20 +34,20 @@
   As mentioned in 2020 I got a Surface Go. It's small and while not super powerful it has lots more beef that my chromebook.  I wanted to try WSL on it so that I could have something to either code on locally or act as a dumb terminal to <a href="/posts/computing-in-the-cloud">code in the cloud</a>.
 </p>
 <p>WSL was in it's first version then and there were definitely a few issues - I can't remember all the details but here's the rough notes I made at the time about the problems I encountered:  long/complex setup, fonts, icons, cursor spacing, gpg can't connect to agent, need to install apt repo, issues with docker.</p>
-<p>There were enough issues that my enthusiasm waned and the Surface Go ended up permantly attached to my expercise bike as a window into the <a href="/pedaling-through-a-pandemic">virtual zwift world</a>).
+<p>There were enough issues that my enthusiasm waned and the Surface Go ended up permanently attached to my exercise bike as a window into the <a href="/pedaling-through-a-pandemic">virtual zwift world</a>).
 </p>
 <h4>Seond go at WSL - 2021</h4>
 <p>
-  In late 2021 I got my new laptop. First I setup dual boot, then ran my <a href"https://github.com/mikemjharris/config">install scripts</a> and fairly quickly I had my familiar linux envirnment running - everything as I like it and no real issues.
+  In late 2021 I got my new laptop. First I setup dual boot, then ran my <a href"https://github.com/mikemjharris/config">install scripts</a> and fairly quickly I had my familiar Linux environment running - everything as I like it and no real issues.
 </p>
 <p>
-  Then I tried out windows - WSL 2 had come out with the promise of quicker setup and better features.  Intially though it didn't seem that much had changed since my first attempt - there were quite a few hoops to jump through: running powershell commands, updating various settings and even a BIOS change.
+  Then I tried out windows - WSL 2 had come out with the promise of quicker setup and better features.  Initially though it didn't seem that much had changed since my first attempt - there were quite a few hoops to jump through: running Powershell commands, updating various settings and even a BIOS change.
 </p>
- Eventually I had Ubunut 20 running in a window. The main difference to my first attempt was the amount of blog posts/help/stackoverflow answers to help one along.
+ Eventually I had Ubuntu 20 running in a window. The main difference to my first attempt was the amount of blog posts/help/stackoverflow answers to help one along.
 </p>
 <h4>Familiar environment</h4>
 <p>
-  With Ubunu running I ran the install scripts I'd just been using on the dual boot. Most things ran but was a bit disappointed to see that again some of the issues from WSL 1 were still present: problemts with fonts/cursor/icons. I tried to fix some of these with limited success, moved onto other issues but then a day or two later found the solution. Switching from the default Windows Console Host to the new <a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Windows Terminal</a> meant that looks wise things were pretty much the same as on my native Linux setup!
+  With Ubuntu running I ran the install scripts I'd just been using on the dual boot. Most things ran but was a bit disappointed to see that again some of the issues from WSL 1 were still present: problems with fonts/cursor/icons. I tried to fix some of these with limited success, moved onto other issues but then a day or two later found the solution. Switching from the default Windows Console Host to the new <a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Windows Terminal</a> meant that looks wise things were pretty much the same as on my native Linux setup!
 </p>
 <h4>WSL and the Windows environment</h4>
 <p>
@@ -64,12 +64,12 @@
 
 
 <h4>The power of Linux and Windows</h4>
-<p>In delving into these issues I started really appreciating the benefits of WSL. You can invoke windows commands in WSL and linux commands in Powershell. They can run together in the fantastic Windows Terminal along with things such as Azure Shell or even other Linux verions. I had what felt like a proper first class linux build but could rely on the quality of Windows for things linke sound (an area that can be complicated with linux) and also the ability to run Windows programs and potentially dabble with a windows coding environment.
+<p>In delving into these issues I started really appreciating the benefits of WSL. You can invoke windows commands in WSL and Linux commands in Powershell. They can run together in the fantastic Windows Terminal along with things such as Azure Shell or even other Linux versions. I had what felt like a proper first class Linux build but could rely on the quality of Windows for things like sound (an area that can be complicated with Linux) and also the ability to run Windows programs and potentially dabble with a windows coding environment.
 </p>
 
 <h4>Conclusion</h4>
 <p>
-  At a number of points in the process I almost gave up on WSL - I had a perfectly good working Linux envoronment on the other half of the hard drive. Why was I going through this pain for soething I thought would be inferior?
+  At a number of points in the process I almost gave up on WSL - I had a perfectly good working Linux envoronment on the other half of the hard drive. Why was I going through this pain for something I thought would be inferior?
 </p>
 <p>I'm glad I persisted - am really enjoying the setup. I've mainly been using it for a few small projects but will aim to stick with it for a few months and report back on how I get on.
 </p>
