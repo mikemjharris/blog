@@ -1,0 +1,48 @@
+<!-- meta-data title: Part 2 - My attempt(s) at using Linux on Windows -->
+<!-- meta-data searchtitle: my-attempts-at-wsl-part-2 -->
+<!-- meta-data date: 9 Jul 2022 -->
+<!-- meta-data intro: How's my experiment with Linux on Windows going six months in? -->
+<!-- meta-data author: Mike Harris  -->
+<!-- meta-data category: tech -->
+<!-- meta-data twitterimage: https://blog.mikemjharris.com/images/windows-terminal-wsl.png  -->
+<!-- meta-data twittercard: summary_large_image -->
+
+<p>
+  Last year I started experimenting with Linux on Windows (WSL)  and wrote about it in <a href="/posts/my-attempts-at-wsl">this post</a>. Back then I'd just set up the environment, used it for small side projects and was going to see if it could work as my main dev environment. As promised here's the report of how I got on.
+</p>
+
+<h4>WSL FTW</h4>
+<p>
+  TLDR - this is now my main dev environemt! I've been working day in day out with Linux on Windows, have switched over to booting from windows and haven't loaded up my native Linux environment for months.</p>
+
+<p>It's been fairly smooth sailing. As always with any computer environment there's always things to setup and deal with although was pleasantly suprised by how few things were an issue.
+</p>
+
+<h4>Windows Apps, Linux Terminal</h4>
+<p>
+  For normal Windows experience and command line linux everything just worked.  Very few issues that I hadn't experienced with normal Linux.  Things just worked and had the benefit of Windows apps.
+</p>
+<h4>Linux Apps</h4>
+<p>
+  Initially I didn't think I'd need to setup Linux apps.  That was until I tried to run end to end tests with cypress.  These need access to, among other things, Chrome.  After a bunch of searching found these two articles (<a href="https://wilcovanes.ch/articles/setting-up-the-cypress-gui-in-wsl2-ubuntu-for-windows-10/">article 1</a> , <a href="https://stackoverflow.com/questions/62641553/setup-cypress-on-wsl-ubuntu-for-windows-10">stackoverflow</a>).  Following those instructions I also added this <a href="https://github.com/mikemjharris/config/commit/eb299ecc43afa1f53393f1ad47b79963ec40c1a1">commit</a> to my config files.
+</p>
+<p>
+  This update also meant I had access to Linux apps - although for the majority (all?) of what I do Windows apps have been more than enough.
+</p>
+<figure>
+    <figcaption>
+      Windows Terminal - with Options to run Powershell, Ubuntu or Azure shell.
+    </figcaption>
+    <img src="/images/windows-terminal-wsl.png" />
+</figure>
+<h4>Coding in Windows</h4>
+<p>
+  I thought with the tightly intergrated terminal apps I thought I'd end up doing some powershell/windows coding.  I haven't touched it. Maybe one day!
+</p>
+
+<h4>Conclusion</h4>
+<p>
+  I'm reporting back - it's a success!  WSL works as a day to day dev environment for me.  Very few issues, love the stability of the apps from Windows but delighted to be on the command line with linux.
+</p>
+
+
