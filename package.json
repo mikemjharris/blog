@@ -20,7 +20,7 @@
     "debug": "^4.1.0",
     "ejs": "^3.1.6",
     "entry": "*",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-session": "*",
     "jest": "^27.3.1",
     "jquery": "^3.6.0",
