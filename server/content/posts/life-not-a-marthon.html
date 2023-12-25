@@ -6,9 +6,14 @@
 <!-- meta-data category: thoughts -->
 <!-- meta-data twitterimage: https://blog.mikemjharris.com/images/retro-2022/norway.jpg  -->
 <!-- meta-data twittercard: summary_large_image -->
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://unpkg.com/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
 <p>
   2022 offered all the delights of a more open world - a craving for expanded horizons, wilderness and to experience remote work without being stuck at home. These were all sampled and enjoyed with the only cloud being a bad back colouring the experiences.
 </p>
+<div id="my_dataviz"></div>
 <div class="table-container">
 <table border="1">
 <thead>
@@ -154,7 +159,6 @@
   </tbody>
 </table>
 </div>  
-
 <h4></h4>
 <p></p>
 
@@ -163,3 +167,101 @@
   <figcaption></figcaption>
 </figure>
 <h4></h4>
+
+<script>
+
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page
+  var svg = d3.select("#my_dataviz")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")");
+
+  //Read the data
+  d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS269BnblrqA7mvGzg-J-BtOH0aVBmTSdPAX6tTs9g4j5TjHrgQRv93Da-FoHRd-9N_T6xxMALZEYQf/pub?gid=727891094&single=true&output=csv&12", function(data) {
+
+    // Add X axis
+    var x = d3.scaleLinear()
+      .domain([400, 1200])
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([-20, 30])
+      .range([ height, 30]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    var groups = svg.selectAll("g")
+    .data(data)
+    .enter().append("g");
+
+    // Add dots
+    svg.append('g')
+      .selectAll("dot")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", function (d) { return x(d.Distance); } )
+      .attr("cy", function (d) { return y(d.Time); } )
+      .attr("r", 5)
+      .style("fill", "#69b3a2")
+
+
+    svg.append('g')
+      .selectAll("dot")
+      .data(data)
+      .enter()
+      .append("text")
+      .text(function(d) { return d.Location; })
+      .attr("x", function (d) { return x(d.Distance) + 10; } )
+      .attr("y", function (d) { return y(d.Time); } )
+      .attr("text-anchor", "left") // Center the text
+      .attr("dy", ".35em")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", "8px")
+      .attr("fill", "black")
+      .style("visibility", "hidden");
+
+    groups.on("mouseover", function(d, i) {
+    d3.select(this).select("text").style("visibility", "visible");
+}).on("mouseout", function(d, i) {
+    d3.select(this).select("text").style("visibility", "hidden");
+});
+
+     const linearRegression = ss.linearRegression(data.map(d => [d.Distance, d.Time]))
+   const linearRegressionLine = ss.linearRegressionLine(linearRegression) 
+     const firstX = data[0].Distance;
+     const lastX = data.slice(-1)[0].Distance;
+     const xCoordinates = [firstX, lastX];
+     const regressionPoints = xCoordinates.map(d => ({
+       x: d * 1,                         // We pick x and y arbitrarily, just make sure they match d3.line accessors
+       y: 10 
+     }));
+   console.log(regressionPoints)
+    line = d3.line()
+       .x(d => x(d.x))
+       .y(d => y(d.y))
+  console.log('xx', regressionPoints)
+     svg.append('line')
+       .style("stroke", "lightgreen")
+    .style("stroke-width", 10)
+    .attr("x1", 0)
+    .attr("y1", 0)
+    .attr("x2", 200)
+    .attr("y2", 200); 
+    
+  })
+
+</script>
