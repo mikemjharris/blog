@@ -501,6 +501,14 @@ table {
   }
 }
 
+.table-container {
+  overflow: scroll;
+  max-width: 100%;
+  margin: 10px 0px;
+}
+
+
+
 .active-menu:hover {
   transform: translateX(0px) scaleX(1) scaleY(1);
 }
