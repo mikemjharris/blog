@@ -71,6 +71,12 @@ if ('serviceWorker' in navigator) {
         $('article').html('');
         setTimeout(function() {
           $('article').append(html);
+          // triggers code highlighting
+          try {
+          Prism.highlightAll();
+          } catch (e) {
+            console.error(e)
+          }
          }, 0);
       }
     });
