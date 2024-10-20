@@ -18,6 +18,8 @@ const getPostsFromPath = (path) => {
       while ( match = regex.exec(str) ) {
         if (match[1].trim() == 'tags') {
           post[ match[ 1 ].trim() ] = match [ 2 ].trim().split(',');
+        } else if ( match[1].trim() == 'date') {
+          post[ match[ 1 ].trim() ] = new Date(match [ 2 ].trim()).toLocaleDateString('en-UK', {year: 'numeric', month: 'short', day: 'numeric'})
         } else {
           post[ match[ 1 ].trim() ] = match [ 2 ].trim();
         }

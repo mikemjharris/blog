@@ -212,6 +212,11 @@ $body-font-size: 18px;
       /*padding-right: 10px;*/
     }
   }
-
-
+  .space-content {
+    flex-direction: column;
+  }
+  .date {
+    font-size: 0.75em;
+    align-self: end;
+  }
 }
