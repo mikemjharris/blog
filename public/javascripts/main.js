@@ -34,6 +34,8 @@ if ('serviceWorker' in navigator) {
             console.log(post);
             var html = MyApp.templates.post({ post: post });
             $('article').html(html);
+            window.location.href = window.location.href
+
           } else {
             $('article').html('');
 
@@ -73,7 +75,9 @@ if ('serviceWorker' in navigator) {
           $('article').append(html);
           // triggers code highlighting
           try {
-          Prism.highlightAll();
+            Prism.highlightAll();
+            console.log('aaa') 
+            window.location.href = window.location.href
           } catch (e) {
             console.error(e)
           }
