@@ -6,304 +6,400 @@
 <!-- meta-data category: thoughts -->
 <!-- meta-data twitterimage: https://blog.mikemjharris.com/images/images/chrome-profiles.png -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .line {
-            fill: none;
-            stroke-width: 3;
-        }
-        .line-running {
-            stroke: #ff6b6b;
-        }
-        .line-swimming {
-            stroke: #4ecdc4;
-        }
-        .line-yoga {
-            stroke: #a278b5;
-        }
-        .axis {
-            font-size: 12px;
-        }
-        .axis-label {
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .legend {
-            font-size: 12px;
-        }
-        .tooltip {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            pointer-events: none;
-            font-size: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-    </style>
-    <h2>Exercise Activity Over Years</h2>
-    <div id="chart"></div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 
-    <script>
+<style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      width: 100%;
+      max-width: 900px;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .chart-wrapper {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.25rem;
+      padding: 1rem;
+      background-color: white;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #chart {
+      width: 100%;
+      height: auto;
+    }
+    /* Add styles for the y-axis to prevent text overlap */
+    .y-axis text, .x-axis text {
+      font-size: 12px;
+    }
+    /* Legend styles */
+    .legend-item {
+      display: inline-block;
+      margin-right: 20px;
+      align-items: center;
+    }
+    .legend-container {
+      padding-top: 20px;
+      text-align: center;
+    }
+    /* Responsive styles for small screens */
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.2rem;
+      }
+      .chart-wrapper {
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h2>Running Activity Over Years</h2>
+    <div class="chart-wrapper">
+      <div id="chart"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create a responsive chart that resizes with the window
+      function createChart() {
+        // Clear previous chart if exists
+        d3.select("#chart").selectAll("*").remove();
+        
         // Parse the data
         const data = [
-            { year: 2012, kmRun: 1639, kmSwam: 0, yogaSessions: 47 },
-            { year: 2013, kmRun: 1633, kmSwam: 0, yogaSessions: 82 },
-            { year: 2014, kmRun: 391, kmSwam: 0, yogaSessions: 62 },
-            { year: 2015, kmRun: 1389, kmSwam: 52, yogaSessions: 99 },
-            { year: 2016, kmRun: 1145, kmSwam: 123, yogaSessions: 60 },
-            { year: 2017, kmRun: 1083, kmSwam: 125, yogaSessions: 30 },
-            { year: 2018, kmRun: 1457, kmSwam: 116, yogaSessions: 48 }
+          { year: 2012, kmRun: 1639, runEquivalent: 2109 },
+          { year: 2013, kmRun: 1633, runEquivalent: 2453 },
+          { year: 2014, kmRun: 391, runEquivalent: 451 },
+          { year: 2015, kmRun: 1389, runEquivalent: 2640 },
+          { year: 2016, kmRun: 1145, runEquivalent: 2359 },
+          { year: 2017, kmRun: 1083, runEquivalent: 2009 },
+          { year: 2018, kmRun: 1457, runEquivalent: 2516 }
         ];
         
-        // Set dimensions
-        const width = 800;
-        const height = 500;
-        const margin = { top: 40, right: 150, bottom: 60, left: 60 };
+        // Get container width for responsive sizing
+        const containerWidth = document.getElementById('chart').clientWidth;
+        const containerHeight = Math.min(Math.max(containerWidth * 0.6, 300), 500); // Maintain aspect ratio with min/max height
+        
+        // Set dimensions based on container size
+        const margin = {
+          top: 40,
+          right: 30, // Reduced right margin
+          bottom: 100, // Increased bottom margin for legend
+          left: containerWidth < 500 ? 60 : 80 // Adjust left margin based on screen size
+        };
+        
+        const width = containerWidth;
+        const height = containerHeight;
         const innerWidth = width - margin.left - margin.right;
         const innerHeight = height - margin.top - margin.bottom;
         
-        // Create SVG element
+        // Create SVG element with viewBox for responsiveness
         const svg = d3.select("#chart")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("viewBox", `0 0 ${width} ${height}`)
+          .attr("preserveAspectRatio", "xMidYMid meet");
         
         // Create chart group
         const g = svg.append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+          .attr("transform", `translate(${margin.left},${margin.top})`);
         
-        // Create scales
-        const xScale = d3.scaleLinear()
-            .domain(d3.extent(data, d => d.year))
-            .range([0, innerWidth]);
+        // Create scales - use band scale for x to ensure one tick per year
+        const xScale = d3.scaleBand()
+          .domain(data.map(d => d.year))
+          .range([0, innerWidth])
+          .padding(0.1);
         
-        // Create different y scales for different metrics
-        const yScaleRun = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.kmRun)])
-            .range([innerHeight, 0])
-            .nice();
-        
-        const yScaleSwim = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.kmSwam)])
-            .range([innerHeight, 0])
-            .nice();
-        
-        const yScaleYoga = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.yogaSessions)])
-            .range([innerHeight, 0])
-            .nice();
+        // Create y scale for both metrics
+        const yScale = d3.scaleLinear()
+          .domain([0, d3.max(data, d => Math.max(d.kmRun, d.runEquivalent))])
+          .range([innerHeight, 0])
+          .nice();
         
         // Create line generators
         const lineRun = d3.line()
-            .x(d => xScale(d.year))
-            .y(d => yScaleRun(d.kmRun))
-            .curve(d3.curveMonotoneX);
+          .x(d => xScale(d.year) + xScale.bandwidth() / 2)
+          .y(d => yScale(d.kmRun))
+          .curve(d3.curveMonotoneX);
         
-        const lineSwim = d3.line()
-            .x(d => xScale(d.year))
-            .y(d => yScaleSwim(d.kmSwam))
-            .curve(d3.curveMonotoneX);
+        const lineEquivalent = d3.line()
+          .x(d => xScale(d.year) + xScale.bandwidth() / 2)
+          .y(d => yScale(d.runEquivalent))
+          .curve(d3.curveMonotoneX);
         
-        const lineYoga = d3.line()
-            .x(d => xScale(d.year))
-            .y(d => yScaleYoga(d.yogaSessions))
-            .curve(d3.curveMonotoneX);
+        // Add X axis with exactly one tick per year
+        const xAxis = g.append("g")
+          .attr("class", "axis x-axis")
+          .attr("transform", `translate(0,${innerHeight})`)
+          .call(d3.axisBottom(xScale));
         
-        // Add X axis
-        g.append("g")
-            .attr("class", "axis x-axis")
-            .attr("transform", `translate(0,${innerHeight})`)
-            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
-            .call(g => g.select(".domain").remove());
+        // Adjust font size for small screens
+        if (containerWidth < 500) {
+          xAxis.selectAll("text")
+            .style("font-size", "10px");
+        }
         
         // X axis label
         g.append("text")
-            .attr("class", "axis-label")
-            .attr("x", innerWidth / 2)
-            .attr("y", innerHeight + 40)
-            .attr("text-anchor", "middle")
-            .text("Year");
+          .attr("x", innerWidth / 2)
+          .attr("y", innerHeight + 40)
+          .attr("text-anchor", "middle")
+          .attr("fill", "black")
+          .style("font-size", containerWidth < 500 ? "12px" : "14px")
+          .style("font-weight", "bold")
+          .text("Year");
         
-        // Add Y axis for running
-        g.append("g")
-            .attr("class", "axis y-axis")
-            .call(d3.axisLeft(yScaleRun))
-            .call(g => g.select(".domain").remove());
+        // Add Y axis
+        const yAxis = g.append("g")
+          .attr("class", "axis y-axis")
+          .call(d3.axisLeft(yScale)
+            .tickFormat(d => d.toLocaleString())
+            .tickSize(-5)
+            .ticks(containerWidth < 500 ? 5 : 10)
+          );
+        
+        // Adjust font size for small screens
+        if (containerWidth < 500) {
+          yAxis.selectAll("text")
+            .style("font-size", "10px");
+        }
         
         // Y axis label
         g.append("text")
-            .attr("class", "axis-label")
-            .attr("transform", "rotate(-90)")
-            .attr("x", -innerHeight / 2)
-            .attr("y", -40)
-            .attr("text-anchor", "middle")
-            .text("Activity Measure");
+          .attr("transform", "rotate(-90)")
+          .attr("x", -innerHeight / 2)
+          .attr("y", containerWidth < 500 ? -40 : -50)
+          .attr("text-anchor", "middle")
+          .attr("fill", "black")
+          .style("font-size", containerWidth < 500 ? "12px" : "14px")
+          .style("font-weight", "bold")
+          .text("Kilometers");
+        
+        // Add vertical grid lines for each year
+        g.selectAll(".grid-line")
+          .data(data)
+          .enter()
+          .append("line")
+          .attr("class", "grid-line")
+          .attr("x1", d => xScale(d.year) + xScale.bandwidth() / 2)
+          .attr("x2", d => xScale(d.year) + xScale.bandwidth() / 2)
+          .attr("y1", 0)
+          .attr("y2", innerHeight)
+          .attr("stroke", "#e0e0e0")
+          .attr("stroke-width", 1);
+        
+        // Add horizontal grid lines
+        yScale.ticks(containerWidth < 500 ? 5 : 10).forEach(tick => {
+          g.append("line")
+            .attr("class", "grid-line-horizontal")
+            .attr("x1", 0)
+            .attr("x2", innerWidth)
+            .attr("y1", yScale(tick))
+            .attr("y2", yScale(tick))
+            .attr("stroke", "#e0e0e0")
+            .attr("stroke-width", 1);
+        });
         
         // Add lines
         g.append("path")
-            .datum(data)
-            .attr("class", "line line-running")
-            .attr("d", lineRun);
+          .datum(data)
+          .attr("fill", "none")
+          .attr("stroke", "#ff6b6b")
+          .attr("stroke-width", 3)
+          .attr("d", lineRun);
         
         g.append("path")
-            .datum(data)
-            .attr("class", "line line-swimming")
-            .attr("d", lineSwim);
-        
-        g.append("path")
-            .datum(data)
-            .attr("class", "line line-yoga")
-            .attr("d", lineYoga);
+          .datum(data)
+          .attr("fill", "none")
+          .attr("stroke", "#4361ee")
+          .attr("stroke-width", 3)
+          .attr("d", lineEquivalent);
         
         // Add points
-        const addPoints = (className, yScale, accessor) => {
-            g.selectAll(`.point-${className}`)
-                .data(data)
-                .enter()
-                .append("circle")
-                .attr("class", `point-${className}`)
-                .attr("cx", d => xScale(d.year))
-                .attr("cy", d => yScale(accessor(d)))
-                .attr("r", 5)
-                .attr("fill", className === "running" ? "#ff6b6b" : 
-                      className === "swimming" ? "#4ecdc4" : "#a278b5");
-        };
+        g.selectAll(".point-running")
+          .data(data)
+          .enter()
+          .append("circle")
+          .attr("class", "point-running")
+          .attr("cx", d => xScale(d.year) + xScale.bandwidth() / 2)
+          .attr("cy", d => yScale(d.kmRun))
+          .attr("r", containerWidth < 500 ? 3 : 5)
+          .attr("fill", "#ff6b6b");
         
-        addPoints("running", yScaleRun, d => d.kmRun);
-        addPoints("swimming", yScaleSwim, d => d.kmSwam);
-        addPoints("yoga", yScaleYoga, d => d.yogaSessions);
+        g.selectAll(".point-equivalent")
+          .data(data)
+          .enter()
+          .append("circle")
+          .attr("class", "point-equivalent")
+          .attr("cx", d => xScale(d.year) + xScale.bandwidth() / 2)
+          .attr("cy", d => yScale(d.runEquivalent))
+          .attr("r", containerWidth < 500 ? 3 : 5)
+          .attr("fill", "#4361ee");
         
-        // Add legend
-        const legend = svg.append("g")
-            .attr("class", "legend")
-            .attr("transform", `translate(${width - margin.right + 20}, ${margin.top})`);
+        // Conditional rendering of data labels based on screen size
+        if (containerWidth >= 400) {
+          // Add labels for data points
+          data.forEach(d => {
+            // KM Run labels
+            g.append("text")
+              .attr("x", xScale(d.year) + xScale.bandwidth() / 2)
+              .attr("y", yScale(d.kmRun) - 10)
+              .attr("text-anchor", "middle")
+              .attr("fill", "#ff6b6b")
+              .style("font-size", containerWidth < 500 ? "8px" : "10px")
+              .style("font-weight", "bold")
+              .text(d.kmRun);
+            
+            // Run Equivalent labels
+            g.append("text")
+              .attr("x", xScale(d.year) + xScale.bandwidth() / 2)
+              .attr("y", yScale(d.runEquivalent) - 10)
+              .attr("text-anchor", "middle")
+              .attr("fill", "#4361ee")
+              .style("font-size", containerWidth < 500 ? "8px" : "10px")
+              .style("font-weight", "bold")
+              .text(d.runEquivalent);
+          });
+        }
+        
+        // Add in-chart labels if there's enough space
+        if (containerWidth >= 600) {
+          // For Actual Running - add at 2016 position
+          g.append("text")
+            .attr("x", xScale(2016) + xScale.bandwidth() / 2)
+            .attr("y", yScale(data.find(d => d.year === 2016).kmRun) - 25)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#ff6b6b")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Actual Running")
+            .attr("stroke", "white")
+            .attr("stroke-width", 5)
+            .attr("paint-order", "stroke")
+            .lower();
+          
+          g.append("text")
+            .attr("x", xScale(2016) + xScale.bandwidth() / 2)
+            .attr("y", yScale(data.find(d => d.year === 2016).kmRun) - 25)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#ff6b6b")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Actual Running");
+          
+          // For Run Equivalent - add at 2015 position
+          g.append("text")
+            .attr("x", xScale(2015) + xScale.bandwidth() / 2)
+            .attr("y", yScale(data.find(d => d.year === 2015).runEquivalent) - 25)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#4361ee")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Run Equivalent")
+            .attr("stroke", "white")
+            .attr("stroke-width", 5)
+            .attr("paint-order", "stroke")
+            .lower();
+          
+          g.append("text")
+            .attr("x", xScale(2015) + xScale.bandwidth() / 2)
+            .attr("y", yScale(data.find(d => d.year === 2015).runEquivalent) - 25)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#4361ee")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Run Equivalent");
+        }
+        
+        // Add improved bottom legend
+        const legendContainer = g.append("g")
+          .attr("class", "legend")
+          .attr("transform", `translate(0, ${innerHeight + 55})`);
         
         const legendItems = [
-            { label: "Running (km)", color: "#ff6b6b" },
-            { label: "Swimming (km)", color: "#4ecdc4" },
-            { label: "Yoga Sessions", color: "#a278b5" }
+          { label: "Actual Running (km)", color: "#ff6b6b" },
+          { label: "Run Equivalent (km)", color: "#4361ee" }
         ];
         
+        // Calculate spacing based on container width
+        const legendSpacing = containerWidth < 500 ? 
+          innerWidth / 2 :  // For small screens - center each item
+          innerWidth / 2.8;   // For larger screens - more spacing
+        
+        // Line size and text positioning
+        const lineWidth = 30;
+        const lineHeight = 3;
+        const textOffsetY = 5;
+        
         legendItems.forEach((item, i) => {
-            const legendRow = legend.append("g")
-                .attr("transform", `translate(0, ${i * 20})`);
-            
-            legendRow.append("line")
-                .attr("x1", 0)
-                .attr("y1", 0)
-                .attr("x2", 20)
-                .attr("y2", 0)
-                .attr("stroke", item.color)
-                .attr("stroke-width", 3);
-            
-            legendRow.append("text")
-                .attr("x", 30)
-                .attr("y", 5)
-                .text(item.label);
+          const legendGroup = legendContainer.append("g")
+            .attr("transform", `translate(${i * legendSpacing}, 0)`);
+          
+          // Add colored line
+          legendGroup.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", lineWidth)
+            .attr("y2", 0)
+            .attr("stroke", item.color)
+            .attr("stroke-width", lineHeight);
+          
+          // Add circle for the data points
+          legendGroup.append("circle")
+            .attr("cx", lineWidth / 2)
+            .attr("cy", 0)
+            .attr("r", 4)
+            .attr("fill", item.color);
+          
+          // Add text label
+          legendGroup.append("text")
+            .attr("x", lineWidth + 10)
+            .attr("y", textOffsetY)
+            .attr("fill", "black")
+            .style("font-size", containerWidth < 500 ? "11px" : "13px")
+            .style("font-weight", containerWidth < 500 ? "normal" : "bold")
+            .text(item.label);
         });
         
-        // Add tooltip
-        const tooltip = d3.select("body")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-        
-        // Add hover functionality
-        data.forEach(d => {
-            const year = d.year;
-            const xPos = xScale(year);
-            
-            g.append("line")
-                .attr("class", "hover-line")
-                .attr("x1", xPos)
-                .attr("x2", xPos)
-                .attr("y1", 0)
-                .attr("y2", innerHeight)
-                .attr("stroke", "#ccc")
-                .attr("stroke-width", 1)
-                .attr("stroke-dasharray", "5,5")
-                .style("opacity", 0);
-            
-            g.append("rect")
-                .attr("class", "hover-zone")
-                .attr("x", xPos - 10)
-                .attr("y", 0)
-                .attr("width", 20)
-                .attr("height", innerHeight)
-                .attr("fill", "transparent")
-                .on("mouseover", function() {
-                    d3.selectAll(".hover-line").style("opacity", 0);
-                    d3.select(this.parentNode).select(".hover-line").style("opacity", 1);
-                    
-                    tooltip.transition()
-                        .duration(200)
-                        .style("opacity", 0.9);
-                    
-                    tooltip.html(`
-                        <strong>Year: ${year}</strong><br/>
-                        Running: ${d.kmRun} km<br/>
-                        Swimming: ${d.kmSwam} km<br/>
-                        Yoga: ${d.yogaSessions} sessions
-                    `)
-                    .style("left", (d3.event ? d3.event.pageX : xPos + margin.left + 50) + "px")
-                    .style("top", (d3.event ? d3.event.pageY - 28 : 100) + "px");
-                })
-                .on("mouseout", function() {
-                    d3.select(this.parentNode).select(".hover-line").style("opacity", 0);
-                    
-                    tooltip.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                });
-        });
-    </script>
-
-<p>
- My ten year anniverary of changing careers has just passed and I wanted to reflect on how much time and effort it took. Anything that far back is hard to recall properly - I remember it being very intense and time consuming but can I quantify that memory?  Turns out I can - I track a number of activities including how much I run.  There was a very clear drop in how much running (and other hobbies) I achieved in the year when I attended General Assembly and kicked off a new career in tech.  Turns out (for me) changing career was roughly the equivalent of running 1000 miles. Interestingly the past year I had a baby and that also seemed to suck up about 1k worth of pavement pounding.
-</p>
-
-<figure>
-    <img src="/images/chrome-profiles.png" alt="Work profile" />
-  <figcaption>Chrome profiles</figcaption>
-</figure>
-
-<h4>Keeping work and pleasure separate but available</h4>
-<p>
-  We're on computers all the time: sometimes during the work day I need to do some personal browsing, sometimes in the evenings I need to do a few work tasks. Prior to using profiles I had work bookmarks on my home computer, personal browsing on my work laptop. I've left jobs and lost history or saved passwords. But with profiles no more.
-</p>
-<p>
-  Google profiles are sandboxed environments with separate browsing history, bookmarks, passwords and extensions.
-</p>
-<figure>
-  <div class="half">
-    <img src="/images/profile-work.png" alt="Work profile" />
-    <img src="/images/profile-personal.png" alt="Personal profile" />
-  </div>
-  <figcaption>Different colours for my work and personal profiles</figcaption>
-</figure>
-
-<h4>Fantastic for freelancers</h4>
-<p>
-A great example of how this can be useful is for a freelancer with multiple clients. Each of those clients probably has, say, a Google Analytics account, a Figma account, a Notion account etc. By using a separate profile for each client you can be logged into a different Figma account in each profile - one can just switch windows instead of logging in and out in the same context. </p>
-
-
-<p>Passwords are kept separate and if you want to have a sense of what work you've done for each client and well you'll have separate browsing histories in each profile.</p>
-</p>
-<h4>For everyone - Keeping work and personal separate</h4>
-<p>
-  You don't need to be a freelancer though - I have a work Google account and a personal one and keep separate profiles for each. If I move jobs I keep all my personal settings and passwords. You don't even need a Google work account - you can still set up a profile just for browsing even if your team uses another provider such as Microsoft.
-</p>
-<h4>Guest profiles - making tech testing easy</h4>
-<p>
-  Your google account has a profile and it goes with you wherever you go.  In addition you can create a guest profile just on your device  - I use this in lots of situations but mainly as a way to test the features I build at work.  Often I need to be logged in as multiple users at once.  Or I'm using a tool like OneSignal and want to test how notification permissions work for a new user. Plenty of other use cases where for a short period you want a separate browsing experience but don't lose your history like you do in incognito mode.
-
-<h3>Summary</h3>
-<p>
-  Lots of reasons to keep your internet activities isolated. Profiles allow your work and personal use to be separated. They also superpower web application testing. I have multiple profiles and have learned to associate the different colors with the different accounts - meaning switching windows to the correct one is a breeze and something I do multiple times a day.
-</p>
+        // Adjust legend positioning based on container width
+        if (containerWidth < 500) {
+          // Center the legend for small screens
+          const legendWidth = innerWidth;
+          legendContainer.attr("transform", `translate(${(innerWidth - legendWidth) / 2}, ${innerHeight + 50})`);
+        } else {
+          // Center the legend for larger screens
+          legendContainer.attr("transform", `translate(${innerWidth / 6}, ${innerHeight + 60})`);
+        }
+      }
+      
+      // Initial chart creation
+      createChart();
+      
+      // Redraw chart on window resize
+      window.addEventListener('resize', function() {
+        // Debounce the resize event
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(function() {
+          createChart();
+        }, 250);
+      });
+    });
+  </script>
