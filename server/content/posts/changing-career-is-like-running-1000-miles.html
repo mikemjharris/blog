@@ -1,6 +1,6 @@
-<!-- meta-data title: Changing careers is like running 1000 miles -->
+<!-- meta-data title: Changing careers is like running 1000 miles (YMMV)-->
 <!-- meta-data searchtitle: changing-career-is-like-running-1000-miles -->
-<!-- meta-data date:  31 March 2025 -->
+<!-- meta-data date:  25 April 2025 -->
 <!-- meta-data intro: Any big change in life requires effort - but how much is needed to shift careers  -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: thoughts -->
@@ -68,12 +68,28 @@
   </style>
 </head>
 <body>
+  <p>
+  Some things in life take up a lot of time and effort - say changing career or having a baby.  But how much time and how does that impact the rest of what you can do with your days?  It’s over ten years now since I changed careers and I know it took a lot of work and effort - but how reliable are my memories - can I quantify what the impact was? Fortunately, to some degree I can - it’s equivalent to running 1000 miles (<a href="https://dictionary.cambridge.org/dictionary/english/ymmvYMMV" target="_blank">YMMV</a>).
   <div class="chart-container">
+
     <h2>Running Activity Over Years</h2>
     <div class="chart-wrapper">
       <div id="chart"></div>
     </div>
   </div>
+
+  <h2>1000 Miles</h2>
+  <p>
+  The chart shows how much running I did each year - - as I got older, wiser and slightly more achy I added in lots of yoga and swimming. I have a rough conversion from each of those to running based on the time it takes to give a rough ‘Running Equivalent’ in KM. The graph is pretty clear:  either side of my career change in 2014 i was roughly doing 2000 - 2500km run equivalent a year. In t 2014 that dropped to around 500km.  So roughly 1000 miles - it’s both a nice round number and allows me to amusingly use the phrase YMMV -  Your mileage may vary - you may not run but if you have an intense new thing in your life it will likely mean doing less of something else.</p>
+
+  <h2>Not just exercise</h2>
+  <p>Have written in these pages about why I track exercise - one thing that helps is it’s pretty easy!  But the career change didn’t just impact that - there were full days at coding bootcamp but also homework in the evenings and weekends.  There was a unique opportunity for a short period of time with access to high quality instructors and a cohort going through the same process and hopefully be the start of a future network.  The work, events and socialising swallowed up not just the running but lots of my personal and social life. This was all worth it - I needed a new career, a new job and to accelerate as fast as possible to pay the bills. I liken it to accelerating in a car - you drop a gear, raise the revs and accelerate as quickly as possible. Once up to speed you settle down into a more maintainable way of life.  And that is what came to pass - there was still plenty of hard work and graft but there was also space to get back to friends, family and fitness.</p>
+
+  <h2>
+Other things that take up time.
+  </h2>
+  <p>
+  Post 2016 the graph has a lot more ups and downs - a big running event in 2019, a pandemic from 2020 onwards, an older body needing more yoga and less running, a bad back impacting total running in 2022.’  The run equivalent levels though were pretty high still - until 2024. The arrival of a baby takes a lot of time - and the numbers suggest roughly as much as an intense career change and around that magic1000 miles.  You can’t really accelerate a babies progress - it just takes up a lot of time. Working hard is imperative as babies cost money so it’s the sport that gives (although replaced by plenty of activity - more crawling on the floor, pushing buggies, lifting a wriggling little body).  Hopefully some balance settles in although I have a feeling I’ve seen my all time highs of yearly run equivalent KMs. The replacement is more than worth it.</p>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -90,7 +106,13 @@
           { year: 2015, kmRun: 1389, runEquivalent: 2640 },
           { year: 2016, kmRun: 1145, runEquivalent: 2359 },
           { year: 2017, kmRun: 1083, runEquivalent: 2009 },
-          { year: 2018, kmRun: 1457, runEquivalent: 2516 }
+          { year: 2018, kmRun: 1642, runEquivalent: 2702 },
+          { year: 2019, kmRun: 2472, runEquivalent: 3442},
+          { year: 2020, kmRun: 1796, runEquivalent: 3250},
+          { year: 2021, kmRun: 1082, runEquivalent: 3338},
+          { year: 2022, kmRun: 455, runEquivalent: 1945 },
+          { year: 2023, kmRun: 1830, runEquivalent: 3664 },
+          { year: 2024, kmRun: 193, runEquivalent: 811},
         ];
         
         // Get container width for responsive sizing
@@ -285,7 +307,7 @@
           // For Actual Running - add at 2016 position
           g.append("text")
             .attr("x", xScale(2016) + xScale.bandwidth() / 2)
-            .attr("y", yScale(data.find(d => d.year === 2016).kmRun) - 25)
+            .attr("y", yScale(data.find(d => d.year === 2016).kmRun) + 25)
             .attr("text-anchor", "middle")
             .attr("fill", "#ff6b6b")
             .style("font-size", "12px")
@@ -295,15 +317,6 @@
             .attr("stroke-width", 5)
             .attr("paint-order", "stroke")
             .lower();
-          
-          g.append("text")
-            .attr("x", xScale(2016) + xScale.bandwidth() / 2)
-            .attr("y", yScale(data.find(d => d.year === 2016).kmRun) - 25)
-            .attr("text-anchor", "middle")
-            .attr("fill", "#ff6b6b")
-            .style("font-size", "12px")
-            .style("font-weight", "bold")
-            .text("Actual Running");
           
           // For Run Equivalent - add at 2015 position
           g.append("text")
@@ -318,17 +331,8 @@
             .attr("stroke-width", 5)
             .attr("paint-order", "stroke")
             .lower();
-          
-          g.append("text")
-            .attr("x", xScale(2015) + xScale.bandwidth() / 2)
-            .attr("y", yScale(data.find(d => d.year === 2015).runEquivalent) - 25)
-            .attr("text-anchor", "middle")
-            .attr("fill", "#4361ee")
-            .style("font-size", "12px")
-            .style("font-weight", "bold")
-            .text("Run Equivalent");
         }
-        
+          
         // Add improved bottom legend
         const legendContainer = g.append("g")
           .attr("class", "legend")
