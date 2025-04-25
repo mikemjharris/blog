@@ -1,7 +1,7 @@
 <!-- meta-data title: Changing careers is like running 1000 miles (YMMV)-->
 <!-- meta-data searchtitle: changing-career-is-like-running-1000-miles -->
 <!-- meta-data date:  25 April 2025 -->
-<!-- meta-data intro: Any big change in life requires effort - but how much is needed to shift careers  -->
+<!-- meta-data intro: Any big change in life requires effort - but how much is needed to shift careers or have a baby  -->
 <!-- meta-data author: Mike Harris  -->
 <!-- meta-data category: thoughts -->
 <!-- meta-data twitterimage: https://blog.mikemjharris.com/images/images/run-equivalent.png -->
@@ -167,7 +167,19 @@ Other things that take up time.
         const xAxis = g.append("g")
           .attr("class", "axis x-axis")
           .attr("transform", `translate(0,${innerHeight})`)
-          .call(d3.axisBottom(xScale));
+          .call(
+    d3.axisBottom(xScale)
+      .tickFormat((d) => {
+        // If d is already a year number (like 2024)
+        const yearStr = d.toString();
+        // Get the last two digits of the year
+        const shortYear = "'" + yearStr.slice(-2);
+        // On small screens, only show alternate years
+        return containerWidth < 500 ? 
+          (d % 2 === 0 ? shortYear : '') : 
+          yearStr;
+      })
+  );
         
         // Adjust font size for small screens
         if (containerWidth < 500) {
@@ -341,8 +353,10 @@ Other things that take up time.
         
         // Calculate spacing based on container width
         const legendSpacing = containerWidth < 500 ? 
-          innerWidth / 2 :  // For small screens - center each item
+          0:  // For small screens - center each item
           innerWidth / 2.8;   // For larger screens - more spacing
+
+        
         
         // Line size and text positioning
         const lineWidth = 30;
@@ -350,29 +364,31 @@ Other things that take up time.
         const textOffsetY = 5;
         
         legendItems.forEach((item, i) => {
-          const legendGroup = legendContainer.append("g")
-            .attr("transform", `translate(${i * legendSpacing}, 0)`);
+          const height = containerWidth < 500 && i === 0 ? lineHeight + 10 : lineHeight;
           
+          const legendGroup = legendContainer.append("g")
+            .attr("transform", `translate(${i * legendSpacing}, ${height})`);
+         
           // Add colored line
           legendGroup.append("line")
             .attr("x1", 0)
-            .attr("y1", 0)
+            .attr("y1", height)
             .attr("x2", lineWidth)
-            .attr("y2", 0)
+            .attr("y2", height)
             .attr("stroke", item.color)
             .attr("stroke-width", lineHeight);
           
           // Add circle for the data points
           legendGroup.append("circle")
             .attr("cx", lineWidth / 2)
-            .attr("cy", 0)
+            .attr("cy", height )
             .attr("r", 4)
             .attr("fill", item.color);
           
           // Add text label
           legendGroup.append("text")
             .attr("x", lineWidth + 10)
-            .attr("y", textOffsetY)
+            .attr("y", height)
             .attr("fill", "black")
             .style("font-size", containerWidth < 500 ? "11px" : "13px")
             .style("font-weight", containerWidth < 500 ? "normal" : "bold")
