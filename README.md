@@ -21,6 +21,19 @@ or for prod
 compiles the Sass, concatenates and minifies the client JS, precompiles the Handlebars
 templates and copies the browser libraries into `public/dist`.
 
+TypeScript
+==========
+
+The server, build scripts and tests are TypeScript. There is no compile step — Node 24
+strips the types at runtime, so `node server/server.ts` just works. `npm run typecheck`
+runs `tsc --noEmit` to check them, and CI runs it on every push.
+
+That means `tsconfig.json` sets `erasableSyntaxOnly`, which keeps the code to syntax Node
+can strip: no enums, no namespaces, no parameter properties.
+
+The browser code in `public/javascripts` stays JavaScript. `helpers.cjs` is shared by the
+server and the browser, so it keeps a hand-written `helpers.d.cts` alongside it.
+
 Posts are in the server/content folder. All the data such as title and date of published is inside meta tags at the top of each post. These are used to order the posts, put them in different cataegories etc.
 
 This project runs mainly using js technologies. It has a bunch of funky css and svg animations - probably a few too many for a normal blog but I was playing around.

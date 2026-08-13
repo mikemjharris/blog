@@ -1,9 +1,9 @@
 // Boots the real server and checks it serves the pages, the built assets and the
 // MCP endpoint. Run in CI so a broken boot fails the build rather than the deploy.
-const { spawn } = require('child_process');
-const path = require('path');
+import { spawn } from 'node:child_process';
+import path from 'node:path';
 
-const port = process.env.SMOKE_PORT || 8123;
+const port = process.env.SMOKE_PORT ?? '8123';
 const base = `http://localhost:${port}`;
 const bootTimeoutMs = 30000;
 
@@ -16,9 +16,20 @@ const assets = [
   '/dist/vendor/handlebars.min.js',
 ];
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+interface Check {
+  name: string;
+  ok: boolean;
+  error?: string;
+}
 
-const waitForBoot = async () => {
+interface PostSummaryResponse {
+  title?: string;
+  searchtitle: string;
+}
+
+const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+
+const waitForBoot = async (): Promise<void> => {
   const deadline = Date.now() + bootTimeoutMs;
   while (Date.now() < deadline) {
     try {
@@ -31,25 +42,26 @@ const waitForBoot = async () => {
   throw new Error(`server did not respond on ${base} within ${bootTimeoutMs}ms`);
 };
 
-const checks = [];
-const check = async (name, fn) => {
+const checks: Check[] = [];
+const check = async (name: string, fn: () => Promise<void>): Promise<void> => {
   try {
     await fn();
     checks.push({ name, ok: true });
   } catch (err) {
-    checks.push({ name, ok: false, error: err.message });
+    checks.push({ name, ok: false, error: err instanceof Error ? err.message : String(err) });
   }
 };
 
-const expectStatus = (res, status) => {
+const expectStatus = (res: Response, status: number): void => {
   if (res.status !== status) throw new Error(`expected ${status}, got ${res.status}`);
 };
 
 // Never follow redirects: the catch-all route sends anything unmatched to the homepage,
 // so a followed redirect turns a missing route or asset into a passing 200.
-const get = (url, options) => fetch(url, { redirect: 'manual', ...options });
+const get = (url: string, options?: RequestInit): Promise<Response> =>
+  fetch(url, { redirect: 'manual', ...options });
 
-const run = async () => {
+const run = async (): Promise<void> => {
   for (const page of pages) {
     await check(`GET ${page}`, async () => {
       const res = await get(`${base}${page}`);
@@ -71,16 +83,20 @@ const run = async () => {
   await check('GET /api/posts returns posts', async () => {
     const res = await get(`${base}/api/posts`);
     expectStatus(res, 200);
-    const posts = await res.json();
+    const posts = (await res.json()) as PostSummaryResponse[];
     if (!Array.isArray(posts) || posts.length === 0) throw new Error('no posts returned');
-    if (!posts[0].title) throw new Error('posts are missing meta-data');
+    if (!posts[0]?.title) throw new Error('posts are missing meta-data');
   });
 
   await check('GET /posts/:id renders a post', async () => {
-    const posts = await (await get(`${base}/api/posts`)).json();
-    const res = await get(`${base}/posts/${posts[0].searchtitle}`);
+    const posts = (await (await get(`${base}/api/posts`)).json()) as PostSummaryResponse[];
+    const first = posts[0];
+    if (!first) throw new Error('no posts to render');
+    const res = await get(`${base}/posts/${first.searchtitle}`);
     expectStatus(res, 200);
-    if (!(await res.text()).includes(posts[0].title)) throw new Error('post title not rendered');
+    if (!(await res.text()).includes(first.title ?? '')) {
+      throw new Error('post title not rendered');
+    }
   });
 
   await check('GET /rss.xml is valid feed', async () => {
@@ -109,18 +125,18 @@ const run = async () => {
   });
 };
 
-const main = async () => {
-  const server = spawn('node', [path.join(__dirname, '../server/server.js')], {
+const main = async (): Promise<void> => {
+  const server = spawn('node', [path.join(import.meta.dirname, '../server/server.ts')], {
     env: { ...process.env, PORT: port },
     stdio: ['ignore', 'pipe', 'inherit'],
   });
 
   let output = '';
-  server.stdout.on('data', (chunk) => {
-    output += chunk;
+  server.stdout.on('data', (chunk: Buffer) => {
+    output += chunk.toString();
   });
 
-  const exited = new Promise((resolve, reject) => {
+  const exited = new Promise<never>((_resolve, reject) => {
     server.on('exit', (code) =>
       reject(new Error(`server exited early with code ${code}\n${output}`)),
     );
@@ -143,7 +159,9 @@ const main = async () => {
   if (failed.length) process.exit(1);
 };
 
-main().catch((err) => {
-  console.error(err.message);
+try {
+  await main();
+} catch (err) {
+  console.error(err instanceof Error ? err.message : err);
   process.exit(1);
-});
+}

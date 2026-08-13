@@ -1,20 +1,23 @@
-const { McpServer, ResourceTemplate } = require('@modelcontextprotocol/sdk/server/mcp.js');
-const { z } = require('zod');
-const search = require('../helpers/post-search');
+import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
+import * as search from '../helpers/post-search.ts';
+import type { Post } from '../helpers/source-content.ts';
+import type { PostSummary } from '../helpers/post-search.ts';
 
-const text = (value) => ({ content: [{ type: 'text', text: value }] });
+const text = (value: string): CallToolResult => ({ content: [{ type: 'text', text: value }] });
 
-const formatSummary = (post) =>
+export const formatSummary = (post: PostSummary): string =>
   [
     `## ${post.title}`,
     `${post.date} · ${post.category}${post.tags.length ? ` · ${post.tags.join(', ')}` : ''}`,
     post.url,
-    post.intro || '',
+    post.intro ?? '',
   ]
     .filter(Boolean)
     .join('\n');
 
-const formatPost = (post) =>
+export const formatPost = (post: Post): string =>
   [
     `# ${post.title}`,
     `${post.date} · ${search.normaliseCategory(post.category)} · ${search.postUrl(post)}`,
@@ -22,8 +25,12 @@ const formatPost = (post) =>
     search.toPlainText(post.body),
   ].join('\n');
 
+/** URI template variables arrive as a string or a list depending on the template. */
+const single = (value: string | string[] | undefined): string =>
+  Array.isArray(value) ? (value[0] ?? '') : (value ?? '');
+
 // `posts` is the array the express app parses once at boot, so every tool is an in-memory read.
-const createBlogMcpServer = (posts) => {
+export const createBlogMcpServer = (posts: Post[]): McpServer => {
   const server = new McpServer(
     { name: 'mikemjharris-blog', version: '1.0.0' },
     {
@@ -52,7 +59,7 @@ const createBlogMcpServer = (posts) => {
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ query, category, tag, limit }) => {
+    ({ query, category, tag, limit }) => {
       const results = search.searchPosts(posts, { query, category, tag, limit });
       if (!results.length) return text(`No posts found matching "${query}".`);
 
@@ -81,7 +88,7 @@ const createBlogMcpServer = (posts) => {
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ category, tag, since, limit }) => {
+    ({ category, tag, since, limit }) => {
       const results = search.listPosts(posts, { category, tag, since, limit });
       if (!results.length) return text('No posts matched those filters.');
 
@@ -103,7 +110,7 @@ const createBlogMcpServer = (posts) => {
       },
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async ({ searchtitle }) => {
+    ({ searchtitle }): CallToolResult => {
       const post = search.findPost(posts, searchtitle);
       if (!post) {
         return {
@@ -128,7 +135,7 @@ const createBlogMcpServer = (posts) => {
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: false },
     },
-    async () => {
+    () => {
       const counts = search.categories(posts);
       const lines = Object.entries(counts)
         .sort((a, b) => b[1] - a[1])
@@ -140,19 +147,20 @@ const createBlogMcpServer = (posts) => {
   server.registerResource(
     'post',
     new ResourceTemplate('blog://posts/{searchtitle}', {
-      list: async () => ({
+      list: () => ({
         resources: posts.map((post) => ({
           uri: `blog://posts/${post.searchtitle}`,
-          name: post.title,
+          name: post.title ?? post.searchtitle,
           description: post.intro,
           mimeType: 'text/plain',
         })),
       }),
     }),
     { title: 'Blog post', description: 'A single post as plain text', mimeType: 'text/plain' },
-    async (uri, { searchtitle }) => {
-      const post = search.findPost(posts, searchtitle);
-      if (!post) throw new Error(`No post with slug "${searchtitle}"`);
+    (uri, { searchtitle }) => {
+      const slug = single(searchtitle);
+      const post = search.findPost(posts, slug);
+      if (!post) throw new Error(`No post with slug "${slug}"`);
 
       return { contents: [{ uri: uri.href, mimeType: 'text/plain', text: formatPost(post) }] };
     },
@@ -160,5 +168,3 @@ const createBlogMcpServer = (posts) => {
 
   return server;
 };
-
-module.exports = { createBlogMcpServer, formatPost, formatSummary };

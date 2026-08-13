@@ -1,65 +1,64 @@
+import type { Express } from 'express';
+import { Builder } from 'xml2js';
+import { mountMcp } from '../mcp/route.ts';
+import type { Post } from '../helpers/source-content.ts';
+
 const notFound = {
   title: '404',
   intro: "the page you were looking for wasn't found",
 };
 
-const xml2js = require('xml2js');
-const { mountMcp } = require('../mcp/route');
 const date = new Date();
 
-module.exports = (app, posts) => {
+export default (app: Express, posts: Post[]): void => {
   mountMcp(app, posts);
 
-  app.get('/', (req, res) => {
+  app.get('/', (_req, res) => {
     res.render('templates/home', { posts: posts, latestPost: posts[0] });
   });
 
-  app.get('/projects', (req, res) => {
+  app.get('/projects', (_req, res) => {
     res.render('templates/projects', { posts: posts });
   });
 
-  app.get('/posts', (req, res) => {
+  app.get('/posts', (_req, res) => {
     res.render('templates/posts', { posts: posts });
   });
 
-  app.get('/posts/top', (req, res) => {
+  app.get('/posts/top', (_req, res) => {
     res.render('templates/posts', { posts: posts });
   });
 
-  app.get('/category', (req, res) => {
+  app.get('/category', (_req, res) => {
     res.render('templates/category', { posts: posts });
   });
 
-  app.get('/talks', (req, res) => {
+  app.get('/talks', (_req, res) => {
     res.render('templates/talks', { posts: posts });
   });
 
   app.get('/posts/:id', (req, res) => {
     const postId = req.params.id;
-    let postToShow = notFound;
+    const postToShow: Post | typeof notFound =
+      posts.find((post) => post.searchtitle === postId) ?? notFound;
 
-    posts.forEach(function (post) {
-      if (post.searchtitle === postId) {
-        postToShow = post;
-      }
-    });
     res.render('templates/post', { post: postToShow });
   });
 
-  app.get('/contact', (req, res) => {
+  app.get('/contact', (_req, res) => {
     res.render('templates/contact');
   });
 
-  app.get('/about', (req, res) => {
+  app.get('/about', (_req, res) => {
     res.render('templates/about');
   });
 
   // API
-  app.get('/api/posts', (req, res) => {
+  app.get('/api/posts', (_req, res) => {
     res.json(posts);
   });
 
-  app.get('/rss.xml', (req, res) => {
+  app.get('/rss.xml', (_req, res) => {
     const rss = {
       rss: {
         $: {
@@ -80,20 +79,18 @@ module.exports = (app, posts) => {
               type: 'application/rss+xml',
             },
           },
-          item: posts.map((post) => {
-            return {
-              title: post.title,
-              link: 'https://blog.mikemjharris.com/posts/' + post.searchtitle,
-              pubDate: post.date,
-              guid: post.searchtitle,
-              description: post.body.replace(/href=\"\//g, 'href="https://blog.mikemjharris.com/'),
-            };
-          }),
+          item: posts.map((post) => ({
+            title: post.title,
+            link: 'https://blog.mikemjharris.com/posts/' + post.searchtitle,
+            pubDate: post.date,
+            guid: post.searchtitle,
+            description: post.body.replace(/href="\//g, 'href="https://blog.mikemjharris.com/'),
+          })),
         },
       },
     };
 
-    const builder = new xml2js.Builder();
+    const builder = new Builder();
     const xml = builder.buildObject(rss);
 
     res.set('Content-Type', 'text/xml');
