@@ -4,9 +4,12 @@ const notFound = {
 };
 
 const xml2js = require("xml2js");
+const { mountMcp } = require('../mcp/route');
 const date = new Date();
 
 module.exports = (app, posts) => {
+
+  mountMcp(app, posts);
 
   app.get('/', ( req, res ) => {
     res.render('templates/home' , { posts: posts, latestPost: posts[ 0 ]  });
