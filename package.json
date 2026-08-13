@@ -54,6 +54,11 @@
     "typescript": "^7.0.2"
   },
   "nodemonConfig": {
-    "delay": 2500
+    "delay": 2500,
+    "execMap": {
+      "ts": "node",
+      "cts": "node",
+      "mts": "node"
+    }
   }
 }
