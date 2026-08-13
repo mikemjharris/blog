@@ -2,9 +2,6 @@ node_modules
 public/dist
 package-lock.json
 
-# Blog posts are hand-written HTML — reflowing them would rewrite the content.
-server/content
-
 # Prettier only parses .hbs with the Ember-specific glimmer parser, which mangles
 # plain Handlebars templates.
 *.hbs

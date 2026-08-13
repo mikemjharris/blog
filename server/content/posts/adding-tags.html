@@ -6,14 +6,17 @@
 <!-- meta-data category: tech -->
 
 <p>
-  My blog needed updating - I wanted to split out all posts that referenced talks I've done. To do so I decided to add tags to posts - initially this project only supported having a category for each post. Being a side project it was up to me to add this.
+  My blog needed updating - I wanted to split out all posts that referenced talks I've done. To do
+  so I decided to add tags to posts - initially this project only supported having a category for
+  each post. Being a side project it was up to me to add this.
 </p>
 
 <h4>Page meta data</h4>
 <p>
-   Each post in the blog has a bunch of meta data fields that are parsed and converted into page attributes. For example the meta data for this page consists of the following:
-  </p>
-   <pre><code class="language-html">
+  Each post in the blog has a bunch of meta data fields that are parsed and converted into page
+  attributes. For example the meta data for this page consists of the following:
+</p>
+<pre><code class="language-html">
       &lt;!-- meta-data title: Adding tags and talks --&gt;
       &lt;!-- meta-data searchtitle: adding-tags-and-talks  --&gt;
       &lt;!-- meta-data date: 21 July 2019 --&gt;
@@ -21,40 +24,50 @@
       &lt;!-- meta-data author: Mike Harris  --&gt;
       &lt;!-- meta-data category: tech --&gt;
     </code></pre>
-    <p>
-      It was built to be extendable so to add tags was initially a case of including the following line:
-
-    </p>
-      <pre><code class="language-html">
+<p>
+  It was built to be extendable so to add tags was initially a case of including the following line:
+</p>
+<pre><code class="language-html">
         &lt;!-- meta-data tags: talk, code --&gt;
     </code></pre>
-    <p>
-      The main different here is that the values are an array.  For all the other fields they are key value pairs so there were a few other changes to make.
-    </p>
+<p>
+  The main different here is that the values are an array. For all the other fields they are key
+  value pairs so there were a few other changes to make.
+</p>
 
 <h4>Viewing the code</h4>
 
 <p>
-  All the code changes can be seen in full in this PR on <a href="https://github.com/mikemjharris/blog/pull/4/files" target="_blank">github</a>.
+  All the code changes can be seen in full in this PR on
+  <a href="https://github.com/mikemjharris/blog/pull/4/files" target="_blank">github</a>.
 </p>
 
 <h4>Parsing tags</h4>
 
 <p>
-  The server reads all the files in the content folder, it then parses each page using a regex pattern to convert the meta field attributes to values.  In this case I added an if statement that checks if it's the 'tags' field and if so convert the value into an array by splitting on commas.
+  The server reads all the files in the content folder, it then parses each page using a regex
+  pattern to convert the meta field attributes to values. In this case I added an if statement that
+  checks if it's the 'tags' field and if so convert the value into an array by splitting on commas.
 </p>
 
 <h4>Filtering by tags</h4>
 <p>
-  This blog uses handlebars as the templating engine. For the categories functionality I wrote a `compares` function to check if a post matched the category.  As tags are arrays this time we needed an `includes` function.
+  This blog uses handlebars as the templating engine. For the categories functionality I wrote a
+  `compares` function to check if a post matched the category. As tags are arrays this time we
+  needed an `includes` function.
 </p>
 <h4>Adding and viewing the tags</h4>
 <p>
-  Once the core functionality was done I needed to go back and update previous posts to include relevant tags.  My main initial need was to be able to collect all the talks I've done. In the future I will add a more dynamic tags page where you can see all the tags and select the ones you want but for now I've built a fixed template for posts tagged as talks. There's a new link on the main menu and you can see the result of all the work <a href="/talks">on the talks page</a></p>
+  Once the core functionality was done I needed to go back and update previous posts to include
+  relevant tags. My main initial need was to be able to collect all the talks I've done. In the
+  future I will add a more dynamic tags page where you can see all the tags and select the ones you
+  want but for now I've built a fixed template for posts tagged as talks. There's a new link on the
+  main menu and you can see the result of all the work <a href="/talks">on the talks page</a>
+</p>
 
 <h4>Summary</h4>
 
 <p>
-  Adding new functionality was fairly quick and smooth.  Given this is a four year old side project happy to get what I wanted with minimal effort.
+  Adding new functionality was fairly quick and smooth. Given this is a four year old side project
+  happy to get what I wanted with minimal effort.
 </p>
-
