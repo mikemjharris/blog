@@ -76,10 +76,6 @@ ever go missing.
 Pass `--no-verify` to skip them for one command. CI runs the same checks regardless, so
 skipping locally only defers the failure.
 
-Test
-==========
-
-`npm test` or `npm run test:coverage`
-
-`npm run smoke` boots the server and checks it actually serves the pages, the built
-assets, the JSON API, the RSS feed and the MCP endpoint. CI runs this on every push.
+Every job runs through `scripts/hook-run.sh`, which executes it in a `node:24-slim`
+container against the mounted working tree. The hooks therefore work whatever node is on
+`PATH`. Set `HOOKS_NO_DOCKER=1` to run on the host i
