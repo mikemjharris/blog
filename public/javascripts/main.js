@@ -1,7 +1,5 @@
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js').then(function () {
-    console.log('Service Worker Registered');
-  });
+  navigator.serviceWorker.register('/service-worker.js');
 }
 
 (function ($) {
@@ -28,11 +26,10 @@ if ('serviceWorker' in navigator) {
 
         if (posts !== undefined) {
           if (id !== undefined) {
-            var post = findPost(id, posts);
-            console.log(post);
-            var html = MyApp.templates.post({ post: post });
-            $('article').html(html);
-            window.location.href = window.location.href;
+            // Individual posts are rendered server side — client-side handlebars was
+            // unreliable for them — so let the server do it rather than rendering a
+            // copy here and immediately throwing it away.
+            window.location.reload();
           } else {
             $('article').html('');
 
@@ -53,34 +50,9 @@ if ('serviceWorker' in navigator) {
 
     $('.menu').on('click', toggleMenu);
 
-    $('body').on('click', '.posts', function (e) {
-      if (!$(this).data('navigate')) {
-        e.preventDefault();
-        var _href = $(this).attr('href');
-        window.history.pushState(null, null, _href);
-        $('.active-menu').removeClass('active-menu');
-
-        _href = window.location.pathname;
-        var pathParams = _href.match(/(?:\/(\w+))(?:\/([\w/-]+))?/);
-        var id = pathParams[2];
-
-        var post = findPost(id, posts);
-
-        var html = MyApp.templates['post']({ post: post });
-        $('article').html('');
-        setTimeout(function () {
-          $('article').append(html);
-          // triggers code highlighting
-          try {
-            Prism.highlightAll();
-            console.log('aaa');
-            window.location.href = window.location.href;
-          } catch (e) {
-            console.error(e);
-          }
-        }, 0);
-      }
-    });
+    // Post links are deliberately not intercepted. They used to be rendered client
+    // side and then immediately reloaded, so the render was discarded every time —
+    // letting the browser navigate reaches the same page without the flash.
 
     $('.intro-animation ul li a').on('click', function (e) {
       if (!$(this).data('navigate')) {
@@ -117,16 +89,6 @@ if ('serviceWorker' in navigator) {
       }
     });
   });
-
-  function findPost(id, posts) {
-    var foundPost;
-    posts.forEach(function (post) {
-      if (post.searchtitle === id) {
-        foundPost = post;
-      }
-    });
-    return foundPost;
-  }
 
   function toggleMenu() {
     $('.menu').toggleClass('cross');
