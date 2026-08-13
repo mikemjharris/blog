@@ -3,15 +3,22 @@ Blog
 
 Base for my online blog - view it here [blog.mikemjharis.com](http://blog.mikemjharris.com) To run pull this repository then run the following commands.
 
+Requires Node 24 (see `.nvmrc`).
+
 ```
-    npm install 
-    npm run start-dev
+    npm install
+    npm run dev
 ```
 
 or for prod
 ```
+    npm run build
     npm start
 ```
+
+`npm run dev` runs the server under nodemon alongside an asset watcher. `npm run build`
+compiles the Sass, concatenates and minifies the client JS, precompiles the Handlebars
+templates and copies the browser libraries into `public/dist`.
 
 
 Posts are in the server/content folder.  All the data such as title and date of published is inside meta tags at the top of each post.  These are used to order the posts, put them in different cataegories etc.
@@ -43,5 +50,8 @@ docker run -d -p 8000:8000 --name blog mikemjharris/blog
 
 Test
 ==========
-`npm test` or `npm run test-coverage`
+`npm test` or `npm run test:coverage`
+
+`npm run smoke` boots the server and checks it actually serves the pages, the built
+assets, the JSON API, the RSS feed and the MCP endpoint. CI runs this on every push.
 

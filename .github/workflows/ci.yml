@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build, test and boot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Boot the server and check it serves
+        run: npm run smoke
+
+  docker:
+    name: Docker image boots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build image
+        run: docker build -t blog:ci .
+
+      - name: Run container
+        run: docker run -d --name blog -p 8000:8000 blog:ci
+
+      - name: Check it serves
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf -o /dev/null http://localhost:8000/; then
+              echo "container is serving"
+              curl -sf -o /dev/null http://localhost:8000/api/posts
+              curl -sf -o /dev/null http://localhost:8000/dist/style.css
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "container did not serve within 60s"
+          docker logs blog
+          exit 1
