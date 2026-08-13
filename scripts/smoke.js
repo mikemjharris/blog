@@ -13,7 +13,7 @@ const assets = [
   '/dist/main.js',
   '/dist/templates.js',
   '/dist/vendor/jquery.min.js',
-  '/dist/vendor/handlebars.min.js'
+  '/dist/vendor/handlebars.min.js',
 ];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -95,9 +95,9 @@ const run = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json, text/event-stream'
+        Accept: 'application/json, text/event-stream',
       },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' })
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }),
     });
     expectStatus(res, 200);
     if (!(await res.text()).includes('search_posts')) throw new Error('mcp tools not listed');
@@ -112,7 +112,7 @@ const run = async () => {
 const main = async () => {
   const server = spawn('node', [path.join(__dirname, '../server/server.js')], {
     env: { ...process.env, PORT: port },
-    stdio: ['ignore', 'pipe', 'inherit']
+    stdio: ['ignore', 'pipe', 'inherit'],
   });
 
   let output = '';
@@ -121,7 +121,9 @@ const main = async () => {
   });
 
   const exited = new Promise((resolve, reject) => {
-    server.on('exit', (code) => reject(new Error(`server exited early with code ${code}\n${output}`)));
+    server.on('exit', (code) =>
+      reject(new Error(`server exited early with code ${code}\n${output}`)),
+    );
     server.on('error', reject);
   });
 
@@ -133,7 +135,7 @@ const main = async () => {
   }
 
   checks.forEach(({ name, ok, error }) =>
-    console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${error ? ` — ${error}` : ''}`)
+    console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${error ? ` — ${error}` : ''}`),
   );
 
   const failed = checks.filter((c) => !c.ok);

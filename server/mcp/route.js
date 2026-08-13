@@ -1,4 +1,6 @@
-const { StreamableHTTPServerTransport } = require('@modelcontextprotocol/sdk/server/streamableHttp.js');
+const {
+  StreamableHTTPServerTransport,
+} = require('@modelcontextprotocol/sdk/server/streamableHttp.js');
 const { createBlogMcpServer } = require('./blog-mcp-server');
 
 // Stateless: a fresh server and transport per request, so there is no session state to pin
@@ -6,15 +8,21 @@ const { createBlogMcpServer } = require('./blog-mcp-server');
 const methodNotAllowed = (res) =>
   res.status(405).json({
     jsonrpc: '2.0',
-    error: { code: -32000, message: 'Method not allowed. This MCP server is stateless - use POST.' },
-    id: null
+    error: {
+      code: -32000,
+      message: 'Method not allowed. This MCP server is stateless - use POST.',
+    },
+    id: null,
   });
 
 const mountMcp = (app, posts) => {
   app.use('/mcp', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, mcp-session-id, mcp-protocol-version');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Content-Type, mcp-session-id, mcp-protocol-version',
+    );
     res.header('Access-Control-Expose-Headers', 'mcp-session-id, mcp-protocol-version');
     if (req.method === 'OPTIONS') return res.sendStatus(204);
     next();
@@ -38,7 +46,7 @@ const mountMcp = (app, posts) => {
         res.status(500).json({
           jsonrpc: '2.0',
           error: { code: -32603, message: 'Internal server error' },
-          id: null
+          id: null,
         });
       }
     }

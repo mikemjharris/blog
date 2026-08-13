@@ -1,0 +1,5 @@
+# Bulk reformats — ignore with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# style: format with prettier
+eec7c5dffacf99c89af4b3442d1c4562f7822330
