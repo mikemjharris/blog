@@ -177,6 +177,29 @@ const run = async (): Promise<void> => {
     const res = await get(`${base}/posts/no-such-post`);
     expectStatus(res, 404);
   });
+
+  await check('security headers are set', async () => {
+    const res = await get(`${base}/`);
+    const required = [
+      'x-content-type-options',
+      'referrer-policy',
+      'strict-transport-security',
+      'x-frame-options',
+      'content-security-policy-report-only',
+    ];
+    const missing = required.filter((header) => !res.headers.get(header));
+    if (missing.length) throw new Error(`missing: ${missing.join(', ')}`);
+    if (res.headers.get('x-powered-by')) throw new Error('x-powered-by is still advertised');
+  });
+
+  await check('the csp still covers the libraries the layout loads', async () => {
+    const csp = (await get(`${base}/`)).headers.get('content-security-policy-report-only') ?? '';
+    // Loosely pinned: enough that dropping an origin the pages depend on is caught,
+    // without re-encoding the whole policy here.
+    for (const origin of ['cdnjs.cloudflare.com', 'platform.twitter.com', 'codepen.io']) {
+      if (!csp.includes(origin)) throw new Error(`csp no longer allows ${origin}`);
+    }
+  });
 };
 
 const main = async (): Promise<void> => {
