@@ -78,8 +78,8 @@ const expectStatus = (res: Response, status: number): void => {
   if (res.status !== status) throw new Error(`expected ${status}, got ${res.status}`);
 };
 
-// Never follow redirects: the catch-all route sends anything unmatched to the homepage,
-// so a followed redirect turns a missing route or asset into a passing 200.
+// Never follow redirects: a followed redirect would turn a route that has quietly
+// started redirecting into a passing 200.
 const get = (url: string, options?: RequestInit): Promise<Response> =>
   fetch(url, { redirect: 'manual', ...options });
 
@@ -163,6 +163,19 @@ const run = async (): Promise<void> => {
   await check('node_modules is not served', async () => {
     const res = await get(`${base}/express/package.json`);
     if (res.status === 200) throw new Error('node_modules is exposed over HTTP');
+  });
+
+  await check('an unknown path 404s with a real page', async () => {
+    const res = await get(`${base}/no-such-page`);
+    expectStatus(res, 404);
+    const html = await res.text();
+    if (!html.includes('Page not found')) throw new Error('404 did not render the error page');
+    if (!html.includes('<article')) throw new Error('404 is not wrapped in the site layout');
+  });
+
+  await check('an unknown post slug 404s rather than soft-404ing', async () => {
+    const res = await get(`${base}/posts/no-such-post`);
+    expectStatus(res, 404);
   });
 };
 

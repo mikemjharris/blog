@@ -38,17 +38,23 @@ app.use(express.static(path.join(import.meta.dirname, '../public')));
 
 registerRoutes(app, posts);
 
-app.get('/{*splat}', (_req, res) => {
-  res.redirect('../');
+// Anything unmatched is a 404. This used to redirect to the homepage, which made
+// every broken link on the site look like it worked — five real ones were hiding
+// behind it.
+app.use((_req, res) => {
+  res.status(404).render('templates/error', {
+    title: 'Page not found',
+    intro: "The page you were looking for isn't here.",
+  });
 });
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   console.error(err);
   const status = err instanceof Error && 'status' in err ? Number(err.status) : 500;
-  res
-    .status(Number.isInteger(status) ? status : 500)
-    .type('text')
-    .send('Something went wrong');
+  res.status(Number.isInteger(status) ? status : 500).render('templates/error', {
+    title: 'Something went wrong',
+    intro: 'That is my fault, not yours.',
+  });
 };
 
 app.use(errorHandler);

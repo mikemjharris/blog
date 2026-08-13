@@ -3,11 +3,6 @@ import { Builder } from 'xml2js';
 import { mountMcp } from '../mcp/route.ts';
 import type { Post } from '../helpers/source-content.ts';
 
-const notFound = {
-  title: '404',
-  intro: "the page you were looking for wasn't found",
-};
-
 const date = new Date();
 
 export default (app: Express, posts: Post[]): void => {
@@ -37,12 +32,16 @@ export default (app: Express, posts: Post[]): void => {
     res.render('templates/talks', { posts: posts });
   });
 
-  app.get('/posts/:id', (req, res) => {
-    const postId = req.params.id;
-    const postToShow: Post | typeof notFound =
-      posts.find((post) => post.searchtitle === postId) ?? notFound;
+  app.get('/posts/:id', (req, res, next) => {
+    const post = posts.find((candidate) => candidate.searchtitle === req.params.id);
+    // Fall through to the 404 handler rather than rendering a page that says "not
+    // found" while returning 200 — a soft 404 tells crawlers the page is fine.
+    if (!post) {
+      next();
+      return;
+    }
 
-    res.render('templates/post', { post: postToShow });
+    res.render('templates/post', { post });
   });
 
   app.get('/contact', (_req, res) => {
