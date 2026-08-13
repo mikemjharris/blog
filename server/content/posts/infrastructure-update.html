@@ -6,36 +6,63 @@
 <!-- meta-data category: tech  -->
 
 <p>
-  Since 2015 most of my side projects have been hosted on a Digital Ocean droplet - back then I wrote about the setup in this <a href="/posts/deploying-this-blog" target="_blank">post</a>. Over the past few years it's broadly the same bar adding new projects and adding some functionality. The main difference is that at the start it was a bunch of scripts and config on a server and now it is now a bunch of scripts and config in source control! That means I have a backup, can track my changes and the code is now public.
+  Since 2015 most of my side projects have been hosted on a Digital Ocean droplet - back then I
+  wrote about the setup in this <a href="/posts/deploying-this-blog" target="_blank">post</a>. Over
+  the past few years it's broadly the same bar adding new projects and adding some functionality.
+  The main difference is that at the start it was a bunch of scripts and config on a server and now
+  it is now a bunch of scripts and config in source control! That means I have a backup, can track
+  my changes and the code is now public.
 </p>
 
 <h4>Infrastructure Repo</h4>
 <p>
- You can see all my infrastructure scripts and config on <a href="https://github.com/mikemjharris/infrastructure" target="_blank">GitHub</a>. It's still a bit ad hoc and is the result of organic growth over time.  Often it has been easier to copy a script and find and replace a word rather than setup a more generic solution. There are three main parts to the repo as it currently stands:
+  You can see all my infrastructure scripts and config on
+  <a href="https://github.com/mikemjharris/infrastructure" target="_blank">GitHub</a>. It's still a
+  bit ad hoc and is the result of organic growth over time. Often it has been easier to copy a
+  script and find and replace a word rather than setup a more generic solution. There are three main
+  parts to the repo as it currently stands:
 </p>
 
 <h4>1 Routing</h4>
 <p>
-  Most of my apps run in docker containers on different ports. I have various CNAMES pointing to the digital ocean droplet and Nginx directs traffic to the relevant container. This used to be one big messy bit of config as part of the <i>nginx.conf</i> file that had evolved over time.  Recently I refactored this to be multiple conf files that are symlinked to the sites-enabled folder which nginx references.
+  Most of my apps run in docker containers on different ports. I have various CNAMES pointing to the
+  digital ocean droplet and Nginx directs traffic to the relevant container. This used to be one big
+  messy bit of config as part of the <i>nginx.conf</i> file that had evolved over time. Recently I
+  refactored this to be multiple conf files that are symlinked to the sites-enabled folder which
+  nginx references.
 </p>
 
 <h4>2 Scripts</h4>
 <p>
-  In the deployment folder there are 'build' and 'version' scripts. These pull from git and build a docker image and run it as a container - often including version data that is consumed by my <a href="/posts/dashboard" target="_blank">dashboard project</a>. The setup is pretty much the same for each with the only differences being the name and the port.  For the future this could be setup with one script and a config file which would make it marginally quicker to add new projects.
+  In the deployment folder there are 'build' and 'version' scripts. These pull from git and build a
+  docker image and run it as a container - often including version data that is consumed by my
+  <a href="/posts/dashboard" target="_blank">dashboard project</a>. The setup is pretty much the
+  same for each with the only differences being the name and the port. For the future this could be
+  setup with one script and a config file which would make it marginally quicker to add new
+  projects.
 </p>
 
 <p>
-  The other main script is the webhook server. This is a simple python http server that listens for webhooks from GitHub which it uses to trigger builds (for more info see this <a href="/posts/deploying-this-blog" target="_blank">post</a>).
+  The other main script is the webhook server. This is a simple python http server that listens for
+  webhooks from GitHub which it uses to trigger builds (for more info see this
+  <a href="/posts/deploying-this-blog" target="_blank">post</a>).
 </p>
 <p>There's a few other test scripts and experiments there too which aren't used.</p>
 
 <h4>3 Crontab</h4>
 <p>
-  The final section is a text file with the cron jobs I run.  This includes restarting all the docker containers and the webhook server on a reboot.  Also it includes a nightly job which scrapes images as part of my <a href="https://view-from-the-ra.mikemjharris.com" target="_blank">view from the RA </a> project.
+  The final section is a text file with the cron jobs I run. This includes restarting all the docker
+  containers and the webhook server on a reboot. Also it includes a nightly job which scrapes images
+  as part of my
+  <a href="https://view-from-the-ra.mikemjharris.com" target="_blank">view from the RA </a> project.
 </p>
 
 <h4>Conclusion</h4>
 <p>
-  It's a relief to have all the config setup in source control.  There was always a worry that I'd have to start all over again or break the setup and not be able to revert the changes. Am happy that what was some experimental playing around four years ago still works. It could all be made more extendable and performant either in it's current guise or by utilising tools such as Ansible and Terraform.  For now it all works and for a non essential side project that is good enough for me.
+  It's a relief to have all the config setup in source control. There was always a worry that I'd
+  have to start all over again or break the setup and not be able to revert the changes. Am happy
+  that what was some experimental playing around four years ago still works. It could all be made
+  more extendable and performant either in it's current guise or by utilising tools such as Ansible
+  and Terraform. For now it all works and for a non essential side project that is good enough for
+  me.
 </p>
-

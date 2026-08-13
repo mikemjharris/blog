@@ -6,35 +6,50 @@
 <!-- meta-data category: tech  -->
 
 <p>
-  Back in the good old days when you asked for a web page you got a web-page. But then you wanted another page and you got another whole web page.
+  Back in the good old days when you asked for a web page you got a web-page. But then you wanted
+  another page and you got another whole web page.
 </p>
 
 <p>
-  Then all these wonderful javascript frameworks came along and you could skip from page to page without a care in the world, just waiting for a small chunk of data to come back.
+  Then all these wonderful javascript frameworks came along and you could skip from page to page
+  without a care in the world, just waiting for a small chunk of data to come back.
 </p>
 
 <p>
-  This was fine - if I click on a link I expect something to happen - a little spinner while something loads seems logical.  But when I load a page, and the outline is there and then a spinner whirls away - that seems wrong.  There was one step in requesting the page - surely I should just get the whole page!  Especially when the layout moves and you thought you'd clicked on a button but in reality had accidentally liked a photo of your great aunt.
+  This was fine - if I click on a link I expect something to happen - a little spinner while
+  something loads seems logical. But when I load a page, and the outline is there and then a spinner
+  whirls away - that seems wrong. There was one step in requesting the page - surely I should just
+  get the whole page! Especially when the layout moves and you thought you'd clicked on a button but
+  in reality had accidentally liked a photo of your great aunt.
 </p>
 <h4>Handlebars</h4>
 <p>
-  When building this blog project I wanted the speed of updating pages using scripting behind the scenes but wanted that first request to return the whole page.  I decided to try out <a href="http://handlebarsjs.com/">handlebars</a> as I had heard good things and from what I could see it fitted what I wanted to do.  If you've ever used a templating language then it is fairly easy to pick up. Handlebars is very minimal so lots of the functionality you would find as standard elsewhere you have to build yourself.
+  When building this blog project I wanted the speed of updating pages using scripting behind the
+  scenes but wanted that first request to return the whole page. I decided to try out
+  <a href="http://handlebarsjs.com/">handlebars</a> as I had heard good things and from what I could
+  see it fitted what I wanted to do. If you've ever used a templating language then it is fairly
+  easy to pick up. Handlebars is very minimal so lots of the functionality you would find as
+  standard elsewhere you have to build yourself.
 </p>
 <p>
-  As the name suggests, handlebars.js is javascript based and you can use it on the server and the client. This was perfect for what I wanted - when a page was requested from the server handlebars would create the markup for the page there and send it all down in the initial request. In subsequent page requests handlebars on the client deals with updating the relevant part of the page.
+  As the name suggests, handlebars.js is javascript based and you can use it on the server and the
+  client. This was perfect for what I wanted - when a page was requested from the server handlebars
+  would create the markup for the page there and send it all down in the initial request. In
+  subsequent page requests handlebars on the client deals with updating the relevant part of the
+  page.
 </p>
 <p>
-  The other benefit of this is that if for some reason javascript isn’t running on the client then a normal http request will be made and the user will still see the page in all its glory.
+  The other benefit of this is that if for some reason javascript isn’t running on the client then a
+  normal http request will be made and the user will still see the page in all its glory.
 </p>
 <p>
-  You can take a look at the project on github - the key part with sharing the templates between the server can be found in <a href="https://github.com/mikemjharris/blog/blob/master/server/server.js#L53" title="github">this section of code</a>
-
-
+  You can take a look at the project on github - the key part with sharing the templates between the
+  server can be found in
+  <a href="https://github.com/mikemjharris/blog/blob/master/server/server.js#L53" title="github"
+    >this section of code</a
+  >
 </p>
 <p>
-  There we are - templating that means that you get the power of a javascript powered web app with the better user experience of an old school webpage. Thank you handlebars.
+  There we are - templating that means that you get the power of a javascript powered web app with
+  the better user experience of an old school webpage. Thank you handlebars.
 </p>
-
-
-
-

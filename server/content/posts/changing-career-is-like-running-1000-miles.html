@@ -7,413 +7,449 @@
 <!-- meta-data twitterimage: https://blog.mikemjharris.com/images/run-equivalent.png -->
 
 <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
-    .chart-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      width: 100%;
-      max-width: 900px;
-    }
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    max-width: 900px;
+  }
+  .chart-wrapper {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  #chart {
+    width: 100%;
+    height: auto;
+  }
+  /* Add styles for the y-axis to prevent text overlap */
+  .y-axis text,
+  .x-axis text {
+    font-size: 12px;
+  }
+  /* Legend styles */
+  .legend-item {
+    display: inline-block;
+    margin-right: 20px;
+    align-items: center;
+  }
+  .legend-container {
+    padding-top: 20px;
+    text-align: center;
+  }
+  /* Responsive styles for small screens */
+  @media (max-width: 600px) {
     .chart-wrapper {
-      border: 1px solid #e2e8f0;
-      border-radius: 0.25rem;
-      padding: 1rem;
-      background-color: white;
-      width: 100%;
-      box-sizing: border-box;
+      padding: 0.5rem;
     }
-    #chart {
-      width: 100%;
-      height: auto;
-    }
-    /* Add styles for the y-axis to prevent text overlap */
-    .y-axis text, .x-axis text {
-      font-size: 12px;
-    }
-    /* Legend styles */
-    .legend-item {
-      display: inline-block;
-      margin-right: 20px;
-      align-items: center;
-    }
-    .legend-container {
-      padding-top: 20px;
-      text-align: center;
-    }
-    /* Responsive styles for small screens */
-    @media (max-width: 600px) {
-      .chart-wrapper {
-        padding: 0.5rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <p>
-  Some things in life take up a lot of time and effort - for example changing career or having a baby.   It’s over ten years now since I changed careers and I know it took a lot of work and dedication - but how reliable are my memories - can I quantify what the impact was? Fortunately I can - it’s equivalent to running 1000 miles (<a href="https://dictionary.cambridge.org/dictionary/english/ymmvYMMV" target="_blank">YMMV</a>).
-  <div class="chart-container">
+  }
+</style>
+<p>
+  Some things in life take up a lot of time and effort - for example changing career or having a
+  baby. It’s over ten years now since I changed careers and I know it took a lot of work and
+  dedication - but how reliable are my memories - can I quantify what the impact was? Fortunately I
+  can - it’s equivalent to running 1000 miles (<a
+    href="https://dictionary.cambridge.org/dictionary/english/ymmvYMMV"
+    target="_blank"
+    >YMMV</a
+  >).
+</p>
 
-    <h2>Running Activity Over Years</h2>
-    <div class="chart-wrapper">
-      <div id="chart"></div>
-    </div>
+<div class="chart-container">
+  <h2>Running Activity Over Years</h2>
+  <div class="chart-wrapper">
+    <div id="chart"></div>
   </div>
+</div>
 
-  <h2>1000 Miles</h2>
-  <p>
-  The chart shows how much running I did each year - as I got older, wiser and slightly more achy I added in lots of yoga and swimming. I have a rough conversion based on time it takes to do an activity to produce a Run Equivalent metric each year. The graph is pretty clear:  either side of my career change in 2014 I was roughly doing 2200km. In 2014 that dropped to around 500km.  So roughly 1000 miles (miles here instead of KM so I can amusingly use YMMV) - Your mileage may vary - if you run your mileage will likely literally vary. However you may not run but if you have an intense new thing in your life it will likely mean doing less of something else.</p>
+<h2>1000 Miles</h2>
+<p>
+  The chart shows how much running I did each year - as I got older, wiser and slightly more achy I
+  added in lots of yoga and swimming. I have a rough conversion based on time it takes to do an
+  activity to produce a Run Equivalent metric each year. The graph is pretty clear: either side of
+  my career change in 2014 I was roughly doing 2200km. In 2014 that dropped to around 500km. So
+  roughly 1000 miles (miles here instead of KM so I can amusingly use YMMV) - Your mileage may vary
+  - if you run your mileage will likely literally vary. However you may not run but if you have an
+  intense new thing in your life it will likely mean doing less of something else.
+</p>
 
-  <h2>Not just exercise</h2>
-  <p>While I track exercise the career change didn’t just impact that - it was an intense period with a unique opporunity to make the most of a coding bootcamp, events and an engaged cohort.  The learning, networking and socialising swallowed up not just the running but lots of my personal and social life. This was all worth it - I needed a new career, a new job and to accelerate as fast as possible to pay the bills. I liken it to accelerating in a car - you drop a gear, raise the revs and accelerate as quickly as possible. Once up to speed you settle down into a more maintainable way of life.  And that is what came to pass - there was still plenty of hard work and graft but there was also space to get back to friends, family and fitness.</p>
+<h2>Not just exercise</h2>
+<p>
+  While I track exercise the career change didn’t just impact that - it was an intense period with a
+  unique opporunity to make the most of a coding bootcamp, events and an engaged cohort. The
+  learning, networking and socialising swallowed up not just the running but lots of my personal and
+  social life. This was all worth it - I needed a new career, a new job and to accelerate as fast as
+  possible to pay the bills. I liken it to accelerating in a car - you drop a gear, raise the revs
+  and accelerate as quickly as possible. Once up to speed you settle down into a more maintainable
+  way of life. And that is what came to pass - there was still plenty of hard work and graft but
+  there was also space to get back to friends, family and fitness.
+</p>
 
-  <h2>
-Other things that take up time.
-  </h2>
-  <p>
-  Post 2016 the graph has a lot more ups and downs - a big running event in 2019, a pandemic from 2020 onwards, an older body needing more yoga and less running, a bad back impacting total running in 2022.  The run equivalent levels though were pretty high still - until 2024. The arrival of a baby takes a lot of time - and the numbers suggest roughly as much as an intense career change and around that magic 1000 miles.  You can’t really accelerate a baby's progress - it just takes up a lot of time. Working hard is imperative as babies cost money so it’s the sport that gives (although replaced by plenty of activity - more crawling on the floor, pushing buggies, lifting a wriggling little body).  Hopefully some balance settles in although I have a feeling I’ve seen my all time highs of yearly run equivalent KMs. Arugably that was a little excessive - also the replacement is more than worth it.</p>
+<h2>Other things that take up time.</h2>
+<p>
+  Post 2016 the graph has a lot more ups and downs - a big running event in 2019, a pandemic from
+  2020 onwards, an older body needing more yoga and less running, a bad back impacting total running
+  in 2022. The run equivalent levels though were pretty high still - until 2024. The arrival of a
+  baby takes a lot of time - and the numbers suggest roughly as much as an intense career change and
+  around that magic 1000 miles. You can’t really accelerate a baby's progress - it just takes up a
+  lot of time. Working hard is imperative as babies cost money so it’s the sport that gives
+  (although replaced by plenty of activity - more crawling on the floor, pushing buggies, lifting a
+  wriggling little body). Hopefully some balance settles in although I have a feeling I’ve seen my
+  all time highs of yearly run equivalent KMs. Arugably that was a little excessive - also the
+  replacement is more than worth it.
+</p>
 
-  <h2>Summary</h2>
-      <p>So the clear and probably obvious message is - a big life change will take up time. In my case a new career and a baby both were equivalent to running 1000 miles. As always - your mileage will figuratively and literally - vary.</p>
+<h2>Summary</h2>
+<p>
+  So the clear and probably obvious message is - a big life change will take up time. In my case a
+  new career and a baby both were equivalent to running 1000 miles. As always - your mileage will
+  figuratively and literally - vary.
+</p>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Create a responsive chart that resizes with the window
+    function createChart() {
+      // Clear previous chart if exists
+      d3.select('#chart').selectAll('*').remove();
 
+      // Parse the data
+      const data = [
+        { year: 2012, kmRun: 1639, runEquivalent: 2109 },
+        { year: 2013, kmRun: 1633, runEquivalent: 2453 },
+        { year: 2014, kmRun: 391, runEquivalent: 451 },
+        { year: 2015, kmRun: 1389, runEquivalent: 2640 },
+        { year: 2016, kmRun: 1145, runEquivalent: 2359 },
+        { year: 2017, kmRun: 1083, runEquivalent: 2009 },
+        { year: 2018, kmRun: 1642, runEquivalent: 2702 },
+        { year: 2019, kmRun: 2472, runEquivalent: 3442 },
+        { year: 2020, kmRun: 1796, runEquivalent: 3250 },
+        { year: 2021, kmRun: 1082, runEquivalent: 3338 },
+        { year: 2022, kmRun: 455, runEquivalent: 1945 },
+        { year: 2023, kmRun: 1830, runEquivalent: 3664 },
+        { year: 2024, kmRun: 193, runEquivalent: 811 },
+      ];
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Create a responsive chart that resizes with the window
-      function createChart() {
-        // Clear previous chart if exists
-        d3.select("#chart").selectAll("*").remove();
-        
-        // Parse the data
-        const data = [
-          { year: 2012, kmRun: 1639, runEquivalent: 2109 },
-          { year: 2013, kmRun: 1633, runEquivalent: 2453 },
-          { year: 2014, kmRun: 391, runEquivalent: 451 },
-          { year: 2015, kmRun: 1389, runEquivalent: 2640 },
-          { year: 2016, kmRun: 1145, runEquivalent: 2359 },
-          { year: 2017, kmRun: 1083, runEquivalent: 2009 },
-          { year: 2018, kmRun: 1642, runEquivalent: 2702 },
-          { year: 2019, kmRun: 2472, runEquivalent: 3442},
-          { year: 2020, kmRun: 1796, runEquivalent: 3250},
-          { year: 2021, kmRun: 1082, runEquivalent: 3338},
-          { year: 2022, kmRun: 455, runEquivalent: 1945 },
-          { year: 2023, kmRun: 1830, runEquivalent: 3664 },
-          { year: 2024, kmRun: 193, runEquivalent: 811},
-        ];
-        
-        // Get container width for responsive sizing
-        const containerWidth = document.getElementById('chart').clientWidth;
-        const containerHeight = Math.min(Math.max(containerWidth * 0.6, 300), 500); // Maintain aspect ratio with min/max height
-        
-        // Set dimensions based on container size
-        const margin = {
-          top: 40,
-          right: 30, // Reduced right margin
-          bottom: 100, // Increased bottom margin for legend
-          left: containerWidth < 500 ? 60 : 80 // Adjust left margin based on screen size
-        };
-        
-        const width = containerWidth;
-        const height = containerHeight;
-        const innerWidth = width - margin.left - margin.right;
-        const innerHeight = height - margin.top - margin.bottom;
-        
-        // Create SVG element with viewBox for responsiveness
-        const svg = d3.select("#chart")
-          .append("svg")
-          .attr("width", width)
-          .attr("height", height)
-          .attr("viewBox", `0 0 ${width} ${height}`)
-          .attr("preserveAspectRatio", "xMidYMid meet");
-        
-        // Create chart group
-        const g = svg.append("g")
-          .attr("transform", `translate(${margin.left},${margin.top})`);
-        
-        // Create scales - use band scale for x to ensure one tick per year
-        const xScale = d3.scaleBand()
-          .domain(data.map(d => d.year))
-          .range([0, innerWidth])
-          .padding(0.1);
-        
-        // Create y scale for both metrics
-        const yScale = d3.scaleLinear()
-          .domain([0, d3.max(data, d => Math.max(d.kmRun, d.runEquivalent))])
-          .range([innerHeight, 0])
-          .nice();
-        
-        // Create line generators
-        const lineRun = d3.line()
-          .x(d => xScale(d.year) + xScale.bandwidth() / 2)
-          .y(d => yScale(d.kmRun))
-          .curve(d3.curveMonotoneX);
-        
-        const lineEquivalent = d3.line()
-          .x(d => xScale(d.year) + xScale.bandwidth() / 2)
-          .y(d => yScale(d.runEquivalent))
-          .curve(d3.curveMonotoneX);
-        
-        // Add X axis with exactly one tick per year
-        const xAxis = g.append("g")
-          .attr("class", "axis x-axis")
-          .attr("transform", `translate(0,${innerHeight})`)
-          .call(
-    d3.axisBottom(xScale)
-      .tickFormat((d) => {
-        // If d is already a year number (like 2024)
-        const yearStr = d.toString();
-        // Get the last two digits of the year
-        const shortYear = "'" + yearStr.slice(-2);
-        // On small screens, only show alternate years
-        return containerWidth < 500 ? 
-          (d % 2 === 0 ? shortYear : '') : 
-          yearStr;
-      })
-  );
-        
-        // Adjust font size for small screens
-        if (containerWidth < 500) {
-          xAxis.selectAll("text")
-            .style("font-size", "10px");
-        }
-        
-        // X axis label
-        g.append("text")
-          .attr("x", innerWidth / 2)
-          .attr("y", innerHeight + 40)
-          .attr("text-anchor", "middle")
-          .attr("fill", "black")
-          .style("font-size", containerWidth < 500 ? "12px" : "14px")
-          .style("font-weight", "bold")
-          .text("Year");
-        
-        // Add Y axis
-        const yAxis = g.append("g")
-          .attr("class", "axis y-axis")
-          .call(d3.axisLeft(yScale)
-            .tickFormat(d => d.toLocaleString())
-            .tickSize(-5)
-            .ticks(containerWidth < 500 ? 5 : 10)
-          );
-        
-        // Adjust font size for small screens
-        if (containerWidth < 500) {
-          yAxis.selectAll("text")
-            .style("font-size", "10px");
-        }
-        
-        // Y axis label
-        g.append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("x", -innerHeight / 2)
-          .attr("y", containerWidth < 500 ? -40 : -50)
-          .attr("text-anchor", "middle")
-          .attr("fill", "black")
-          .style("font-size", containerWidth < 500 ? "12px" : "14px")
-          .style("font-weight", "bold")
-          .text("Kilometers");
-        
-        // Add vertical grid lines for each year
-        g.selectAll(".grid-line")
-          .data(data)
-          .enter()
-          .append("line")
-          .attr("class", "grid-line")
-          .attr("x1", d => xScale(d.year) + xScale.bandwidth() / 2)
-          .attr("x2", d => xScale(d.year) + xScale.bandwidth() / 2)
-          .attr("y1", 0)
-          .attr("y2", innerHeight)
-          .attr("stroke", "#e0e0e0")
-          .attr("stroke-width", 1);
-        
-        // Add horizontal grid lines
-        yScale.ticks(containerWidth < 500 ? 5 : 10).forEach(tick => {
-          g.append("line")
-            .attr("class", "grid-line-horizontal")
-            .attr("x1", 0)
-            .attr("x2", innerWidth)
-            .attr("y1", yScale(tick))
-            .attr("y2", yScale(tick))
-            .attr("stroke", "#e0e0e0")
-            .attr("stroke-width", 1);
-        });
-        
-        // Add lines
-        g.append("path")
-          .datum(data)
-          .attr("fill", "none")
-          .attr("stroke", "#ff6b6b")
-          .attr("stroke-width", 3)
-          .attr("d", lineRun);
-        
-        g.append("path")
-          .datum(data)
-          .attr("fill", "none")
-          .attr("stroke", "#4361ee")
-          .attr("stroke-width", 3)
-          .attr("d", lineEquivalent);
-        
-        // Add points
-        g.selectAll(".point-running")
-          .data(data)
-          .enter()
-          .append("circle")
-          .attr("class", "point-running")
-          .attr("cx", d => xScale(d.year) + xScale.bandwidth() / 2)
-          .attr("cy", d => yScale(d.kmRun))
-          .attr("r", containerWidth < 500 ? 3 : 5)
-          .attr("fill", "#ff6b6b");
-        
-        g.selectAll(".point-equivalent")
-          .data(data)
-          .enter()
-          .append("circle")
-          .attr("class", "point-equivalent")
-          .attr("cx", d => xScale(d.year) + xScale.bandwidth() / 2)
-          .attr("cy", d => yScale(d.runEquivalent))
-          .attr("r", containerWidth < 500 ? 3 : 5)
-          .attr("fill", "#4361ee");
-        
-        // Conditional rendering of data labels based on screen size
-        if (containerWidth >= 400) {
-          // Add labels for data points
-          data.forEach(d => {
-            // KM Run labels
-            g.append("text")
-              .attr("x", xScale(d.year) + xScale.bandwidth() / 2)
-              .attr("y", yScale(d.kmRun) - 10)
-              .attr("text-anchor", "middle")
-              .attr("fill", "#ff6b6b")
-              .style("font-size", containerWidth < 500 ? "8px" : "10px")
-              .style("font-weight", "bold")
-              .text(d.kmRun);
-            
-            // Run Equivalent labels
-            g.append("text")
-              .attr("x", xScale(d.year) + xScale.bandwidth() / 2)
-              .attr("y", yScale(d.runEquivalent) - 10)
-              .attr("text-anchor", "middle")
-              .attr("fill", "#4361ee")
-              .style("font-size", containerWidth < 500 ? "8px" : "10px")
-              .style("font-weight", "bold")
-              .text(d.runEquivalent);
-          });
-        }
-        
-        // Add in-chart labels if there's enough space
-        if (containerWidth >= 600) {
-          // For Actual Running - add at 2016 position
-          g.append("text")
-            .attr("x", xScale(2016) + xScale.bandwidth() / 2)
-            .attr("y", yScale(data.find(d => d.year === 2016).kmRun) + 25)
-            .attr("text-anchor", "middle")
-            .attr("fill", "#ff6b6b")
-            .style("font-size", "12px")
-            .style("font-weight", "bold")
-            .text("Actual Running")
-            .attr("stroke", "white")
-            .attr("stroke-width", 5)
-            .attr("paint-order", "stroke")
-            .lower();
-          
-          // For Run Equivalent - add at 2015 position
-          g.append("text")
-            .attr("x", xScale(2015) + xScale.bandwidth() / 2)
-            .attr("y", yScale(data.find(d => d.year === 2015).runEquivalent) - 25)
-            .attr("text-anchor", "middle")
-            .attr("fill", "#4361ee")
-            .style("font-size", "12px")
-            .style("font-weight", "bold")
-            .text("Run Equivalent")
-            .attr("stroke", "white")
-            .attr("stroke-width", 5)
-            .attr("paint-order", "stroke")
-            .lower();
-        }
-          
-        // Add improved bottom legend
-        const legendContainer = g.append("g")
-          .attr("class", "legend")
-          .attr("transform", `translate(0, ${innerHeight + 55})`);
-        
-        const legendItems = [
-          { label: "Actual Running (km)", color: "#ff6b6b" },
-          { label: "Run Equivalent (km)", color: "#4361ee" }
-        ];
-        
-        // Calculate spacing based on container width
-        const legendSpacing = containerWidth < 500 ? 
-          0:  // For small screens - center each item
-          innerWidth / 2.8;   // For larger screens - more spacing
+      // Get container width for responsive sizing
+      const containerWidth = document.getElementById('chart').clientWidth;
+      const containerHeight = Math.min(Math.max(containerWidth * 0.6, 300), 500); // Maintain aspect ratio with min/max height
 
-        
-        
-        // Line size and text positioning
-        const lineWidth = 30;
-        const lineHeight = 3;
-        const textOffsetY = 5;
-        
-        legendItems.forEach((item, i) => {
-          const height = containerWidth < 500 && i === 0 ? lineHeight + 10 : lineHeight;
-          
-          const legendGroup = legendContainer.append("g")
-            .attr("transform", `translate(${i * legendSpacing}, ${height})`);
-         
-          // Add colored line
-          legendGroup.append("line")
-            .attr("x1", 0)
-            .attr("y1", height)
-            .attr("x2", lineWidth)
-            .attr("y2", height)
-            .attr("stroke", item.color)
-            .attr("stroke-width", lineHeight);
-          
-          // Add circle for the data points
-          legendGroup.append("circle")
-            .attr("cx", lineWidth / 2)
-            .attr("cy", height )
-            .attr("r", 4)
-            .attr("fill", item.color);
-          
-          // Add text label
-          legendGroup.append("text")
-            .attr("x", lineWidth + 10)
-            .attr("y", height)
-            .attr("fill", "black")
-            .style("font-size", containerWidth < 500 ? "11px" : "13px")
-            .style("font-weight", containerWidth < 500 ? "normal" : "bold")
-            .text(item.label);
-        });
-        
-        // Adjust legend positioning based on container width
-        if (containerWidth < 500) {
-          // Center the legend for small screens
-          const legendWidth = innerWidth;
-          legendContainer.attr("transform", `translate(${(innerWidth - legendWidth) / 2}, ${innerHeight + 50})`);
-        } else {
-          // Center the legend for larger screens
-          legendContainer.attr("transform", `translate(${innerWidth / 6}, ${innerHeight + 60})`);
-        }
+      // Set dimensions based on container size
+      const margin = {
+        top: 40,
+        right: 30, // Reduced right margin
+        bottom: 100, // Increased bottom margin for legend
+        left: containerWidth < 500 ? 60 : 80, // Adjust left margin based on screen size
+      };
+
+      const width = containerWidth;
+      const height = containerHeight;
+      const innerWidth = width - margin.left - margin.right;
+      const innerHeight = height - margin.top - margin.bottom;
+
+      // Create SVG element with viewBox for responsiveness
+      const svg = d3
+        .select('#chart')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('viewBox', `0 0 ${width} ${height}`)
+        .attr('preserveAspectRatio', 'xMidYMid meet');
+
+      // Create chart group
+      const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+      // Create scales - use band scale for x to ensure one tick per year
+      const xScale = d3
+        .scaleBand()
+        .domain(data.map((d) => d.year))
+        .range([0, innerWidth])
+        .padding(0.1);
+
+      // Create y scale for both metrics
+      const yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, (d) => Math.max(d.kmRun, d.runEquivalent))])
+        .range([innerHeight, 0])
+        .nice();
+
+      // Create line generators
+      const lineRun = d3
+        .line()
+        .x((d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .y((d) => yScale(d.kmRun))
+        .curve(d3.curveMonotoneX);
+
+      const lineEquivalent = d3
+        .line()
+        .x((d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .y((d) => yScale(d.runEquivalent))
+        .curve(d3.curveMonotoneX);
+
+      // Add X axis with exactly one tick per year
+      const xAxis = g
+        .append('g')
+        .attr('class', 'axis x-axis')
+        .attr('transform', `translate(0,${innerHeight})`)
+        .call(
+          d3.axisBottom(xScale).tickFormat((d) => {
+            // If d is already a year number (like 2024)
+            const yearStr = d.toString();
+            // Get the last two digits of the year
+            const shortYear = "'" + yearStr.slice(-2);
+            // On small screens, only show alternate years
+            return containerWidth < 500 ? (d % 2 === 0 ? shortYear : '') : yearStr;
+          }),
+        );
+
+      // Adjust font size for small screens
+      if (containerWidth < 500) {
+        xAxis.selectAll('text').style('font-size', '10px');
       }
-      
-      // Initial chart creation
-      createChart();
-      
-      // Redraw chart on window resize
-      window.addEventListener('resize', function() {
-        // Debounce the resize event
-        clearTimeout(window.resizeTimer);
-        window.resizeTimer = setTimeout(function() {
-          createChart();
-        }, 250);
+
+      // X axis label
+      g.append('text')
+        .attr('x', innerWidth / 2)
+        .attr('y', innerHeight + 40)
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'black')
+        .style('font-size', containerWidth < 500 ? '12px' : '14px')
+        .style('font-weight', 'bold')
+        .text('Year');
+
+      // Add Y axis
+      const yAxis = g
+        .append('g')
+        .attr('class', 'axis y-axis')
+        .call(
+          d3
+            .axisLeft(yScale)
+            .tickFormat((d) => d.toLocaleString())
+            .tickSize(-5)
+            .ticks(containerWidth < 500 ? 5 : 10),
+        );
+
+      // Adjust font size for small screens
+      if (containerWidth < 500) {
+        yAxis.selectAll('text').style('font-size', '10px');
+      }
+
+      // Y axis label
+      g.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -innerHeight / 2)
+        .attr('y', containerWidth < 500 ? -40 : -50)
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'black')
+        .style('font-size', containerWidth < 500 ? '12px' : '14px')
+        .style('font-weight', 'bold')
+        .text('Kilometers');
+
+      // Add vertical grid lines for each year
+      g.selectAll('.grid-line')
+        .data(data)
+        .enter()
+        .append('line')
+        .attr('class', 'grid-line')
+        .attr('x1', (d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .attr('x2', (d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .attr('y1', 0)
+        .attr('y2', innerHeight)
+        .attr('stroke', '#e0e0e0')
+        .attr('stroke-width', 1);
+
+      // Add horizontal grid lines
+      yScale.ticks(containerWidth < 500 ? 5 : 10).forEach((tick) => {
+        g.append('line')
+          .attr('class', 'grid-line-horizontal')
+          .attr('x1', 0)
+          .attr('x2', innerWidth)
+          .attr('y1', yScale(tick))
+          .attr('y2', yScale(tick))
+          .attr('stroke', '#e0e0e0')
+          .attr('stroke-width', 1);
       });
+
+      // Add lines
+      g.append('path')
+        .datum(data)
+        .attr('fill', 'none')
+        .attr('stroke', '#ff6b6b')
+        .attr('stroke-width', 3)
+        .attr('d', lineRun);
+
+      g.append('path')
+        .datum(data)
+        .attr('fill', 'none')
+        .attr('stroke', '#4361ee')
+        .attr('stroke-width', 3)
+        .attr('d', lineEquivalent);
+
+      // Add points
+      g.selectAll('.point-running')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('class', 'point-running')
+        .attr('cx', (d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .attr('cy', (d) => yScale(d.kmRun))
+        .attr('r', containerWidth < 500 ? 3 : 5)
+        .attr('fill', '#ff6b6b');
+
+      g.selectAll('.point-equivalent')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('class', 'point-equivalent')
+        .attr('cx', (d) => xScale(d.year) + xScale.bandwidth() / 2)
+        .attr('cy', (d) => yScale(d.runEquivalent))
+        .attr('r', containerWidth < 500 ? 3 : 5)
+        .attr('fill', '#4361ee');
+
+      // Conditional rendering of data labels based on screen size
+      if (containerWidth >= 400) {
+        // Add labels for data points
+        data.forEach((d) => {
+          // KM Run labels
+          g.append('text')
+            .attr('x', xScale(d.year) + xScale.bandwidth() / 2)
+            .attr('y', yScale(d.kmRun) - 10)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#ff6b6b')
+            .style('font-size', containerWidth < 500 ? '8px' : '10px')
+            .style('font-weight', 'bold')
+            .text(d.kmRun);
+
+          // Run Equivalent labels
+          g.append('text')
+            .attr('x', xScale(d.year) + xScale.bandwidth() / 2)
+            .attr('y', yScale(d.runEquivalent) - 10)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#4361ee')
+            .style('font-size', containerWidth < 500 ? '8px' : '10px')
+            .style('font-weight', 'bold')
+            .text(d.runEquivalent);
+        });
+      }
+
+      // Add in-chart labels if there's enough space
+      if (containerWidth >= 600) {
+        // For Actual Running - add at 2016 position
+        g.append('text')
+          .attr('x', xScale(2016) + xScale.bandwidth() / 2)
+          .attr('y', yScale(data.find((d) => d.year === 2016).kmRun) + 25)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#ff6b6b')
+          .style('font-size', '12px')
+          .style('font-weight', 'bold')
+          .text('Actual Running')
+          .attr('stroke', 'white')
+          .attr('stroke-width', 5)
+          .attr('paint-order', 'stroke')
+          .lower();
+
+        // For Run Equivalent - add at 2015 position
+        g.append('text')
+          .attr('x', xScale(2015) + xScale.bandwidth() / 2)
+          .attr('y', yScale(data.find((d) => d.year === 2015).runEquivalent) - 25)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#4361ee')
+          .style('font-size', '12px')
+          .style('font-weight', 'bold')
+          .text('Run Equivalent')
+          .attr('stroke', 'white')
+          .attr('stroke-width', 5)
+          .attr('paint-order', 'stroke')
+          .lower();
+      }
+
+      // Add improved bottom legend
+      const legendContainer = g
+        .append('g')
+        .attr('class', 'legend')
+        .attr('transform', `translate(0, ${innerHeight + 55})`);
+
+      const legendItems = [
+        { label: 'Actual Running (km)', color: '#ff6b6b' },
+        { label: 'Run Equivalent (km)', color: '#4361ee' },
+      ];
+
+      // Calculate spacing based on container width
+      const legendSpacing =
+        containerWidth < 500
+          ? 0 // For small screens - center each item
+          : innerWidth / 2.8; // For larger screens - more spacing
+
+      // Line size and text positioning
+      const lineWidth = 30;
+      const lineHeight = 3;
+      const textOffsetY = 5;
+
+      legendItems.forEach((item, i) => {
+        const height = containerWidth < 500 && i === 0 ? lineHeight + 10 : lineHeight;
+
+        const legendGroup = legendContainer
+          .append('g')
+          .attr('transform', `translate(${i * legendSpacing}, ${height})`);
+
+        // Add colored line
+        legendGroup
+          .append('line')
+          .attr('x1', 0)
+          .attr('y1', height)
+          .attr('x2', lineWidth)
+          .attr('y2', height)
+          .attr('stroke', item.color)
+          .attr('stroke-width', lineHeight);
+
+        // Add circle for the data points
+        legendGroup
+          .append('circle')
+          .attr('cx', lineWidth / 2)
+          .attr('cy', height)
+          .attr('r', 4)
+          .attr('fill', item.color);
+
+        // Add text label
+        legendGroup
+          .append('text')
+          .attr('x', lineWidth + 10)
+          .attr('y', height)
+          .attr('fill', 'black')
+          .style('font-size', containerWidth < 500 ? '11px' : '13px')
+          .style('font-weight', containerWidth < 500 ? 'normal' : 'bold')
+          .text(item.label);
+      });
+
+      // Adjust legend positioning based on container width
+      if (containerWidth < 500) {
+        // Center the legend for small screens
+        const legendWidth = innerWidth;
+        legendContainer.attr(
+          'transform',
+          `translate(${(innerWidth - legendWidth) / 2}, ${innerHeight + 50})`,
+        );
+      } else {
+        // Center the legend for larger screens
+        legendContainer.attr('transform', `translate(${innerWidth / 6}, ${innerHeight + 60})`);
+      }
+    }
+
+    // Initial chart creation
+    createChart();
+
+    // Redraw chart on window resize
+    window.addEventListener('resize', function () {
+      // Debounce the resize event
+      clearTimeout(window.resizeTimer);
+      window.resizeTimer = setTimeout(function () {
+        createChart();
+      }, 250);
     });
-  </script>
+  });
+</script>
