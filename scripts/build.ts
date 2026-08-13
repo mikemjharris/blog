@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const sass = require('sass');
-const esbuild = require('esbuild');
-const Handlebars = require('handlebars');
+import fs from 'node:fs';
+import path from 'node:path';
+import * as sass from 'sass';
+import * as esbuild from 'esbuild';
+import Handlebars from 'handlebars';
 
-const root = path.join(__dirname, '..');
+const root = path.join(import.meta.dirname, '..');
 const dist = path.join(root, 'public/dist');
 const vendorDist = path.join(dist, 'vendor');
 
@@ -14,7 +14,7 @@ const stylesheets = [
   'public/stylesheets/mobile.scss',
 ];
 
-const scripts = ['public/javascripts/helpers.js', 'public/javascripts/main.js'];
+const scripts = ['public/javascripts/helpers.cjs', 'public/javascripts/main.js'];
 
 const templateDir = 'server/views/templates';
 const partialDir = 'server/views/templates/partials';
@@ -23,12 +23,13 @@ const partialDir = 'server/views/templates/partials';
 // never has to serve node_modules over HTTP.
 const vendor = ['jquery/dist/jquery.min.js', 'handlebars/dist/handlebars.min.js'];
 
-const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
-const write = (file, contents) => fs.writeFileSync(path.join(dist, file), contents);
-const hbsFiles = (dir) =>
+const read = (file: string): string => fs.readFileSync(path.join(root, file), 'utf8');
+const write = (file: string, contents: string): void =>
+  fs.writeFileSync(path.join(dist, file), contents);
+const hbsFiles = (dir: string): string[] =>
   fs.readdirSync(path.join(root, dir)).filter((file) => file.endsWith('.hbs'));
 
-const buildCss = () => {
+const buildCss = (): void => {
   const css = stylesheets
     .map(
       (file) =>
@@ -40,7 +41,7 @@ const buildCss = () => {
   write('style.css', css);
 };
 
-const buildJs = async () => {
+const buildJs = async (): Promise<void> => {
   // Both files are globals-based IIFEs rather than modules, so they are concatenated
   // in order and minified — not bundled.
   const source = scripts.map(read).join('\n');
@@ -48,7 +49,7 @@ const buildJs = async () => {
   write('main.js', code);
 };
 
-const buildTemplates = () => {
+const buildTemplates = (): void => {
   const partials = hbsFiles(partialDir).map((file) => {
     const name = path.basename(file, '.hbs');
     const spec = Handlebars.precompile(read(path.join(partialDir, file)));
@@ -69,7 +70,7 @@ const buildTemplates = () => {
   write('templates.js', [...preamble, ...partials, ...templates].join('\n'));
 };
 
-const copyVendor = () => {
+const copyVendor = (): void => {
   fs.mkdirSync(vendorDist, { recursive: true });
   vendor.forEach((file) => {
     fs.copyFileSync(
@@ -79,7 +80,7 @@ const copyVendor = () => {
   });
 };
 
-const build = async () => {
+const build = async (): Promise<void> => {
   fs.mkdirSync(dist, { recursive: true });
   buildCss();
   await buildJs();
@@ -87,33 +88,34 @@ const build = async () => {
   copyVendor();
 };
 
-const watch = () => {
-  const targets = [
+const watch = (): void => {
+  const targets: [string, () => void | Promise<void>][] = [
     ['public/stylesheets', buildCss],
     ['public/javascripts', buildJs],
     [templateDir, buildTemplates],
   ];
 
   targets.forEach(([dir, rebuild]) => {
-    fs.watch(path.join(root, dir), { recursive: true }, async () => {
-      try {
-        await rebuild();
-        console.log(`rebuilt ${dir}`);
-      } catch (err) {
-        console.error(`failed to rebuild ${dir}`, err.message);
-      }
+    fs.watch(path.join(root, dir), { recursive: true }, () => {
+      void (async () => {
+        try {
+          await rebuild();
+          console.log(`rebuilt ${dir}`);
+        } catch (err) {
+          console.error(`failed to rebuild ${dir}`, err instanceof Error ? err.message : err);
+        }
+      })();
     });
   });
 
   console.log('watching for asset changes');
 };
 
-build()
-  .then(() => {
-    console.log('assets built to public/dist');
-    if (process.argv.includes('--watch')) watch();
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+try {
+  await build();
+  console.log('assets built to public/dist');
+  if (process.argv.includes('--watch')) watch();
+} catch (err) {
+  console.error(err);
+  process.exit(1);
+}
