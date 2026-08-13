@@ -1,2 +1,11 @@
-db/data
+.git
+.github
+.claude
 node_modules
+public/dist
+db/data
+coverage
+npm-debug.log
+.DS_Store
+*.swp
+*.bak

@@ -2,53 +2,39 @@
   "name": "blog",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "node ./server/server.js",
-    "dev-server": "./node_modules/nodemon/bin/nodemon.js ./server/server.js -e html,js",
-    "fe-build": "./node_modules/gulp/bin/gulp.js",
-    "fe-dev": "./node_modules/gulp/bin/gulp.js watch",
-    "gulp": "./node_modules/gulp/bin/gulp.js sass",
-    "test": "jest test",
-    "test-coverage": "jest test --coverage",
-    "start-dev": "concurrently \"npm:dev-server\" \"npm:fe-dev\""
+    "build": "node ./scripts/build.js",
+    "build:watch": "node ./scripts/build.js --watch",
+    "dev": "concurrently \"npm:dev:server\" \"npm:build:watch\"",
+    "dev:server": "nodemon ./server/server.js -e html,js,hbs",
+    "smoke": "node ./scripts/smoke.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
-    "body-parser": "^1.18.3",
-    "compression": "^1.7.0",
-    "concurrently": "^3.5.1",
-    "cookie-parser": "^1.4.3",
-    "debug": "^4.1.0",
-    "ejs": "^3.1.6",
-    "entry": "*",
-    "express": "^4.16.3",
-    "express-session": "*",
-    "jest": "^27.3.1",
-    "jquery": "^3.6.0",
-    "moment": "^2.10.2",
-    "morgan": "^1.9.1",
-    "node-sass": "^9.0.0",
-    "nunjucks": "^3.2.3",
-    "static-favicon": "~1.0.0",
-    "xml2js": "^0.4.22",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "express-handlebars": "^9.0.1",
+    "morgan": "^1.11.0",
+    "xml2js": "^0.6.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "express-handlebars": "^3.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-declare": "^0.3.0",
-    "gulp-handlebars": "^5.0.0",
-    "gulp-sass": "^5.0.0",
-    "gulp-wrap": "^0.14.0",
-    "handlebars": "^4.7.7",
-    "merge-stream": "^0.1.7",
-    "nodemon": "^2.0.14",
-    "path": "^0.11.14"
+    "concurrently": "^10.0.4",
+    "esbuild": "^0.28.2",
+    "handlebars": "^4.7.9",
+    "jest": "^30.4.2",
+    "jquery": "^4.0.0",
+    "nodemon": "^3.1.14",
+    "sass": "^1.102.0"
   },
   "nodemonConfig": {
-    "delay": "2500",
-    "e": "html"
+    "delay": 2500
   }
 }

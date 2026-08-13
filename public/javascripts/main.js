@@ -85,7 +85,7 @@ if ('serviceWorker' in navigator) {
       }
     });
 
-    $('.intro-animation ul li a').click(function(e) {
+    $('.intro-animation ul li a').on('click', function(e) {
       if ( !$(this).data('navigate') ) {
         e.preventDefault();
         toggleMenu();

@@ -1,25 +1,35 @@
-FROM node:20
-MAINTAINER Mike Harris "hello@mikemjharris.com"
+FROM node:24-slim AS build
 
-RUN  npm --no-color install -g gulp
+WORKDIR /app
 
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm --no-color install
-RUN mkdir -p /var/www/ && cp -a /tmp/node_modules /var/www/
+COPY package.json package-lock.json ./
+RUN npm ci --no-color
 
+COPY public ./public
+COPY server ./server
+COPY scripts ./scripts
+
+RUN npm run build
+
+
+FROM node:24-slim
+
+LABEL org.opencontainers.image.authors="Mike Harris <hello@mikemjharris.com>"
+
+WORKDIR /var/www
+ENV NODE_ENV=production
+
+# Runtime dependencies only — the build toolchain stays in the build stage.
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --no-color && npm cache clean --force
+
+COPY server ./server
+COPY public ./public
+COPY --from=build /app/public/dist ./public/dist
 
 RUN mkdir -p /var/log/www/
 VOLUME /var/log/www/
 
-ADD . /var/www/
-
-WORKDIR /var/www/
-
-# was getting a weird errro around handle bars template.  Doing another npm instll here (it's fast) seems to fix
-RUN npm install
-RUN gulp --no-color 
-
-CMD npm start
-
 EXPOSE 8000
 
+CMD ["npm", "start"]
