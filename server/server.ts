@@ -8,7 +8,7 @@ import { engine } from 'express-handlebars';
 import { getPosts } from './helpers/source-content.ts';
 import registerRoutes from './routes/main.ts';
 import { securityHeaders } from './security.ts';
-import blogHelpers from '../public/javascripts/helpers.cjs';
+import { helpers as blogHelpers } from '../public/javascripts/helpers.ts';
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.engine(
   engine({
     defaultLayout: 'main',
     extname: '.hbs',
-    helpers: blogHelpers.helpers, // same file that gets used on our client
+    helpers: blogHelpers, // same file that gets used on our client
     layoutsDir: path.join(import.meta.dirname, 'views/layouts'),
     partialsDir: path.join(import.meta.dirname, 'views/templates/partials'),
   }),

@@ -14,7 +14,11 @@ const stylesheets = [
   'public/stylesheets/mobile.scss',
 ];
 
-const scripts = ['public/javascripts/helpers.cjs', 'public/javascripts/main.js'];
+const clientEntry = 'public/javascripts/main.ts';
+
+// jQuery 4 dropped the old browsers anyway, so there is nothing to gain from
+// transpiling further down than this.
+const BROWSER_TARGET = 'es2020';
 
 const templateDir = 'server/views/templates';
 const partialDir = 'server/views/templates/partials';
@@ -52,11 +56,16 @@ const buildCss = (): void => {
 };
 
 const buildJs = async (): Promise<void> => {
-  // Both files are globals-based IIFEs rather than modules, so they are concatenated
-  // in order and minified — not bundled.
-  const source = scripts.map(read).join('\n');
-  const { code } = await esbuild.transform(source, { minify: true });
-  write('main.js', code);
+  // main.ts imports the shared helpers, so this is a real bundle. jQuery, Handlebars
+  // and the precompiled templates stay globals loaded by their own script tags.
+  await esbuild.build({
+    entryPoints: [path.join(root, clientEntry)],
+    outfile: path.join(dist, 'main.js'),
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    target: BROWSER_TARGET,
+  });
 };
 
 const buildTemplates = (): void => {

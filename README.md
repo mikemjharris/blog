@@ -48,8 +48,13 @@ runs `tsc --noEmit` to check them, and CI runs it on every push.
 That means `tsconfig.json` sets `erasableSyntaxOnly`, which keeps the code to syntax Node
 can strip: no enums, no namespaces, no parameter properties.
 
-The browser code in `public/javascripts` stays JavaScript. `helpers.cjs` is shared by the
-server and the browser, so it keeps a hand-written `helpers.d.cts` alongside it.
+The browser code in `public/javascripts` is TypeScript too, checked under its own
+`tsconfig.browser.json` so the server never sees `window` and the browser never sees
+node's globals. `helpers.ts` is shared by both and is checked under each, which is what
+keeps it usable from either side. esbuild bundles `main.ts` for the browser; jQuery,
+Handlebars and the precompiled templates stay globals loaded by their own script tags.
+
+`npm run typecheck` runs both projects.
 
 Posts are in the server/content folder. All the data such as title and date of published is inside meta tags at the top of each post. These are used to order the posts, put them in different cataegories etc.
 
