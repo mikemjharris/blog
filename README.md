@@ -61,6 +61,21 @@ The project exposes port 8000 so map that to whichevere port you need.
 docker run -d -p 8000:8000 --name blog mikemjharris/blog
 ```
 
+Git hooks
+==========
+
+[lefthook](https://lefthook.dev) runs the same checks CI does, earlier. `npm install`
+installs the hooks via the `prepare` script; run `npx lefthook install` by hand if they
+ever go missing.
+
+| hook         | does                                                                            |
+| ------------ | ------------------------------------------------------------------------------- |
+| `pre-commit` | prettier on staged files (fixes and restages them), then `typecheck` and `test` |
+| `pre-push`   | `build` then `smoke`                                                            |
+
+Pass `--no-verify` to skip them for one command. CI runs the same checks regardless, so
+skipping locally only defers the failure.
+
 Test
 ==========
 
