@@ -1,9 +1,30 @@
 // Boots the real server and checks it serves the pages, the built assets and the
 // MCP endpoint. Run in CI so a broken boot fails the build rather than the deploy.
 import { spawn } from 'node:child_process';
+import { createServer } from 'node:net';
 import path from 'node:path';
 
-const port = process.env.SMOKE_PORT ?? '8123';
+/**
+ * Ask the OS for a spare port rather than hardcoding one. A fixed port makes this
+ * fail spuriously whenever anything else is already listening — including a previous
+ * run of this script that has not fully released it yet.
+ */
+const freePort = (): Promise<number> =>
+  new Promise((resolve, reject) => {
+    const probe = createServer();
+    probe.on('error', reject);
+    probe.listen(0, () => {
+      const address = probe.address();
+      if (address === null || typeof address === 'string') {
+        probe.close(() => reject(new Error('could not determine a free port')));
+        return;
+      }
+      const { port } = address;
+      probe.close(() => resolve(port));
+    });
+  });
+
+const port = process.env.SMOKE_PORT ?? String(await freePort());
 const base = `http://localhost:${port}`;
 const bootTimeoutMs = 30000;
 
@@ -107,17 +128,36 @@ const run = async (): Promise<void> => {
     if (!xml.includes('<rss') || !xml.includes('<item>')) throw new Error('not an rss feed');
   });
 
-  await check('POST /mcp lists tools', async () => {
-    const res = await get(`${base}/mcp`, {
+  const mcp = (body: unknown): Promise<Response> =>
+    get(`${base}/mcp`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json, text/event-stream',
       },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }),
+      body: JSON.stringify(body),
     });
+
+  await check('POST /mcp lists tools', async () => {
+    const res = await mcp({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
     expectStatus(res, 200);
     if (!(await res.text()).includes('search_posts')) throw new Error('mcp tools not listed');
+  });
+
+  // Listing tools only proves the server mounted. Call one so the whole path —
+  // parse the posts, search them, format the reply — is exercised over HTTP.
+  await check('POST /mcp runs a tool against real posts', async () => {
+    const res = await mcp({
+      jsonrpc: '2.0',
+      id: 2,
+      method: 'tools/call',
+      params: { name: 'search_posts', arguments: { query: 'keyboard', limit: 3 } },
+    });
+    expectStatus(res, 200);
+    const body = await res.text();
+    if (body.includes('"isError":true'))
+      throw new Error(`tool call errored: ${body.slice(0, 200)}`);
+    if (!/Found \d+ post\(s\)/.test(body)) throw new Error('tool returned no search results');
   });
 
   await check('node_modules is not served', async () => {
