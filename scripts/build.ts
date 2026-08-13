@@ -23,6 +23,16 @@ const partialDir = 'server/views/templates/partials';
 // never has to serve node_modules over HTTP.
 const vendor = ['jquery/dist/jquery.min.js', 'handlebars/dist/handlebars.min.js'];
 
+// Only the chart post needs d3, and only these five modules of it. Bundling the
+// subset rather than shipping the 273KB meta-package keeps it to about 42KB.
+const D3_EXPORTS = [
+  "export { select } from 'd3-selection';",
+  "export { max } from 'd3-array';",
+  "export { scaleBand, scaleLinear } from 'd3-scale';",
+  "export { line, curveMonotoneX } from 'd3-shape';",
+  "export { axisBottom, axisLeft } from 'd3-axis';",
+].join('\n');
+
 const read = (file: string): string => fs.readFileSync(path.join(root, file), 'utf8');
 const write = (file: string, contents: string): void =>
   fs.writeFileSync(path.join(dist, file), contents);
@@ -80,12 +90,26 @@ const copyVendor = (): void => {
   });
 };
 
+// Exposed as the `d3` global because the chart post is a plain inline script.
+const buildD3 = async (): Promise<void> => {
+  fs.mkdirSync(vendorDist, { recursive: true });
+  await esbuild.build({
+    stdin: { contents: D3_EXPORTS, resolveDir: root, loader: 'js' },
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    globalName: 'd3',
+    outfile: path.join(vendorDist, 'd3.min.js'),
+  });
+};
+
 const build = async (): Promise<void> => {
   fs.mkdirSync(dist, { recursive: true });
   buildCss();
   await buildJs();
   buildTemplates();
   copyVendor();
+  await buildD3();
 };
 
 const watch = (): void => {
