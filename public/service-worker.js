@@ -45,7 +45,12 @@ self.addEventListener('fetch', function (event) {
     caches.open(cacheName).then(function (cache) {
       return caches.match(event.request).then(function (response) {
         var fetchPromise = fetch(event.request).then(function (networkResponse) {
-          cache.put(event.request, networkResponse.clone());
+          // Only cache successes. Unmatched URLs now 404 rather than redirecting to
+          // the homepage, and caching those would keep serving the 404 after the
+          // page starts existing.
+          if (networkResponse.ok) {
+            cache.put(event.request, networkResponse.clone());
+          }
           return networkResponse;
         });
         return response || fetchPromise;
