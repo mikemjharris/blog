@@ -1,0 +1,12 @@
+{
+  // Browser code is checked separately so the server never sees `window` or `document`
+  // and the browser never sees node's globals. helpers.ts is shared and is checked
+  // under both, which is what keeps it usable from either side.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["ES2020", "DOM"],
+    "types": ["jquery"]
+  },
+  "include": ["public/javascripts/**/*.ts", "public/javascripts/**/*.d.ts"]
+}
