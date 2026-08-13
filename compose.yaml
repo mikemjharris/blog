@@ -1,0 +1,39 @@
+# Development in a container, so nothing local depends on the host's node version.
+#
+#   docker compose up dev                   — http://localhost:8000, watching for changes
+#   docker compose run --rm dev npm test    — a one-off command
+#
+# node_modules is the same named volume the git hooks use, so dependencies are
+# installed once and shared. It cannot be the host's: esbuild ships a
+# platform-specific binary and a macOS install will not run on linux.
+
+services:
+  dev:
+    image: node:24-slim
+    working_dir: /app
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    # If edits stop triggering a restart or a rebuild, the bind mount is not
+    # forwarding file events — uncomment to make both watchers poll instead. Left
+    # off by default because Docker Desktop forwards them fine and polling costs CPU.
+    # environment:
+    #   CHOKIDAR_USEPOLLING: 'true'
+    command: >
+      sh -c '
+        if ! cmp -s package-lock.json node_modules/.lock-stamp; then
+          echo "installing dependencies..."
+          npm ci --no-audit --no-fund
+          cp package-lock.json node_modules/.lock-stamp
+        fi
+        exec npm run dev
+      '
+
+volumes:
+  # Named explicitly rather than left to compose's project prefix, so this is the
+  # same volume scripts/hook-run.sh mounts. Not external: compose should create it
+  # on first run rather than erroring because it does not exist yet.
+  node_modules:
+    name: blog-node-modules
