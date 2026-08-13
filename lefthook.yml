@@ -1,0 +1,31 @@
+# Git hooks. Installed automatically by the `prepare` npm script; run
+# `npx lefthook install` by hand if the hooks ever go missing.
+#
+# Jobs run in order, not in parallel: format rewrites files and restages them, so
+# anything that reads those files has to run after it.
+
+pre-commit:
+  jobs:
+    - name: format
+      glob: '*.{ts,cts,mts,js,cjs,mjs,json,md,yml,yaml,scss,css,html}'
+      run: npx prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+    - name: typecheck
+      glob: '*.{ts,cts,mts}'
+      run: npm run typecheck
+
+    # Plain `*.ts` rather than `server/**/*.ts` — a `**` glob does not match files
+    # sitting directly in the directory, which would silently skip server.ts.
+    - name: test
+      glob: '*.{ts,cts,mts}'
+      run: npm test
+
+# The slower checks, so a commit stays quick but nothing broken leaves the machine.
+pre-push:
+  jobs:
+    - name: build
+      run: npm run build
+
+    - name: smoke
+      run: npm run smoke
