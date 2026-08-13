@@ -7,9 +7,14 @@ import compression from 'compression';
 import { engine } from 'express-handlebars';
 import { getPosts } from './helpers/source-content.ts';
 import registerRoutes from './routes/main.ts';
+import { securityHeaders } from './security.ts';
 import blogHelpers from '../public/javascripts/helpers.cjs';
 
 const app = express();
+
+// Nothing to gain from advertising the framework.
+app.disable('x-powered-by');
+app.use(securityHeaders());
 app.use(compression());
 
 const posts = getPosts();
