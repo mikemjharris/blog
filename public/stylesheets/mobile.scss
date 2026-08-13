@@ -1,7 +1,6 @@
 $body-font-size: 18px;
 
-@media screen and (max-width: 800px){
-
+@media screen and (max-width: 800px) {
   .desktop {
     display: none;
   }
@@ -15,15 +14,20 @@ $body-font-size: 18px;
   }
 
   .cross {
-     -webkit-animation: flash 0.4s ease-out;
+    -webkit-animation: flash 0.4s ease-out;
   }
 
   @-webkit-keyframes flash {
-    0% {background: none;}
-    20% {background: hsla(120, 30%, 60%, 1)}
-    100% {background: none}
+    0% {
+      background: none;
+    }
+    20% {
+      background: hsla(120, 30%, 60%, 1);
+    }
+    100% {
+      background: none;
+    }
   }
-
 
   .menu li {
     width: 40px;
@@ -34,7 +38,7 @@ $body-font-size: 18px;
 
   .cross li:nth-child(1) {
     transform-origin: 0% 50%;
-    transform: translateX(5px) rotate(45deg) ;
+    transform: translateX(5px) rotate(45deg);
   }
 
   .cross li:nth-child(2) {
@@ -42,21 +46,20 @@ $body-font-size: 18px;
   }
   .cross li:nth-child(3) {
     transform-origin: 0% 50%;
-    transform:  translateX(5px) rotate(-45deg)  ;
+    transform: translateX(5px) rotate(-45deg);
   }
 
-  .mobile{
+  .mobile {
     display: block;
   }
 
   header {
-
     ul {
       position: absolute;
       right: 0px;
       top: -10px;
       transform: translateZ(100px);
-      cursor:pointer;
+      cursor: pointer;
       padding: 15px;
     }
     li {
@@ -77,10 +80,9 @@ $body-font-size: 18px;
 
     #twitter-share {
       width: 90px;
-      padding-left: calc( 100% - 200px);
+      padding-left: calc(100% - 200px);
       text-align: right;
       svg {
-
         display: inline-block;
       }
     }
@@ -89,13 +91,13 @@ $body-font-size: 18px;
   h1 {
     font-size: 20px;
   }
-  h2, article h2 {
+  h2,
+  article h2 {
     font-size: $body-font-size * 1.3;
   }
   h3 {
     font-size: $body-font-size * 1;
   }
-
 
   main {
     flex-direction: column;
@@ -107,63 +109,61 @@ $body-font-size: 18px;
       background: white;
       width: 100%;
       header {
-       height: 45px;
-       width: 100%;
-      line-height: 20px;
+        height: 45px;
+        width: 100%;
+        line-height: 20px;
       }
       h1 {
         text-align: left;
         font-size: 20px;
-        width:100%;
+        width: 100%;
       }
     }
 
-      nav {
-        opacity: 0;
-        &.expand {
-          opacity: 1;
-        }
-        z-index: 1;
-        position: absolute;
-        right: 0px;
-        top: 50px;
-        width: 100%;
-        transform: translateY(-700px) scaleX(0.3) scaleY(4);;
-        transition: transform 0.5s cubic-bezier(.58,-1.06,.2,1.95);
-        background: transparent;
-        ul {
-          width: 100%;
-          -webkit-animation: none 1.5s linear;
-          li {
-
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 300px;
-            width: 100%;
-            transition: all 0.5s;
-          }
-          .space {
-            display: none;
-          }
-          span {
-            display: none;
-            &.mobile {
-              cursor: pointer;
-              display:block;
-              background: red;
-              padding: 10px;
-            }
-          }
-        }
-
+    nav {
+      opacity: 0;
+      &.expand {
+        opacity: 1;
       }
-   }
+      z-index: 1;
+      position: absolute;
+      right: 0px;
+      top: 50px;
+      width: 100%;
+      transform: translateY(-700px) scaleX(0.3) scaleY(4);
+      transition: transform 0.5s cubic-bezier(0.58, -1.06, 0.2, 1.95);
+      background: transparent;
+      ul {
+        width: 100%;
+        -webkit-animation: none 1.5s linear;
+        li {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 300px;
+          width: 100%;
+          transition: all 0.5s;
+        }
+        .space {
+          display: none;
+        }
+        span {
+          display: none;
+          &.mobile {
+            cursor: pointer;
+            display: block;
+            background: red;
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
 
-   .intro-animation li:nth-child(n) {
+  .intro-animation li:nth-child(n) {
     -webkit-animation: none 1s linear;
-   }
+  }
 
-  nav>ul>li {
+  nav > ul > li {
     -webkit-animation: none 1.5s linear;
   }
   /* @-webkit-keyframes hide {
@@ -171,35 +171,40 @@ $body-font-size: 18px;
     to {opacity: 1; transform: translateY(--500px)}
    }*/
 
-   section {
+  section {
     height: calc(100vh - 55px);
     margin-top: 10px;
     padding: 0px;
-   }
+  }
 
   .expand {
     z-index: 2;
     transform: translateY(0px) translateZ(2px) scaleX(1) scaleY(1);
     height: 100%;
     -webkit-animation: expandback 0.6s linear;
-     background: hsla(0, 95%, 5%, 0.2);
-     li ul li {
-       box-shadow: 0px 5px 5px 3px #888888;
-     }
+    background: hsla(0, 95%, 5%, 0.2);
+    li ul li {
+      box-shadow: 0px 5px 5px 3px #888888;
+    }
   }
 
   @keyframes expandback {
-    0% { background: transparent; }
-    85% { background: transparent;}
-    110% { background: hsla(0, 95%, 5%, 0.2); }
+    0% {
+      background: transparent;
+    }
+    85% {
+      background: transparent;
+    }
+    110% {
+      background: hsla(0, 95%, 5%, 0.2);
+    }
   }
-
 
   #twitter-logo {
     display: none;
   }
 
-  article  {
+  article {
     padding: 20px;
     .content {
       margin-top: 10px;

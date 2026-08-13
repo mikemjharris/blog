@@ -7,7 +7,7 @@ const kelpPost = {
   category: 'tech',
   tags: ['kelp', ' seaweed '],
   intro: 'Growing kelp at Coral Bay',
-  body: '<!-- meta-data title: Farming Kelp --><p>Kelp grows fast in Coral Bay.</p>'
+  body: '<!-- meta-data title: Farming Kelp --><p>Kelp grows fast in Coral Bay.</p>',
 };
 
 const anemonePost = {
@@ -17,7 +17,7 @@ const anemonePost = {
   category: 'thoughts ',
   tags: [''],
   intro: 'On anemones',
-  body: '<p>An aside about kelp.</p>'
+  body: '<p>An aside about kelp.</p>',
 };
 
 const posts = [anemonePost, kelpPost];
@@ -34,13 +34,15 @@ describe('toPlainText', () => {
 
   test('keeps link destinations alongside their label', () => {
     const html = '<p>Bought a <a href="https://reef.example/kelp">kelp trimmer</a> today</p>';
-    expect(search.toPlainText(html)).toEqual('Bought a kelp trimmer (https://reef.example/kelp) today');
+    expect(search.toPlainText(html)).toEqual(
+      'Bought a kelp trimmer (https://reef.example/kelp) today',
+    );
   });
 
   test('makes relative links absolute', () => {
     const html = '<a href="/posts/tuna-turner">earlier post</a>';
     expect(search.toPlainText(html)).toEqual(
-      'earlier post (https://blog.mikemjharris.com/posts/tuna-turner)'
+      'earlier post (https://blog.mikemjharris.com/posts/tuna-turner)',
     );
   });
 
@@ -110,7 +112,7 @@ describe('production content', () => {
   test('every post has the meta-data the MCP tools depend on', () => {
     const realPosts = require('../helpers/source-content').getPosts();
     const incomplete = realPosts.filter(
-      (post) => !post.title || !post.searchtitle || !post.date || !post.category
+      (post) => !post.title || !post.searchtitle || !post.date || !post.category,
     );
     expect(incomplete.map((post) => post.template)).toEqual([]);
   });

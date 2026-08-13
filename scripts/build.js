@@ -11,23 +11,17 @@ const vendorDist = path.join(dist, 'vendor');
 const stylesheets = [
   'public/stylesheets/reset.scss',
   'public/stylesheets/style.scss',
-  'public/stylesheets/mobile.scss'
+  'public/stylesheets/mobile.scss',
 ];
 
-const scripts = [
-  'public/javascripts/helpers.js',
-  'public/javascripts/main.js'
-];
+const scripts = ['public/javascripts/helpers.js', 'public/javascripts/main.js'];
 
 const templateDir = 'server/views/templates';
 const partialDir = 'server/views/templates/partials';
 
 // Browser copies of the two libraries the layout loads. Built into dist so the app
 // never has to serve node_modules over HTTP.
-const vendor = [
-  'jquery/dist/jquery.min.js',
-  'handlebars/dist/handlebars.min.js'
-];
+const vendor = ['jquery/dist/jquery.min.js', 'handlebars/dist/handlebars.min.js'];
 
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const write = (file, contents) => fs.writeFileSync(path.join(dist, file), contents);
@@ -36,7 +30,12 @@ const hbsFiles = (dir) =>
 
 const buildCss = () => {
   const css = stylesheets
-    .map((file) => sass.compile(path.join(root, file), { silenceDeprecations: ['import', 'global-builtin', 'color-functions'] }).css)
+    .map(
+      (file) =>
+        sass.compile(path.join(root, file), {
+          silenceDeprecations: ['import', 'global-builtin', 'color-functions'],
+        }).css,
+    )
     .join('\n');
   write('style.css', css);
 };
@@ -64,7 +63,7 @@ const buildTemplates = () => {
 
   const preamble = [
     'this["MyApp"] = this["MyApp"] || {};',
-    'this["MyApp"]["templates"] = this["MyApp"]["templates"] || {};'
+    'this["MyApp"]["templates"] = this["MyApp"]["templates"] || {};',
   ];
 
   write('templates.js', [...preamble, ...partials, ...templates].join('\n'));
@@ -75,7 +74,7 @@ const copyVendor = () => {
   vendor.forEach((file) => {
     fs.copyFileSync(
       path.join(root, 'node_modules', file),
-      path.join(vendorDist, path.basename(file))
+      path.join(vendorDist, path.basename(file)),
     );
   });
 };
@@ -92,7 +91,7 @@ const watch = () => {
   const targets = [
     ['public/stylesheets', buildCss],
     ['public/javascripts', buildJs],
-    [templateDir, buildTemplates]
+    [templateDir, buildTemplates],
   ];
 
   targets.forEach(([dir, rebuild]) => {

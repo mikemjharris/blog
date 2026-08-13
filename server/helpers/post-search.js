@@ -12,7 +12,7 @@ const ENTITIES = {
   '&nbsp;': ' ',
   '&mdash;': '—',
   '&ndash;': '–',
-  '&hellip;': '…'
+  '&hellip;': '…',
 };
 
 const absoluteUrl = (href) => (href.startsWith('/') ? BASE_URL + href : href);
@@ -34,7 +34,7 @@ const toPlainText = (html) => {
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/<(script|style|iframe)[\s\S]*?<\/\1>/gi, '')
     .replace(/<a\s[^>]*href=["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi, (match, href, label) =>
-      inlineLink(label, href)
+      inlineLink(label, href),
     )
     .replace(/<(br|hr)\s*\/?>/gi, '\n')
     .replace(/<\/(p|div|h[1-6]|li|blockquote|pre|section)>/gi, '\n\n')
@@ -60,7 +60,7 @@ const summarise = (post) => ({
   category: normaliseCategory(post.category),
   tags: normaliseTags(post.tags),
   intro: post.intro,
-  url: postUrl(post)
+  url: postUrl(post),
 });
 
 const terms = (query) =>
@@ -126,8 +126,7 @@ const listPosts = (posts, { category, tag, since, limit = 20 } = {}) => {
     .map(summarise);
 };
 
-const findPost = (posts, searchtitle) =>
-  posts.find((post) => post.searchtitle === searchtitle);
+const findPost = (posts, searchtitle) => posts.find((post) => post.searchtitle === searchtitle);
 
 const categories = (posts) => {
   const counts = {};
@@ -149,5 +148,5 @@ module.exports = {
   searchPosts,
   listPosts,
   findPost,
-  categories
+  categories,
 };

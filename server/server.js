@@ -15,13 +15,16 @@ const posts = postHelpers.getPosts(postsPath);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
-app.engine('.hbs', engine({
-  defaultLayout: 'main',
-  extname: '.hbs',
-  helpers: require('../public/javascripts/helpers.js').helpers, // same file that gets used on our client
-  layoutsDir: path.join(__dirname, 'views/layouts'),
-  partialsDir: path.join(__dirname, 'views/templates/partials')
-}));
+app.engine(
+  '.hbs',
+  engine({
+    defaultLayout: 'main',
+    extname: '.hbs',
+    helpers: require('../public/javascripts/helpers.js').helpers, // same file that gets used on our client
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: path.join(__dirname, 'views/templates/partials'),
+  }),
+);
 
 app.set('view engine', '.hbs');
 
@@ -39,7 +42,10 @@ app.get('/{*splat}', (req, res) => {
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(err.status || 500).type('text').send('Something went wrong');
+  res
+    .status(err.status || 500)
+    .type('text')
+    .send('Something went wrong');
 });
 
 app.set('port', process.env.PORT || 8000);
