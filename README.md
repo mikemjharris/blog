@@ -21,6 +21,23 @@ or for prod
 compiles the Sass, concatenates and minifies the client JS, precompiles the Handlebars
 templates and copies the browser libraries into `public/dist`.
 
+Or in a container, needing no node on the host at all:
+
+```
+    docker compose up dev
+```
+
+Same address, same watching — edit a file and nodemon restarts or the assets rebuild.
+One-off commands go through `docker compose run --rm dev npm test`.
+
+Dependencies live in a named volume rather than the host's `node_modules`, which cannot
+be shared: esbuild ships a platform-specific binary, so a macOS install will not run on
+linux. The volume fills itself on first run and refills whenever `package-lock.json`
+moves. The git hooks mount the same one, so it is installed once for both.
+
+If editing stops triggering a restart, the bind mount is not forwarding file events —
+uncomment `CHOKIDAR_USEPOLLING` in `compose.yaml`.
+
 TypeScript
 ==========
 
