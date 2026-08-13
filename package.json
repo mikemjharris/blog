@@ -13,6 +13,7 @@
     "start-dev": "concurrently \"npm:dev-server\" \"npm:fe-dev\""
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.0",
     "concurrently": "^3.5.1",
@@ -29,7 +30,8 @@
     "node-sass": "^9.0.0",
     "nunjucks": "^3.2.3",
     "static-favicon": "~1.0.0",
-    "xml2js": "^0.4.22"
+    "xml2js": "^0.4.22",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "express-handlebars": "^3.0.0",
