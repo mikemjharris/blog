@@ -15,6 +15,7 @@
     "dev": "concurrently \"npm:dev:server\" \"npm:build:watch\"",
     "dev:server": "nodemon ./server/server.ts -e ts,js,cjs,hbs,html",
     "smoke": "node ./scripts/smoke.ts",
+    "new:post": "node ./scripts/new-post.ts",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.browser.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
