@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import * as readline from 'node:readline/promises';
@@ -20,7 +21,10 @@ Options:
   --image <url>       Absolute URL for the Twitter card image.
   --draft             Write to server/content/drafts/ instead of posts/.
   --force             Overwrite an existing file.
+  --no-branch         Write the post on the current branch.
   --help              Show this message.
+
+Creates a post/<slug> branch off the default branch and writes the post there.
 `;
 
 const { values, positionals } = parseArgs({
@@ -34,6 +38,7 @@ const { values, positionals } = parseArgs({
     image: { type: 'string' },
     draft: { type: 'boolean', default: false },
     force: { type: 'boolean', default: false },
+    'no-branch': { type: 'boolean', default: false },
     help: { type: 'boolean', default: false },
   },
   allowPositionals: true,
@@ -62,6 +67,57 @@ const slugify = (title: string): string =>
 
 /** A `--` inside a meta-data value would close the HTML comment early. */
 const safeMeta = (value: string): string => value.replace(/-{2,}/g, '-').trim();
+
+/** Returns null rather than throwing, so callers can treat git being unavailable as a case. */
+const git = (...args: string[]): string | null => {
+  try {
+    return execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim();
+  } catch {
+    return null;
+  }
+};
+
+/** Whichever branch origin points its HEAD at, so this survives a master/main rename. */
+const defaultBranch = (): string => {
+  const remoteHead = git('symbolic-ref', '--short', 'refs/remotes/origin/HEAD');
+  if (remoteHead) return remoteHead.replace(/^origin\//, '');
+  return git('show-ref', '--verify', '--quiet', 'refs/heads/main') === null ? 'master' : 'main';
+};
+
+/**
+ * Branches off the freshly fetched default branch so a post never starts from a stale
+ * base. Returns the branch name, or null when the post should be written where it is.
+ */
+const createBranch = (slug: string): string | null => {
+  if (values['no-branch']) return null;
+
+  if (git('rev-parse', '--git-dir') === null) {
+    console.warn('! not a git repository — writing the post on the current checkout');
+    return null;
+  }
+
+  // Only tracked changes matter: an untracked file follows a checkout without complaint.
+  if (git('status', '--porcelain', '--untracked-files=no')) {
+    fail('the working tree has uncommitted changes — commit them, or pass --no-branch');
+  }
+
+  const branch = `post/${slug}`;
+  if (git('rev-parse', '--verify', '--quiet', `refs/heads/${branch}`) !== null) {
+    fail(`branch ${branch} already exists — switch to it, or pass --no-branch`);
+  }
+
+  const base = defaultBranch();
+  // An offline run still branches, just from whatever the local ref already knows.
+  const fetched = git('fetch', 'origin', base) !== null;
+  if (!fetched) console.warn(`! could not reach origin — branching from local ${base}`);
+  const from = fetched ? `origin/${base}` : base;
+
+  if (git('checkout', '-b', branch, from) === null) {
+    fail(`could not create ${branch} from ${from}`);
+  }
+
+  return branch;
+};
 
 let input: readline.Interface | undefined;
 
@@ -112,6 +168,9 @@ if (fs.existsSync(file) && !values.force) {
   fail(`${path.relative(root, file)} already exists — pass --force to overwrite`);
 }
 
+// Before the write, so a refused branch leaves nothing behind to clean up.
+const branch = createBranch(slug);
+
 const meta = [
   `<!-- meta-data title: ${safeMeta(title)} -->`,
   `<!-- meta-data searchtitle: ${slug} -->`,
@@ -155,5 +214,6 @@ const body = `<p>TODO — open with the hook: what this post is about and why it
 fs.writeFileSync(file, `${meta.join('\n')}\n\n${body}`);
 
 console.log(`✓ ${path.relative(root, file)}`);
+if (branch) console.log(`  on ${branch}`);
 if (!values.draft) console.log(`  http://localhost:8000/posts/${slug}`);
 console.log('  npm run dev');

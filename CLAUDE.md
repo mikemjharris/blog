@@ -46,12 +46,19 @@ Prompts for each field, Enter takes the bracketed default. Or pass them:
 npm run new:post -- "Post Title" --intro "One line summary" --tags talk,tech-tips
 ```
 
-Flags: `--title --intro --category --tags --date --author --image --draft --force --help`.
-When stdin is not a tty each unsupplied field takes its default, so it works unattended.
+Flags: `--title --intro --category --tags --date --author --image --draft --force --no-branch
+--help`. When stdin is not a tty each unsupplied field takes its default, so it works
+unattended.
 
-It writes `server/content/posts/<slug>.html` — meta-data block plus a section skeleton with
-`TODO` markers. Fill in the TODOs, then `npm run dev` and read it at
+It fetches the default branch, cuts `post/<slug>` from it, and writes
+`server/content/posts/<slug>.html` there — meta-data block plus a section skeleton with `TODO`
+markers. Fill in the TODOs, then `npm run dev` and read it at
 `http://localhost:8000/posts/<slug>`.
+
+The branch step refuses to run when the working tree has uncommitted tracked changes, or when
+`post/<slug>` already exists. `--no-branch` writes the post on the current branch instead, which
+is also what happens outside a git repository. Offline, it branches from the local ref and says
+so rather than failing.
 
 **The scaffold does not pass `npm test` as generated.** The placeholder `<figure>` points at
 `/images/TODO.png`, and `content-links.test.ts` requires every local reference to resolve.
