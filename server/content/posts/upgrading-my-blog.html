@@ -1,0 +1,194 @@
+<!-- meta-data title: Upgrading my blog -->
+<!-- meta-data searchtitle: upgrading-my-blog -->
+<!-- meta-data date: 14 Aug 2026 -->
+<!-- meta-data intro: Tidying up all the hacky loose ends and hugely outdated packages.  On my list for a long time but a breeze with my pal Claude. -->
+<!-- meta-data author: Mike Harris -->
+<!-- meta-data category: tech -->
+
+<p>
+  When I started building this blog I was curious how long I'd keep it going and what I'd write
+  about. Indeed, here's a slightly lairy/embarrassing passage from the second post 11 years ago:
+</p>
+
+<p class="quote">
+  ...I've already built an mvp of the blog - look it’s glowing at you from your screen. You're
+  reading it now. It is a side project squeezed into the small gaps that life sometimes provided but
+  it does give an idea of the thoughts and process that I put into building a project. There were
+  some interesting decisions along the way, I discovered some new tools and had problems to
+  overcome. I’m still iterating and improving. I reckon there are enough navel gazing, meta posts in
+  this project to pollinate the blog and hope it is flourishes into something beautiful.
+</p>
+<p class="quote-source">
+  - Mike Harris, <a href="/posts/building-a-blog">Building a blog</a>, Mar 2015
+</p>
+
+<h4>Meta navel gazing</h4>
+<p>
+  So that was quite prescient - I have built lots of little things into the blog - from
+  <a href="/posts/adding-an-rss-feed">RSS feeds</a> through to
+  <a href="/posts/blogimations">extravagant animations</a>,
+  <a href="/posts/building-a-pwa">progressive web apps</a> through to
+  <a href="/posts/automated-lighthouse">automated lighthouse reports</a>. Learnt a bunch along the
+  way and each fun feature provided content for various posts. What I have failed to do is to keep
+  all the libraries and dependencies up to date. All the less fun that is hard to motivate yourself
+  to do for one of many side projects.
+</p>
+
+<h4>Upgrading the blog</h4>
+<p>
+  I have tried to upgrade things but this is a fun project and I know how to manage dependencies so
+  the energy to push through and do the dirty work just wasn't there. I remember trying to upgrade
+  handlebars (a templating engine) a few times and getting a bit stuck. If I really wanted to I'd
+  have sorted it out but it never was that important to a side project. Almost anything in life was
+  more important! Fortunately AI came along and in the space of an afternoon my pal Claude worked
+  alongside me in the background and we sorted out all the dependencies. We also did a bunch of
+  slightly tedious but essential things such as expanding the test suite, providing better tooling
+  along the way plus adding in workflows and types. It's a real project now!
+</p>
+
+<h4>Smoothness of AI just gets you going</h4>
+<p>
+  My friend Werner wrote a
+  <a
+    href="https://www.linkedin.com/pulse/devops-damnation-werner-broennimann-ybare/"
+    target="_blank"
+    >longer, more detailed post</a
+  >
+  about using AI to tackle often tedious tasks. Tasks which in the past would have sucked up a lot
+  of time and been intimidating to start but now you're much more likely to tackle.
+</p>
+
+<h4>Conclusion</h4>
+<p>
+  The building part of the blog has done its job - I've learnt loads along the way, written posts
+  and done talks on how I built it. I'll probably do some fun features in the future but it's a bit
+  of a relief to have finally got the project into a decent state. Almost every job I've interviewed
+  for I've shared a link to a blog post - I'd now feel happier if they actually looked at the code
+  it was running on.
+</p>
+
+<h3>Appendix - Modernising the stack</h3>
+<p>A list of everything that my pal Claude built to bring this project up to date</p>
+<ul>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/29">Modernise the stack and add CI</a> —
+    dragged the blog off a 2018-era dependency set and replaced the CI stub with a workflow that
+    actually checks the app boots.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/30">Add prettier</a> — config, ignore file
+    and a CI step, with the bulk reformat kept in its own commit and added to
+    <code>.git-blame-ignore-revs</code>.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/31">Repair malformed HTML in posts</a> —
+    pointing prettier at the content turned out to be a decent HTML linter: 16 of 76 posts would not
+    parse, and every failure was genuinely broken markup.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/33">Migrate the server to TypeScript</a> — no
+    compile step, because Node 24 strips types at runtime and <code>tsc</code> only checks.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/50"
+      >Migrate the browser code to TypeScript</a
+    >
+    — and with it the hand-written type declaration that could silently drift from the code it
+    described.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/49">Drop the client-side post rendering</a> —
+    an abandoned experiment that intercepted every post link and re-rendered it in the browser.
+  </li>
+</ul>
+
+<h4>Bugs the tests found</h4>
+<ul>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/47">Repair the RSS feed</a> — four bugs in
+    the one part of the routing no test reached, including 100 images that resolved against the
+    subscriber's own domain rather than the blog.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/38">Repair five broken internal links</a> —
+    started as one broken link I had noticed; writing a test to catch it found four more.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/34">Load d3 so the running chart renders</a>
+    — the chart on an old post had been quietly blank.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/44"
+      >Make <code>npm run dev</code> work again</a
+    >
+    — broken on master since the TypeScript migration.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/27">Correct post meta-data gaps</a> — a
+    category typo that put one post in a category of its own, and another with no category at all.
+  </li>
+</ul>
+
+<h4>Safety nets</h4>
+<ul>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/40">404 unmatched URLs</a> — they used to
+    redirect to the homepage, which made every broken link on the site look like it worked. Five
+    real ones were hiding behind it.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/39">Cover the MCP server with tests</a> — 170
+    lines with no tests, driven through a real client so the tools are called the way an agent calls
+    them.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/42">Cover meta-data parsing properly</a> — it
+    was tested, but only the easy half.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/48">Add security response headers</a> — the
+    site sent none at all. The content-security policy starts in report-only, deliberately.
+  </li>
+</ul>
+
+<h4>Making it easier to work on</h4>
+<ul>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/36">Run the CI checks locally</a> — the same
+    checks CI runs, on commit and push instead of after.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/43">Run the git hooks in a container</a> — so
+    they work whatever version of node happens to be on the host.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/45">Add a compose dev service</a> — with
+    this, developing the blog needs no node on the host at all.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/37"
+      >Let Dependabot keep dependencies current</a
+    >
+    — weekly, with minor and patch bumps grouped into one PR and majors left separate.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/51"
+      >Add a scaffolding script for new posts</a
+    >
+    — <code>npm run new:post</code> writes the meta-data block and the usual section skeleton, so
+    starting a post is no longer a copy-paste job.
+  </li>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/52">Document the layout and conventions</a> —
+    the parts that are only discoverable by reading the code.
+  </li>
+</ul>
+
+<h4>New features</h4>
+<ul>
+  <li>
+    <a href="https://github.com/mikemjharris/blog/pull/28">Expose the blog over MCP</a> — a
+    read-only endpoint at <code>/mcp</code>, so the posts can be searched and read by an agent. Add
+    it as a connector and ask it things.
+  </li>
+</ul>
