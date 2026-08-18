@@ -63,6 +63,17 @@ div#loom-companion-mv3 {
   }
 }
 
+.quote-source {
+  padding: 0 10px;
+  margin-top: 8px;
+  text-align: right;
+  // The `*` reset sets every element to $body-font-size, so the anchor needs it too.
+  &,
+  a {
+    font-size: 0.8 * $body-font-size;
+  }
+}
+
 hr {
   margin: 30px auto;
   width: 80%;
