@@ -90,9 +90,54 @@ pre {
 }
 code {
   display: block;
-  background: #eee;
+  background: $code-bg;
   padding: 5px;
   border-radius: 4px;
+}
+
+// Wraps a code block so the copy button has something to position against that does
+// not scroll with the code.
+.code-block {
+  display: block;
+  position: relative;
+
+  // Room for the button, so it never lands on top of the first line.
+  code {
+    padding-right: 40px;
+  }
+}
+
+.copy-code {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #555;
+  // Opaque rather than transparent: long lines scroll underneath the button.
+  background: $code-bg;
+
+  &:hover,
+  &:focus-visible {
+    color: #000;
+  }
+
+  &.copied {
+    color: green;
+  }
+}
+
+.copy-code-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .highlight {

@@ -1,4 +1,5 @@
 import { register } from './helpers.ts';
+import { addCopyButtons } from './copy-code.ts';
 
 interface PostSummary {
   searchtitle: string;
@@ -19,6 +20,8 @@ const toggleMenu = (): void => {
 };
 
 $(() => {
+  addCopyButtons();
+
   let posts: PostSummary[] | undefined;
 
   //initial call for posts
