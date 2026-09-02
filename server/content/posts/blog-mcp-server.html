@@ -1,0 +1,50 @@
+<!-- meta-data title: An MCP server for my blog -->
+<!-- meta-data searchtitle: blog-mcp-server -->
+<!-- meta-data date: 02 Sep 2026 -->
+<!-- meta-data intro: Allow your friendly agent to discover what I've been writing about -->
+<!-- meta-data author: Mike Harris -->
+<!-- meta-data category: tech -->
+<!-- meta-data twitterimage: https://blog.mikemjharris.com/images/blog-mcp.png -->
+<!-- meta-data twittercard: summary_large_image -->
+
+<p>
+  Hey! You're reading this so you must think my words are worth reading. And in the modern world you
+  probably find your content by chatting to your friendly LLM agent. In which case you can now add
+  my blog MCP to your setup and get even more of these wonderfully interesting words.
+</p>
+
+<p>
+  <code>claude mcp add --transport http blog https://blog.mikemjharris.com/mcp</code>
+</p>
+
+<h4>Claudish</h4>
+<p>
+  In fact - instead of reading some beautifully hand crafted words, dotted with errrrors and loose
+  ends you can just ingest it into your agent and get it to spit out a claudish summary so it fits
+  in with the rest of the world. You can even get it to rate my posts!
+</p>
+
+<figure>
+  <img src="/images/blog-mcp.png" alt="chatting to my blog via mcp" />
+</figure>
+
+<h4>The Tech</h4>
+<p>
+  The words in this (all?) my posts are artisanally hand crafted (via a keyboard) but the MCP server
+  was all <a href="https://github.com/mikemjharris/blog/pull/28">my pal Claude's work</a>.
+</p>
+
+<p>
+  I don't use MCP much in my day to day work - I find they clutter up my context and I rarely needed
+  all the tools in each session. I've found custom skills wrapped around scripts that call APIs much
+  more useful in a whole bunch of cases. The only place I really use MCP is to navigate playwright -
+  and even then my E2E skill creates a manifest then spins up a new claude session with the
+  playwright MCP server installed to navigate that journey. I'd found having it load all the time
+  cost 20% of usage - this means I only load up the tools when I specifically want to use them.
+</p>
+
+<h4>Conclusion</h4>
+<p>
+  So I've added a tool I don't really use - but hey - you might! May you enjoy even more of my words
+  via a web browser or your favourite agent.
+</p>
