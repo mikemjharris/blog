@@ -36,7 +36,6 @@ const assets = [
   '/dist/templates.js',
   '/dist/vendor/jquery.min.js',
   '/dist/vendor/handlebars.min.js',
-  '/dist/vendor/d3.min.js',
 ];
 
 interface Check {
