@@ -1,5 +1,6 @@
 import { register } from './helpers.ts';
 import { addCopyButtons } from './copy-code.ts';
+import { addImageLightbox } from './lightbox.ts';
 
 interface PostSummary {
   searchtitle: string;
@@ -21,6 +22,7 @@ const toggleMenu = (): void => {
 
 $(() => {
   addCopyButtons();
+  addImageLightbox();
 
   let posts: PostSummary[] | undefined;
 
