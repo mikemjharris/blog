@@ -1,0 +1,171 @@
+@import 'variables';
+
+// Charts for posts. Paired with public/javascripts/charts.ts - see the comment
+// at the top of that file for the markup.
+
+:root {
+  // Categorical slots. Checked for colour-blind separation and for contrast
+  // against white; assign by entity, in order, and never recycle a slot.
+  --chart-1: #2a78d6; // blue
+  --chart-2: #eb6834; // orange
+  --chart-3: #1baf7a; // green
+  --chart-4: #4a3aa7; // violet
+  --chart-5: #eda100; // yellow
+
+  --chart-ink: #111111;
+  --chart-ink-soft: #555555;
+  --chart-grid: #e6e6e6;
+}
+
+figure.chart {
+  margin: 20px 0;
+  padding: 14px 14px 6px;
+  border: 1px solid lighten($border-left-col, 25%);
+
+  figcaption {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--chart-ink-soft);
+    margin-top: 10px;
+    max-width: 66ch;
+  }
+}
+
+.chart-scroller {
+  overflow-x: auto;
+  max-width: 100%;
+
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--chart-ink-soft);
+  margin-bottom: 12px;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  i {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+}
+
+// SVG text roles
+.chart-label,
+.chart-line-label,
+.chart-axis,
+.chart-value,
+.chart-total,
+.chart-panel-title,
+.chart-row-label,
+.chart-annotation {
+  font-family: inconsolata, monospace;
+}
+
+.chart-label {
+  font-size: 11.5px;
+  fill: var(--chart-ink);
+}
+.chart-value {
+  font-size: 11px;
+  fill: var(--chart-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.chart-total {
+  font-size: 12.5px;
+  fill: var(--chart-ink);
+}
+.chart-axis {
+  font-size: 11px;
+  fill: var(--chart-ink-soft);
+}
+.chart-panel-title {
+  font-size: 12px;
+  fill: var(--chart-ink);
+  letter-spacing: 0.06em;
+}
+.chart-row-label {
+  font-size: 10.5px;
+  fill: var(--chart-ink-soft);
+  letter-spacing: 0.08em;
+}
+.chart-annotation {
+  font-size: 12px;
+  fill: var(--chart-ink-soft);
+}
+.chart-line-label {
+  font-size: 13px;
+  font-weight: bold;
+  // Drawn under the line, so a white halo keeps it readable where they cross.
+  stroke: #ffffff;
+  stroke-width: 4;
+  paint-order: stroke;
+}
+
+.chart-grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+.chart-marker {
+  stroke: var(--chart-ink-soft);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+.chart-mark:hover {
+  opacity: 0.78 !important;
+}
+
+.chart-line {
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+// d3-axis draws its own domain path and ticks; match them to the grid.
+g.chart-axis {
+  .domain,
+  .tick line {
+    stroke: var(--chart-grid);
+  }
+
+  .tick text {
+    font-family: inconsolata, monospace;
+    font-size: 11px;
+    fill: var(--chart-ink-soft);
+  }
+}
+
+// A tint of the site green, for banded reference tables in data-heavy posts.
+table.compare {
+  table-layout: fixed;
+
+  th:first-child,
+  td:first-child {
+    width: 40%;
+  }
+
+  th:not(:first-child),
+  td:not(:first-child) {
+    width: 30%;
+    text-align: right;
+    border-left: 1px solid lighten($border-left-col, 20%);
+  }
+
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+}

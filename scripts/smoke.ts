@@ -32,6 +32,7 @@ const pages = ['/', '/posts', '/about', '/projects', '/talks', '/category', '/co
 const assets = [
   '/dist/style.css',
   '/dist/main.js',
+  '/dist/charts.js',
   '/dist/templates.js',
   '/dist/vendor/jquery.min.js',
   '/dist/vendor/handlebars.min.js',
