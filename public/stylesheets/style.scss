@@ -140,6 +140,83 @@ code {
   stroke-linejoin: round;
 }
 
+// Post images open full size in an overlay. The image itself is the control, so it
+// gets the affordance rather than a separate button.
+.lightbox-target {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.9);
+
+  &.open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.lightbox-figure {
+  // The figure is inside the backdrop, so it has to pass clicks through to it for
+  // the click-outside-to-close to land on the padding around the image.
+  pointer-events: none;
+  max-height: 100%;
+  text-align: center;
+}
+
+.lightbox-image {
+  pointer-events: auto;
+  // The overlay is the whole screen, so it can show more than the article column.
+  max-width: 100%;
+  max-height: 85vh;
+  cursor: zoom-out;
+}
+
+.lightbox-caption {
+  pointer-events: auto;
+  // Overrides the in-article caption spacing, which assumes a caption above its image.
+  margin: 10px 0 0;
+  color: #fff;
+  font-style: italic;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  background: transparent;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.lightbox-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+// The overlay scrolls nothing, so hold the page still behind it.
+body.lightbox-open {
+  overflow: hidden;
+}
+
 .highlight {
   padding: 15px;
   margin: 15px;
