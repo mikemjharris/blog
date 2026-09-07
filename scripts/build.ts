@@ -12,9 +12,15 @@ const stylesheets = [
   'public/stylesheets/reset.scss',
   'public/stylesheets/style.scss',
   'public/stylesheets/mobile.scss',
+  'public/stylesheets/components.scss',
+  'public/stylesheets/charts.scss',
 ];
 
 const clientEntry = 'public/javascripts/main.ts';
+
+// Its own bundle rather than part of main.ts: it carries a d3 subset, and only the
+// posts with charts in them should pay for that.
+const chartEntry = 'public/javascripts/charts.ts';
 
 // jQuery 4 dropped the old browsers anyway, so there is nothing to gain from
 // transpiling further down than this.
@@ -61,6 +67,17 @@ const buildJs = async (): Promise<void> => {
   await esbuild.build({
     entryPoints: [path.join(root, clientEntry)],
     outfile: path.join(dist, 'main.js'),
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    target: BROWSER_TARGET,
+  });
+};
+
+const buildCharts = async (): Promise<void> => {
+  await esbuild.build({
+    entryPoints: [path.join(root, chartEntry)],
+    outfile: path.join(dist, 'charts.js'),
     bundle: true,
     minify: true,
     format: 'iife',
@@ -116,6 +133,7 @@ const build = async (): Promise<void> => {
   fs.mkdirSync(dist, { recursive: true });
   buildCss();
   await buildJs();
+  await buildCharts();
   buildTemplates();
   copyVendor();
   await buildD3();
@@ -124,7 +142,13 @@ const build = async (): Promise<void> => {
 const watch = (): void => {
   const targets: [string, () => void | Promise<void>][] = [
     ['public/stylesheets', buildCss],
-    ['public/javascripts', buildJs],
+    [
+      'public/javascripts',
+      async () => {
+        await buildJs();
+        await buildCharts();
+      },
+    ],
     [templateDir, buildTemplates],
   ];
 

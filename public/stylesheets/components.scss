@@ -1,0 +1,67 @@
+@import 'variables';
+
+// Post components that aren't charts. Reusable across posts.
+
+// A short note at the top of a post - provenance, caveats, AI disclosure.
+.disclaimer {
+  font-family: inconsolata, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: lighten($border-left-col, 32%);
+  border-left: 10px solid $border-left-col;
+  padding: 10px 14px;
+  margin: 0 0 20px;
+}
+
+// A dated timeline. <ul class="beats"><li><span class="when">…</span><strong>…</strong> body</li>
+ul.beats {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+
+  li {
+    padding: 14px 0;
+    border-top: 1px solid lighten($border-left-col, 30%);
+
+    &:last-child {
+      border-bottom: 1px solid lighten($border-left-col, 30%);
+    }
+
+    strong {
+      display: block;
+    }
+
+    .beat p {
+      margin: 4px 0 0;
+    }
+  }
+
+  .when {
+    display: inline-block;
+    font-family: inconsolata, monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 4px;
+  }
+
+  li.peak .when {
+    background: $border-left-col;
+    color: #111;
+    padding: 2px 5px;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  ul.beats li {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 18px;
+    align-items: start;
+
+    .when {
+      margin-bottom: 0;
+    }
+  }
+}
