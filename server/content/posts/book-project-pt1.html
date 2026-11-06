@@ -88,9 +88,7 @@
   In my app I called off to google sheets, ran the CSV through a converter to JSON and update the
   GraphQL schema to reflect a few additional data fields. You can see the results at the GraphQL
   endpoint on the
-  <a
-    href="https://books.mikemjharris.com/GraphQL?query=%7B%0A%20%20books%20%7B%0A%20%20%20%20title%0A%20%20%20%20author%0A%20%20%20%20gender%0A%20%20%20%20year%0A%20%20%20%20month%0A%20%20%7D%0A%7D"
-    target="_blank"
+  <a href="https://github.com/mikemjharris/books/blob/18c3499/server/server.js" target="_blank"
     >live app here</a
   >. Click the button that looks like a play button and you'll get back the full list of books!
 </p>
@@ -100,10 +98,21 @@
   you actually want. For example in the previous posts in this blog I've been looking at the gender
   of the authors I've read (currently only male and female but the field is a string as I'm looking
   for recommendations of non binary authors if you can help). A query for that would look
-  <a
-    href="https://books.mikemjharris.com/GraphQL?query=%7B%0A%20%20books%20%7B%0A%20%20%20%20gender%0A%20%20%7D%0A%7D"
-    target="_blank"
+  <a href="https://github.com/mikemjharris/books/blob/18c3499/server/server.js" target="_blank"
     >like this</a
+  >
+</p>
+
+<p>
+  <em
+    >Update, November 2026: the books site is now a static page that reads the Google Sheet directly
+    in the browser, so the GraphQL endpoint has gone. The two links above now go to the server code
+    as it was. The list itself is still available as the
+    <a
+      href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSnuIE5i7X7VhTsbCcyQtLJeBkFpBiF1CMvRtv9Ze8NOMdnFXQZC1JHE40qGo83rkhsAw6CQVhZvqRW/pub?gid=50513809&amp;single=true&amp;output=csv"
+      target="_blank"
+      >published CSV</a
+    >.</em
   >
 </p>
 
