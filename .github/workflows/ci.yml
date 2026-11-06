@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -64,9 +64,9 @@ jobs:
 
   deploy:
     name: Deploy to Lambda
-    # Only master, and only once the checks above pass. The function,
+    # Only main, and only once the checks above pass. The function,
     # image repository and CloudFront are defined in mikemjharris/infra.
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [build, docker]
     runs-on: ubuntu-latest
     permissions:
