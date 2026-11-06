@@ -1,0 +1,17 @@
+# The blog's normal image plus the AWS Lambda Web Adapter, which turns Lambda
+# invocations into HTTP requests to the app. Outside Lambda the adapter does
+# nothing, so this image also runs anywhere the normal one does.
+#
+#   docker build -t blog .
+#   docker build -f Dockerfile.lambda --build-arg BASE=blog -t blog-lambda .
+
+ARG BASE=blog
+
+FROM public.ecr.aws/awsguru/aws-lambda-adapter:1.1.0 AS adapter
+
+FROM ${BASE}
+COPY --from=adapter /lambda-adapter /opt/extensions/lambda-adapter
+
+ENV PORT=8080 \
+    AWS_LWA_PORT=8080 \
+    AWS_LWA_READINESS_CHECK_PATH=/

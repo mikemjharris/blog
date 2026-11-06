@@ -61,3 +61,80 @@ jobs:
           echo "container did not serve within 60s"
           docker logs blog
           exit 1
+
+  deploy:
+    name: Deploy to Lambda
+    # Only master, and only once the checks above pass. The function,
+    # image repository and CloudFront are defined in mikemjharris/infra.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: [build, docker]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC login to AWS; no AWS keys are stored in GitHub
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
+    env:
+      AWS_REGION: eu-west-2
+      AWS_ROLE_ARN: arn:aws:iam::702167621683:role/github-deploy-blog
+      REPOSITORY: 702167621683.dkr.ecr.eu-west-2.amazonaws.com/blog
+      FUNCTION_NAME: blog
+      DISTRIBUTION_ID: E3F49JBURV7SMZ
+      CLOUDFRONT_URL: https://d2uu38ddvjy9hw.cloudfront.net
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Write version.json
+        run: |
+          cat > public/version.json <<JSON
+          {
+              "commit": "${GITHUB_SHA}",
+              "branch": "${GITHUB_REF_NAME}",
+              "deploy_date": "$(date -u +%Y-%m-%d_%H-%M-%S)"
+          }
+          JSON
+
+      - name: Build the Lambda image
+        run: |
+          docker build -t blog .
+          docker build -f Dockerfile.lambda --build-arg BASE=blog -t "${REPOSITORY}:${GITHUB_SHA}" .
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Push the image
+        run: |
+          aws ecr get-login-password | docker login --username AWS --password-stdin "${REPOSITORY%%/*}"
+          docker push "${REPOSITORY}:${GITHUB_SHA}"
+
+      - name: Point the function at the new image
+        run: |
+          aws lambda update-function-code \
+            --function-name "${FUNCTION_NAME}" \
+            --image-uri "${REPOSITORY}:${GITHUB_SHA}" \
+            --query 'LastUpdateStatus' --output text
+          aws lambda wait function-updated-v2 --function-name "${FUNCTION_NAME}"
+
+      - name: Clear the CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${DISTRIBUTION_ID}" \
+            --paths "/*" \
+            --query 'Invalidation.Id' --output text
+
+      - name: Check the new version is live
+        run: |
+          for i in $(seq 1 30); do
+            live=$(curl -sf "${CLOUDFRONT_URL}/version.json" | jq -r .commit || true)
+            if [ "$live" = "${GITHUB_SHA}" ]; then
+              echo "serving ${GITHUB_SHA}"
+              curl -sf -o /dev/null "${CLOUDFRONT_URL}/"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "still serving ${live:-nothing}, expected ${GITHUB_SHA}"
+          exit 1
