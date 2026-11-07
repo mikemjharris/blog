@@ -4,7 +4,9 @@ import type { Request, Response } from 'express';
 import { originVerify, ORIGIN_VERIFY_HEADER } from '../security.ts';
 
 const run = (secret: string | undefined, header?: string) => {
-  const req = { get: (name: string) => (name === ORIGIN_VERIFY_HEADER ? header : undefined) } as Request;
+  const req = {
+    get: (name: string) => (name === ORIGIN_VERIFY_HEADER ? header : undefined),
+  } as Request;
   const result = { next: false, status: 0 };
   const res = {
     status(code: number) {
