@@ -1,4 +1,5 @@
 import helmet from 'helmet';
+import { timingSafeEqual } from 'node:crypto';
 import type { RequestHandler } from 'express';
 
 /**
@@ -58,3 +59,21 @@ export const securityHeaders = (): RequestHandler =>
     // Third-party embeds (codepen, youtube, twitter) need to load cross-origin.
     crossOriginResourcePolicy: { policy: 'cross-origin' },
   });
+
+export const ORIGIN_VERIFY_HEADER = 'x-origin-verify';
+
+/**
+ * In production the app sits behind CloudFront, which adds a secret header to every
+ * request it forwards. With ORIGIN_VERIFY_SECRET set, requests without it — someone
+ * calling the Lambda function URL directly, skipping the cache — get a 403. Unset
+ * (local development, tests) it lets everything through.
+ */
+export const originVerify = (secret = process.env.ORIGIN_VERIFY_SECRET): RequestHandler => {
+  if (!secret) return (_req, _res, next) => next();
+  const expected = Buffer.from(secret);
+  return (req, res, next) => {
+    const given = Buffer.from(req.get(ORIGIN_VERIFY_HEADER) ?? '');
+    if (given.length === expected.length && timingSafeEqual(given, expected)) return next();
+    res.status(403).type('text').send('Forbidden');
+  };
+};
