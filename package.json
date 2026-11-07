@@ -27,7 +27,7 @@
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
-    "express-handlebars": "^9.0.1",
+    "express-handlebars": "^9.0.4",
     "helmet": "^8.3.0",
     "morgan": "^1.11.0",
     "xml2js": "^0.6.2",
